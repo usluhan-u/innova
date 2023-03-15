@@ -8,7 +8,6 @@ module.exports = {
   images: {
     domains: [
       'localhost',
-      'https://p01--innova-panel--wqf7yvvlslgm.code.run/',
       // Your domain(s) here
     ],
     deviceSizes: sizes,
