@@ -4,6 +4,10 @@ import dotenv from 'dotenv';
 import { Logo } from './assets/Logo';
 import { Icon } from './assets/icon';
 
+import seo from '@payloadcms/plugin-seo';
+import redirects from '@payloadcms/plugin-redirects';
+
+
 import Page from './collections/Page';
 import Media from './collections/Media';
 import Awards from './collections/Awards';
@@ -45,4 +49,21 @@ export default buildConfig({
   defaultLocale: 'tr-TR',
   fallback: true,
 },
+plugins: [
+  redirects({
+    collections: ['pages'],
+  }),
+  seo({
+    collections: [
+      'pages',
+      'blogs',
+      'awards',
+      'stories',
+    ],
+    uploadsCollection: 'media',
+    generateTitle: ({ doc }) => `İnnova — ${doc.title.value}`,
+    generateDescription: ({ doc }) => doc.excerpt
+
+  })
+]
 });

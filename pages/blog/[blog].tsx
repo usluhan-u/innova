@@ -7,6 +7,8 @@ import Header from '../../Layouts/Header';
 import { Type as BlogType } from '../../collections/Blog';
 import RenderBlocks from '../../components/RenderBlocks';
 
+
+
 export type Props = {
   blog: BlogType
   statusCode: number
@@ -30,7 +32,7 @@ const Blog: React.FC<Props> = (props) => {
       <div >
         {blog.image && (
           <img
-            src={`${SERVER_URL}/media/${blog.image.sizes?.feature?.filename || blog.image.filename}`}
+            src={`/media/${blog.image.sizes?.feature?.filename || blog.image.filename}`}
             alt={blog.image.alt}
           />
         )}
@@ -38,15 +40,7 @@ const Blog: React.FC<Props> = (props) => {
       <RenderBlocks layout={blog.layout} />
       <footer >
         <hr />
-        NextJS + Payload Server Boilerplate made by
-        {' '}
-        <a
-          href="https://payloadcms.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Payload
-        </a>
+        İnnova
       </footer>
     </main>
   );

@@ -45,15 +45,7 @@ const Page: React.FC<Props> = (props) => {
       <RenderBlocks layout={page.layout} />
       <footer className={classes.footer}>
         <hr />
-        NextJS + Payload Server Boilerplate made by
-        {' '}
-        <a
-          href="https://payloadcms.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Payload
-        </a>
+        "İnnova"
       </footer>
     </main>
   );
