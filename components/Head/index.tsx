@@ -5,11 +5,11 @@ import { useRouter } from 'next/router';
 
 const { publicRuntimeConfig: { SERVER_URL } } = getConfig();
 
-const defaultDescription = 'Boilerplate for combining Payload CMS and NextJS into a single Node server';
-const defaultTitle = 'Payload CMS + NextJS Custom Server';
-const titleSuffix = ' | Payload CMS';
+const defaultDescription = 'İnnova, Uçtan Uca Kurumsal Çözümler';
+const defaultTitle = 'İnnova';
+const titleSuffix = ' | İnnova';
 const defaultOGImage = `${SERVER_URL}/images/og-image.jpg`;
-const defaultKeywords = 'NextJS, Payload CMS, boilerplate';
+const defaultKeywords = 'İnnova, Ürünler, Çözümler, Hizmetler';
 
 type Props = {
   title?: string,

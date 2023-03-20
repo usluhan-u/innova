@@ -9,6 +9,7 @@ dotenv();
 
 const dev = process.env.NODE_ENV !== 'production';
 const server = express();
+server.use('/assets', express.static(path.resolve(__dirname, './assets')));
 
 const start = async () => {
   await payload.init({
