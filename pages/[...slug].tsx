@@ -7,6 +7,7 @@ import NotFound from '../components/NotFound';
 import Head from '../components/Head';
 import classes from '../css/page.module.css';
 import RenderBlocks from '../components/RenderBlocks';
+import Header from '../Layouts/Header';
 
 const { publicRuntimeConfig: { SERVER_URL } } = getConfig();
 
@@ -29,6 +30,7 @@ const Page: React.FC<Props> = (props) => {
         description={page.meta?.description}
         keywords={page.meta?.keywords}
       />
+      <Header />
       <header className={classes.header}>
         <h1>{page.title}</h1>
       </header>

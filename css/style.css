@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+
 html, body {
-  font-family: system-ui, Segoe UI, Helvetica Neue, Arial;
+  font-family: 'Inter', sans-serif;
   margin: 0;
   padding: 0;
   line-height: 1.5;
-  color: var(--color-dark-gray);
+  color: var(  --color-darkslategray-200);
 }
 
 :root {
@@ -13,7 +16,19 @@ html, body {
 
   --baseline : 30px;
 
-  --color-dark-gray: #212121;
+  --color-white: #fff;
+  --color-darkslategray-100: #1b425e;
+  --color-darkslategray-200: #002946;
+  --color-gainsboro: #e3e3e3;
+  --color-steelblue-100: #1777bc;
+  --color-steelblue-200: #005a9b;
+  --color-gray-100: #fbfdfe;
+  --color-gray-200: #092232;
+  --color-lightslategray: #7893a7;
+  --color-whitesmoke: #f4f6f8;
+  --grays-cool-gray-40: #a7aeb8;
+  --color-darkgray-100: #aaa9a9;
+  --color-silver: #bdcad3;
 }
 
 img {
