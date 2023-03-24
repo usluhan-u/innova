@@ -48,9 +48,14 @@ web_modules/
 
 # TypeScript cache
 *.tsbuildinfo
+next-env.d.ts
 
 # Optional npm cache directory
 .npm
+
+# next.js
+/.next/
+/out/
 
 # Optional eslint cache
 .eslintcache
@@ -90,7 +95,7 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-dist
+build
 
 # Gatsby files
 .cache/
@@ -99,7 +104,7 @@ dist
 # public
 
 # vuepress build output
-.vuepress/dist
+.vuepress/build
 
 # vuepress v2.x temp and cache directory
 .temp
@@ -164,5 +169,8 @@ dist
 
 # Ignore code-workspaces
 *.code-workspace
+
+# vercel
+.vercel
 
 # End of https://www.toptal.com/developers/gitignore/api/node,visualstudiocode

@@ -16,13 +16,13 @@ const start = async () => {
     mongoURL: process.env.MONGODB_URI,
     express: app,
     onInit: async () => {
-      payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
-    },
-  })
+      payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`);
+    }
+  });
 
   // Add your own express routes here
 
   app.listen(3000);
-}
+};
 
 start();
