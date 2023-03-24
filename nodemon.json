@@ -4,5 +4,5 @@
     ".env"
   ],
   "ext": "ts",
-  "exec": "ts-node -r tsconfig-paths/register src/server/main.ts"
+  "exec": "ts-node -r tsconfig-paths/register src/server.ts"
 }

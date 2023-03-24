@@ -1,8 +1,10 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
-}
+require('dotenv').config();
 
-module.exports = nextConfig
+const nextConfig = {
+  reactStrictMode: true,
+  publicRuntimeConfig: {
+    SERVER_URL: process.env.PAYLOAD_PUBLIC_SERVER_URL
+  }
+};
+
+module.exports = nextConfig;
