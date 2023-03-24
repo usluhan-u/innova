@@ -1,69 +1,22 @@
 import { buildConfig } from 'payload/config';
-import dotenv from 'dotenv';
-
-import { Logo } from './assets/Logo';
-import { Icon } from './assets/icon';
-
-import seo from '@payloadcms/plugin-seo';
-import redirects from '@payloadcms/plugin-redirects';
-
-
-import Page from './collections/Page';
-import Media from './collections/Media';
-import Awards from './collections/Awards';
-import News from './collections/News';
-import Blog from './collections/Blog';
-import Story from './collections/Stories';
-import Category from './collections/Category';
-
-
-dotenv.config();
+import path from 'path';
+// import Examples from './collections/Examples';
+import Users from './src/collections/Users';
 
 export default buildConfig({
-  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
-  collections: [
-    Page,
-    Blog,
-    Story,
-    Awards,
-    Media,
-  ],
+  serverURL: 'http://localhost:3000',
   admin: {
-    meta: {
-      titleSuffix: '- İnnova',
-      favicon: '/assets/icon.svg',
-      ogImage: '/assets/logo.svg',
-    },
-    components: {
-      graphics: {
-        Logo,
-        Icon,
-      },
-    },
- },
- localization: {
-  locales: [
-    'tr-TR',
-    'en-US',
+    user: Users.slug,
+  },
+  collections: [
+    Users,
+    // Add Collections here
+    // Examples,
   ],
-  defaultLocale: 'tr-TR',
-  fallback: true,
-},
-plugins: [
-  redirects({
-    collections: ['pages'],
-  }),
-  seo({
-    collections: [
-      'pages',
-      'blogs',
-      'awards',
-      'stories',
-    ],
-    uploadsCollection: 'media',
-    generateTitle: ({ doc }) => `İnnova — ${doc.title.value}`,
-    generateDescription: ({ doc }) => doc.excerpt
-
-  })
-]
+  typescript: {
+    outputFile: path.resolve(__dirname, 'payload-types.ts'),
+  },
+  graphQL: {
+    schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
+  },
 });
