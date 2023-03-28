@@ -1,6 +1,6 @@
 import { buildConfig } from 'payload/config';
 import dotenv from 'dotenv';
-import { Users } from './src/collections/Users';
+import { Link, Menu, Page, User } from './src/collections';
 
 dotenv.config();
 
@@ -8,7 +8,7 @@ export default buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
   cors: '*',
   admin: {
-    user: Users.slug
+    user: User.slug
   },
-  collections: [Users]
+  collections: [Link, Menu, Page, User]
 });

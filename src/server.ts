@@ -31,7 +31,7 @@ const boilerplate = async () => {
       payload.logger.info(`Client is ready!`);
 
       app.listen(PORT, async () => {
-        payload.logger.info(`Server is listening on port ${PORT}}!`);
+        payload.logger.info(`Server is listening on port ${PORT}!`);
       });
     });
   } else {
