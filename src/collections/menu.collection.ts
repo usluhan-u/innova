@@ -1,6 +1,24 @@
 import { CollectionConfig } from 'payload/types';
+import { Slug } from '../fields';
 
-export interface MenuType {}
+interface SubMenuItemType {
+  label: string;
+  link: string;
+}
+
+interface SubMenuType {
+  label: string;
+  subMenuItems: SubMenuItemType[];
+}
+
+export interface MenuType {
+  title: string;
+  menu: {
+    type: 'dropdown' | 'single';
+    subMenus?: SubMenuType[];
+    link?: string;
+  };
+}
 
 export const Menu: CollectionConfig = {
   slug: 'menus',
@@ -45,7 +63,7 @@ export const Menu: CollectionConfig = {
           type: 'row',
           fields: [
             {
-              name: 'submenu',
+              name: 'subMenu',
               label: 'Sub Menu',
               type: 'array',
               labels: {
@@ -68,6 +86,12 @@ export const Menu: CollectionConfig = {
                     plural: 'Submenu Items'
                   },
                   fields: [
+                    {
+                      name: 'label',
+                      label: 'label',
+                      type: 'text',
+                      required: true
+                    },
                     {
                       name: 'link',
                       label: 'Link',
@@ -95,6 +119,7 @@ export const Menu: CollectionConfig = {
           ]
         }
       ]
-    }
+    },
+    Slug
   ]
 };

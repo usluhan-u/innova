@@ -1,4 +1,5 @@
 import { CollectionConfig } from 'payload/types';
+import { Slug } from '../fields';
 
 export interface LinkType {}
 
@@ -44,7 +45,7 @@ export const Link: CollectionConfig = {
       relationTo: 'pages',
       required: true,
       admin: {
-        condition: (_, siblingData) => siblingData?.type === 'page'
+        condition: (_, siblingData) => siblingData?.linkType === 'page'
       }
     },
     {
@@ -53,8 +54,9 @@ export const Link: CollectionConfig = {
       type: 'text',
       required: true,
       admin: {
-        condition: (_, siblingData) => siblingData?.type === 'custom'
+        condition: (_, siblingData) => siblingData?.linkType === 'custom'
       }
-    }
+    },
+    Slug
   ]
 };

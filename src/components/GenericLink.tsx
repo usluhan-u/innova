@@ -7,7 +7,12 @@ export interface GenericLinkProps {
 
 export const GenericLink = ({ href, children }: GenericLinkProps) => {
   return (
-    <Link href={href} scroll={false}>
+    <Link
+      href={href}
+      scroll={false}
+      textDecoration="none"
+      _hover={{ textDecoration: 'none' }}
+    >
       {children}
     </Link>
   );
