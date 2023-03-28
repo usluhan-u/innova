@@ -1,69 +1,14 @@
 import { buildConfig } from 'payload/config';
 import dotenv from 'dotenv';
-
-import { Logo } from './assets/Logo';
-import { Icon } from './assets/icon';
-
-import seo from '@payloadcms/plugin-seo';
-import redirects from '@payloadcms/plugin-redirects';
-
-
-import Page from './collections/Page';
-import Media from './collections/Media';
-import Awards from './collections/Awards';
-import News from './collections/News';
-import Blog from './collections/Blog';
-import Story from './collections/Stories';
-import Category from './collections/Category';
-
+import { Link, Menu, Page, User } from './src/collections';
 
 dotenv.config();
 
 export default buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
-  collections: [
-    Page,
-    Blog,
-    Story,
-    Awards,
-    Media,
-  ],
+  cors: '*',
   admin: {
-    meta: {
-      titleSuffix: '- İnnova',
-      favicon: '/assets/icon.svg',
-      ogImage: '/assets/logo.svg',
-    },
-    components: {
-      graphics: {
-        Logo,
-        Icon,
-      },
-    },
- },
- localization: {
-  locales: [
-    'tr-TR',
-    'en-US',
-  ],
-  defaultLocale: 'tr-TR',
-  fallback: true,
-},
-plugins: [
-  redirects({
-    collections: ['pages'],
-  }),
-  seo({
-    collections: [
-      'pages',
-      'blogs',
-      'awards',
-      'stories',
-    ],
-    uploadsCollection: 'media',
-    generateTitle: ({ doc }) => `İnnova — ${doc.title.value}`,
-    generateDescription: ({ doc }) => doc.excerpt
-
-  })
-]
+    user: User.slug
+  },
+  collections: [Link, Menu, Page, User]
 });

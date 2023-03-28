@@ -1,15 +1,14 @@
 require('dotenv').config();
-const { sizes } = require('./blocks/Image/sizes.json');
 
-module.exports = {
+const nextConfig = {
+  reactStrictMode: true,
   publicRuntimeConfig: {
-    SERVER_URL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
-  },
-  images: {
-    domains: [
-      'localhost',
-      // Your domain(s) here
-    ],
-    deviceSizes: sizes,
-  },
+    SERVER_URL: process.env.PAYLOAD_PUBLIC_SERVER_URL
+  }
+  // i18n: {
+  //   locales: ['tr', 'en'],
+  //   defaultLocale: 'tr'
+  // }
 };
+
+module.exports = nextConfig;

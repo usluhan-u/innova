@@ -1,12 +1,8 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "module": "commonjs",
-    "outDir": "dist",
-    "noEmit": false,
+    "module": "CommonJS",
+    "outDir": "build"
   },
-  "include": [
-    "server.ts",
-    "payload.config.ts",
-  ]
+  "include": ["server.ts", "payload.config.ts"]
 }
