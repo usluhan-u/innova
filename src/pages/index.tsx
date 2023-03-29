@@ -1,15 +1,9 @@
 import { GetServerSideProps } from 'next';
-import Page, {
-  getServerSideProps as sharedGetServerSideProps
-} from './[...slug]';
-
-// import { Inter } from 'next/font/google';
-
-// const inter = Inter({ subsets: ['latin'] });
+import Page, { getStaticProps as sharedGetStaticProps } from './[...slug]';
 
 export default Page;
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const func = sharedGetServerSideProps.bind(this);
+export const getStaticProps: GetServerSideProps = async (ctx) => {
+  const func = sharedGetStaticProps.bind(this);
   return func(ctx);
 };

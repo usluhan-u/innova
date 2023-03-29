@@ -15,11 +15,14 @@ import {
   VStack,
   Text
 } from '@chakra-ui/react';
-import { MenuType } from '../collections';
 import { ArrowForwardIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import { v4 as uuidv4 } from 'uuid';
 import React from 'react';
-import { menuData } from '../data';
+import {
+  Menu as MenuType,
+  Link as LinkType,
+  Page as PageType
+} from '../payload-types';
 
 export interface HeaderProps {
   menus: MenuType[];
@@ -28,7 +31,19 @@ export interface HeaderProps {
 export const Header = ({ menus }: HeaderProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  menus = menuData;
+  menus = [];
+
+  const detectMenuLink = (link?: string | LinkType) => {
+    if (!link) {
+      return '/';
+    }
+
+    if (typeof link === 'string') {
+      return link;
+    }
+
+    return link.type === 'page' ? (link.page as PageType).slug : link.url;
+  };
 
   return (
     <Container
@@ -46,7 +61,7 @@ export const Header = ({ menus }: HeaderProps) => {
           <HStack alignItems="center" spacing={16}>
             <Menu isOpen={isOpen}>
               {menus.map((menu) => {
-                return menu.menu.type === 'dropdown' ? (
+                return menu.group?.type === 'dropdown' ? (
                   <React.Fragment key={uuidv4()}>
                     <MenuButton
                       as={Button}
@@ -63,27 +78,27 @@ export const Header = ({ menus }: HeaderProps) => {
                         backgroundColor: 'transparent'
                       }}
                     >
-                      {menu.title}
+                      {menu.label}
                     </MenuButton>
                     <MenuList onMouseEnter={onOpen} onMouseLeave={onClose}>
                       <HStack spacing={8} alignItems="normal" padding="20px">
-                        {menu.menu.subMenus?.map((subMenu) => (
+                        {menu.group.menuGroups?.map((menuGroup) => (
                           <MenuGroup
                             key={uuidv4()}
-                            title={subMenu.label}
+                            title={menuGroup.label}
                             color="text.secondary"
                             fontWeight={500}
                           >
-                            {subMenu.subMenuItems.map((subMenuItem) => (
+                            {menuGroup.subMenus?.map((subMenu) => (
                               <MenuItem
                                 key={uuidv4()}
                                 as="a"
-                                href={subMenuItem.link}
+                                href={detectMenuLink(subMenu.link)}
                                 color="text.primary"
                                 fontWeight={400}
                                 _hover={{ backgroundColor: 'transparent' }}
                               >
-                                {subMenuItem.label}
+                                {subMenu.label}
                               </MenuItem>
                             ))}
                           </MenuGroup>
@@ -100,8 +115,11 @@ export const Header = ({ menus }: HeaderProps) => {
                     </MenuList>
                   </React.Fragment>
                 ) : (
-                  <GenericLink key={uuidv4()} href={menu.menu.link || ''}>
-                    {menu.title}
+                  <GenericLink
+                    key={uuidv4()}
+                    href={detectMenuLink(menu.group?.link)}
+                  >
+                    {menu.label}
                   </GenericLink>
                 );
               })}

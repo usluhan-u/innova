@@ -1,12 +1,10 @@
 import React from 'react';
 import payload from 'payload';
-import { GetServerSideProps } from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import getConfig from 'next/config';
-import { PageType } from '../collections';
 import { NotFound } from '../components';
-// import { Type as PageType } from '../collections/Page';
+import { Page as PageType } from '../payload-types';
 // import Head from '../components/Head';
-// import classes from '../css/page.module.css';
 // import RenderBlocks from '../components/RenderBlocks';
 
 const {
@@ -45,7 +43,7 @@ const Page: React.FC<Props> = (props) => {
           />
         )}
       </div> */}
-      {/* <RenderBlocks layout={page.layout} /> */}
+      {/* <RenderBlocks layout={page.layout as any} /> */}
       <footer>
         <hr />
         NextJS + Payload Server Boilerplate made by
@@ -63,31 +61,32 @@ const Page: React.FC<Props> = (props) => {
 
 export default Page;
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const slug = ctx.params?.slug
-    ? (ctx.params.slug as string[]).join('/')
-    : 'home';
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  const slug = ctx.params?.slug || '/';
 
-  const pageQuery = await payload.find({
-    collection: 'pages',
-    where: {
-      slug: {
-        equals: slug
-      }
-    }
-  });
-
-  if (!pageQuery.docs[0]) {
-    ctx.res.statusCode = 404;
-
-    return {
-      props: {}
-    };
-  }
+  const pageReq = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/pages?where[slug][equals]=${slug}`
+  );
+  const pageData = await pageReq.json();
 
   return {
     props: {
-      page: pageQuery.docs[0]
-    }
+      page: pageData.docs[0]
+    },
+    revalidate: 1
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const pageReq = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/pages?limit=100`
+  );
+  const pageData = await pageReq.json();
+
+  return {
+    paths: pageData.docs.map(({ slug }: { slug: string }) => ({
+      params: { slug: slug.split('/') }
+    })),
+    fallback: false
   };
 };
