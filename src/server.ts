@@ -16,8 +16,8 @@ const boilerplate = async () => {
     mongoURL: env.db,
     express: app,
     onInit: async () => {
-      payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}!`);
-      payload.logger.info(`Payload API URL: ${payload.getAPIURL()}!`);
+      payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}.`);
+      payload.logger.info(`Payload API URL: ${payload.getAPIURL()}.`);
     }
   });
 
@@ -31,7 +31,7 @@ const boilerplate = async () => {
       payload.logger.info(`Client is ready!`);
 
       app.listen(PORT, async () => {
-        payload.logger.info(`Server is listening on port ${PORT}!`);
+        payload.logger.info(`Server is listening on port ${PORT}...`);
       });
     });
   } else {

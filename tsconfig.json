@@ -20,7 +20,7 @@
   },
   "include": [
     "src",
-    "payload.config.ts",
+    "src/payload.config.ts",
     "next.config.js",
     "next-env.d.ts",
     "**/*.ts",

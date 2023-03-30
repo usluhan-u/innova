@@ -1,24 +1,4 @@
 import { CollectionConfig } from 'payload/types';
-import { Slug } from '../fields';
-
-interface SubMenuItemType {
-  label: string;
-  link: string;
-}
-
-interface SubMenuType {
-  label: string;
-  subMenuItems: SubMenuItemType[];
-}
-
-export interface MenuType {
-  title: string;
-  menu: {
-    type: 'dropdown' | 'single';
-    subMenus?: SubMenuType[];
-    link?: string;
-  };
-}
 
 export const Menu: CollectionConfig = {
   slug: 'menus',
@@ -26,32 +6,33 @@ export const Menu: CollectionConfig = {
     read: () => true
   },
   admin: {
-    useAsTitle: 'title'
+    useAsTitle: 'label'
   },
   fields: [
     {
-      name: 'title',
-      label: 'Title',
+      name: 'label',
+      label: 'Label',
       type: 'text',
       required: true
     },
     {
-      name: 'menu',
-      label: 'Menu',
+      name: 'group',
+      label: 'Group',
       type: 'group',
       fields: [
         {
           name: 'type',
-          label: 'Type',
+          label: 'Menu Type',
           type: 'radio',
+          required: true,
           options: [
             {
               label: 'Dropdown',
               value: 'dropdown'
             },
             {
-              label: 'Single',
-              value: 'single'
+              label: 'Link',
+              value: 'link'
             }
           ],
           defaultValue: 'dropdown',
@@ -63,12 +44,12 @@ export const Menu: CollectionConfig = {
           type: 'row',
           fields: [
             {
-              name: 'subMenu',
-              label: 'Sub Menu',
+              name: 'menuGroups',
+              label: 'Menu Groups',
               type: 'array',
               labels: {
-                singular: 'Sub Menu',
-                plural: 'Sub Menus'
+                singular: 'Menu Group',
+                plural: 'Menu Groups'
               },
               fields: [
                 {
@@ -78,17 +59,17 @@ export const Menu: CollectionConfig = {
                   required: true
                 },
                 {
-                  name: 'subMenuItem',
-                  label: 'Sub Menu Item',
+                  name: 'subMenus',
+                  label: 'Sub Menus',
                   type: 'array',
                   labels: {
-                    singular: 'Submenu Item',
-                    plural: 'Submenu Items'
+                    singular: 'Sub Menu',
+                    plural: 'Sub Menus'
                   },
                   fields: [
                     {
                       name: 'label',
-                      label: 'label',
+                      label: 'Label',
                       type: 'text',
                       required: true
                     },
@@ -101,25 +82,58 @@ export const Menu: CollectionConfig = {
                     }
                   ]
                 }
+                // {
+                //   name: 'group',
+                //   label: 'Group,
+                //   type: 'group',
+                //   fields: [
+                //     {
+                //       name: 'allMenuContent',
+                //       label: 'All Menu Content',
+                //       type: 'checkbox'
+                //     },
+                //     {
+                //       type: 'row',
+                //       fields: [
+                //         {
+                //           name: 'label',
+                //           label: 'Label',
+                //           type: 'text',
+                //           required: true
+                //         },
+                //         {
+                //           name: 'link',
+                //           label: 'Link',
+                //           type: 'relationship',
+                //           relationTo: 'links',
+                //           required: true
+                //         }
+                //       ],
+                //       admin: {
+                //         condition: (_, siblingData) =>
+                //           siblingData?.allMenuContent === 'true'
+                //       }
+                //     }
+                //   ]
+                // }
               ],
               admin: {
                 condition: (_, siblingData) => siblingData?.type === 'dropdown'
               }
-            },
-            {
-              name: 'link',
-              label: 'Link',
-              type: 'relationship',
-              relationTo: 'links',
-              required: true,
-              admin: {
-                condition: (_, siblingData) => siblingData?.type === 'single'
-              }
             }
           ]
+        },
+        {
+          name: 'link',
+          label: 'Link',
+          type: 'relationship',
+          relationTo: 'links',
+          required: true,
+          admin: {
+            condition: (_, siblingData) => siblingData?.type === 'link'
+          }
         }
       ]
-    },
-    Slug
+    }
   ]
 };

@@ -1,7 +1,4 @@
-import { CollectionConfig } from 'payload/types';
-import { Slug } from '../fields';
-
-export interface LinkType {}
+import { CollectionConfig, GlobalConfig } from 'payload/types';
 
 export const Link: CollectionConfig = {
   slug: 'links',
@@ -9,11 +6,11 @@ export const Link: CollectionConfig = {
     read: () => true
   },
   admin: {
-    useAsTitle: 'title'
+    useAsTitle: 'label'
   },
   fields: [
     {
-      name: 'linkType',
+      name: 'type',
       label: 'Link Type',
       type: 'radio',
       required: true,
@@ -33,8 +30,8 @@ export const Link: CollectionConfig = {
       }
     },
     {
-      name: 'title',
-      label: 'Title',
+      name: 'label',
+      label: 'Label',
       type: 'text',
       required: true
     },
@@ -44,8 +41,9 @@ export const Link: CollectionConfig = {
       type: 'relationship',
       relationTo: 'pages',
       required: true,
+      unique: true,
       admin: {
-        condition: (_, siblingData) => siblingData?.linkType === 'page'
+        condition: (_, siblingData) => siblingData?.type === 'page'
       }
     },
     {
@@ -53,10 +51,10 @@ export const Link: CollectionConfig = {
       label: 'Custom URL',
       type: 'text',
       required: true,
+      unique: true,
       admin: {
-        condition: (_, siblingData) => siblingData?.linkType === 'custom'
+        condition: (_, siblingData) => siblingData?.type === 'custom'
       }
-    },
-    Slug
+    }
   ]
 };

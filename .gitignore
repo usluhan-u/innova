@@ -173,4 +173,10 @@ build
 # vercel
 .vercel
 
+# OS
+.DS_Store
+
+# Misc
+media/*
+
 # End of https://www.toptal.com/developers/gitignore/api/node,visualstudiocode

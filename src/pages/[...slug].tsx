@@ -1,51 +1,38 @@
-import React from 'react';
-import payload from 'payload';
 import { GetServerSideProps } from 'next';
 import getConfig from 'next/config';
-import { PageType } from '../collections';
-import { NotFound } from '../components';
-// import { Type as PageType } from '../collections/Page';
-// import Head from '../components/Head';
-// import classes from '../css/page.module.css';
-// import RenderBlocks from '../components/RenderBlocks';
+import { Head, NotFound, RenderBlocks } from '../components';
+import { Page as PageType } from '../payload-types';
+import payload from 'payload';
 
 const {
   publicRuntimeConfig: { SERVER_URL }
 } = getConfig();
 
-export type Props = {
+export interface PageProps {
   page?: PageType;
   statusCode: number;
-};
+}
 
-const Page: React.FC<Props> = (props) => {
-  const { page } = props;
-
+const Page = ({ page }: PageProps) => {
+  console.log(
+    '🚀 ~ file: [...slug].tsx:17 ~ Page ~ page:',
+    JSON.stringify(page, null, 2)
+  );
   if (!page) {
     return <NotFound />;
   }
 
   return (
     <main>
-      {/* <Head
+      <Head
         title={page.meta?.title || page.title}
         description={page.meta?.description}
         keywords={page.meta?.keywords}
-      /> */}
+      />
       <header>
         <h1>{page.title}</h1>
       </header>
-      {/* <div>
-        {page.image && (
-          <img
-            src={`${SERVER_URL}/media/${
-              page.image.sizes?.feature?.filename || page.image.filename
-            }`}
-            alt={page.image.alt}
-          />
-        )}
-      </div> */}
-      {/* <RenderBlocks layout={page.layout} /> */}
+      <RenderBlocks layout={page.layout as any} />
       <footer>
         <hr />
         NextJS + Payload Server Boilerplate made by

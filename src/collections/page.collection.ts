@@ -1,9 +1,21 @@
 import { CollectionConfig } from 'payload/types';
-import { Slug } from '../fields';
+import {
+  Content,
+  MediaBlock,
+  MediaBlockType,
+  MediaContent,
+  MediaContentType,
+  MediaSlider,
+  MediaSliderType
+} from '../blocks';
+import { Meta, Slug } from '../fields';
+import { ContentProps as ContentType } from '../components';
 
-export interface PageType {
-  title: string;
-}
+export type PageLayout =
+  | MediaContentType
+  | ContentType
+  | MediaSliderType
+  | MediaBlockType;
 
 export const Page: CollectionConfig = {
   slug: 'pages',
@@ -20,6 +32,14 @@ export const Page: CollectionConfig = {
       type: 'text',
       required: true
     },
-    Slug
+    {
+      name: 'layout',
+      label: 'Page Layout',
+      type: 'blocks',
+      minRows: 1,
+      blocks: [MediaContent, Content, MediaSlider, MediaBlock]
+    },
+    Slug,
+    Meta
   ]
 };

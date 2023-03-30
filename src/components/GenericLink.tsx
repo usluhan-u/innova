@@ -1,4 +1,5 @@
 import { Link } from '@chakra-ui/next-js';
+import escapeHTML from 'escape-html';
 
 export interface GenericLinkProps {
   href: string;
@@ -8,7 +9,7 @@ export interface GenericLinkProps {
 export const GenericLink = ({ href, children }: GenericLinkProps) => {
   return (
     <Link
-      href={href}
+      href={escapeHTML(href)}
       scroll={false}
       textDecoration="none"
       _hover={{ textDecoration: 'none' }}
