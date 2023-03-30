@@ -5,7 +5,7 @@ export interface MediaBlockType {
   media: MediaType;
   size: 'normal' | 'wide' | 'fullscreen';
   caption: unknown;
-  type: 'mediaBlock';
+  blockType: 'mediaBlock';
 }
 
 export const MediaBlock: Block = {

@@ -1,25 +1,27 @@
 import React from 'react';
-import { components } from '../blocks';
 import { PageLayout } from '../collections';
+import { Content } from './Content';
+import { v4 as uuidv4 } from 'uuid';
 
-type RenderBlocksProps = {
+interface RenderBlocksProps {
   layout: PageLayout[];
+}
+
+const components = {
+  content: Content,
+  mediaBlock: () => null,
+  mediaContent: () => null,
+  mediaSlider: () => null
 };
 
 export const RenderBlocks = ({ layout }: RenderBlocksProps) => (
-  <div>
-    {layout.map((block, i) => {
-      const Block: React.FC<any> = components[block.type];
+  <>
+    {layout.map((block) => {
+      const Block: React.FC<any> = components[block.blockType];
 
-      if (Block) {
-        return (
-          <section key={i}>
-            <Block {...block} />
-          </section>
-        );
-      }
-
-      return null;
+      return Block ? (
+        <section key={uuidv4()}>{<Block {...block} />}</section>
+      ) : null;
     })}
-  </div>
+  </>
 );

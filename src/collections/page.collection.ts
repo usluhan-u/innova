@@ -1,7 +1,6 @@
 import { CollectionConfig } from 'payload/types';
 import {
   Content,
-  ContentType,
   MediaBlock,
   MediaBlockType,
   MediaContent,
@@ -9,7 +8,8 @@ import {
   MediaSlider,
   MediaSliderType
 } from '../blocks';
-import { Slug } from '../fields';
+import { Meta, Slug } from '../fields';
+import { ContentProps as ContentType } from '../components';
 
 export type PageLayout =
   | MediaContentType
@@ -39,6 +39,7 @@ export const Page: CollectionConfig = {
       minRows: 1,
       blocks: [MediaContent, Content, MediaSlider, MediaBlock]
     },
-    Slug
+    Slug,
+    Meta
   ]
 };

@@ -1,64 +1,40 @@
-import React from 'react';
-import { ContentType } from '../blocks';
 import { Grid, GridItem } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
-import { RichText } from './rich-text';
+import { RichText } from './RichText';
 
-const colStyles = {
-  oneThird: {
-    cols: 4
-  },
-  half: {
-    cols: 6
-  },
-  twoThirds: {
-    cols: 8
-  },
-  full: {
-    cols: 12
-  }
-};
+type width = 'oneThird' | 'half' | 'twoThirds' | 'full';
+type alignment = 'left' | 'center' | 'right';
 
-export const Content = ({ columns, type }: ContentType) => {
+export interface ContentColumn {
+  width: width;
+  alignment: alignment;
+  content: unknown;
+}
+
+export interface ContentProps {
+  blockType: 'content';
+  columns: ContentColumn[];
+}
+
+export const Content = ({ columns }: ContentProps) => {
+  const getWidth = (width: width) => {
+    const widthMap = {
+      oneThird: '33%',
+      half: '50%',
+      twoThirds: '66%',
+      full: '100%'
+    };
+
+    return widthMap[width] || widthMap.full;
+  };
+
   return (
-    <Grid templateColumns={`repeat(${columns.length}, 1fr)`} gap={12}>
-      {columns?.map((column) => (
-        <GridItem key={uuidv4()} w="100%" justifyContent={column.alignment}>
-          <RichText content={column.content} />
+    <Grid templateColumns={`repeat(${columns.length}, 1fr)`} gap={8}>
+      {columns.map((column) => (
+        <GridItem key={uuidv4()} w={getWidth(column.width)}>
+          <RichText content={column.content} textAlign={column.alignment} />
         </GridItem>
       ))}
     </Grid>
-    // <div className={classes.content}>
-    //   <Gutter left right>
-    //     <BackgroundColor color={backgroundColor}>
-    //       <Padding top={paddingTop} bottom={paddingBottom}>
-    //         <GridContainer className={classes.gridContainer}>
-    //           {accentLine && (
-    //             <div
-    //               className={[
-    //                 classes.accentLine,
-    //                 classes[`accentLine-${accentLineAlignment}`]
-    //               ]
-    //                 .filter(Boolean)
-    //                 .join(' ')}
-    //             />
-    //           )}
-    //           <Grid>
-    //             {columns?.map((col, i) => (
-    //               <Cell
-    //                 key={i}
-    //                 className={classes[`align-${col.alignment}`]}
-    //                 {...colStyles[col.width]}
-    //                 colsM={8}
-    //               >
-    //                 <RichText content={col.content} />
-    //               </Cell>
-    //             ))}
-    //           </Grid>
-    //         </GridContainer>
-    //       </Padding>
-    //     </BackgroundColor>
-    //   </Gutter>
-    // </div>
   );
 };

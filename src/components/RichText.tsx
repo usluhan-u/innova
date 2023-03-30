@@ -1,29 +1,43 @@
 import React from 'react';
 import escapeHTML from 'escape-html';
-import { Text } from 'slate';
+import { Text as SlateText } from 'slate';
 import { v4 as uuidv4 } from 'uuid';
+import { chakra, ChakraProps } from '@chakra-ui/react';
 
-export interface RichTextProps {
-  content: any;
+export interface RichTextProps extends ChakraProps {
+  content: unknown;
 }
 
-export const RichText = ({ content }: RichTextProps) => {
+export const RichText = chakra(({ content, ...rest }: RichTextProps) => {
   if (!content) {
     return null;
   }
 
-  return <div>{serialize(content)}</div>;
+  return <chakra.div {...rest}>{serialize(content)}</chakra.div>;
+});
+
+type Children = Leaf[];
+
+type Leaf = {
+  type: string;
+  value?: {
+    url: string;
+    alt: string;
+  };
+  children?: Children;
+  url?: string;
+  [key: string]: unknown;
 };
 
 const serialize = (children: any): React.ReactElement[] =>
   children.map((node: any) => {
-    if (Text.isText(node)) {
+    if (SlateText.isText(node)) {
       let text = (
         <span dangerouslySetInnerHTML={{ __html: escapeHTML(node.text) }} />
       );
 
       if ((node as any).bold) {
-        text = <strong key={uuidv4()}>{text}</strong>;
+        text = <b key={uuidv4()}>{text}</b>;
       }
 
       if ((node as any).code) {
@@ -31,23 +45,15 @@ const serialize = (children: any): React.ReactElement[] =>
       }
 
       if ((node as any).italic) {
-        text = <em key={uuidv4()}>{text}</em>;
+        text = <i key={uuidv4()}>{text}</i>;
       }
 
       if ((node as any).underline) {
-        text = (
-          <span style={{ textDecoration: 'underline' }} key={uuidv4()}>
-            {text}
-          </span>
-        );
+        text = <u key={uuidv4()}>{text}</u>;
       }
 
       if ((node as any).strikethrough) {
-        text = (
-          <span style={{ textDecoration: 'line-through' }} key={uuidv4()}>
-            {text}
-          </span>
-        );
+        text = <del key={uuidv4()}>{text}</del>;
       }
 
       return <React.Fragment key={uuidv4()}>{text}</React.Fragment>;
@@ -86,10 +92,6 @@ const serialize = (children: any): React.ReactElement[] =>
             {serialize(node.children)}
           </a>
         );
-
-      case 'hr':
-        return <hr key={uuidv4()} />;
-
       default:
         return <p key={uuidv4()}>{serialize(node.children)}</p>;
     }

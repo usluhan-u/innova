@@ -1,20 +1,4 @@
 import { Block } from 'payload/types';
-import { RichText } from '../fields';
-import { Hr } from '../components/rich-text/hr';
-import { Video } from '../components/rich-text/video';
-import { VideoButton } from '../components/rich-text/video/VideoButton';
-import { VideoElement } from '../components/rich-text/video/VideoElement';
-
-export interface ContentTypeColumn {
-  width: 'oneThird' | 'half' | 'twoThirds' | 'full';
-  alignment: 'left' | 'center' | 'right';
-  content: unknown;
-}
-
-export interface ContentType {
-  columns: ContentTypeColumn[];
-  type: 'content';
-}
 
 export const Content: Block = {
   slug: 'content',
@@ -89,25 +73,10 @@ export const Content: Block = {
             }
           ]
         },
-        RichText(
-          {},
-          {
-            elements: [
-              'ol',
-              'ul',
-              'indent',
-              'relationship',
-              'upload',
-              {
-                name: Video.name,
-                plugins: Video.plugins,
-                Button: VideoButton,
-                Element: VideoElement
-              },
-              Hr
-            ]
-          }
-        )
+        {
+          name: 'content',
+          type: 'richText'
+        }
       ]
     }
   ]

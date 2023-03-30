@@ -1,49 +1,38 @@
-import React from 'react';
-import payload from 'payload';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import getConfig from 'next/config';
-import { NotFound } from '../components';
+import { Head, NotFound, RenderBlocks } from '../components';
 import { Page as PageType } from '../payload-types';
-// import Head from '../components/Head';
-// import RenderBlocks from '../components/RenderBlocks';
+import payload from 'payload';
 
 const {
   publicRuntimeConfig: { SERVER_URL }
 } = getConfig();
 
-export type Props = {
+export interface PageProps {
   page?: PageType;
   statusCode: number;
-};
+}
 
-const Page: React.FC<Props> = (props) => {
-  const { page } = props;
-
+const Page = ({ page }: PageProps) => {
+  console.log(
+    '🚀 ~ file: [...slug].tsx:17 ~ Page ~ page:',
+    JSON.stringify(page, null, 2)
+  );
   if (!page) {
     return <NotFound />;
   }
 
   return (
     <main>
-      {/* <Head
+      <Head
         title={page.meta?.title || page.title}
         description={page.meta?.description}
         keywords={page.meta?.keywords}
-      /> */}
+      />
       <header>
         <h1>{page.title}</h1>
       </header>
-      {/* <div>
-        {page.image && (
-          <img
-            src={`${SERVER_URL}/media/${
-              page.image.sizes?.feature?.filename || page.image.filename
-            }`}
-            alt={page.image.alt}
-          />
-        )}
-      </div> */}
-      {/* <RenderBlocks layout={page.layout as any} /> */}
+      <RenderBlocks layout={page.layout as any} />
       <footer>
         <hr />
         NextJS + Payload Server Boilerplate made by
@@ -61,32 +50,31 @@ const Page: React.FC<Props> = (props) => {
 
 export default Page;
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
-  const slug = ctx.params?.slug || '/';
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const slug = ctx.params?.slug
+    ? (ctx.params.slug as string[]).join('/')
+    : 'home';
 
-  const pageReq = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/pages?where[slug][equals]=${slug}`
-  );
-  const pageData = await pageReq.json();
+  const pageQuery = await payload.find({
+    collection: 'pages',
+    where: {
+      slug: {
+        equals: slug
+      }
+    }
+  });
+
+  if (!pageQuery.docs[0]) {
+    ctx.res.statusCode = 404;
+
+    return {
+      props: {}
+    };
+  }
 
   return {
     props: {
-      page: pageData.docs[0]
-    },
-    revalidate: 1
-  };
-};
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  const pageReq = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/pages?limit=100`
-  );
-  const pageData = await pageReq.json();
-
-  return {
-    paths: pageData.docs.map(({ slug }: { slug: string }) => ({
-      params: { slug: slug.split('/') }
-    })),
-    fallback: false
+      page: pageQuery.docs[0]
+    }
   };
 };

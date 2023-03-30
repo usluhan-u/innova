@@ -1,12 +1,11 @@
 import { Block } from 'payload/types';
-import { RichText } from '../fields';
 import { Media as MediaType } from '../payload-types';
 
 export interface MediaContentType {
   alignment: 'contentOnLeft' | 'contentOnRight';
   content: unknown;
   media: MediaType;
-  type: 'mediaContent';
+  blockType: 'mediaContent';
 }
 
 export const MediaContent: Block = {
@@ -36,12 +35,10 @@ export const MediaContent: Block = {
         layout: 'horizontal'
       }
     },
-    RichText(
-      {},
-      {
-        elements: ['ol', 'ul', 'indent']
-      }
-    ),
+    {
+      name: 'content',
+      type: 'richText'
+    },
     {
       name: 'media',
       type: 'upload',

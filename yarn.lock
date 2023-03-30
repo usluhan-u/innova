@@ -6168,8 +6168,8 @@ __metadata:
   linkType: hard
 
 "framer-motion@npm:^10.9.2":
-  version: 10.9.2
-  resolution: "framer-motion@npm:10.9.2"
+  version: 10.9.4
+  resolution: "framer-motion@npm:10.9.4"
   dependencies:
     "@emotion/is-prop-valid": ^0.8.2
     tslib: ^2.4.0
@@ -6184,7 +6184,7 @@ __metadata:
       optional: true
     react-dom:
       optional: true
-  checksum: ae45174e03551efdb94aa579287d9d83c3ad06fc16849790cc9379692a7e0defb20bd76bab449286dba8ba112963c3e91605fe3085116f0ab967f5e046716627
+  checksum: f272e9ba588a2d24054f6a24263c4b78e48104c4692f160375fcad3204e38cfb51d4d225ccf27545ada32f9de5f1c7b1d4e95e0bc0eee59242c7f890e4bf02ff
   languageName: node
   linkType: hard
 
@@ -7062,7 +7062,6 @@ __metadata:
     "@commitlint/config-conventional": ^17.4.4
     "@emotion/react": ^11.10.6
     "@emotion/styled": ^11.10.6
-    "@faceless-ui/modal": ^2.0.1
     "@types/escape-html": ^1.0.2
     "@types/express": ^4.17.17
     "@types/node": ^18.15.11

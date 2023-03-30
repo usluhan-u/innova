@@ -30,7 +30,7 @@ export interface Page {
   layout?: (
     | {
         alignment: 'contentOnLeft' | 'contentOnRight';
-        richText?: {
+        content?: {
           [k: string]: unknown;
         }[];
         media: string | Media;
@@ -42,7 +42,7 @@ export interface Page {
         columns?: {
           width: 'oneThird' | 'half' | 'twoThirds' | 'full';
           alignment: 'left' | 'center' | 'right';
-          richText?: {
+          content?: {
             [k: string]: unknown;
           }[];
           id?: string;
@@ -52,7 +52,7 @@ export interface Page {
         blockType: 'content';
       }
     | {
-        introContent?: {
+        content?: {
           [k: string]: unknown;
         }[];
         slides?: {
@@ -75,6 +75,11 @@ export interface Page {
       }
   )[];
   slug: string;
+  meta?: {
+    title?: string;
+    description?: string;
+    keywords?: string;
+  };
   createdAt: string;
   updatedAt: string;
 }

@@ -1,5 +1,4 @@
 import { Block } from 'payload/types';
-import { RichText } from '../fields';
 import { Media as MediaType } from '../payload-types';
 
 export interface MediaSliderSlide {
@@ -9,7 +8,7 @@ export interface MediaSliderSlide {
 export interface MediaSliderType {
   introContent: unknown;
   slides: MediaSliderSlide[];
-  type: 'mediaSlider';
+  blockType: 'mediaSlider';
 }
 
 export const MediaSlider: Block = {
@@ -19,10 +18,10 @@ export const MediaSlider: Block = {
     plural: 'Media Sliders'
   },
   fields: [
-    RichText({
-      name: 'introContent',
-      label: 'Introductory Content'
-    }),
+    {
+      name: 'content',
+      type: 'richText'
+    },
     {
       name: 'slides',
       type: 'array',
