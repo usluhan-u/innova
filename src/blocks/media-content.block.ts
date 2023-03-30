@@ -1,12 +1,4 @@
 import { Block } from 'payload/types';
-import { Media as MediaType } from '../payload-types';
-
-export interface MediaContentType {
-  alignment: 'contentOnLeft' | 'contentOnRight';
-  content: unknown;
-  media: MediaType;
-  blockType: 'mediaContent';
-}
 
 export const MediaContent: Block = {
   slug: 'mediaContent',
@@ -43,10 +35,7 @@ export const MediaContent: Block = {
       name: 'media',
       type: 'upload',
       relationTo: 'medias',
-      required: true,
-      admin: {
-        condition: (_, { embeddedVideo }) => Boolean(!embeddedVideo?.embed)
-      }
+      required: true
     }
   ]
 };

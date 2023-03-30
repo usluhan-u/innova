@@ -2,6 +2,8 @@ import React from 'react';
 import { PageLayout } from '../collections';
 import { Content } from './Content';
 import { v4 as uuidv4 } from 'uuid';
+import { Media } from './Media';
+import { MediaContent } from './MediaContent';
 
 interface RenderBlocksProps {
   layout: PageLayout[];
@@ -9,8 +11,8 @@ interface RenderBlocksProps {
 
 const components = {
   content: Content,
-  mediaBlock: () => null,
-  mediaContent: () => null,
+  media: Media,
+  mediaContent: MediaContent,
   mediaSlider: () => null
 };
 

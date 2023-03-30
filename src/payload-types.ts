@@ -71,7 +71,7 @@ export interface Page {
         }[];
         id?: string;
         blockName?: string;
-        blockType: 'mediaBlock';
+        blockType: 'media';
       }
   )[];
   slug: string;
@@ -92,32 +92,6 @@ export interface Media {
   filesize?: number;
   width?: number;
   height?: number;
-  sizes?: {
-    thumbnail?: {
-      url?: string;
-      width?: number;
-      height?: number;
-      mimeType?: string;
-      filesize?: number;
-      filename?: string;
-    };
-    portrait?: {
-      url?: string;
-      width?: number;
-      height?: number;
-      mimeType?: string;
-      filesize?: number;
-      filename?: string;
-    };
-    hero?: {
-      url?: string;
-      width?: number;
-      height?: number;
-      mimeType?: string;
-      filesize?: number;
-      filename?: string;
-    };
-  };
   createdAt: string;
   updatedAt: string;
 }

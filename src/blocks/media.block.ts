@@ -1,18 +1,11 @@
 import { Block } from 'payload/types';
 import { Media as MediaType } from '../payload-types';
 
-export interface MediaBlockType {
-  media: MediaType;
-  size: 'normal' | 'wide' | 'fullscreen';
-  caption: unknown;
-  blockType: 'mediaBlock';
-}
-
-export const MediaBlock: Block = {
-  slug: 'mediaBlock',
+export const Media: Block = {
+  slug: 'media',
   labels: {
-    singular: 'Media Block',
-    plural: 'Media Blocks'
+    singular: 'Media',
+    plural: 'Medias'
   },
   fields: [
     {

@@ -3,6 +3,8 @@ export * from './Content';
 export * from './GenericLink';
 export * from './Head';
 export * from './Header';
+export * from './Media';
+export * from './MediaContent';
 export * from './NotFound';
 export * from './RenderBlocks';
 export * from './RichText';

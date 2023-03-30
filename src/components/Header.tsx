@@ -53,7 +53,7 @@ export const Header = ({ menus }: HeaderProps) => {
       alignItems="center"
       justifyContent="space-between"
     >
-      <HStack alignItems="center" justifyContent="space-between" w="100%">
+      <HStack alignItems="center" justifyContent="space-between" w="full">
         <HStack alignItems="center" spacing={32}>
           <GenericLink href="/">
             <Logo />
