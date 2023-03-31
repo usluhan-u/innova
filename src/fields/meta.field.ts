@@ -1,5 +1,4 @@
 import { Field } from 'payload/types';
-import { formatSlug } from '../utils';
 
 export const Meta: Field = {
   name: 'meta',

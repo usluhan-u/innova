@@ -1,23 +1,26 @@
 import { CollectionConfig } from 'payload/types';
 import {
+  CallToAction,
   Content,
   Media,
   MediaContent,
-  MediaSlider,
-  MediaSliderType
+  MediaSlider
 } from '../blocks';
 import { Meta, Slug } from '../fields';
 import {
+  CallToActionProps as CallToActionType,
   ContentProps as ContentType,
   MediaContentProps as MediaContentType,
-  MediaProps as MediaType
+  MediaProps as MediaType,
+  MediaSliderProps as MediaSliderType
 } from '../components';
 
 export type PageLayout =
   | MediaContentType
   | ContentType
   | MediaSliderType
-  | MediaType;
+  | MediaType
+  | CallToActionType;
 
 export const Page: CollectionConfig = {
   slug: 'pages',
@@ -39,7 +42,7 @@ export const Page: CollectionConfig = {
       label: 'Page Layout',
       type: 'blocks',
       minRows: 1,
-      blocks: [MediaContent, Content, MediaSlider, Media]
+      blocks: [MediaContent, Content, MediaSlider, Media, CallToAction]
     },
     Slug,
     Meta

@@ -4,6 +4,8 @@ import { Content } from './Content';
 import { v4 as uuidv4 } from 'uuid';
 import { Media } from './Media';
 import { MediaContent } from './MediaContent';
+import { MediaSlider } from './MediaSlider';
+import { CallToAction } from './CallToAction';
 
 interface RenderBlocksProps {
   layout: PageLayout[];
@@ -13,7 +15,8 @@ const components = {
   content: Content,
   media: Media,
   mediaContent: MediaContent,
-  mediaSlider: () => null
+  mediaSlider: MediaSlider,
+  callToAction: CallToAction
 };
 
 export const RenderBlocks = ({ layout }: RenderBlocksProps) => (

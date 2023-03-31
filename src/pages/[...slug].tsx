@@ -1,12 +1,7 @@
 import { GetServerSideProps } from 'next';
-import getConfig from 'next/config';
 import { Head, NotFound, RenderBlocks } from '../components';
 import { Page as PageType } from '../payload-types';
 import payload from 'payload';
-
-const {
-  publicRuntimeConfig: { SERVER_URL }
-} = getConfig();
 
 export interface PageProps {
   page?: PageType;

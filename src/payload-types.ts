@@ -52,10 +52,17 @@ export interface Page {
         blockType: 'content';
       }
     | {
-        content?: {
-          [k: string]: unknown;
-        }[];
         slides?: {
+          content?: {
+            [k: string]: unknown;
+          }[];
+          callToAction?: {
+            label: string;
+            type: 'page' | 'custom';
+            page: string | Page;
+            url: string;
+            newTab: boolean;
+          };
           media: string | Media;
           id?: string;
         }[];
@@ -72,6 +79,16 @@ export interface Page {
         id?: string;
         blockName?: string;
         blockType: 'media';
+      }
+    | {
+        label: string;
+        type: 'page' | 'custom';
+        page: string | Page;
+        url: string;
+        newTab: boolean;
+        id?: string;
+        blockName?: string;
+        blockType: 'callToAction';
       }
   )[];
   slug: string;

@@ -1,12 +1,12 @@
 import { Link } from '@chakra-ui/next-js';
 import escapeHTML from 'escape-html';
 
-export interface GenericLinkProps {
+export interface InternalLinkProps {
   href: string;
   children: React.ReactNode | React.ReactNode[];
 }
 
-export const GenericLink = ({ href, children }: GenericLinkProps) => {
+export const InternalLink = ({ href, children }: InternalLinkProps) => {
   return (
     <Link
       href={escapeHTML(href)}

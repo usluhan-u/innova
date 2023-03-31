@@ -1,4 +1,4 @@
-import { GenericLink } from './GenericLink';
+import { InternalLink } from './GenericLink';
 import { Logo } from '../icons';
 import {
   Box,
@@ -55,9 +55,9 @@ export const Header = ({ menus }: HeaderProps) => {
     >
       <HStack alignItems="center" justifyContent="space-between" w="full">
         <HStack alignItems="center" spacing={32}>
-          <GenericLink href="/">
+          <InternalLink href="/">
             <Logo />
-          </GenericLink>
+          </InternalLink>
           <HStack alignItems="center" spacing={16}>
             <Menu isOpen={isOpen}>
               {menus.map((menu) => {
@@ -106,21 +106,21 @@ export const Header = ({ menus }: HeaderProps) => {
                       </HStack>
                       <VStack alignItems="normal" p={8}>
                         <Divider borderBottomColor="black" />
-                        <GenericLink href="/">
+                        <InternalLink href="/">
                           <Text color="text.blue">
                             Tüm Ürünleri İnceleyin <ArrowForwardIcon />
                           </Text>
-                        </GenericLink>
+                        </InternalLink>
                       </VStack>
                     </MenuList>
                   </React.Fragment>
                 ) : (
-                  <GenericLink
+                  <InternalLink
                     key={uuidv4()}
                     href={detectMenuLink(menu.group?.link)}
                   >
                     {menu.label}
-                  </GenericLink>
+                  </InternalLink>
                 );
               })}
             </Menu>

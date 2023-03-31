@@ -7,6 +7,9 @@ export const theme = extendTheme({
       secondary: '#7893A7',
       blue: '#005A9B',
       light: '#FFFFFF'
+    },
+    button: {
+      primary: '#005A9B'
     }
   }
 });

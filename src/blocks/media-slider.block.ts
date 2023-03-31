@@ -1,15 +1,5 @@
 import { Block } from 'payload/types';
-import { Media as MediaType } from '../payload-types';
-
-export interface MediaSliderSlide {
-  media: MediaType;
-}
-
-export interface MediaSliderType {
-  introContent: unknown;
-  slides: MediaSliderSlide[];
-  blockType: 'mediaSlider';
-}
+import { CallToAction } from '../fields';
 
 export const MediaSlider: Block = {
   slug: 'mediaSlider',
@@ -19,18 +9,19 @@ export const MediaSlider: Block = {
   },
   fields: [
     {
-      name: 'content',
-      type: 'richText'
-    },
-    {
       name: 'slides',
       type: 'array',
-      minRows: 3,
+      minRows: 2,
       labels: {
         singular: 'Slide',
         plural: 'Slides'
       },
       fields: [
+        {
+          name: 'content',
+          type: 'richText'
+        },
+        CallToAction,
         {
           name: 'media',
           type: 'upload',

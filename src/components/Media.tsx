@@ -39,6 +39,8 @@ export const Media = ({ caption, media, size }: MediaProps) => {
               alt={media.alt}
               style={{ objectFit: 'cover' }}
               fill
+              sizes="100%"
+              priority={false}
             />
             {caption && <RichText content={caption} textAlign="center" />}
           </>

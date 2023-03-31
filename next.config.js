@@ -9,13 +9,7 @@ const nextConfig = {
     SERVER_URL: process.env.PAYLOAD_PUBLIC_SERVER_URL
   },
   images: {
-    remotePatterns: [
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: process.env.PORT
-      }
-    ]
+    domains: ['localhost']
   }
 };
 
