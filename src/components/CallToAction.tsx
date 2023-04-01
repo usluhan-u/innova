@@ -21,7 +21,6 @@ export const CallToAction = ({
   label
 }: CallToActionProps) => {
   const isRelative = url.startsWith('/');
-  console.log('🚀 ~ file: CallToAction.tsx:24 ~ isRelative:', isRelative);
 
   return (
     <>

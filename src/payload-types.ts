@@ -7,20 +7,53 @@
 
 export interface Config {
   collections: {
-    links: Link;
+    users: User;
     medias: Media;
     menus: Menu;
+    categories: Category;
     pages: Page;
-    users: User;
   };
   globals: {};
 }
-export interface Link {
+export interface User {
   id: string;
-  type: 'page' | 'custom';
+  email?: string;
+  resetPasswordToken?: string;
+  resetPasswordExpiration?: string;
+  loginAttempts?: number;
+  lockUntil?: string;
+  createdAt: string;
+  updatedAt: string;
+  password?: string;
+}
+export interface Media {
+  id: string;
+  alt: string;
+  url?: string;
+  filename?: string;
+  mimeType?: string;
+  filesize?: number;
+  width?: number;
+  height?: number;
+  createdAt: string;
+  updatedAt: string;
+}
+export interface Menu {
+  id: string;
   label: string;
-  page: string | Page;
-  url: string;
+  group?: {
+    type: 'multiple' | 'single';
+    menuGroups?: {
+      label: string;
+      subMenus?: {
+        label: string;
+        page: string | Page;
+        id?: string;
+      }[];
+      id?: string;
+    }[];
+    page: string | Page;
+  };
   createdAt: string;
   updatedAt: string;
 }
@@ -58,8 +91,8 @@ export interface Page {
           }[];
           callToAction?: {
             label: string;
-            type: 'page' | 'custom';
-            page: string | Page;
+            type: 'internal' | 'external';
+            internal: string | Page;
             url: string;
             newTab: boolean;
           };
@@ -72,7 +105,7 @@ export interface Page {
       }
     | {
         media: string | Media;
-        size?: 'normal' | 'wide' | 'fullscreen';
+        size: 'normal' | 'wide' | 'fullscreen';
         caption?: {
           [k: string]: unknown;
         }[];
@@ -100,45 +133,9 @@ export interface Page {
   createdAt: string;
   updatedAt: string;
 }
-export interface Media {
-  id: string;
-  alt: string;
-  url?: string;
-  filename?: string;
-  mimeType?: string;
-  filesize?: number;
-  width?: number;
-  height?: number;
-  createdAt: string;
-  updatedAt: string;
-}
-export interface Menu {
+export interface Category {
   id: string;
   label: string;
-  group?: {
-    type: 'dropdown' | 'link';
-    menuGroups?: {
-      label: string;
-      subMenus?: {
-        label: string;
-        link: string | Link;
-        id?: string;
-      }[];
-      id?: string;
-    }[];
-    link: string | Link;
-  };
   createdAt: string;
   updatedAt: string;
-}
-export interface User {
-  id: string;
-  email?: string;
-  resetPasswordToken?: string;
-  resetPasswordExpiration?: string;
-  loginAttempts?: number;
-  lockUntil?: string;
-  createdAt: string;
-  updatedAt: string;
-  password?: string;
 }

@@ -2340,6 +2340,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@payloadcms/plugin-redirects@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@payloadcms/plugin-redirects@npm:1.0.0"
+  peerDependencies:
+    payload: ^0.18.5 || ^1.0.0
+  checksum: 5127775a7670751c1951cceac66c32329906010ed6bc615917a5618974fd7211116ad422aee7a3b13e6fdf8042d51b84e4db9440a5a2fc58c362683edd0de0bf
+  languageName: node
+  linkType: hard
+
+"@payloadcms/plugin-seo@npm:^1.0.10":
+  version: 1.0.10
+  resolution: "@payloadcms/plugin-seo@npm:1.0.10"
+  peerDependencies:
+    payload: ^0.18.5 || ^1.0.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: f178826b72ee72e66a10542f91ed79e2b72581e34b0f8606ff5e98823dc244fb99cccb340c8ec1aa81d2cc0140e8a589c9d0a87c6b33e4d4ca63f87c17c38aca
+  languageName: node
+  linkType: hard
+
 "@polka/url@npm:^1.0.0-next.20":
   version: 1.0.0-next.21
   resolution: "@polka/url@npm:1.0.0-next.21"
@@ -7078,6 +7097,8 @@ __metadata:
     "@commitlint/config-conventional": ^17.4.4
     "@emotion/react": ^11.10.6
     "@emotion/styled": ^11.10.6
+    "@payloadcms/plugin-redirects": ^1.0.0
+    "@payloadcms/plugin-seo": ^1.0.10
     "@types/escape-html": ^1.0.2
     "@types/express": ^4.17.17
     "@types/node": ^18.15.11

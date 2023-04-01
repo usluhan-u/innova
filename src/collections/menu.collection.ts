@@ -13,40 +13,46 @@ export const Menu: CollectionConfig = {
       name: 'label',
       label: 'Label',
       type: 'text',
-      required: true
+      required: true,
+      localized: true
     },
     {
       name: 'group',
       label: 'Group',
       type: 'group',
+      localized: true,
       fields: [
         {
           name: 'type',
           label: 'Menu Type',
           type: 'radio',
           required: true,
+          localized: true,
           options: [
             {
-              label: 'Dropdown',
-              value: 'dropdown'
+              label: 'Multiple',
+              value: 'multiple'
             },
             {
-              label: 'Link',
-              value: 'link'
+              label: 'Single',
+              value: 'single'
             }
           ],
-          defaultValue: 'dropdown',
+          defaultValue: 'multiple',
           admin: {
             layout: 'horizontal'
           }
         },
         {
           type: 'row',
+          localized: true,
           fields: [
             {
               name: 'menuGroups',
               label: 'Menu Groups',
               type: 'array',
+              localized: true,
+              minRows: 1,
               labels: {
                 singular: 'Menu Group',
                 plural: 'Menu Groups'
@@ -56,12 +62,15 @@ export const Menu: CollectionConfig = {
                   name: 'label',
                   label: 'Label',
                   type: 'text',
-                  required: true
+                  required: true,
+                  localized: true
                 },
                 {
                   name: 'subMenus',
                   label: 'Sub Menus',
                   type: 'array',
+                  localized: true,
+                  minRows: 1,
                   labels: {
                     singular: 'Sub Menu',
                     plural: 'Sub Menus'
@@ -71,66 +80,35 @@ export const Menu: CollectionConfig = {
                       name: 'label',
                       label: 'Label',
                       type: 'text',
-                      required: true
+                      required: true,
+                      localized: true
                     },
                     {
-                      name: 'link',
-                      label: 'Link',
+                      name: 'page',
+                      label: 'Page',
                       type: 'relationship',
-                      relationTo: 'links',
-                      required: true
+                      relationTo: 'pages',
+                      required: true,
+                      localized: true
                     }
                   ]
                 }
-                // {
-                //   name: 'group',
-                //   label: 'Group,
-                //   type: 'group',
-                //   fields: [
-                //     {
-                //       name: 'allMenuContent',
-                //       label: 'All Menu Content',
-                //       type: 'checkbox'
-                //     },
-                //     {
-                //       type: 'row',
-                //       fields: [
-                //         {
-                //           name: 'label',
-                //           label: 'Label',
-                //           type: 'text',
-                //           required: true
-                //         },
-                //         {
-                //           name: 'link',
-                //           label: 'Link',
-                //           type: 'relationship',
-                //           relationTo: 'links',
-                //           required: true
-                //         }
-                //       ],
-                //       admin: {
-                //         condition: (_, siblingData) =>
-                //           siblingData?.allMenuContent === 'true'
-                //       }
-                //     }
-                //   ]
-                // }
               ],
               admin: {
-                condition: (_, siblingData) => siblingData?.type === 'dropdown'
+                condition: (_, siblingData) => siblingData?.type === 'multiple'
               }
             }
           ]
         },
         {
-          name: 'link',
-          label: 'Link',
+          name: 'page',
+          label: 'Page',
           type: 'relationship',
-          relationTo: 'links',
+          relationTo: 'pages',
           required: true,
+          localized: true,
           admin: {
-            condition: (_, siblingData) => siblingData?.type === 'link'
+            condition: (_, siblingData) => siblingData?.type === 'single'
           }
         }
       ]

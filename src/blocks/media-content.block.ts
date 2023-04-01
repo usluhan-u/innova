@@ -13,6 +13,7 @@ export const MediaContent: Block = {
       type: 'radio',
       defaultValue: 'contentOnLeft',
       required: true,
+      localized: true,
       options: [
         {
           label: 'Content on Left',
@@ -29,13 +30,15 @@ export const MediaContent: Block = {
     },
     {
       name: 'content',
-      type: 'richText'
+      type: 'richText',
+      localized: true
     },
     {
       name: 'media',
       type: 'upload',
       relationTo: 'medias',
-      required: true
+      required: true,
+      localized: true
     }
   ]
 };

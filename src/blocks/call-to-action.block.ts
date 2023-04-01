@@ -1,6 +1,6 @@
 import { Block } from 'payload/types';
 
-const customURLCondition = (_: Partial<any>, siblingData: Partial<any>) =>
+const customCondition = (_: Partial<any>, siblingData: Partial<any>) =>
   siblingData.type === 'custom';
 
 export const CallToAction: Block = {
@@ -12,12 +12,14 @@ export const CallToAction: Block = {
   fields: [
     {
       type: 'row',
+      localized: true,
       fields: [
         {
           name: 'label',
           label: 'Button Label',
           type: 'text',
           required: true,
+          localized: true,
           admin: {
             width: '50%'
           }
@@ -25,9 +27,10 @@ export const CallToAction: Block = {
         {
           name: 'type',
           label: 'Button Type',
-          required: true,
           type: 'radio',
+          required: true,
           defaultValue: 'page',
+          localized: true,
           options: [
             {
               label: 'Page',
@@ -51,6 +54,7 @@ export const CallToAction: Block = {
       type: 'relationship',
       relationTo: 'pages',
       required: true,
+      localized: true,
       admin: {
         condition: (_, siblingData) => siblingData.type === 'page'
       }
@@ -60,8 +64,9 @@ export const CallToAction: Block = {
       label: 'Button URL',
       type: 'text',
       required: true,
+      localized: true,
       admin: {
-        condition: customURLCondition
+        condition: customCondition
       }
     },
     {
@@ -69,8 +74,9 @@ export const CallToAction: Block = {
       type: 'checkbox',
       label: 'Open in new tab',
       required: true,
+      localized: true,
       admin: {
-        condition: customURLCondition
+        condition: customCondition
       }
     }
   ]

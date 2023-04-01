@@ -35,13 +35,15 @@ export const Page: CollectionConfig = {
       name: 'title',
       label: 'Page Title',
       type: 'text',
-      required: true
+      required: true,
+      localized: true
     },
     {
       name: 'layout',
       label: 'Page Layout',
       type: 'blocks',
       minRows: 1,
+      localized: true,
       blocks: [MediaContent, Content, MediaSlider, Media, CallToAction]
     },
     Slug,

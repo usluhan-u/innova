@@ -4,15 +4,17 @@ import { theme } from '../theme';
 import { ChakraProvider } from '@chakra-ui/react';
 import type { AppContext, AppProps } from 'next/app';
 import App from 'next/app';
+import { Menu as MenuType } from '../payload-types';
+import payload from 'payload';
 
 interface MyAppProps extends AppProps {
-  menus: any[];
+  menuList: MenuType[];
 }
 
-export default function MyApp({ Component, pageProps, menus }: MyAppProps) {
+export default function MyApp({ Component, pageProps, menuList }: MyAppProps) {
   return (
     <ChakraProvider theme={theme}>
-      <Header menus={menus} />
+      <Header menuList={menuList} />
       <Component {...pageProps} />
     </ChakraProvider>
   );
@@ -21,14 +23,17 @@ export default function MyApp({ Component, pageProps, menus }: MyAppProps) {
 MyApp.getInitialProps = async (appContext: AppContext) => {
   const appProps = await App.getInitialProps(appContext);
 
-  const [menus] = await Promise.all([
-    fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/menus`).then((res) =>
-      res.json()
-    )
+  const [menuQuery] = await Promise.all([
+    payload.find({
+      collection: 'menus',
+      limit: 100,
+      locale: appContext.ctx.locale,
+      fallbackLocale: appContext.ctx.defaultLocale
+    })
   ]);
 
   return {
     ...appProps,
-    menus
+    menuList: menuQuery.docs
   };
 };

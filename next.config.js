@@ -10,6 +10,20 @@ const nextConfig = {
   },
   images: {
     domains: ['localhost']
+  },
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: '/home',
+  //       destination: '/',
+  //       permanent: true
+  //     }
+  //   ];
+  // },
+  i18n: {
+    locales: ['en', 'tr'],
+    defaultLocale: 'tr',
+    localeDetection: false
   }
 };
 

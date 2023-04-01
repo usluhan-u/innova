@@ -13,12 +13,15 @@ export const Media: Block = {
       label: 'Media',
       type: 'upload',
       relationTo: 'medias',
-      required: true
+      required: true,
+      localized: true
     },
     {
       name: 'size',
       label: 'Size',
       type: 'radio',
+      required: true,
+      localized: true,
       defaultValue: 'normal',
       options: [
         {
@@ -41,7 +44,8 @@ export const Media: Block = {
     {
       name: 'caption',
       label: 'Caption',
-      type: 'richText'
+      type: 'richText',
+      localized: true
     }
   ]
 };

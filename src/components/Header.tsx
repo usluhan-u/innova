@@ -18,32 +18,14 @@ import {
 import { ArrowForwardIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import { v4 as uuidv4 } from 'uuid';
 import React from 'react';
-import {
-  Menu as MenuType,
-  Link as LinkType,
-  Page as PageType
-} from '../payload-types';
+import { Menu as MenuType, Page as PageType } from '../payload-types';
 
 export interface HeaderProps {
-  menus: MenuType[];
+  menuList: MenuType[];
 }
 
-export const Header = ({ menus }: HeaderProps) => {
+export const Header = ({ menuList }: HeaderProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  menus = [];
-
-  const detectMenuLink = (link?: string | LinkType) => {
-    if (!link) {
-      return '/';
-    }
-
-    if (typeof link === 'string') {
-      return link;
-    }
-
-    return link.type === 'page' ? (link.page as PageType).slug : link.url;
-  };
 
   return (
     <Container
@@ -60,8 +42,8 @@ export const Header = ({ menus }: HeaderProps) => {
           </InternalLink>
           <HStack alignItems="center" spacing={16}>
             <Menu isOpen={isOpen}>
-              {menus.map((menu) => {
-                return menu.group?.type === 'dropdown' ? (
+              {menuList.map((menu) => {
+                return menu.group?.type === 'multiple' ? (
                   <React.Fragment key={uuidv4()}>
                     <MenuButton
                       as={Button}
@@ -93,7 +75,7 @@ export const Header = ({ menus }: HeaderProps) => {
                               <MenuItem
                                 key={uuidv4()}
                                 as="a"
-                                href={detectMenuLink(subMenu.link)}
+                                href={(subMenu.page as PageType).slug}
                                 color="text.primary"
                                 fontWeight={400}
                                 _hover={{ backgroundColor: 'transparent' }}
@@ -117,7 +99,7 @@ export const Header = ({ menus }: HeaderProps) => {
                 ) : (
                   <InternalLink
                     key={uuidv4()}
-                    href={detectMenuLink(menu.group?.link)}
+                    href={(menu.page as PageType).slug}
                   >
                     {menu.label}
                   </InternalLink>

@@ -17,9 +17,9 @@ export const Media: CollectionConfig = {
     {
       name: 'alt',
       label: 'Alt Text',
-      localized: true,
       type: 'text',
-      required: true
+      required: true,
+      localized: true
     }
   ]
 };

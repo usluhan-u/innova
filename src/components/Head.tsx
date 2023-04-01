@@ -38,6 +38,10 @@ export const Head = ({ title, description, ogImage, keywords }: HeadProps) => {
         property="og:description"
         content={description || defaultDescription}
       />
+      <meta property="twitter:title" content={title || defaultTitle} />
+      <meta name="twitter:site" content="@payloadcms" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:image" content={ogImage || defaultOGImage} />
       <meta property="og:image" content={ogImage || defaultOGImage} />
     </NextHead>
   );

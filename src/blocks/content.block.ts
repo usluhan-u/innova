@@ -11,6 +11,7 @@ export const Content: Block = {
       name: 'columns',
       type: 'array',
       minRows: 1,
+      localized: true,
       labels: {
         singular: 'Column',
         plural: 'Columns'
@@ -18,6 +19,7 @@ export const Content: Block = {
       fields: [
         {
           type: 'row',
+          localized: true,
           fields: [
             {
               name: 'width',
@@ -25,6 +27,7 @@ export const Content: Block = {
               type: 'select',
               defaultValue: 'full',
               required: true,
+              localized: true,
               options: [
                 {
                   label: 'One Third',
@@ -53,6 +56,7 @@ export const Content: Block = {
               type: 'select',
               defaultValue: 'left',
               required: true,
+              localized: true,
               options: [
                 {
                   label: 'Left',
@@ -75,7 +79,8 @@ export const Content: Block = {
         },
         {
           name: 'content',
-          type: 'richText'
+          type: 'richText',
+          localized: true
         }
       ]
     }

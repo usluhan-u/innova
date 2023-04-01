@@ -1,7 +1,7 @@
-import { GetServerSideProps } from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import payload from 'payload';
 import { Head, NotFound, RenderBlocks } from '../components';
 import { Page as PageType } from '../payload-types';
-import payload from 'payload';
 
 export interface PageProps {
   page?: PageType;
@@ -9,10 +9,6 @@ export interface PageProps {
 }
 
 const Page = ({ page }: PageProps) => {
-  console.log(
-    '🚀 ~ file: [...slug].tsx:17 ~ Page ~ page:',
-    JSON.stringify(page, null, 2)
-  );
   if (!page) {
     return <NotFound />;
   }
@@ -45,13 +41,15 @@ const Page = ({ page }: PageProps) => {
 
 export default Page;
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const slug = ctx.params?.slug
-    ? (ctx.params.slug as string[]).join('/')
+export const getStaticProps: GetStaticProps = async (context) => {
+  const slug = context.params?.slug
+    ? (context.params.slug as string[]).join('/')
     : 'home';
 
   const pageQuery = await payload.find({
     collection: 'pages',
+    locale: context.locale,
+    fallbackLocale: context.defaultLocale,
     where: {
       slug: {
         equals: slug
@@ -59,17 +57,30 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     }
   });
 
-  if (!pageQuery.docs[0]) {
-    ctx.res.statusCode = 404;
-
+  if (pageQuery.docs[0]) {
     return {
-      props: {}
+      props: {
+        page: pageQuery.docs[0]
+      },
+      revalidate: 1
     };
   }
 
   return {
-    props: {
-      page: pageQuery.docs[0]
-    }
+    props: {}
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const pageQuery = await payload.find({
+    collection: 'pages',
+    limit: 100
+  });
+
+  return {
+    paths: pageQuery.docs.map(({ slug }: { slug: string }) => ({
+      params: { slug: slug.split('/') }
+    })),
+    fallback: false
   };
 };

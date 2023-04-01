@@ -12,6 +12,7 @@ export const MediaSlider: Block = {
       name: 'slides',
       type: 'array',
       minRows: 2,
+      localized: true,
       labels: {
         singular: 'Slide',
         plural: 'Slides'
@@ -19,14 +20,16 @@ export const MediaSlider: Block = {
       fields: [
         {
           name: 'content',
-          type: 'richText'
+          type: 'richText',
+          localized: true
         },
         CallToAction,
         {
           name: 'media',
           type: 'upload',
           relationTo: 'medias',
-          required: true
+          required: true,
+          localized: true
         }
       ]
     }

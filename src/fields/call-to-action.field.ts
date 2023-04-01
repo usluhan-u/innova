@@ -1,7 +1,7 @@
 import { Field } from 'payload/types';
 
 const customURLCondition = (_: Partial<any>, siblingData: Partial<any>) =>
-  siblingData.type === 'custom';
+  siblingData.type === 'external';
 
 export const CallToAction: Field = {
   name: 'callToAction',
@@ -25,15 +25,15 @@ export const CallToAction: Field = {
           label: 'Button Type',
           required: true,
           type: 'radio',
-          defaultValue: 'page',
+          defaultValue: 'internal',
           options: [
             {
-              label: 'Page',
-              value: 'page'
+              label: 'Internal Link',
+              value: 'internal'
             },
             {
-              label: 'Custom URL',
-              value: 'custom'
+              label: 'External Link',
+              value: 'external'
             }
           ],
           admin: {
@@ -44,13 +44,13 @@ export const CallToAction: Field = {
       ]
     },
     {
-      name: 'page',
-      label: 'Page to link to',
+      name: 'internal',
+      label: 'Link to Page',
       type: 'relationship',
       relationTo: 'pages',
       required: true,
       admin: {
-        condition: (_, siblingData) => siblingData.type === 'page'
+        condition: (_, siblingData) => siblingData.type === 'internal'
       }
     },
     {
