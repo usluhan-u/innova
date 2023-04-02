@@ -41,15 +41,17 @@ const Page = ({ page }: PageProps) => {
 
 export default Page;
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const slug = context.params?.slug
-    ? (context.params.slug as string[]).join('/')
-    : 'home';
+export const getStaticProps: GetStaticProps = async ({
+  params,
+  locale,
+  defaultLocale
+}) => {
+  const slug = params?.slug ? (params.slug as string[]).join('/') : 'home';
 
   const pageQuery = await payload.find({
     collection: 'pages',
-    locale: context.locale,
-    fallbackLocale: context.defaultLocale,
+    locale,
+    fallbackLocale: defaultLocale,
     where: {
       slug: {
         equals: slug
@@ -71,16 +73,22 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   const pageQuery = await payload.find({
     collection: 'pages',
     limit: 100
   });
 
+  const paths = pageQuery.docs.map(({ slug }: { slug: string }) => ({
+    params: { slug: slug.split('/') }
+  }));
+
+  const localizedPaths = locales
+    ? paths.flatMap((path) => locales.map((locale) => ({ ...path, locale })))
+    : [];
+
   return {
-    paths: pageQuery.docs.map(({ slug }: { slug: string }) => ({
-      params: { slug: slug.split('/') }
-    })),
+    paths: [...paths, ...localizedPaths],
     fallback: false
   };
 };

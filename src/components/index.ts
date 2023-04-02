@@ -11,4 +11,5 @@ export * from './MediaSlider';
 export * from './NotFound';
 export * from './RenderBlocks';
 export * from './RichText';
+export * from './SearchBox';
 export * from './Slider';

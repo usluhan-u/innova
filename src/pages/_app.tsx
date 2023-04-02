@@ -5,7 +5,6 @@ import { ChakraProvider } from '@chakra-ui/react';
 import type { AppContext, AppProps } from 'next/app';
 import App from 'next/app';
 import { Menu as MenuType } from '../payload-types';
-import payload from 'payload';
 
 interface MyAppProps extends AppProps {
   menuList: MenuType[];
@@ -24,12 +23,9 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
   const appProps = await App.getInitialProps(appContext);
 
   const [menuQuery] = await Promise.all([
-    payload.find({
-      collection: 'menus',
-      limit: 100,
-      locale: appContext.ctx.locale,
-      fallbackLocale: appContext.ctx.defaultLocale
-    })
+    fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/menus?limit=100&locale=${appContext.ctx.locale}&fallback-locale=${appContext.ctx.defaultLocale}`
+    ).then((res) => res.json())
   ]);
 
   return {
