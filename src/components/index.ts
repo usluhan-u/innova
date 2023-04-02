@@ -1,3 +1,4 @@
+export * from './BackgroundColor';
 export * from './BeforeLogin';
 export * from './CallToAction';
 export * from './Content';
@@ -8,9 +9,11 @@ export * from './Header';
 export * from './Media';
 export * from './MediaContent';
 export * from './MediaSlider';
+export * from './MediaViewer';
 export * from './NotFound';
 export * from './RenderBlocks';
 export * from './RichText';
 export * from './SearchBox';
 export * from './Slider';
+export * from './Tabs';
 export * from './Template';

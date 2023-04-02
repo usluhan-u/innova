@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import payload from 'payload';
-import { Head, NotFound, RenderBlocks, Template } from '../components';
-import { PageLayout, PageType } from '../collections';
+import { Head, NotFound, RenderBlocks } from '../components';
+import { PageType } from '../collections';
 
 export interface PageProps {
   page?: PageType;
@@ -13,15 +13,15 @@ const Page = ({ page }: PageProps) => {
   }
 
   return (
-    <Template>
+    <>
       <Head
         title={page.meta?.title || page.title}
         description={page.meta?.description}
         keywords={page.meta?.keywords}
         noIndex={page.meta?.noIndex}
       />
-      <RenderBlocks layout={page.layout as PageLayout[]} />
-    </Template>
+      <RenderBlocks layout={page.layout} />
+    </>
   );
 };
 

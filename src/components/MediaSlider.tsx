@@ -3,9 +3,9 @@ import styled from '@emotion/styled';
 import { v4 as uuidv4 } from 'uuid';
 import { Slider } from './Slider';
 import { CallToAction } from './CallToAction';
-import { Media } from './Media';
 import { RichText } from './RichText';
 import { MediaSliderSlideType, MediaSliderType } from '../blocks';
+import { MediaViewer } from './MediaViewer';
 
 export interface MediaSliderProps extends MediaSliderType {}
 
@@ -48,13 +48,7 @@ const SliderWrapper = styled.div`
 
 const Slide = ({ content, callToAction, media }: MediaSliderSlideType) => (
   <div className="relative">
-    <Media
-      blockType="media"
-      media={media.media}
-      caption={media.caption}
-      size={media.size}
-      backgroundColor={media.backgroundColor}
-    />
+    <MediaViewer media={media} size={{ w: 'full', h: 'full' }} />
     <VStack
       className="absolute top-1/2 left-36 text-white"
       spacing={4}

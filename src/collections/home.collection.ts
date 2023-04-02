@@ -1,5 +1,5 @@
 import { CollectionConfig } from 'payload/types';
-import { CallToAction, Cards, Meta, Slides, Tabs } from '../fields';
+import { CallToAction, Cards, Meta, Slides } from '../fields';
 
 export const Home: CollectionConfig = {
   slug: 'home',
@@ -53,8 +53,8 @@ export const Home: CollectionConfig = {
           label: 'Description',
           type: 'richText',
           required: true
-        },
-        Tabs
+        }
+        // Tabs
       ]
     },
     {

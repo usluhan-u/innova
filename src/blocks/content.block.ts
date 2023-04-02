@@ -1,13 +1,13 @@
 import { Block } from 'payload/types';
 import { BackgroundColor, BackgroundColorType } from '../fields';
 import { RichTextNode } from '../components';
+import { Alignment } from '../types';
 
 export type ContentColumnWidth = 'oneThird' | 'half' | 'twoThirds' | 'full';
-export type ContentColumnAlignment = 'left' | 'center' | 'right';
 
 interface ContentColumnType {
   width: ContentColumnWidth;
-  alignment: ContentColumnAlignment;
+  alignment: Alignment;
   content: RichTextNode[];
 }
 

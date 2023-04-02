@@ -18,7 +18,7 @@ export const Content = ({ columns }: ContentProps) => {
   };
 
   return (
-    <Grid templateColumns={`repeat(${columns.length}, 1fr)`} gap={8}>
+    <Grid templateColumns={`repeat(${columns.length}, 1fr)`} gap="8" w="full">
       {columns.map((column) => (
         <GridItem key={uuidv4()} w={getWidth(column.width)}>
           <RichText content={column.content} textAlign={column.alignment} />

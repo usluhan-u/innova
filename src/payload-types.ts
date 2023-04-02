@@ -78,7 +78,6 @@ export interface Page {
         blockType: 'media';
       }
     | {
-        backgroundColor?: 'white' | 'gray';
         label: string;
         type: 'page' | 'custom';
         page: string | Page;

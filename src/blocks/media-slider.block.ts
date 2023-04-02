@@ -2,12 +2,12 @@ import { Block } from 'payload/types';
 import { BackgroundColor, BackgroundColorType, CallToAction } from '../fields';
 import { RichTextNode } from '../components';
 import { CallToActionType } from './call-to-action.block';
-import { MediaType } from './media.block';
+import { MediaTypeMediaType } from './media.block';
 
 export interface MediaSliderSlideType {
   content: RichTextNode[];
   callToAction: CallToActionType;
-  media: MediaType;
+  media: MediaTypeMediaType;
 }
 
 export interface MediaSliderType {

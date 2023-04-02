@@ -43,6 +43,7 @@
     "@typescript-eslint/no-non-null-assertion": "error",
     "react/no-unused-prop-types": "off",
     "@typescript-eslint/no-empty-interface": "off",
+    "import/no-extraneous-dependencies": "off",
     "react/function-component-definition": [
       "error",
       {
