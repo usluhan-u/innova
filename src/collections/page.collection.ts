@@ -4,16 +4,14 @@ import {
   Content,
   Media,
   MediaContent,
-  MediaSlider
+  MediaSlider,
+  CallToActionType,
+  ContentType,
+  MediaContentType,
+  MediaType,
+  MediaSliderType
 } from '../blocks';
-import { Meta, Slug } from '../fields';
-import {
-  CallToActionProps as CallToActionType,
-  ContentProps as ContentType,
-  MediaContentProps as MediaContentType,
-  MediaProps as MediaType,
-  MediaSliderProps as MediaSliderType
-} from '../components';
+import { Meta, MetaType, Slug } from '../fields';
 import { generateFullTitle } from '../utils';
 
 export type PageLayout =
@@ -22,6 +20,14 @@ export type PageLayout =
   | MediaSliderType
   | MediaType
   | CallToActionType;
+
+export interface PageType {
+  id: string;
+  title: string;
+  layout: PageLayout[];
+  slug: string;
+  meta: MetaType;
+}
 
 export const Page: CollectionConfig = {
   slug: 'pages',

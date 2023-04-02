@@ -1,9 +1,11 @@
 import { Block } from 'payload/types';
-import { BackgroundColor } from '../fields';
+
+export type CallToActionButtonType = 'page' | 'custom';
 
 export interface CallToActionType {
+  blockType: 'callToAction';
   label: string;
-  type: 'page' | 'custom';
+  type: CallToActionButtonType;
   page?: string;
   url?: string;
   newTab?: boolean;
@@ -21,7 +23,6 @@ export const CallToAction: Block = {
     plural: 'Calls to Action'
   },
   fields: [
-    BackgroundColor,
     {
       type: 'row',
       fields: [

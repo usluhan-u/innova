@@ -1,20 +1,13 @@
 import { AspectRatio, ChakraProps } from '@chakra-ui/react';
 import Image from 'next/image';
-import { Media as MediaType } from '../payload-types';
 import { RichText } from './RichText';
+import { MediaSize, MediaType } from '../blocks';
 
-type size = 'normal' | 'wide' | 'fullscreen';
-
-export interface MediaProps {
-  blockType: 'media';
-  media: MediaType;
-  size?: size;
-  caption?: unknown;
-}
+export interface MediaProps extends MediaType {}
 
 export const Media = ({ caption, media, size }: MediaProps) => {
   const getSize = (
-    size?: size
+    size?: MediaSize
   ): Pick<ChakraProps, 'maxW' | 'w' | 'h' | 'pos' | 'overflow'> => {
     const sizeMap: Record<string, ChakraProps> = {
       normal: { maxW: 'full', w: 'full' },
@@ -42,7 +35,7 @@ export const Media = ({ caption, media, size }: MediaProps) => {
               sizes="100%"
               priority={false}
             />
-            {caption && <RichText content={caption} textAlign="center" />}
+            <RichText content={caption} textAlign="center" />
           </>
         </AspectRatio>
       )}

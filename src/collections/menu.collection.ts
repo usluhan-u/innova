@@ -1,4 +1,26 @@
 import { CollectionConfig } from 'payload/types';
+import { PageType } from './page.collection';
+
+interface MenuGroupMenuGroupSubMenu {
+  label: string;
+  page: PageType;
+}
+
+interface MenuGroupMenuGroup {
+  label: string;
+  subMenus: MenuGroupMenuGroupSubMenu[];
+}
+
+interface MenuGroupType {
+  type: 'multiple' | 'single';
+  menuGroups: MenuGroupMenuGroup[];
+  page: PageType;
+}
+
+export interface MenuType {
+  label: string;
+  group: MenuGroupType;
+}
 
 export const Menu: CollectionConfig = {
   slug: 'menus',

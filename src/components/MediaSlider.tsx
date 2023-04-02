@@ -2,24 +2,12 @@ import { VStack } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import { v4 as uuidv4 } from 'uuid';
 import { Slider } from './Slider';
-import { Media as MediaType } from '../payload-types';
-import {
-  CallToAction,
-  CallToActionProps as CallToActionType
-} from './CallToAction';
+import { CallToAction } from './CallToAction';
 import { Media } from './Media';
-import { RichText, RichTextNode } from './RichText';
+import { RichText } from './RichText';
+import { MediaSliderSlideType, MediaSliderType } from '../blocks';
 
-export interface SlideProps {
-  content: RichTextNode[];
-  callToAction: CallToActionType;
-  media: MediaType;
-}
-
-export interface MediaSliderProps {
-  blockType: 'mediaSlider';
-  slides: SlideProps[];
-}
+export interface MediaSliderProps extends MediaSliderType {}
 
 const SliderWrapper = styled.div`
   .slick-dots {
@@ -58,9 +46,15 @@ const SliderWrapper = styled.div`
   }
 `;
 
-const Slide = ({ content, callToAction, media }: SlideProps) => (
+const Slide = ({ content, callToAction, media }: MediaSliderSlideType) => (
   <div className="relative">
-    <Media blockType="media" media={media} />
+    <Media
+      blockType="media"
+      media={media.media}
+      caption={media.caption}
+      size={media.size}
+      backgroundColor={media.backgroundColor}
+    />
     <VStack
       className="absolute top-1/2 left-36 text-white"
       spacing={4}
@@ -73,7 +67,7 @@ const Slide = ({ content, callToAction, media }: SlideProps) => (
 );
 
 export const MediaSlider = ({ slides }: MediaSliderProps) => {
-  const getSliderSlides = (items: SlideProps[]) =>
+  const getSliderSlides = (items: MediaSliderSlideType[]) =>
     items.map((item) => <Slide {...item} key={uuidv4()} />);
 
   return (

@@ -1,5 +1,21 @@
 import { Block } from 'payload/types';
-import { BackgroundColor } from '../fields';
+import { BackgroundColor, BackgroundColorType } from '../fields';
+import { RichTextNode } from '../components';
+
+export type ContentColumnWidth = 'oneThird' | 'half' | 'twoThirds' | 'full';
+export type ContentColumnAlignment = 'left' | 'center' | 'right';
+
+interface ContentColumnType {
+  width: ContentColumnWidth;
+  alignment: ContentColumnAlignment;
+  content: RichTextNode[];
+}
+
+export interface ContentType {
+  blockType: 'content';
+  backgroundColor: BackgroundColorType;
+  columns: ContentColumnType[];
+}
 
 export const Content: Block = {
   slug: 'content',
@@ -8,6 +24,7 @@ export const Content: Block = {
     plural: 'Content Blocks'
   },
   fields: [
+    BackgroundColor,
     {
       name: 'columns',
       type: 'array',
@@ -17,7 +34,6 @@ export const Content: Block = {
         plural: 'Columns'
       },
       fields: [
-        BackgroundColor,
         {
           type: 'row',
           fields: [

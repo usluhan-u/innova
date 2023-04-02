@@ -1,5 +1,7 @@
 import { Field } from 'payload/types';
 
+export type BackgroundColorType = 'white' | 'gray';
+
 export const BackgroundColor: Field = {
   name: 'backgroundColor',
   label: 'Background Color',

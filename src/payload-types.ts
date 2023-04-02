@@ -22,6 +22,7 @@ export interface Page {
   title: string;
   layout?: (
     | {
+        backgroundColor?: 'white' | 'gray';
         alignment: 'contentOnLeft' | 'contentOnRight';
         content: {
           [k: string]: unknown;
@@ -32,6 +33,7 @@ export interface Page {
         blockType: 'mediaContent';
       }
     | {
+        backgroundColor?: 'white' | 'gray';
         columns?: {
           width: 'oneThird' | 'half' | 'twoThirds' | 'full';
           alignment: 'left' | 'center' | 'right';
@@ -45,6 +47,7 @@ export interface Page {
         blockType: 'content';
       }
     | {
+        backgroundColor?: 'white' | 'gray';
         slides: {
           content: {
             [k: string]: unknown;
@@ -64,6 +67,7 @@ export interface Page {
         blockType: 'mediaSlider';
       }
     | {
+        backgroundColor?: 'white' | 'gray';
         media: string | Media;
         size: 'normal' | 'wide' | 'fullscreen';
         caption: {
@@ -74,6 +78,7 @@ export interface Page {
         blockType: 'media';
       }
     | {
+        backgroundColor?: 'white' | 'gray';
         label: string;
         type: 'page' | 'custom';
         page: string | Page;

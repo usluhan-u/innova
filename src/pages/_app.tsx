@@ -6,7 +6,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { Helmet } from 'react-helmet';
 import { theme } from '../theme';
 import { Header } from '../components';
-import { Menu as MenuType, Script as ScriptType } from '../payload-types';
+import { ScriptType } from '../globals';
+import { MenuType } from '../collections';
 
 interface MyAppProps extends AppProps {
   menuList: MenuType[];

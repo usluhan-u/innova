@@ -28,7 +28,9 @@ const serialize = (nodes: RichTextNode[]): (React.ReactElement | null)[] =>
     }
 
     if (SlateText.isText(node)) {
-      let text = <span> {escapeHTML(node.text)}</span>;
+      let text = (
+        <span dangerouslySetInnerHTML={{ __html: escapeHTML(node.text) }} />
+      );
 
       if (node.bold) {
         text = <b key={uuidv4()}>{text}</b>;

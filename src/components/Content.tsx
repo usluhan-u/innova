@@ -1,23 +1,12 @@
 import { Grid, GridItem } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
-import { RichText, RichTextNode } from './RichText';
+import { RichText } from './RichText';
+import { ContentColumnWidth, ContentType } from '../blocks';
 
-type width = 'oneThird' | 'half' | 'twoThirds' | 'full';
-type alignment = 'left' | 'center' | 'right';
-
-export interface ContentColumn {
-  width: width;
-  alignment: alignment;
-  content: RichTextNode[];
-}
-
-export interface ContentProps {
-  blockType: 'content';
-  columns: ContentColumn[];
-}
+interface ContentProps extends ContentType {}
 
 export const Content = ({ columns }: ContentProps) => {
-  const getWidth = (width: width) => {
+  const getWidth = (width: ContentColumnWidth) => {
     const widthMap = {
       oneThird: '33%',
       half: '50%',

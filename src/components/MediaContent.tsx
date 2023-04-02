@@ -1,23 +1,16 @@
 import { Grid, GridItem } from '@chakra-ui/react';
 import { Media } from './Media';
-import { RichText, RichTextNode } from './RichText';
-import { Media as MediaType } from '../payload-types';
+import { RichText } from './RichText';
+import { MediaContentAlignment, MediaContentType } from '../blocks';
 
-type Alignment = 'contentOnLeft' | 'contentOnRight';
-
-export interface MediaContentProps {
-  blockType: 'mediaContent';
-  alignment: Alignment;
-  content: RichTextNode[];
-  media: MediaType;
-}
+export interface MediaContentProps extends MediaContentType {}
 
 export const MediaContent = ({
   content,
   alignment,
   media
 }: MediaContentProps) => {
-  const getAlignment = (alignment: Alignment) => {
+  const getAlignment = (alignment: MediaContentAlignment) => {
     const alignmentMap: Record<string, string> = {
       contentOnLeft: '1',
       contentOnRight: '2'
@@ -32,7 +25,13 @@ export const MediaContent = ({
         <RichText content={content} />
       </GridItem>
       <GridItem gridRow="1">
-        <Media media={media} blockType="media" />
+        <Media
+          media={media.media}
+          caption={media.caption}
+          size={media.size}
+          backgroundColor={media.backgroundColor}
+          blockType="media"
+        />
       </GridItem>
     </Grid>
   );

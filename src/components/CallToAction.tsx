@@ -1,14 +1,10 @@
 import { Button, ThemeTypings } from '@chakra-ui/react';
 import { ExternalLink } from './ExternalLink';
 import { InternalLink } from './GenericLink';
+import { CallToActionType } from '../blocks';
 
-export interface CallToActionProps {
-  blockType: 'callToAction';
-  label: string;
-  url: string;
-  type: 'page' | 'custom';
-  newTab?: boolean;
-  backgroundColor: ThemeTypings['colorSchemes'];
+export interface CallToActionProps extends CallToActionType {
+  backgroundColor?: ThemeTypings['colorSchemes'];
 }
 
 export const CallToAction = ({
@@ -17,21 +13,17 @@ export const CallToAction = ({
   type,
   newTab,
   label
-}: CallToActionProps) => {
-  const isRelative = url.startsWith('/');
-
-  return (
-    <>
-      {(type === 'page' || isRelative) && (
-        <InternalLink href="[...slug]">
-          <Button colorScheme={backgroundColor}>{label}</Button>
-        </InternalLink>
-      )}
-      {type === 'custom' && (
-        <ExternalLink href={url} newTab={newTab}>
-          <Button colorScheme={backgroundColor}>{label}</Button>
-        </ExternalLink>
-      )}
-    </>
-  );
-};
+}: CallToActionProps) => (
+  <>
+    {type === 'page' && (
+      <InternalLink href="[...slug]">
+        <Button colorScheme={backgroundColor}>{label}</Button>
+      </InternalLink>
+    )}
+    {type === 'custom' && url && (
+      <ExternalLink href={url} newTab={newTab}>
+        <Button colorScheme={backgroundColor}>{label}</Button>
+      </ExternalLink>
+    )}
+  </>
+);

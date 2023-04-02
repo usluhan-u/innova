@@ -1,5 +1,14 @@
 import { GlobalConfig } from 'payload/types';
 
+interface ScriptScript {
+  title: string;
+  script: string;
+}
+
+export interface ScriptType {
+  scripts: ScriptScript[];
+}
+
 export const Script: GlobalConfig = {
   slug: 'scripts',
   label: 'Scripts',

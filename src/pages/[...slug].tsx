@@ -1,8 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import payload from 'payload';
-import { Head, NotFound, RenderBlocks } from '../components';
-import { Page as PageType } from '../payload-types';
-import { PageLayout } from '../collections';
+import { Head, NotFound, RenderBlocks, Template } from '../components';
+import { PageLayout, PageType } from '../collections';
 
 export interface PageProps {
   page?: PageType;
@@ -14,29 +13,15 @@ const Page = ({ page }: PageProps) => {
   }
 
   return (
-    <main>
+    <Template>
       <Head
         title={page.meta?.title || page.title}
         description={page.meta?.description}
         keywords={page.meta?.keywords}
         noIndex={page.meta?.noIndex}
       />
-      <header>
-        <h1>{page.title}</h1>
-      </header>
       <RenderBlocks layout={page.layout as PageLayout[]} />
-      <footer>
-        <hr />
-        NextJS + Payload Server Boilerplate made by
-        <a
-          href="https://payloadcms.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Payload
-        </a>
-      </footer>
-    </main>
+    </Template>
   );
 };
 
@@ -60,6 +45,11 @@ export const getStaticProps: GetStaticProps = async ({
     }
   });
 
+  // console.log(
+  //   '🚀 ~ file: [...slug].tsx:50 ~ pageQuery.docs[0]:',
+  //   JSON.stringify(pageQuery.docs[0], null, 2)
+  // );
+
   if (pageQuery.docs[0]) {
     return {
       props: {
@@ -75,12 +65,12 @@ export const getStaticProps: GetStaticProps = async ({
 };
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-  const pageQuery = await payload.find({
-    collection: 'pages',
-    limit: 100
-  });
+  const pageRequest = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/pages?limit=100`
+  );
+  const pageData = await pageRequest.json();
 
-  const paths = pageQuery.docs.map(({ slug }: { slug: string }) => ({
+  const paths = (pageData.docs as PageType[]).map(({ slug }) => ({
     params: { slug: slug.split('/') }
   }));
 

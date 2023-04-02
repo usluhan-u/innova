@@ -13,3 +13,4 @@ export * from './RenderBlocks';
 export * from './RichText';
 export * from './SearchBox';
 export * from './Slider';
+export * from './Template';

@@ -1,6 +1,5 @@
 import {
   Button,
-  Container,
   Divider,
   HStack,
   Menu,
@@ -20,10 +19,11 @@ import { useRouter } from 'next/router';
 import { v4 as uuidv4 } from 'uuid';
 import React from 'react';
 import Link from 'next/link';
-import { Menu as MenuType, Page as PageType } from '../payload-types';
 import { Logo, EN, TR } from '../icons';
 import { InternalLink } from './GenericLink';
 import { SearchBox } from './SearchBox';
+import { Template } from './Template';
+import { MenuType } from '../collections';
 
 export interface HeaderProps {
   menuList: MenuType[];
@@ -54,8 +54,7 @@ export const Header = ({ menuList }: HeaderProps) => {
   };
 
   return (
-    <Container
-      maxW="90%"
+    <Template
       h="70px"
       display="flex"
       alignItems="center"
@@ -71,7 +70,7 @@ export const Header = ({ menuList }: HeaderProps) => {
           <GridItem>
             <Menu isOpen={isOpen}>
               {menuList.map((menu) =>
-                menu.group?.type === 'multiple' ? (
+                menu.group.type === 'multiple' ? (
                   <React.Fragment key={uuidv4()}>
                     <MenuButton
                       as={Button}
@@ -103,7 +102,7 @@ export const Header = ({ menuList }: HeaderProps) => {
                               <MenuItem
                                 key={uuidv4()}
                                 as="a"
-                                href={(subMenu.page as PageType).slug}
+                                href={subMenu.page.slug}
                                 color="text.primary"
                                 fontWeight={400}
                                 _hover={{ backgroundColor: 'transparent' }}
@@ -125,10 +124,7 @@ export const Header = ({ menuList }: HeaderProps) => {
                     </MenuList>
                   </React.Fragment>
                 ) : (
-                  <InternalLink
-                    key={uuidv4()}
-                    href={(menu.page as PageType).slug}
-                  >
+                  <InternalLink key={uuidv4()} href={menu.group.page.slug}>
                     {menu.label}
                   </InternalLink>
                 )
@@ -173,6 +169,6 @@ export const Header = ({ menuList }: HeaderProps) => {
           </Menu>
         </GridItem>
       </Grid>
-    </Container>
+    </Template>
   );
 };

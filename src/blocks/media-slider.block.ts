@@ -1,5 +1,20 @@
 import { Block } from 'payload/types';
-import { BackgroundColor, CallToAction } from '../fields';
+import { BackgroundColor, BackgroundColorType, CallToAction } from '../fields';
+import { RichTextNode } from '../components';
+import { CallToActionType } from './call-to-action.block';
+import { MediaType } from './media.block';
+
+export interface MediaSliderSlideType {
+  content: RichTextNode[];
+  callToAction: CallToActionType;
+  media: MediaType;
+}
+
+export interface MediaSliderType {
+  blockType: 'mediaSlider';
+  backgroundColor: BackgroundColorType;
+  slides: MediaSliderSlideType[];
+}
 
 export const MediaSlider: Block = {
   slug: 'mediaSlider',

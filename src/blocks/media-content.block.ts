@@ -1,5 +1,17 @@
 import { Block } from 'payload/types';
-import { BackgroundColor } from '../fields';
+import { BackgroundColor, BackgroundColorType } from '../fields';
+import { RichTextNode } from '../components';
+import { MediaType } from './media.block';
+
+export type MediaContentAlignment = 'contentOnLeft' | 'contentOnRight';
+
+export interface MediaContentType {
+  blockType: 'mediaContent';
+  backgroundColor: BackgroundColorType;
+  alignment: MediaContentAlignment;
+  content: RichTextNode[];
+  media: MediaType;
+}
 
 export const MediaContent: Block = {
   slug: 'mediaContent',
@@ -39,7 +51,8 @@ export const MediaContent: Block = {
       name: 'media',
       type: 'upload',
       relationTo: 'medias',
-      required: true
+      required: true,
+      localized: true
     }
   ]
 };
