@@ -26,7 +26,7 @@ export type PageLayout =
 export const Page: CollectionConfig = {
   slug: 'pages',
   admin: {
-    useAsTitle: 'title'
+    useAsTitle: 'fullTitle'
   },
   access: {
     read: () => true
@@ -44,7 +44,6 @@ export const Page: CollectionConfig = {
       label: 'Page Layout',
       type: 'blocks',
       minRows: 1,
-      localized: true,
       blocks: [MediaContent, Content, MediaSlider, Media, CallToAction]
     },
     {
@@ -53,7 +52,7 @@ export const Page: CollectionConfig = {
       localized: true,
       hooks: {
         beforeChange: [
-          ({ data, originalDoc }) =>
+          async ({ data, originalDoc }) =>
             generateFullTitle(data?.breadcrumbs || originalDoc.breadcrumbs)
         ]
       },

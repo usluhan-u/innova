@@ -15,18 +15,21 @@ export const Cards: Field = {
       label: 'Logo',
       type: 'upload',
       relationTo: 'medias',
-      required: true
+      required: true,
+      localized: true
     },
     {
       name: 'title',
       label: 'Title',
       type: 'text',
-      required: true
+      required: true,
+      localized: true
     },
     {
       name: 'content',
       type: 'richText',
-      required: true
+      required: true,
+      localized: true
     },
     CallToAction
   ]

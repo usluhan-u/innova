@@ -43,7 +43,7 @@ export interface Menu {
   label: string;
   group?: {
     type: 'multiple' | 'single';
-    menuGroups?: {
+    menuGroups: {
       label: string;
       subMenus?: {
         label: string;
@@ -124,7 +124,15 @@ export interface Page {
         blockType: 'callToAction';
       }
   )[];
+  fullTitle?: string;
+  breadcrumbs?: {
+    page?: string | Page;
+    url?: string;
+    label?: string;
+    id?: string;
+  }[];
   slug: string;
+  parent?: string | Page;
   meta?: {
     title?: string;
     description?: string;

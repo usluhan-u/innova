@@ -1,5 +1,4 @@
 import { Block } from 'payload/types';
-import { Media as MediaType } from '../payload-types';
 
 export const Media: Block = {
   slug: 'media',
@@ -21,7 +20,6 @@ export const Media: Block = {
       label: 'Size',
       type: 'radio',
       required: true,
-      localized: true,
       defaultValue: 'normal',
       options: [
         {
@@ -45,6 +43,7 @@ export const Media: Block = {
       name: 'caption',
       label: 'Caption',
       type: 'richText',
+      required: true,
       localized: true
     }
   ]

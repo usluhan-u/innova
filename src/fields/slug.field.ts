@@ -6,6 +6,7 @@ export const Slug: Field = {
   label: 'Slug',
   type: 'text',
   required: true,
+  localized: true,
   admin: {
     position: 'sidebar'
   },

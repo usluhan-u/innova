@@ -12,7 +12,7 @@ export const MediaSlider: Block = {
       name: 'slides',
       type: 'array',
       minRows: 2,
-      localized: true,
+      required: true,
       labels: {
         singular: 'Slide',
         plural: 'Slides'
@@ -21,6 +21,7 @@ export const MediaSlider: Block = {
         {
           name: 'content',
           type: 'richText',
+          required: true,
           localized: true
         },
         CallToAction,

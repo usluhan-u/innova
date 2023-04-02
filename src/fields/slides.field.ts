@@ -13,14 +13,16 @@ export const Slides: Field = {
     {
       name: 'content',
       type: 'richText',
-      required: true
+      required: true,
+      localized: true
     },
     CallToAction,
     {
       name: 'media',
       type: 'upload',
       relationTo: 'medias',
-      required: true
+      required: true,
+      localized: true
     }
   ]
 };

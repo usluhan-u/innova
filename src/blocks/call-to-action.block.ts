@@ -12,7 +12,6 @@ export const CallToAction: Block = {
   fields: [
     {
       type: 'row',
-      localized: true,
       fields: [
         {
           name: 'label',
@@ -28,9 +27,8 @@ export const CallToAction: Block = {
           name: 'type',
           label: 'Button Type',
           type: 'radio',
-          required: true,
           defaultValue: 'page',
-          localized: true,
+          required: true,
           options: [
             {
               label: 'Page',
@@ -54,7 +52,6 @@ export const CallToAction: Block = {
       type: 'relationship',
       relationTo: 'pages',
       required: true,
-      localized: true,
       admin: {
         condition: (_, siblingData) => siblingData.type === 'page'
       }
@@ -74,7 +71,6 @@ export const CallToAction: Block = {
       type: 'checkbox',
       label: 'Open in new tab',
       required: true,
-      localized: true,
       admin: {
         condition: customCondition
       }

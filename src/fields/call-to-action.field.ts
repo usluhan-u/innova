@@ -16,6 +16,7 @@ export const CallToAction: Field = {
           label: 'Button Label',
           type: 'text',
           required: true,
+          localized: true,
           admin: {
             width: '50%'
           }
@@ -23,9 +24,9 @@ export const CallToAction: Field = {
         {
           name: 'type',
           label: 'Button Type',
-          required: true,
           type: 'radio',
           defaultValue: 'internal',
+          required: true,
           options: [
             {
               label: 'Internal Link',
@@ -58,6 +59,7 @@ export const CallToAction: Field = {
       label: 'Button URL',
       type: 'text',
       required: true,
+      localized: true,
       admin: {
         condition: customURLCondition
       }

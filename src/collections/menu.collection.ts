@@ -20,14 +20,12 @@ export const Menu: CollectionConfig = {
       name: 'group',
       label: 'Group',
       type: 'group',
-      localized: true,
       fields: [
         {
           name: 'type',
           label: 'Menu Type',
           type: 'radio',
           required: true,
-          localized: true,
           options: [
             {
               label: 'Multiple',
@@ -45,13 +43,12 @@ export const Menu: CollectionConfig = {
         },
         {
           type: 'row',
-          localized: true,
           fields: [
             {
               name: 'menuGroups',
               label: 'Menu Groups',
               type: 'array',
-              localized: true,
+              required: true,
               minRows: 1,
               labels: {
                 singular: 'Menu Group',
@@ -69,7 +66,6 @@ export const Menu: CollectionConfig = {
                   name: 'subMenus',
                   label: 'Sub Menus',
                   type: 'array',
-                  localized: true,
                   minRows: 1,
                   labels: {
                     singular: 'Sub Menu',
@@ -88,8 +84,7 @@ export const Menu: CollectionConfig = {
                       label: 'Page',
                       type: 'relationship',
                       relationTo: 'pages',
-                      required: true,
-                      localized: true
+                      required: true
                     }
                   ]
                 }
@@ -106,7 +101,6 @@ export const Menu: CollectionConfig = {
           type: 'relationship',
           relationTo: 'pages',
           required: true,
-          localized: true,
           admin: {
             condition: (_, siblingData) => siblingData?.type === 'single'
           }
