@@ -6,15 +6,13 @@ export interface InternalLinkProps {
   children: React.ReactNode | React.ReactNode[];
 }
 
-export const InternalLink = ({ href, children }: InternalLinkProps) => {
-  return (
-    <Link
-      href={escapeHTML(href)}
-      scroll={false}
-      textDecoration="none"
-      _hover={{ textDecoration: 'none' }}
-    >
-      {children}
-    </Link>
-  );
-};
+export const InternalLink = ({ href, children }: InternalLinkProps) => (
+  <Link
+    href={escapeHTML(href)}
+    scroll={false}
+    textDecoration="none"
+    _hover={{ textDecoration: 'none' }}
+  >
+    {children}
+  </Link>
+);

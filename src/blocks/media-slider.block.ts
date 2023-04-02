@@ -1,5 +1,5 @@
 import { Block } from 'payload/types';
-import { CallToAction } from '../fields';
+import { BackgroundColor, CallToAction } from '../fields';
 
 export const MediaSlider: Block = {
   slug: 'mediaSlider',
@@ -8,6 +8,7 @@ export const MediaSlider: Block = {
     plural: 'Media Sliders'
   },
   fields: [
+    BackgroundColor,
     {
       name: 'slides',
       type: 'array',

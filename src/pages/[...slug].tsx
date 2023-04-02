@@ -2,10 +2,10 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import payload from 'payload';
 import { Head, NotFound, RenderBlocks } from '../components';
 import { Page as PageType } from '../payload-types';
+import { PageLayout } from '../collections';
 
 export interface PageProps {
   page?: PageType;
-  statusCode: number;
 }
 
 const Page = ({ page }: PageProps) => {
@@ -19,11 +19,12 @@ const Page = ({ page }: PageProps) => {
         title={page.meta?.title || page.title}
         description={page.meta?.description}
         keywords={page.meta?.keywords}
+        noIndex={page.meta?.noIndex}
       />
       <header>
         <h1>{page.title}</h1>
       </header>
-      <RenderBlocks layout={page.layout as any} />
+      <RenderBlocks layout={page.layout as PageLayout[]} />
       <footer>
         <hr />
         NextJS + Payload Server Boilerplate made by

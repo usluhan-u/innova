@@ -1,7 +1,18 @@
 import { Block } from 'payload/types';
+import { BackgroundColor } from '../fields';
 
-const customCondition = (_: Partial<any>, siblingData: Partial<any>) =>
-  siblingData.type === 'custom';
+export interface CallToActionType {
+  label: string;
+  type: 'page' | 'custom';
+  page?: string;
+  url?: string;
+  newTab?: boolean;
+}
+
+const customCondition = (
+  _: Partial<CallToActionType>,
+  siblingData: Partial<CallToActionType>
+) => siblingData.type === 'custom';
 
 export const CallToAction: Block = {
   slug: 'callToAction',
@@ -10,6 +21,7 @@ export const CallToAction: Block = {
     plural: 'Calls to Action'
   },
   fields: [
+    BackgroundColor,
     {
       type: 'row',
       fields: [
@@ -70,7 +82,6 @@ export const CallToAction: Block = {
       name: 'newTab',
       type: 'checkbox',
       label: 'Open in new tab',
-      required: true,
       admin: {
         condition: customCondition
       }

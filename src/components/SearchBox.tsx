@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   Input,
   InputGroup,
@@ -21,19 +20,14 @@ export const SearchBox = ({
   <InputGroup w="full">
     {expanded && (
       <>
-        <InputLeftElement
-          children={<SearchIcon boxSize={5} />}
-          pos="relative"
-        />
+        <InputLeftElement pos="relative">
+          <SearchIcon boxSize={5} />
+        </InputLeftElement>
         <Input variant="unstyled" placeholder={placeholder} />
       </>
     )}
-    <InputRightElement
-      onClick={handleToggle}
-      children={
-        expanded ? <CloseIcon boxSize={4} /> : <SearchIcon boxSize={5} />
-      }
-      pos="relative"
-    />
+    <InputRightElement onClick={handleToggle} pos="relative">
+      {expanded ? <CloseIcon boxSize={4} /> : <SearchIcon boxSize={5} />}
+    </InputRightElement>
   </InputGroup>
 );

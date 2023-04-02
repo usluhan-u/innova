@@ -1,7 +1,17 @@
 import { Field } from 'payload/types';
 
-const customURLCondition = (_: Partial<any>, siblingData: Partial<any>) =>
-  siblingData.type === 'external';
+interface CallToActionType {
+  label: string;
+  type: 'internal' | 'external';
+  internal: string;
+  url: string;
+  newTab: boolean;
+}
+
+const customURLCondition = (
+  _: Partial<unknown>,
+  siblingData: Partial<CallToActionType>
+) => siblingData.type === 'external';
 
 export const CallToAction: Field = {
   name: 'callToAction',
@@ -68,7 +78,6 @@ export const CallToAction: Field = {
       name: 'newTab',
       type: 'checkbox',
       label: 'Open in new tab',
-      required: true,
       admin: {
         condition: customURLCondition
       }

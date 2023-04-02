@@ -31,6 +31,9 @@ export const Page: CollectionConfig = {
   access: {
     read: () => true
   },
+  versions: {
+    drafts: true
+  },
   fields: [
     {
       name: 'title',

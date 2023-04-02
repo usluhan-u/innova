@@ -1,3 +1,5 @@
+import React from 'react';
+
 export const TR = (props: React.ComponentProps<'svg'>) => (
   <svg
     width="24"

@@ -10,6 +10,10 @@ export const theme = extendTheme({
     },
     button: {
       primary: '#005A9B'
+    },
+    background: {
+      primary: '#FFFFFF',
+      secondary: '#F4F6F8'
     }
   }
 });

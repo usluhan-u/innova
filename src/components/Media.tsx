@@ -29,13 +29,13 @@ export const Media = ({ caption, media, size }: MediaProps) => {
     <>
       {media.mimeType?.includes('video') ? (
         <AspectRatio {...getSize(size)} ratio={1}>
-          <iframe title={media.filename} src={media.url!} allowFullScreen />
+          <iframe title={media.filename} src={media.url} allowFullScreen />
         </AspectRatio>
       ) : (
         <AspectRatio {...getSize(size)} ratio={1}>
           <>
             <Image
-              src={media.url!}
+              src={media.url}
               alt={media.alt}
               style={{ objectFit: 'cover' }}
               fill

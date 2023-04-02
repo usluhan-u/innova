@@ -1,5 +1,12 @@
 import { Field } from 'payload/types';
 
+export interface MetaType {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  noIndex?: boolean;
+}
+
 export const Meta: Field = {
   name: 'meta',
   label: 'Meta',
@@ -19,6 +26,11 @@ export const Meta: Field = {
       name: 'keywords',
       label: 'Keywords',
       type: 'text'
+    },
+    {
+      name: 'noIndex',
+      label: 'No Index',
+      type: 'checkbox'
     }
   ]
 };

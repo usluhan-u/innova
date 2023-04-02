@@ -1,3 +1,5 @@
+import React from 'react';
+
 export const EN = (props: React.ComponentProps<'svg'>) => (
   <svg
     width="24"

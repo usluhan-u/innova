@@ -2,13 +2,11 @@ import { Button, ThemeTypings } from '@chakra-ui/react';
 import { ExternalLink } from './ExternalLink';
 import { InternalLink } from './GenericLink';
 
-type type = 'page' | 'custom';
-
 export interface CallToActionProps {
   blockType: 'callToAction';
   label: string;
   url: string;
-  type: type;
+  type: 'page' | 'custom';
   newTab?: boolean;
   backgroundColor: ThemeTypings['colorSchemes'];
 }

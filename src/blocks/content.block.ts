@@ -1,4 +1,5 @@
 import { Block } from 'payload/types';
+import { BackgroundColor } from '../fields';
 
 export const Content: Block = {
   slug: 'content',
@@ -16,6 +17,7 @@ export const Content: Block = {
         plural: 'Columns'
       },
       fields: [
+        BackgroundColor,
         {
           type: 'row',
           fields: [

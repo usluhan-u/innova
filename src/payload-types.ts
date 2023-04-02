@@ -7,24 +7,101 @@
 
 export interface Config {
   collections: {
-    users: User;
+    pages: Page;
     medias: Media;
     menus: Menu;
     categories: Category;
-    pages: Page;
+    users: User;
   };
-  globals: {};
+  globals: {
+    scripts: Script;
+  };
 }
-export interface User {
+export interface Page {
   id: string;
-  email?: string;
-  resetPasswordToken?: string;
-  resetPasswordExpiration?: string;
-  loginAttempts?: number;
-  lockUntil?: string;
+  title: string;
+  layout?: (
+    | {
+        alignment: 'contentOnLeft' | 'contentOnRight';
+        content: {
+          [k: string]: unknown;
+        }[];
+        media: string | Media;
+        id?: string;
+        blockName?: string;
+        blockType: 'mediaContent';
+      }
+    | {
+        columns?: {
+          width: 'oneThird' | 'half' | 'twoThirds' | 'full';
+          alignment: 'left' | 'center' | 'right';
+          content: {
+            [k: string]: unknown;
+          }[];
+          id?: string;
+        }[];
+        id?: string;
+        blockName?: string;
+        blockType: 'content';
+      }
+    | {
+        slides: {
+          content: {
+            [k: string]: unknown;
+          }[];
+          callToAction?: {
+            label: string;
+            type: 'internal' | 'external';
+            internal: string | Page;
+            url: string;
+            newTab?: boolean;
+          };
+          media: string | Media;
+          id?: string;
+        }[];
+        id?: string;
+        blockName?: string;
+        blockType: 'mediaSlider';
+      }
+    | {
+        media: string | Media;
+        size: 'normal' | 'wide' | 'fullscreen';
+        caption: {
+          [k: string]: unknown;
+        }[];
+        id?: string;
+        blockName?: string;
+        blockType: 'media';
+      }
+    | {
+        label: string;
+        type: 'page' | 'custom';
+        page: string | Page;
+        url: string;
+        newTab?: boolean;
+        id?: string;
+        blockName?: string;
+        blockType: 'callToAction';
+      }
+  )[];
+  fullTitle?: string;
+  breadcrumbs?: {
+    page?: string | Page;
+    url?: string;
+    label?: string;
+    id?: string;
+  }[];
+  slug: string;
+  parent?: string | Page;
+  meta?: {
+    title?: string;
+    description?: string;
+    keywords?: string;
+    noIndex?: boolean;
+  };
+  _status?: 'draft' | 'published';
   createdAt: string;
   updatedAt: string;
-  password?: string;
 }
 export interface Media {
   id: string;
@@ -57,93 +134,28 @@ export interface Menu {
   createdAt: string;
   updatedAt: string;
 }
-export interface Page {
-  id: string;
-  title: string;
-  layout?: (
-    | {
-        alignment: 'contentOnLeft' | 'contentOnRight';
-        content?: {
-          [k: string]: unknown;
-        }[];
-        media: string | Media;
-        id?: string;
-        blockName?: string;
-        blockType: 'mediaContent';
-      }
-    | {
-        columns?: {
-          width: 'oneThird' | 'half' | 'twoThirds' | 'full';
-          alignment: 'left' | 'center' | 'right';
-          content?: {
-            [k: string]: unknown;
-          }[];
-          id?: string;
-        }[];
-        id?: string;
-        blockName?: string;
-        blockType: 'content';
-      }
-    | {
-        slides?: {
-          content?: {
-            [k: string]: unknown;
-          }[];
-          callToAction?: {
-            label: string;
-            type: 'internal' | 'external';
-            internal: string | Page;
-            url: string;
-            newTab: boolean;
-          };
-          media: string | Media;
-          id?: string;
-        }[];
-        id?: string;
-        blockName?: string;
-        blockType: 'mediaSlider';
-      }
-    | {
-        media: string | Media;
-        size: 'normal' | 'wide' | 'fullscreen';
-        caption?: {
-          [k: string]: unknown;
-        }[];
-        id?: string;
-        blockName?: string;
-        blockType: 'media';
-      }
-    | {
-        label: string;
-        type: 'page' | 'custom';
-        page: string | Page;
-        url: string;
-        newTab: boolean;
-        id?: string;
-        blockName?: string;
-        blockType: 'callToAction';
-      }
-  )[];
-  fullTitle?: string;
-  breadcrumbs?: {
-    page?: string | Page;
-    url?: string;
-    label?: string;
-    id?: string;
-  }[];
-  slug: string;
-  parent?: string | Page;
-  meta?: {
-    title?: string;
-    description?: string;
-    keywords?: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-}
 export interface Category {
   id: string;
   label: string;
   createdAt: string;
   updatedAt: string;
+}
+export interface User {
+  id: string;
+  email?: string;
+  resetPasswordToken?: string;
+  resetPasswordExpiration?: string;
+  loginAttempts?: number;
+  lockUntil?: string;
+  createdAt: string;
+  updatedAt: string;
+  password?: string;
+}
+export interface Script {
+  id: string;
+  scripts?: {
+    title: string;
+    script: string;
+    id?: string;
+  }[];
 }

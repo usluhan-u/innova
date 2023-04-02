@@ -1,3 +1,6 @@
+import { VStack } from '@chakra-ui/react';
+import styled from '@emotion/styled';
+import { v4 as uuidv4 } from 'uuid';
 import { Slider } from './Slider';
 import { Media as MediaType } from '../payload-types';
 import {
@@ -5,54 +8,18 @@ import {
   CallToActionProps as CallToActionType
 } from './CallToAction';
 import { Media } from './Media';
-import { RichText } from './RichText';
-import { VStack } from '@chakra-ui/react';
-import styled from '@emotion/styled';
+import { RichText, RichTextNode } from './RichText';
 
-export interface Slide {
-  content: unknown;
+export interface SlideProps {
+  content: RichTextNode[];
   callToAction: CallToActionType;
   media: MediaType;
 }
 
 export interface MediaSliderProps {
-  blockType?: 'mediaSlider';
-  slides: Slide[];
+  blockType: 'mediaSlider';
+  slides: SlideProps[];
 }
-
-export const MediaSlider = ({ slides }: MediaSliderProps) => {
-  const getSliderSlides = (slides: Slide[]) =>
-    slides.map((slide) => <Slide {...slide} />);
-
-  return (
-    <SliderWrapper>
-      <Slider
-        // appendDots={(dots) => (
-        //   <div className="bottom-0 left-36">
-        //     <ul>{dots}</ul>
-        //   </div>
-        // )}
-        slides={getSliderSlides(slides)}
-      />
-    </SliderWrapper>
-  );
-};
-
-const Slide = ({ content, callToAction, media }: Slide) => {
-  return (
-    <div className="relative">
-      <Media blockType="media" media={media} />
-      <VStack
-        className="absolute top-1/2 left-36 text-white"
-        spacing={4}
-        alignItems="normal"
-      >
-        <RichText content={content} />
-        <CallToAction {...callToAction} />
-      </VStack>
-    </div>
-  );
-};
 
 const SliderWrapper = styled.div`
   .slick-dots {
@@ -90,3 +57,35 @@ const SliderWrapper = styled.div`
     background-color: #ffffff;
   }
 `;
+
+const Slide = ({ content, callToAction, media }: SlideProps) => (
+  <div className="relative">
+    <Media blockType="media" media={media} />
+    <VStack
+      className="absolute top-1/2 left-36 text-white"
+      spacing={4}
+      alignItems="normal"
+    >
+      <RichText content={content} />
+      <CallToAction {...callToAction} />
+    </VStack>
+  </div>
+);
+
+export const MediaSlider = ({ slides }: MediaSliderProps) => {
+  const getSliderSlides = (items: SlideProps[]) =>
+    items.map((item) => <Slide {...item} key={uuidv4()} />);
+
+  return (
+    <SliderWrapper>
+      <Slider
+        // appendDots={(dots) => (
+        //   <div className="bottom-0 left-36">
+        //     <ul>{dots}</ul>
+        //   </div>
+        // )}
+        slides={getSliderSlides(slides)}
+      />
+    </SliderWrapper>
+  );
+};

@@ -1,10 +1,11 @@
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import React from 'react';
 import ReactSlick, { Settings } from 'react-slick';
 import { v4 as uuidv4 } from 'uuid';
 
 export interface SliderProps extends Settings {
-  slides: any[];
+  slides: React.ReactNode[];
 }
 
 export const Slider = ({ appendDots, slides }: SliderProps) => {

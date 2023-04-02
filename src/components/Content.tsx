@@ -1,6 +1,6 @@
 import { Grid, GridItem } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
-import { RichText } from './RichText';
+import { RichText, RichTextNode } from './RichText';
 
 type width = 'oneThird' | 'half' | 'twoThirds' | 'full';
 type alignment = 'left' | 'center' | 'right';
@@ -8,7 +8,7 @@ type alignment = 'left' | 'center' | 'right';
 export interface ContentColumn {
   width: width;
   alignment: alignment;
-  content: unknown;
+  content: RichTextNode[];
 }
 
 export interface ContentProps {

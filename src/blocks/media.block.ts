@@ -1,4 +1,5 @@
 import { Block } from 'payload/types';
+import { BackgroundColor } from '../fields';
 
 export const Media: Block = {
   slug: 'media',
@@ -7,6 +8,7 @@ export const Media: Block = {
     plural: 'Medias'
   },
   fields: [
+    BackgroundColor,
     {
       name: 'media',
       label: 'Media',

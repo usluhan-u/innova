@@ -4,62 +4,56 @@ import { Text as SlateText } from 'slate';
 import { v4 as uuidv4 } from 'uuid';
 import { chakra, ChakraProps } from '@chakra-ui/react';
 
-export interface RichTextProps extends ChakraProps {
-  content: unknown;
+interface RichTextNodeValue {
+  url: string;
+  alt: string;
 }
 
-export const RichText = chakra(({ content, ...rest }: RichTextProps) => {
-  if (!content) {
-    return null;
-  }
-
-  return <chakra.div {...rest}>{serialize(content)}</chakra.div>;
-});
-
-type Children = Leaf[];
-
-type Leaf = {
+export interface RichTextNode {
   type: string;
-  value?: {
-    url: string;
-    alt: string;
-  };
-  children?: Children;
+  value?: RichTextNodeValue;
+  children?: RichTextNode[];
   url?: string;
   [key: string]: unknown;
-};
+}
 
-const serialize = (children: any): React.ReactElement[] =>
-  children.map((node: any) => {
+export interface RichTextProps extends ChakraProps {
+  content: RichTextNode[];
+}
+
+const serialize = (nodes: RichTextNode[]): (React.ReactElement | null)[] =>
+  nodes.map((node) => {
+    if (!node) {
+      return null;
+    }
+
     if (SlateText.isText(node)) {
-      let text = (
-        <span dangerouslySetInnerHTML={{ __html: escapeHTML(node.text) }} />
-      );
+      let text = <span> {escapeHTML(node.text)}</span>;
 
-      if ((node as any).bold) {
+      if (node.bold) {
         text = <b key={uuidv4()}>{text}</b>;
       }
 
-      if ((node as any).code) {
+      if (node.code) {
         text = <code key={uuidv4()}>{text}</code>;
       }
 
-      if ((node as any).italic) {
+      if (node.italic) {
         text = <i key={uuidv4()}>{text}</i>;
       }
 
-      if ((node as any).underline) {
+      if (node.underline) {
         text = <u key={uuidv4()}>{text}</u>;
       }
 
-      if ((node as any).strikethrough) {
+      if (node.strikethrough) {
         text = <del key={uuidv4()}>{text}</del>;
       }
 
       return <React.Fragment key={uuidv4()}>{text}</React.Fragment>;
     }
 
-    if (!node) {
+    if (!node.children) {
       return null;
     }
 
@@ -96,3 +90,11 @@ const serialize = (children: any): React.ReactElement[] =>
         return <p key={uuidv4()}>{serialize(node.children)}</p>;
     }
   });
+
+export const RichText = chakra(({ content, ...rest }: RichTextProps) => {
+  if (!content) {
+    return null;
+  }
+
+  return <chakra.div {...rest}>{serialize(content)}</chakra.div>;
+});

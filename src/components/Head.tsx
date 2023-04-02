@@ -17,9 +17,18 @@ type HeadProps = {
   description?: string;
   ogImage?: string;
   keywords?: string;
+  noIndex?: boolean;
+  externalScripts?: string[];
 };
 
-export const Head = ({ title, description, ogImage, keywords }: HeadProps) => {
+export const Head = ({
+  title,
+  description,
+  ogImage,
+  keywords,
+  noIndex,
+  externalScripts
+}: HeadProps) => {
   const { asPath } = useRouter();
 
   const getTitle = () =>
@@ -32,6 +41,7 @@ export const Head = ({ title, description, ogImage, keywords }: HeadProps) => {
       <meta name="description" content={description || defaultDescription} />
       <meta name="keywords" content={keywords || defaultKeywords} />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
+      {noIndex && <meta name="robots" content="noindex" />}
       <meta property="og:url" content={`${SERVER_URL}${asPath}`} />
       <meta property="og:title" content={title || defaultTitle} />
       <meta
@@ -43,6 +53,7 @@ export const Head = ({ title, description, ogImage, keywords }: HeadProps) => {
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:image" content={ogImage || defaultOGImage} />
       <meta property="og:image" content={ogImage || defaultOGImage} />
+      {externalScripts?.map((script) => script)}
     </NextHead>
   );
 };
