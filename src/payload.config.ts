@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { buildConfig } from 'payload/config';
 import dotenv from 'dotenv';
 import path from 'path';
 import nestedDocs from '@payloadcms/plugin-nested-docs';
+import seo from '@payloadcms/plugin-seo';
+import redirects from '@payloadcms/plugin-redirects';
 import { Home, Category, Media, Menu, Page, User } from './collections';
 import { Script, ContactUs } from './globals';
 
@@ -35,22 +38,22 @@ export default buildConfig({
     // }
   },
   plugins: [
-    // redirects({
-    //   collections: [Page.slug]
-    // }),
-    // seo({
-    //   globals: [],
-    //   collections: [
-    //     Menu.slug,
-    //     Media.slug,
-    //     User.slug,
-    //     Category.slug,
-    //     Page.slug,
-    //     Home.slug
-    //   ],
-    //   generateTitle: ({ doc }: { doc: any }) => `İnnova — ${doc.title.value}`,
-    //   generateDescription: ({ doc }: { doc: any }) => doc.excerpt,
-    // }),
+    redirects({
+      collections: [Page.slug]
+    }),
+    seo({
+      globals: [],
+      collections: [
+        Menu.slug,
+        Media.slug,
+        User.slug,
+        Category.slug,
+        Page.slug,
+        Home.slug
+      ],
+      generateTitle: ({ doc }: { doc: any }) => `İnnova — ${doc.title.value}`,
+      generateDescription: ({ doc }: { doc: any }) => doc.excerpt
+    }),
     nestedDocs({
       collections: [Page.slug],
       parentFieldSlug: 'parent',
