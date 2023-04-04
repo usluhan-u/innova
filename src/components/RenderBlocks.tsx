@@ -13,6 +13,7 @@ import { Template } from './Template';
 import { Tabs } from './Tabs';
 import { SmallCards } from './SmallCards';
 import { BlockType } from '../types';
+import { Cards } from './Cards';
 
 interface RenderBlocksProps {
   layout: PageLayout[];
@@ -26,7 +27,8 @@ const components: Record<BlockType, React.FC<any>> = {
   mediaSlider: MediaSlider,
   callToAction: CallToAction,
   tabs: Tabs,
-  smallCards: SmallCards
+  smallCards: SmallCards,
+  cards: Cards
 };
 
 export const RenderBlocks = ({ layout, paddingY = 20 }: RenderBlocksProps) => {

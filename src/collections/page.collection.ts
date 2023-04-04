@@ -13,7 +13,9 @@ import {
   Tabs,
   TabsType,
   SmallCardsType,
-  SmallCards
+  SmallCards,
+  CardsType,
+  Cards
 } from '../blocks';
 import { Meta, MetaType, Slug } from '../fields';
 import { generateFullTitle } from '../utils';
@@ -25,7 +27,8 @@ export type PageLayout =
   | MediaType
   | CallToActionType
   | TabsType
-  | SmallCardsType;
+  | SmallCardsType
+  | CardsType;
 
 export interface PageType {
   id: string;
@@ -63,7 +66,8 @@ export const Page: CollectionConfig = {
         Media,
         CallToAction,
         Tabs,
-        SmallCards
+        SmallCards,
+        Cards
       ]
     },
     {

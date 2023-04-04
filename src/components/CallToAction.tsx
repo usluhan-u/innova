@@ -1,6 +1,6 @@
 import { Button, ThemeTypings } from '@chakra-ui/react';
 import { ExternalLink } from './ExternalLink';
-import { InternalLink } from './GenericLink';
+import { InternalLink } from './InternalLink';
 import { CallToActionType } from '../blocks';
 
 export interface CallToActionProps extends CallToActionType {

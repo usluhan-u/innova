@@ -1,5 +1,9 @@
 import { CollectionConfig } from 'payload/types';
 
+export interface CategoryType {
+  label: string;
+}
+
 export const Category: CollectionConfig = {
   slug: 'categories',
   access: {

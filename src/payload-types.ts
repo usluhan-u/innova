@@ -23,11 +23,26 @@ export interface Page {
   layout?: (
     | {
         backgroundColor?: 'white' | 'gray';
-        alignment: 'contentOnLeft' | 'contentOnRight';
-        content: {
-          [k: string]: unknown;
-        }[];
-        media: string | Media;
+        enableHeader?: boolean;
+        header?: {
+          alignment: 'left' | 'center' | 'right';
+          content?: {
+            [k: string]: unknown;
+          }[];
+        };
+        content?: {
+          alignment: 'contentOnLeft' | 'contentOnRight';
+          content: {
+            [k: string]: unknown;
+          }[];
+          media: string | Media;
+          enableExternalLink?: boolean;
+          externalLink?: {
+            label: string;
+            url: string;
+            newTab?: boolean;
+          };
+        };
         id?: string;
         blockName?: string;
         blockType: 'mediaContent';
@@ -87,6 +102,111 @@ export interface Page {
         blockName?: string;
         blockType: 'callToAction';
       }
+    | {
+        backgroundColor?: 'white' | 'gray';
+        enableHeader?: boolean;
+        header?: {
+          content: {
+            [k: string]: unknown;
+          }[];
+          description?: {
+            [k: string]: unknown;
+          }[];
+        };
+        alignment: 'left' | 'center' | 'right';
+        tabs?: {
+          title: string;
+          layout?: (
+            | {
+                backgroundColor?: 'white' | 'gray';
+                enableHeader?: boolean;
+                header?: {
+                  alignment: 'left' | 'center' | 'right';
+                  content?: {
+                    [k: string]: unknown;
+                  }[];
+                };
+                content?: {
+                  alignment: 'contentOnLeft' | 'contentOnRight';
+                  content: {
+                    [k: string]: unknown;
+                  }[];
+                  media: string | Media;
+                  enableExternalLink?: boolean;
+                  externalLink?: {
+                    label: string;
+                    url: string;
+                    newTab?: boolean;
+                  };
+                };
+                id?: string;
+                blockName?: string;
+                blockType: 'mediaContent';
+              }
+            | {
+                backgroundColor?: 'white' | 'gray';
+                columns?: {
+                  width: 'oneThird' | 'half' | 'twoThirds' | 'full';
+                  alignment: 'left' | 'center' | 'right';
+                  content: {
+                    [k: string]: unknown;
+                  }[];
+                  id?: string;
+                }[];
+                id?: string;
+                blockName?: string;
+                blockType: 'content';
+              }
+            | {
+                backgroundColor?: 'white' | 'gray';
+                media: string | Media;
+                size: 'normal' | 'wide' | 'fullscreen';
+                caption: {
+                  [k: string]: unknown;
+                }[];
+                id?: string;
+                blockName?: string;
+                blockType: 'media';
+              }
+          )[];
+          id?: string;
+        }[];
+        id?: string;
+        blockName?: string;
+        blockType: 'tabs';
+      }
+    | {
+        backgroundColor?: 'white' | 'gray';
+        enableHeader?: boolean;
+        header?: {
+          alignment: 'left' | 'center' | 'right';
+          content?: {
+            [k: string]: unknown;
+          }[];
+        };
+        smallCards?: {
+          title: string;
+          content?: {
+            [k: string]: unknown;
+          }[];
+          media: string | Media;
+          id?: string;
+        }[];
+        id?: string;
+        blockName?: string;
+        blockType: 'smallCards';
+      }
+    | {
+        backgroundColor?: 'white' | 'gray';
+        header: string;
+        publishDate: string;
+        category: string | Category;
+        media: string | Media;
+        page: string | Page;
+        id?: string;
+        blockName?: string;
+        blockType: 'cards';
+      }
   )[];
   fullTitle?: string;
   breadcrumbs?: {
@@ -103,7 +223,6 @@ export interface Page {
     keywords?: string;
     noIndex?: boolean;
   };
-  _status?: 'draft' | 'published';
   createdAt: string;
   updatedAt: string;
 }
@@ -116,6 +235,12 @@ export interface Media {
   filesize?: number;
   width?: number;
   height?: number;
+  createdAt: string;
+  updatedAt: string;
+}
+export interface Category {
+  id: string;
+  label: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -135,12 +260,6 @@ export interface Menu {
     }[];
     page: string | Page;
   };
-  createdAt: string;
-  updatedAt: string;
-}
-export interface Category {
-  id: string;
-  label: string;
   createdAt: string;
   updatedAt: string;
 }

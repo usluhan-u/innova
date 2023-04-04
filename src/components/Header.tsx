@@ -20,7 +20,7 @@ import { v4 as uuidv4 } from 'uuid';
 import React from 'react';
 import Link from 'next/link';
 import { Logo, EN, TR } from '../icons';
-import { InternalLink } from './GenericLink';
+import { InternalLink } from './InternalLink';
 import { SearchBox } from './SearchBox';
 import { Template } from './Template';
 import { MenuType } from '../collections';

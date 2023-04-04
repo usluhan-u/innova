@@ -27,6 +27,7 @@
     "@payloadcms/plugin-nested-docs": "^1.0.4",
     "@payloadcms/plugin-redirects": "^1.0.0",
     "@payloadcms/plugin-seo": "^1.0.10",
+    "date-fns": "^2.29.3",
     "dotenv": "^16.0.3",
     "escape-html": "^1.0.3",
     "express": "^4.18.2",

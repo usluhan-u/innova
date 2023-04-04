@@ -6,4 +6,5 @@ export type BlockType =
   | 'media'
   | 'callToAction'
   | 'tabs'
-  | 'smallCards';
+  | 'smallCards'
+  | 'cards';
