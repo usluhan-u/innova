@@ -11,8 +11,8 @@ import {
   VStack,
   Text,
   IconButton,
-  Grid,
-  GridItem
+  Flex,
+  Spacer
 } from '@chakra-ui/react';
 import { ArrowForwardIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import { useRouter } from 'next/router';
@@ -55,91 +55,94 @@ export const Header = ({ menuList }: HeaderProps) => {
 
   return (
     <Template
+      backgroundColor="white"
       h="70px"
       display="flex"
       alignItems="center"
       justifyContent="space-between"
     >
-      <Grid templateColumns="repeat(24, 1fr)" alignItems="center" gap={8}>
-        <GridItem>
-          <InternalLink href={asPath}>
-            <Logo />
-          </InternalLink>
-        </GridItem>
-        {!expanded && (
-          <GridItem>
-            <Menu isOpen={isOpen}>
-              {menuList.map((menu) =>
-                menu.group.type === 'multiple' ? (
-                  <React.Fragment key={uuidv4()}>
-                    <MenuButton
-                      as={Button}
-                      rightIcon={<ChevronDownIcon />}
-                      onMouseEnter={onOpen}
-                      backgroundColor="transparent"
-                      color="text.primary"
-                      fontWeight={400}
-                      _hover={{
-                        backgroundColor: 'transparent',
-                        color: 'text.blue'
-                      }}
-                      _active={{
-                        backgroundColor: 'transparent'
-                      }}
-                    >
+      <Flex
+        alignItems="center"
+        justifyContent="space-between"
+        boxSize="full"
+        gap={8}
+      >
+        <InternalLink href={asPath}>
+          <Logo />
+        </InternalLink>
+        <Flex w="full" alignItems="center" justifyContent="space-between">
+          <Flex alignItems="center" justifyContent="space-between" w="full">
+            {!expanded && (
+              <Menu isOpen={isOpen}>
+                {menuList.map((menu) =>
+                  menu.group.type === 'multiple' ? (
+                    <React.Fragment key={uuidv4()}>
+                      <MenuButton
+                        as={Button}
+                        rightIcon={<ChevronDownIcon />}
+                        onMouseEnter={onOpen}
+                        backgroundColor="transparent"
+                        color="text.primary"
+                        fontWeight={400}
+                        _hover={{
+                          backgroundColor: 'transparent',
+                          color: 'text.blue'
+                        }}
+                        _active={{
+                          backgroundColor: 'transparent'
+                        }}
+                      >
+                        {menu.label}
+                      </MenuButton>
+                      <MenuList onMouseEnter={onOpen} onMouseLeave={onClose}>
+                        <HStack spacing={8} alignItems="normal" padding="20px">
+                          {menu.group.menuGroups?.map((menuGroup) => (
+                            <MenuGroup
+                              key={uuidv4()}
+                              title={menuGroup.label}
+                              color="text.secondary"
+                              fontWeight={500}
+                            >
+                              {menuGroup.subMenus?.map((subMenu) => (
+                                <MenuItem
+                                  key={uuidv4()}
+                                  as="a"
+                                  href={subMenu.page.slug}
+                                  color="text.primary"
+                                  fontWeight={400}
+                                  _hover={{ backgroundColor: 'transparent' }}
+                                >
+                                  {subMenu.label}
+                                </MenuItem>
+                              ))}
+                            </MenuGroup>
+                          ))}
+                        </HStack>
+                        <VStack alignItems="normal" p={8}>
+                          <Divider borderBottomColor="black" />
+                          <InternalLink href={asPath}>
+                            <Text color="text.blue">
+                              Tüm Ürünleri İnceleyin <ArrowForwardIcon />
+                            </Text>
+                          </InternalLink>
+                        </VStack>
+                      </MenuList>
+                    </React.Fragment>
+                  ) : (
+                    <InternalLink key={uuidv4()} href={menu.group.page.slug}>
                       {menu.label}
-                    </MenuButton>
-                    <MenuList onMouseEnter={onOpen} onMouseLeave={onClose}>
-                      <HStack spacing={8} alignItems="normal" padding="20px">
-                        {menu.group.menuGroups?.map((menuGroup) => (
-                          <MenuGroup
-                            key={uuidv4()}
-                            title={menuGroup.label}
-                            color="text.secondary"
-                            fontWeight={500}
-                          >
-                            {menuGroup.subMenus?.map((subMenu) => (
-                              <MenuItem
-                                key={uuidv4()}
-                                as="a"
-                                href={subMenu.page.slug}
-                                color="text.primary"
-                                fontWeight={400}
-                                _hover={{ backgroundColor: 'transparent' }}
-                              >
-                                {subMenu.label}
-                              </MenuItem>
-                            ))}
-                          </MenuGroup>
-                        ))}
-                      </HStack>
-                      <VStack alignItems="normal" p={8}>
-                        <Divider borderBottomColor="black" />
-                        <InternalLink href={asPath}>
-                          <Text color="text.blue">
-                            Tüm Ürünleri İnceleyin <ArrowForwardIcon />
-                          </Text>
-                        </InternalLink>
-                      </VStack>
-                    </MenuList>
-                  </React.Fragment>
-                ) : (
-                  <InternalLink key={uuidv4()} href={menu.group.page.slug}>
-                    {menu.label}
-                  </InternalLink>
-                )
-              )}
-            </Menu>
-          </GridItem>
-        )}
-        <GridItem colStart={expanded ? 2 : undefined} colEnd={26}>
-          <SearchBox
-            expanded={expanded}
-            handleToggle={handleExpandToggle}
-            placeholder="Search"
-          />
-        </GridItem>
-        <GridItem colEnd={27} alignItems="flex-end">
+                    </InternalLink>
+                  )
+                )}
+              </Menu>
+            )}
+            <Spacer />
+            <SearchBox
+              expanded={expanded}
+              handleToggle={handleExpandToggle}
+              placeholder="Search"
+            />
+          </Flex>
           <Menu>
             <MenuButton
               as={IconButton}
@@ -167,8 +170,8 @@ export const Header = ({ menuList }: HeaderProps) => {
               ))}
             </MenuList>
           </Menu>
-        </GridItem>
-      </Grid>
+        </Flex>
+      </Flex>
     </Template>
   );
 };

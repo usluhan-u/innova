@@ -1,4 +1,4 @@
-import { VStack, Grid, GridItem } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 import { SmallCardsType } from '../blocks';
 import { RichText } from './RichText';
@@ -7,20 +7,28 @@ import { SingleSmallCard } from './SingleSmallCard';
 export interface SmallCardsProps extends SmallCardsType {}
 
 export const SmallCards = ({ header, smallCards }: SmallCardsProps) => (
-  <VStack gap={8}>
+  <Flex
+    gap={{ base: 6, md: 8 }}
+    flexDirection="column"
+    alignItems={{ base: 'center', md: 'normal' }}
+    w="full"
+  >
     {header && (
       <RichText content={header.content} textAlign={header.alignment} />
     )}
-    <Grid templateColumns="repeat(4, 1fr)" gap={8}>
+    <Flex
+      gap={{ base: 6, md: 8 }}
+      flexDirection={{ base: 'column', md: 'row' }}
+      flexWrap={{ base: 'nowrap', md: 'wrap' }}
+    >
       {smallCards.map((smallCard) => (
-        <GridItem key={uuidv4()}>
-          <SingleSmallCard
-            media={smallCard.media}
-            title={smallCard.title}
-            content={smallCard.content}
-          />
-        </GridItem>
+        <SingleSmallCard
+          key={uuidv4()}
+          media={smallCard.media}
+          title={smallCard.title}
+          content={smallCard.content}
+        />
       ))}
-    </Grid>
-  </VStack>
+    </Flex>
+  </Flex>
 );

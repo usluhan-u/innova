@@ -12,7 +12,12 @@ export const Template = ({
   ...rest
 }: TemplateProps) => (
   <BackgroundColor backgroundColor={backgroundColor}>
-    <Container maxW="90rem" display="flex" alignItems="center" {...rest}>
+    <Container
+      maxW={{ base: 'full', md: '90rem' }}
+      display="flex"
+      alignItems="center"
+      {...rest}
+    >
       {children}
     </Container>
   </BackgroundColor>

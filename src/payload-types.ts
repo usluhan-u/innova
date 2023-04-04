@@ -9,11 +9,11 @@ export interface Config {
   collections: {
     pages: Page;
     medias: Media;
-    menus: Menu;
     categories: Category;
     users: User;
   };
   globals: {
+    menus: Menu;
     scripts: Script;
   };
 }
@@ -198,11 +198,17 @@ export interface Page {
       }
     | {
         backgroundColor?: 'white' | 'gray';
-        header: string;
-        publishDate: string;
-        category: string | Category;
-        media: string | Media;
-        page: string | Page;
+        cards?: {
+          header: string;
+          publishDate: string;
+          category: string | Category;
+          media: string | Media;
+          internalLink?: {
+            label: string;
+            page: string | Page;
+          };
+          id?: string;
+        }[];
         id?: string;
         blockName?: string;
         blockType: 'cards';
@@ -244,25 +250,6 @@ export interface Category {
   createdAt: string;
   updatedAt: string;
 }
-export interface Menu {
-  id: string;
-  label: string;
-  group?: {
-    type: 'multiple' | 'single';
-    menuGroups: {
-      label: string;
-      subMenus?: {
-        label: string;
-        page: string | Page;
-        id?: string;
-      }[];
-      id?: string;
-    }[];
-    page: string | Page;
-  };
-  createdAt: string;
-  updatedAt: string;
-}
 export interface User {
   id: string;
   email?: string;
@@ -273,6 +260,26 @@ export interface User {
   createdAt: string;
   updatedAt: string;
   password?: string;
+}
+export interface Menu {
+  id: string;
+  menus?: {
+    label: string;
+    group?: {
+      type: 'multiple' | 'single';
+      menuGroups: {
+        label: string;
+        subMenus?: {
+          label: string;
+          page: string | Page;
+          id?: string;
+        }[];
+        id?: string;
+      }[];
+      page: string | Page;
+    };
+    id?: string;
+  }[];
 }
 export interface Script {
   id: string;

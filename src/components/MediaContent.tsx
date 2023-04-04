@@ -1,4 +1,4 @@
-import { Grid, GridItem, VStack } from '@chakra-ui/react';
+import { Flex, SimpleGrid, VStack } from '@chakra-ui/react';
 import { RichText } from './RichText';
 import { MediaContentAlignment, MediaContentType } from '../blocks';
 import { MediaViewer } from './MediaViewer';
@@ -17,34 +17,30 @@ export const MediaContent = ({ header, content }: MediaContentProps) => {
   };
 
   return (
-    <VStack spacing={16} align="stretch">
+    <Flex gap={{ base: 6, md: 16 }} flexDirection="column">
       {header && (
         <RichText content={header.content} textAlign={header.alignment} />
       )}
-      <Grid
-        templateColumns="repeat(2, 1fr)"
+      <SimpleGrid
+        columns={{ base: 1, md: 2 }}
         alignItems="center"
-        justifyContent="space-between"
-        gap={16}
+        justifyContent={{ base: 'center', md: 'space-between' }}
+        spacing={{ base: 4, md: 16 }}
         w="full"
       >
-        <GridItem gridRow="1" gridColumn={getAlignment(content.alignment)}>
-          <VStack alignItems="normal" spacing={4}>
-            <RichText content={content.content} />
-            {content.externalLink && (
-              <ExternalLink
-                href={content.externalLink?.url}
-                newTab={content.externalLink.newTab}
-              >
-                {content.externalLink?.label}
-              </ExternalLink>
-            )}
-          </VStack>
-        </GridItem>
-        <GridItem gridRow="1">
-          <MediaViewer media={content.media} size={{ w: 'full', h: 'full' }} />
-        </GridItem>
-      </Grid>
-    </VStack>
+        <MediaViewer media={content.media} size={{ w: 'full', h: 'full' }} />
+        <VStack alignItems="normal" spacing={4}>
+          <RichText content={content.content} />
+          {content.externalLink && (
+            <ExternalLink
+              href={content.externalLink?.url}
+              newTab={content.externalLink.newTab}
+            >
+              {content.externalLink?.label}
+            </ExternalLink>
+          )}
+        </VStack>
+      </SimpleGrid>
+    </Flex>
   );
 };

@@ -17,7 +17,7 @@ export const SearchBox = ({
   expanded,
   handleToggle
 }: SearchBoxProps) => (
-  <InputGroup w="full">
+  <InputGroup>
     {expanded && (
       <>
         <InputLeftElement pos="relative">

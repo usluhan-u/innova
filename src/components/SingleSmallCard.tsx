@@ -13,7 +13,7 @@ export const SingleSmallCard = ({
   media
 }: SingleSmallCardProps) => (
   <Card
-    direction={{ base: 'column', sm: 'row' }}
+    direction="row"
     overflow="hidden"
     variant="outline"
     alignItems="center"

@@ -31,7 +31,7 @@ export const SingleCard = ({
   publishDate,
   media
 }: SingleCardProps) => (
-  <ChakraCard w="md">
+  <ChakraCard w={{ base: 'full', md: 'md' }}>
     <Image objectFit="cover" src={media.url} alt={media.alt} h="2xs" />
     <CardBody>
       <Text>{header}</Text>

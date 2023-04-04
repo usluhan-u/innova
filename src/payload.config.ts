@@ -13,7 +13,7 @@ export default buildConfig({
   graphQL: {
     disable: true
   },
-  collections: [Page, Media, Menu, Category, User],
+  collections: [Page, Menu, Media, Category, User],
   globals: [Script],
   localization: {
     locales: ['en', 'tr'],
