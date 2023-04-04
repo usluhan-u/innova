@@ -2,6 +2,7 @@ export * from './BackgroundColor';
 export * from './BeforeLogin';
 export * from './CallToAction';
 export * from './Cards';
+export * from './ContactUs';
 export * from './Content';
 export * from './ExternalLink';
 export * from './InternalLink';

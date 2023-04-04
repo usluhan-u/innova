@@ -1,7 +1,8 @@
 import { Link } from '@chakra-ui/next-js';
+import { ChakraProps } from '@chakra-ui/react';
 import escapeHTML from 'escape-html';
 
-export interface InternalLinkProps {
+export interface InternalLinkProps extends ChakraProps {
   href: string;
   children: React.ReactNode | React.ReactNode[];
   icon?: React.ReactNode;
@@ -12,9 +13,11 @@ export const InternalLink = ({
   href,
   children,
   icon,
-  color
+  color,
+  ...rest
 }: InternalLinkProps) => (
   <Link
+    {...rest}
     href={escapeHTML(href)}
     scroll={false}
     textDecoration="none"

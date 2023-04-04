@@ -1,5 +1,29 @@
 import { CollectionConfig } from 'payload/types';
-import { CallToAction, Meta, Slides } from '../fields';
+import { CallToAction, Meta, MetaType, Slides, Slug } from '../fields';
+
+interface HomeHero {}
+
+interface HomeProduct {}
+
+interface HomeSolution {}
+
+interface HomeService {}
+
+interface HomeBlog {}
+
+interface HomeSuccessStory {}
+
+export interface HomeType {
+  title: string;
+  hero: HomeHero;
+  product: HomeHero;
+  solution: HomeHero;
+  service: HomeHero;
+  blog: HomeHero;
+  successStory: HomeHero;
+  slug: string;
+  meta: MetaType;
+}
 
 export const Home: CollectionConfig = {
   slug: 'home',
@@ -95,6 +119,7 @@ export const Home: CollectionConfig = {
       type: 'group',
       fields: [CallToAction]
     },
+    Slug,
     Meta
   ]
 };

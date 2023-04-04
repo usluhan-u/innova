@@ -2,8 +2,8 @@ import { buildConfig } from 'payload/config';
 import dotenv from 'dotenv';
 import path from 'path';
 import nestedDocs from '@payloadcms/plugin-nested-docs';
-import { Category, Media, Menu, Page, User } from './collections';
-import { Script } from './globals';
+import { Home, Category, Media, Menu, Page, User } from './collections';
+import { Script, ContactUs } from './globals';
 
 dotenv.config();
 
@@ -13,8 +13,8 @@ export default buildConfig({
   graphQL: {
     disable: true
   },
-  collections: [Page, Menu, Media, Category, User],
-  globals: [Script],
+  collections: [Home, Page, Menu, Media, Category, User],
+  globals: [Script, ContactUs],
   localization: {
     locales: ['en', 'tr'],
     defaultLocale: 'tr',

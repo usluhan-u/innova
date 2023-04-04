@@ -7,15 +7,87 @@
 
 export interface Config {
   collections: {
+    home: Home;
     pages: Page;
+    menus: Menu;
     medias: Media;
     categories: Category;
     users: User;
   };
   globals: {
-    menus: Menu;
     scripts: Script;
+    contactUs: ContactUs;
   };
+}
+export interface Home {
+  id: string;
+  title: string;
+  hero?: {
+    slides?: {
+      content: {
+        [k: string]: unknown;
+      }[];
+      callToAction?: {
+        label: string;
+        type: 'internal' | 'external';
+        internal: string | Page;
+        url: string;
+        newTab?: boolean;
+      };
+      media: string | Media;
+      id?: string;
+    }[];
+  };
+  product?: {
+    title: string;
+    slides?: {
+      content: {
+        [k: string]: unknown;
+      }[];
+      callToAction?: {
+        label: string;
+        type: 'internal' | 'external';
+        internal: string | Page;
+        url: string;
+        newTab?: boolean;
+      };
+      media: string | Media;
+      id?: string;
+    }[];
+  };
+  solution?: {
+    title: string;
+    description: {
+      [k: string]: unknown;
+    }[];
+  };
+  service?: {
+    title: string;
+    description: {
+      [k: string]: unknown;
+    }[];
+  };
+  blog?: {
+    title: string;
+  };
+  successStory?: {
+    callToAction?: {
+      label: string;
+      type: 'internal' | 'external';
+      internal: string | Page;
+      url: string;
+      newTab?: boolean;
+    };
+  };
+  slug: string;
+  meta?: {
+    title?: string;
+    description?: string;
+    keywords?: string;
+    noIndex?: boolean;
+  };
+  createdAt: string;
+  updatedAt: string;
 }
 export interface Page {
   id: string;
@@ -250,6 +322,25 @@ export interface Category {
   createdAt: string;
   updatedAt: string;
 }
+export interface Menu {
+  id: string;
+  label: string;
+  group?: {
+    type: 'multiple' | 'single';
+    menuGroups: {
+      label: string;
+      subMenus?: {
+        label: string;
+        page: string | Page;
+        id?: string;
+      }[];
+      id?: string;
+    }[];
+    page: string | Page;
+  };
+  createdAt: string;
+  updatedAt: string;
+}
 export interface User {
   id: string;
   email?: string;
@@ -261,26 +352,6 @@ export interface User {
   updatedAt: string;
   password?: string;
 }
-export interface Menu {
-  id: string;
-  menus?: {
-    label: string;
-    group?: {
-      type: 'multiple' | 'single';
-      menuGroups: {
-        label: string;
-        subMenus?: {
-          label: string;
-          page: string | Page;
-          id?: string;
-        }[];
-        id?: string;
-      }[];
-      page: string | Page;
-    };
-    id?: string;
-  }[];
-}
 export interface Script {
   id: string;
   scripts?: {
@@ -288,4 +359,20 @@ export interface Script {
     script: string;
     id?: string;
   }[];
+}
+export interface ContactUs {
+  id: string;
+  stickyButtonLabel: string;
+  form?: {
+    title: string;
+    description: string;
+    inputs?: {
+      inputGroup?: {
+        type: 'text' | 'textarea' | 'tel' | 'email';
+        placeholder: string;
+      };
+      id?: string;
+    }[];
+    sendButtonLabel: string;
+  };
 }

@@ -11,6 +11,12 @@ const nextConfig = {
   images: {
     domains: ['localhost']
   },
+  async exportPathMap(defaultPathMap) {
+    return {
+      '/': { page: '/home' }
+    };
+  },
+
   // async redirects() {
   //   return [
   //     {
