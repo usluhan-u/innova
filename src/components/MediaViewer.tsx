@@ -6,7 +6,7 @@ import { MediaTypeMediaType } from '../blocks';
 export interface MediaViewerProps {
   caption?: RichTextNode[];
   media: MediaTypeMediaType;
-  size: Pick<ChakraProps, 'maxW' | 'w' | 'h' | 'pos' | 'overflow'>;
+  size: ChakraProps;
 }
 
 export const MediaViewer = ({ caption, media, size }: MediaViewerProps) => (
@@ -16,7 +16,7 @@ export const MediaViewer = ({ caption, media, size }: MediaViewerProps) => (
         <iframe title={media.filename} src={media.url} allowFullScreen />
       </AspectRatio>
     ) : (
-      <AspectRatio {...size} ratio={16 / 9} minWidth="md">
+      <AspectRatio {...size} ratio={16 / 9}>
         <>
           <Image
             src={media.url}

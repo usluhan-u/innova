@@ -16,4 +16,5 @@ export * from './RichText';
 export * from './SearchBox';
 export * from './Slider';
 export * from './Tabs';
+export * from './SmallCards';
 export * from './Template';

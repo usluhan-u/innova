@@ -45,11 +45,6 @@ export const getStaticProps: GetStaticProps = async ({
     }
   });
 
-  // console.log(
-  //   '🚀 ~ file: [...slug].tsx:50 ~ pageQuery.docs[0]:',
-  //   JSON.stringify(pageQuery.docs[0], null, 2)
-  // );
-
   if (pageQuery.docs[0]) {
     return {
       props: {

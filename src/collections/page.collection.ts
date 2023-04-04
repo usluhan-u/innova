@@ -11,7 +11,9 @@ import {
   MediaType,
   MediaSliderType,
   Tabs,
-  TabsType
+  TabsType,
+  SmallCardsType,
+  SmallCards
 } from '../blocks';
 import { Meta, MetaType, Slug } from '../fields';
 import { generateFullTitle } from '../utils';
@@ -22,7 +24,8 @@ export type PageLayout =
   | MediaSliderType
   | MediaType
   | CallToActionType
-  | TabsType;
+  | TabsType
+  | SmallCardsType;
 
 export interface PageType {
   id: string;
@@ -53,7 +56,15 @@ export const Page: CollectionConfig = {
       label: 'Page Layout',
       type: 'blocks',
       minRows: 1,
-      blocks: [MediaContent, Content, MediaSlider, Media, CallToAction, Tabs]
+      blocks: [
+        MediaContent,
+        Content,
+        MediaSlider,
+        Media,
+        CallToAction,
+        Tabs,
+        SmallCards
+      ]
     },
     {
       name: 'fullTitle',

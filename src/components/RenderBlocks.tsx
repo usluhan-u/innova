@@ -11,19 +11,22 @@ import { CallToAction } from './CallToAction';
 import { BackgroundColorType } from '../fields';
 import { Template } from './Template';
 import { Tabs } from './Tabs';
+import { SmallCards } from './SmallCards';
+import { BlockType } from '../types';
 
 interface RenderBlocksProps {
   layout: PageLayout[];
   paddingY?: string | number;
 }
 
-const components: Record<string, React.FC<any>> = {
+const components: Record<BlockType, React.FC<any>> = {
   content: Content,
   media: Media,
   mediaContent: MediaContent,
   mediaSlider: MediaSlider,
   callToAction: CallToAction,
-  tabs: Tabs
+  tabs: Tabs,
+  smallCards: SmallCards
 };
 
 export const RenderBlocks = ({ layout, paddingY = 20 }: RenderBlocksProps) => {
