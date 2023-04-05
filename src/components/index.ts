@@ -5,6 +5,7 @@ export * from './Cards';
 export * from './ContactUs';
 export * from './Content';
 export * from './ExternalLink';
+export * from './Footer';
 export * from './InternalLink';
 export * from './Head';
 export * from './Header';

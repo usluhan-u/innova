@@ -13,7 +13,8 @@ export const theme = extendTheme({
     },
     background: {
       primary: '#FFFFFF',
-      secondary: '#F4F6F8'
+      secondary: '#F4F6F8',
+      footer: '#092232'
     }
   }
 });

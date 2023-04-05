@@ -5,14 +5,21 @@ import App from 'next/app';
 import { v4 as uuidv4 } from 'uuid';
 import { Helmet } from 'react-helmet';
 import { theme } from '../theme';
-import { Header, ContactUs } from '../components';
-import { ContactUsType, ScriptType } from '../globals';
+import { Header, ContactUs, Footer } from '../components';
+import {
+  ContactUsType,
+  FooterType,
+  ScriptType,
+  SocialMediaType
+} from '../globals';
 import { MenuType } from '../collections';
 
 interface MyAppProps extends AppProps {
   menuList?: MenuType[];
   externalScripts?: string[];
   contactUs: ContactUsType;
+  socialMedia: SocialMediaType;
+  footer: FooterType;
 }
 
 const MyApp = ({
@@ -20,7 +27,9 @@ const MyApp = ({
   pageProps,
   menuList,
   externalScripts,
-  contactUs
+  contactUs,
+  socialMedia,
+  footer
 }: MyAppProps) => {
   const [isLargerThanMd] = useMediaQuery('(min-width: 768px)');
 
@@ -36,6 +45,7 @@ const MyApp = ({
       {isLargerThanMd && Object.keys(contactUs?.form).length && (
         <ContactUs {...contactUs} />
       )}
+      <Footer socialMedia={socialMedia} footer={footer} />
     </ChakraProvider>
   );
 };
@@ -45,7 +55,13 @@ export default MyApp;
 MyApp.getInitialProps = async (appContext: AppContext) => {
   const appProps = await App.getInitialProps(appContext);
 
-  const [menuQuery, scriptsQuery, contactUsQuery] = await Promise.all([
+  const [
+    menuQuery,
+    scriptsQuery,
+    contactUsQuery,
+    socialMediaQuery,
+    footerQuery
+  ] = await Promise.all([
     fetch(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/api/menus?limit=100&locale=${appContext.ctx.locale}&fallback-locale=${appContext.ctx.defaultLocale}`
     ).then((res) => res.json()),
@@ -54,6 +70,12 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
     ).then((res) => res.json()) as Promise<ScriptType | undefined>,
     fetch(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/api/globals/contactUs?locale=${appContext.ctx.locale}&fallback-locale=${appContext.ctx.defaultLocale}`
+    ).then((res) => res.json()),
+    fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/globals/socialMedia?locale=${appContext.ctx.locale}&fallback-locale=${appContext.ctx.defaultLocale}`
+    ).then((res) => res.json()),
+    fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/globals/footer?locale=${appContext.ctx.locale}&fallback-locale=${appContext.ctx.defaultLocale}`
     ).then((res) => res.json())
   ]);
 
@@ -61,6 +83,8 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
     ...appProps,
     menuList: menuQuery.docs,
     externalScripts: scriptsQuery?.scripts?.map((script) => script.script),
-    contactUs: contactUsQuery
+    contactUs: contactUsQuery,
+    socialMedia: socialMediaQuery,
+    footer: footerQuery
   };
 };

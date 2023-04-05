@@ -6,7 +6,7 @@ import nestedDocs from '@payloadcms/plugin-nested-docs';
 import seo from '@payloadcms/plugin-seo';
 import redirects from '@payloadcms/plugin-redirects';
 import { Home, Category, Media, Menu, Page, User } from './collections';
-import { Script, ContactUs } from './globals';
+import { Script, ContactUs, SocialMedia, Footer } from './globals';
 
 dotenv.config();
 
@@ -17,7 +17,7 @@ export default buildConfig({
     disable: true
   },
   collections: [Home, Page, Menu, Media, Category, User],
-  globals: [Script, ContactUs],
+  globals: [Script, ContactUs, SocialMedia, Footer],
   localization: {
     locales: ['en', 'tr'],
     defaultLocale: 'tr',

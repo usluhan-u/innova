@@ -7,6 +7,7 @@ export interface InternalLinkProps extends ChakraProps {
   children: React.ReactNode | React.ReactNode[];
   icon?: React.ReactNode;
   color?: string;
+  fontWeight?: string;
 }
 
 export const InternalLink = ({
@@ -14,15 +15,17 @@ export const InternalLink = ({
   children,
   icon,
   color,
+  fontWeight,
   ...rest
 }: InternalLinkProps) => (
   <Link
-    {...rest}
     href={escapeHTML(href)}
     scroll={false}
     textDecoration="none"
     color={color}
+    fontWeight={fontWeight}
     _hover={{ textDecoration: 'none' }}
+    {...rest}
   >
     {children} {icon}
   </Link>

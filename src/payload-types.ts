@@ -18,12 +18,13 @@ export interface Config {
   globals: {
     scripts: Script;
     contactUs: ContactUs;
+    socialMedia: SocialMedia;
   };
 }
 export interface Home {
   id: string;
   title: string;
-  hero?: {
+  hero: {
     slides: {
       title?: {
         [k: string]: unknown;
@@ -31,7 +32,7 @@ export interface Home {
       content?: {
         [k: string]: unknown;
       }[];
-      callToAction?: {
+      callToAction: {
         label: string;
         type: 'internal' | 'external';
         internal: string | Page;
@@ -42,7 +43,7 @@ export interface Home {
       id?: string;
     }[];
   };
-  productsSummary?: {
+  productsSummary: {
     title: {
       [k: string]: unknown;
     }[];
@@ -53,7 +54,7 @@ export interface Home {
       content?: {
         [k: string]: unknown;
       }[];
-      callToAction?: {
+      callToAction: {
         label: string;
         type: 'internal' | 'external';
         internal: string | Page;
@@ -62,6 +63,11 @@ export interface Home {
       };
       media: string | Media;
       id?: string;
+    }[];
+  };
+  solutionsSummary: {
+    title: {
+      [k: string]: unknown;
     }[];
   };
   slug: string;
@@ -85,7 +91,7 @@ export interface Page {
             [k: string]: unknown;
           }[];
         };
-        content?: {
+        content: {
           alignment: 'contentOnLeft' | 'contentOnRight';
           content: {
             [k: string]: unknown;
@@ -104,7 +110,7 @@ export interface Page {
       }
     | {
         backgroundColor?: 'white' | 'gray';
-        columns?: {
+        columns: {
           width: 'oneThird' | 'half' | 'twoThirds' | 'full';
           alignment: 'left' | 'center' | 'right';
           content: {
@@ -148,8 +154,9 @@ export interface Page {
             [k: string]: unknown;
           }[];
         };
+        orientation: 'horizontal' | 'vertical';
         alignment: 'left' | 'center' | 'right';
-        tabs?: {
+        tabs: {
           title: string;
           layout?: (
             | {
@@ -161,7 +168,7 @@ export interface Page {
                     [k: string]: unknown;
                   }[];
                 };
-                content?: {
+                content: {
                   alignment: 'contentOnLeft' | 'contentOnRight';
                   content: {
                     [k: string]: unknown;
@@ -180,7 +187,7 @@ export interface Page {
               }
             | {
                 backgroundColor?: 'white' | 'gray';
-                columns?: {
+                columns: {
                   width: 'oneThird' | 'half' | 'twoThirds' | 'full';
                   alignment: 'left' | 'center' | 'right';
                   content: {
@@ -219,7 +226,7 @@ export interface Page {
             [k: string]: unknown;
           }[];
         };
-        smallCards?: {
+        smallCards: {
           title: string;
           content?: {
             [k: string]: unknown;
@@ -233,12 +240,12 @@ export interface Page {
       }
     | {
         backgroundColor?: 'white' | 'gray';
-        cards?: {
+        cards: {
           header: string;
           publishDate: string;
           category: string | Category;
           media: string | Media;
-          internalLink?: {
+          internalLink: {
             label: string;
             page: string | Page;
           };
@@ -286,11 +293,11 @@ export interface Category {
 export interface Menu {
   id: string;
   label: string;
-  group?: {
+  group: {
     type: 'multiple' | 'single';
     menuGroups: {
       label: string;
-      subMenus?: {
+      subMenus: {
         label: string;
         page: string | Page;
         id?: string;
@@ -316,7 +323,7 @@ export interface User {
 export interface Redirect {
   id: string;
   from: string;
-  to?: {
+  to: {
     type?: 'reference' | 'custom';
     reference: {
       value: string | Page;
@@ -329,7 +336,7 @@ export interface Redirect {
 }
 export interface Script {
   id: string;
-  scripts?: {
+  scripts: {
     title: string;
     script: string;
     id?: string;
@@ -338,11 +345,11 @@ export interface Script {
 export interface ContactUs {
   id: string;
   stickyButtonLabel: string;
-  form?: {
+  form: {
     title: string;
     description: string;
-    inputs?: {
-      inputGroup?: {
+    inputs: {
+      inputGroup: {
         type: 'text' | 'textarea' | 'tel' | 'email';
         placeholder: string;
       };
@@ -350,4 +357,12 @@ export interface ContactUs {
     }[];
     sendButtonLabel: string;
   };
+}
+export interface SocialMedia {
+  id: string;
+  facebook?: string;
+  linkedIn?: string;
+  youtube?: string;
+  instagram?: string;
+  twitter?: string;
 }
