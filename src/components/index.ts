@@ -10,7 +10,7 @@ export * from './Head';
 export * from './Header';
 export * from './Media';
 export * from './MediaContent';
-export * from './MediaSlider';
+export * from './HomeHeroSlider';
 export * from './MediaViewer';
 export * from './NotFound';
 export * from './RenderBlocks';

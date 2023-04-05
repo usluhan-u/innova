@@ -43,14 +43,7 @@ export default buildConfig({
     }),
     seo({
       globals: [],
-      collections: [
-        Menu.slug,
-        Media.slug,
-        User.slug,
-        Category.slug,
-        Page.slug,
-        Home.slug
-      ],
+      collections: [Page.slug, Home.slug],
       generateTitle: ({ doc }: { doc: any }) => `İnnova — ${doc.title.value}`,
       generateDescription: ({ doc }: { doc: any }) => doc.excerpt
     }),

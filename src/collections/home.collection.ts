@@ -1,26 +1,22 @@
 import { CollectionConfig } from 'payload/types';
-import { CallToAction, Meta, MetaType, Slides, Slug } from '../fields';
+import { CallToAction, Meta, MetaType, Slug } from '../fields';
+import { CallToActionType, MediaTypeMediaType } from '../blocks';
+import { RichTextNode } from '../components';
 
-interface HomeHero {}
+export interface HomeHeroSliderSlideType {
+  title?: RichTextNode[];
+  content?: RichTextNode[];
+  callToAction?: CallToActionType;
+  media: MediaTypeMediaType;
+}
 
-interface HomeProduct {}
-
-interface HomeSolution {}
-
-interface HomeService {}
-
-interface HomeBlog {}
-
-interface HomeSuccessStory {}
+export interface HomeHeroType {
+  slides: HomeHeroSliderSlideType[];
+}
 
 export interface HomeType {
   title: string;
-  hero: HomeHero;
-  product: HomeHero;
-  solution: HomeHero;
-  service: HomeHero;
-  blog: HomeHero;
-  successStory: HomeHero;
+  hero: HomeHeroType;
   slug: string;
   meta: MetaType;
 }
@@ -33,91 +29,47 @@ export const Home: CollectionConfig = {
   fields: [
     {
       name: 'title',
-      label: 'Title',
+      label: 'Page Title',
       type: 'text',
       required: true,
-      defaultValue: 'Home',
-      admin: {
-        readOnly: true
-      }
+      localized: true
     },
     {
       name: 'hero',
       label: 'Hero',
       type: 'group',
-      fields: [Slides]
-    },
-    {
-      name: 'product',
-      label: 'Product',
-      type: 'group',
       fields: [
         {
-          name: 'title',
-          label: 'Title',
-          type: 'text',
-          required: true
-        },
-        Slides
-      ]
-    },
-    {
-      name: 'solution',
-      label: 'Solution',
-      type: 'group',
-      fields: [
-        {
-          name: 'title',
-          label: 'Title',
-          type: 'text',
-          required: true
-        },
-        {
-          name: 'description',
-          label: 'Description',
-          type: 'richText',
-          required: true
+          name: 'slides',
+          type: 'array',
+          minRows: 2,
+          required: true,
+          labels: {
+            singular: 'Slide',
+            plural: 'Slides'
+          },
+          fields: [
+            {
+              name: 'title',
+              type: 'richText',
+              localized: true
+            },
+            {
+              name: 'content',
+              type: 'richText',
+              localized: true
+            },
+            CallToAction,
+            {
+              name: 'media',
+              type: 'upload',
+              relationTo: 'medias',
+              required: true,
+              localized: true
+            }
+          ]
         }
       ]
-    },
-    {
-      name: 'service',
-      label: 'Service',
-      type: 'group',
-      fields: [
-        {
-          name: 'title',
-          label: 'Title',
-          type: 'text',
-          required: true
-        },
-        {
-          name: 'description',
-          label: 'Description',
-          type: 'richText',
-          required: true
-        }
-        // Cards
-      ]
-    },
-    {
-      name: 'blog',
-      label: 'Blog',
-      type: 'group',
-      fields: [
-        {
-          name: 'title',
-          label: 'Title',
-          type: 'text',
-          required: true
-        }
-      ]
-    },
-    {
-      name: 'successStory',
-      label: 'Success Story',
-      type: 'group',
-      fields: [CallToAction]
     },
     Slug,
     Meta

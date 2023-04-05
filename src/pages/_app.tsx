@@ -10,8 +10,8 @@ import { ContactUsType, ScriptType } from '../globals';
 import { MenuType } from '../collections';
 
 interface MyAppProps extends AppProps {
-  menuList: MenuType[];
-  externalScripts: string[];
+  menuList?: MenuType[];
+  externalScripts?: string[];
   contactUs: ContactUsType;
 }
 
@@ -27,11 +27,11 @@ const MyApp = ({
   return (
     <ChakraProvider theme={theme}>
       <Helmet>
-        {externalScripts.map((script) => (
+        {externalScripts?.map((script) => (
           <script key={uuidv4()} dangerouslySetInnerHTML={{ __html: script }} />
         ))}
       </Helmet>
-      <Header menuList={menuList} />
+      {menuList && <Header menuList={menuList} />}
       <Component {...pageProps} />
       {isLargerThanMd && Object.keys(contactUs?.form).length && (
         <ContactUs {...contactUs} />

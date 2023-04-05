@@ -18,11 +18,12 @@ export const ExternalLink = ({ href, newTab, children }: ExternalLinkProps) => (
     textDecoration="none"
     target={newTab ? '_blank' : '_self'}
     rel="noopener noreferrer"
-    _hover={{ textDecoration: 'none' }}
     transitionProperty="all"
     transitionDuration="100ms"
     transitionTimingFunction="ease-in-out"
-    className="transition-all duration-100 ease-in-out hover:tracking-[0.15em]"
+    transition="all 100ms ease-in-out"
+    _hover={{ textDecoration: 'none', transform: 'translateX(0.15em)' }}
+    // className="transition-all duration-100 ease-in-out hover:tracking-[0.15em]"
   >
     {children} <ArrowForwardIcon />
   </Link>

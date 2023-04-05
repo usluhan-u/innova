@@ -2,7 +2,7 @@ export type Alignment = 'left' | 'center' | 'right';
 export type BlockType =
   | 'mediaContent'
   | 'content'
-  | 'mediaSlider'
+  | 'homeHeroSlider'
   | 'media'
   | 'callToAction'
   | 'tabs'

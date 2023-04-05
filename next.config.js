@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 require('dotenv').config();
 
 /**
@@ -12,20 +13,22 @@ const nextConfig = {
     domains: ['localhost']
   },
   async exportPathMap(defaultPathMap) {
-    return {
+    const paths = {
       '/': { page: '/home' }
     };
-  },
 
-  // async redirects() {
-  //   return [
-  //     {
-  //       source: '/home',
-  //       destination: '/',
-  //       permanent: true
-  //     }
-  //   ];
-  // },
+    const locales = ['en', 'tr'];
+
+    locales.forEach((locale) => {
+      paths[`/${locale}`] = { page: '/home' };
+      paths[`/${locale}`].query = {
+        __nextLocale: locale,
+        __nextDefaultLocale: 'tr'
+      };
+    });
+
+    return paths;
+  },
   i18n: {
     locales: ['en', 'tr'],
     defaultLocale: 'tr',

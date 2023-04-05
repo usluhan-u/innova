@@ -6,7 +6,7 @@ import { PageLayout } from '../collections';
 import { Content } from './Content';
 import { Media } from './Media';
 import { MediaContent } from './MediaContent';
-import { MediaSlider } from './MediaSlider';
+import { HomeHeroSlider } from './HomeHeroSlider';
 import { CallToAction } from './CallToAction';
 import { BackgroundColorType } from '../fields';
 import { Template } from './Template';
@@ -24,7 +24,7 @@ const components: Record<BlockType, React.FC<any>> = {
   content: Content,
   media: Media,
   mediaContent: MediaContent,
-  mediaSlider: MediaSlider,
+  homeHeroSlider: HomeHeroSlider,
   callToAction: CallToAction,
   tabs: Tabs,
   smallCards: SmallCards,

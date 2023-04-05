@@ -13,6 +13,7 @@ export interface Config {
     medias: Media;
     categories: Category;
     users: User;
+    redirects: Redirect;
   };
   globals: {
     scripts: Script;
@@ -23,8 +24,11 @@ export interface Home {
   id: string;
   title: string;
   hero?: {
-    slides?: {
-      content: {
+    slides: {
+      title?: {
+        [k: string]: unknown;
+      }[];
+      content?: {
         [k: string]: unknown;
       }[];
       callToAction?: {
@@ -37,54 +41,11 @@ export interface Home {
       media: string | Media;
       id?: string;
     }[];
-  };
-  product?: {
-    title: string;
-    slides?: {
-      content: {
-        [k: string]: unknown;
-      }[];
-      callToAction?: {
-        label: string;
-        type: 'internal' | 'external';
-        internal: string | Page;
-        url: string;
-        newTab?: boolean;
-      };
-      media: string | Media;
-      id?: string;
-    }[];
-  };
-  solution?: {
-    title: string;
-    description: {
-      [k: string]: unknown;
-    }[];
-  };
-  service?: {
-    title: string;
-    description: {
-      [k: string]: unknown;
-    }[];
-  };
-  blog?: {
-    title: string;
-  };
-  successStory?: {
-    callToAction?: {
-      label: string;
-      type: 'internal' | 'external';
-      internal: string | Page;
-      url: string;
-      newTab?: boolean;
-    };
   };
   slug: string;
   meta?: {
     title?: string;
     description?: string;
-    keywords?: string;
-    noIndex?: boolean;
   };
   createdAt: string;
   updatedAt: string;
@@ -132,26 +93,6 @@ export interface Page {
         id?: string;
         blockName?: string;
         blockType: 'content';
-      }
-    | {
-        backgroundColor?: 'white' | 'gray';
-        slides: {
-          content: {
-            [k: string]: unknown;
-          }[];
-          callToAction?: {
-            label: string;
-            type: 'internal' | 'external';
-            internal: string | Page;
-            url: string;
-            newTab?: boolean;
-          };
-          media: string | Media;
-          id?: string;
-        }[];
-        id?: string;
-        blockName?: string;
-        blockType: 'mediaSlider';
       }
     | {
         backgroundColor?: 'white' | 'gray';
@@ -298,8 +239,6 @@ export interface Page {
   meta?: {
     title?: string;
     description?: string;
-    keywords?: string;
-    noIndex?: boolean;
   };
   createdAt: string;
   updatedAt: string;
@@ -351,6 +290,20 @@ export interface User {
   createdAt: string;
   updatedAt: string;
   password?: string;
+}
+export interface Redirect {
+  id: string;
+  from: string;
+  to?: {
+    type?: 'reference' | 'custom';
+    reference: {
+      value: string | Page;
+      relationTo: 'pages';
+    };
+    url: string;
+  };
+  createdAt: string;
+  updatedAt: string;
 }
 export interface Script {
   id: string;

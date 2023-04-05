@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next';
 import payload from 'payload';
 import { HomeType } from '../collections';
-import { NotFound } from '../components';
+import { Head, HomeHeroSlider, NotFound } from '../components';
 
 export interface HomeProps {
   page: HomeType;
@@ -14,13 +14,13 @@ const Home = ({ page }: HomeProps) => {
 
   return (
     <>
-      {/* <Head
+      <Head
         title={page.meta?.title || page.title}
         description={page.meta?.description}
         keywords={page.meta?.keywords}
         noIndex={page.meta?.noIndex}
       />
-      <RenderBlocks layout={page.layout} /> */}
+      <HomeHeroSlider slides={page.hero.slides} />
     </>
   );
 };

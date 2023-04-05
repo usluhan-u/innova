@@ -1,5 +1,5 @@
 import { AspectRatio, ChakraProps } from '@chakra-ui/react';
-import Image from 'next/image';
+import { Image } from '@chakra-ui/next-js';
 import { RichText, RichTextNode } from './RichText';
 import { MediaTypeMediaType } from '../blocks';
 
@@ -25,7 +25,7 @@ export const MediaViewer = ({ caption, media, size }: MediaViewerProps) => (
             fill
             sizes="100%"
             priority={false}
-            className="rounded-xl"
+            sx={{ borderRadius: 'xl' }}
           />
           {caption && <RichText content={caption} textAlign="center" />}
         </>

@@ -3,12 +3,13 @@ import 'slick-carousel/slick/slick-theme.css';
 import React from 'react';
 import ReactSlick, { Settings } from 'react-slick';
 import { v4 as uuidv4 } from 'uuid';
+import { chakra } from '@chakra-ui/react';
 
 export interface SliderProps extends Settings {
   slides: React.ReactNode[];
 }
 
-export const Slider = ({ appendDots, slides }: SliderProps) => {
+export const Slider = ({ slides }: SliderProps) => {
   const settings: Settings = {
     dots: true,
     infinite: true,
@@ -24,7 +25,9 @@ export const Slider = ({ appendDots, slides }: SliderProps) => {
   return (
     <ReactSlick {...settings}>
       {slides.map((slide) => (
-        <div key={uuidv4()}>{slide}</div>
+        <chakra.div key={uuidv4()} pos="relative" _focus={{ outline: 'none' }}>
+          {slide}
+        </chakra.div>
       ))}
     </ReactSlick>
   );

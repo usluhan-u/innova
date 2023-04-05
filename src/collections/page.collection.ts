@@ -4,12 +4,10 @@ import {
   Content,
   Media,
   MediaContent,
-  MediaSlider,
   CallToActionType,
   ContentType,
   MediaContentType,
   MediaType,
-  MediaSliderType,
   Tabs,
   TabsType,
   SmallCardsType,
@@ -23,7 +21,6 @@ import { generateFullTitle } from '../utils';
 export type PageLayout =
   | MediaContentType
   | ContentType
-  | MediaSliderType
   | MediaType
   | CallToActionType
   | TabsType
@@ -62,7 +59,6 @@ export const Page: CollectionConfig = {
       blocks: [
         MediaContent,
         Content,
-        MediaSlider,
         Media,
         CallToAction,
         Tabs,
