@@ -24,7 +24,8 @@ const Slide = ({ title, content, callToAction, media }: SlideProps) => (
       bottom={{ base: '20%', md: '55%' }}
       left={{ base: '5%', md: '7%' }}
       textAlign="left"
-      w="full"
+      w={{ base: 'sm', md: 'xl' }}
+      color="white"
     >
       {title && <RichText content={title} />}
       {content && <RichText content={content} />}

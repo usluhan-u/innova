@@ -17,7 +17,7 @@ import { RenderBlocks } from './RenderBlocks';
 
 export interface TabsProps extends TabsType {}
 
-export const Tabs = ({ header, tabs, alignment }: TabsProps) => {
+export const Tabs = ({ header, tabs, alignment, orientation }: TabsProps) => {
   const [isLargerThanMd] = useMediaQuery('(min-width: 768px)');
   const [value, setValue] = React.useState(0);
 
@@ -39,7 +39,7 @@ export const Tabs = ({ header, tabs, alignment }: TabsProps) => {
       {header && <RichText content={header.content} />}
       {header?.description && <RichText content={header.description} />}
       {isLargerThanMd ? (
-        <ChakraTabs align={getAlignment(alignment)}>
+        <ChakraTabs align={getAlignment(alignment)} orientation={orientation}>
           <ChakraTablist
             maxW={alignment === 'center' ? 'fit-content' : 'initial'}
           >

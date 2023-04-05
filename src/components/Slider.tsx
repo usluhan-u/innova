@@ -9,7 +9,7 @@ export interface SliderProps extends Settings {
   slides: React.ReactNode[];
 }
 
-export const Slider = ({ slides }: SliderProps) => {
+export const Slider = ({ slides, ...rest }: SliderProps) => {
   const settings: Settings = {
     dots: true,
     infinite: true,
@@ -19,7 +19,8 @@ export const Slider = ({ slides }: SliderProps) => {
     arrows: false,
     autoplaySpeed: 3000,
     fade: true,
-    speed: 3000
+    speed: 3000,
+    ...rest
   };
 
   return (

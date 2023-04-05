@@ -11,6 +11,7 @@ export * from './Header';
 export * from './Media';
 export * from './MediaContent';
 export * from './HomeHeroSlider';
+export * from './HomeProductsSummarySlider';
 export * from './MediaViewer';
 export * from './NotFound';
 export * from './RenderBlocks';

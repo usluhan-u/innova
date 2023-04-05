@@ -42,6 +42,28 @@ export interface Home {
       id?: string;
     }[];
   };
+  productsSummary?: {
+    title: {
+      [k: string]: unknown;
+    }[];
+    slides: {
+      title?: {
+        [k: string]: unknown;
+      }[];
+      content?: {
+        [k: string]: unknown;
+      }[];
+      callToAction?: {
+        label: string;
+        type: 'internal' | 'external';
+        internal: string | Page;
+        url: string;
+        newTab?: boolean;
+      };
+      media: string | Media;
+      id?: string;
+    }[];
+  };
   slug: string;
   meta?: {
     title?: string;
@@ -107,7 +129,7 @@ export interface Page {
       }
     | {
         label: string;
-        type: 'page' | 'custom';
+        type: 'internal' | 'external';
         page: string | Page;
         url: string;
         newTab?: boolean;

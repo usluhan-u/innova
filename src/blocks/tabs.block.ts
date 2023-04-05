@@ -19,6 +19,7 @@ export interface TabsType {
     content: RichTextNode[];
     description?: RichTextNode[];
   };
+  orientation: 'horizontal' | 'vertical';
   alignment: 'left' | 'center' | 'right';
   tabs: TabsTabsType[];
 }
@@ -58,6 +59,23 @@ export const Tabs: Block = {
       ]
     },
     {
+      name: 'orientation',
+      label: 'Orientation',
+      type: 'radio',
+      defaultValue: 'horizontal',
+      required: true,
+      options: [
+        {
+          label: 'Horizontal',
+          value: 'horizontal'
+        },
+        {
+          label: 'Vertical',
+          value: 'vertical'
+        }
+      ]
+    },
+    {
       name: 'alignment',
       label: 'Tab Alignment',
       type: 'radio',
@@ -78,7 +96,8 @@ export const Tabs: Block = {
         }
       ],
       admin: {
-        width: '50%'
+        width: '50%',
+        condition: (_, siblingData) => siblingData.orientation === 'horizontal'
       }
     },
     {

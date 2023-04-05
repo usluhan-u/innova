@@ -14,9 +14,14 @@ export interface HomeHeroType {
   slides: HomeHeroSliderSlideType[];
 }
 
+export interface HomeProductsSummaryType extends HomeHeroType {
+  title: RichTextNode[];
+}
+
 export interface HomeType {
   title: string;
   hero: HomeHeroType;
+  productsSummary: HomeProductsSummaryType;
   slug: string;
   meta: MetaType;
 }
@@ -51,11 +56,13 @@ export const Home: CollectionConfig = {
           fields: [
             {
               name: 'title',
+              label: 'Title',
               type: 'richText',
               localized: true
             },
             {
               name: 'content',
+              label: 'Content',
               type: 'richText',
               localized: true
             },
@@ -68,6 +75,67 @@ export const Home: CollectionConfig = {
               localized: true
             }
           ]
+        }
+      ]
+    },
+    {
+      name: 'productsSummary',
+      label: 'Products Summary',
+      type: 'group',
+      fields: [
+        {
+          name: 'title',
+          label: 'Title',
+          type: 'richText',
+          required: true,
+          localized: true
+        },
+        {
+          name: 'slides',
+          type: 'array',
+          minRows: 3,
+          required: true,
+          labels: {
+            singular: 'Slide',
+            plural: 'Slides'
+          },
+          fields: [
+            {
+              name: 'title',
+              label: 'Title',
+              type: 'richText',
+              localized: true
+            },
+            {
+              name: 'content',
+              label: 'Content',
+              type: 'richText',
+              localized: true
+            },
+            CallToAction,
+            {
+              name: 'media',
+              label: 'Media',
+              type: 'upload',
+              relationTo: 'medias',
+              required: true,
+              localized: true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: 'solutionsSummary',
+      label: 'Solutions Summary',
+      type: 'group',
+      fields: [
+        {
+          name: 'title',
+          label: 'Title',
+          type: 'richText',
+          required: true,
+          localized: true
         }
       ]
     },
