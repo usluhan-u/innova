@@ -1,4 +1,4 @@
-import { Box, Container, Flex } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 import { Slider } from './Slider';
 import { CallToAction } from './CallToAction';
@@ -17,11 +17,19 @@ interface SliderWrapperProps {
 const Slide = ({ title, content, callToAction, media }: SlideProps) => (
   <Box pos="relative">
     <MediaViewer media={media} size={{ w: 'full', h: 'full' }} />
-    <Container gap={4} border="2px solid blue">
+    <Flex
+      flexDirection="column"
+      gap={4}
+      pos="absolute"
+      bottom={{ base: '20%', md: '55%' }}
+      left={{ base: '5%', md: '7%' }}
+      textAlign="left"
+      w="full"
+    >
       {title && <RichText content={title} />}
       {content && <RichText content={content} />}
       {callToAction && <CallToAction {...callToAction} />}
-    </Container>
+    </Flex>
   </Box>
 );
 

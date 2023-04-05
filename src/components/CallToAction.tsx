@@ -15,12 +15,12 @@ export const CallToAction = ({
   label
 }: CallToActionProps) => (
   <>
-    {type === 'page' && (
+    {type === 'internal' && (
       <InternalLink href="[...slug]">
         <Button colorScheme={backgroundColor}>{label}</Button>
       </InternalLink>
     )}
-    {type === 'custom' && url && (
+    {type === 'external' && url && (
       <ExternalLink href={url} newTab={newTab}>
         <Button colorScheme={backgroundColor}>{label}</Button>
       </ExternalLink>

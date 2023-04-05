@@ -1,6 +1,6 @@
 import { Block } from 'payload/types';
 
-export type CallToActionButtonType = 'page' | 'custom';
+export type CallToActionButtonType = 'internal' | 'external';
 
 export interface CallToActionType {
   blockType: 'callToAction';
@@ -14,7 +14,7 @@ export interface CallToActionType {
 const customCondition = (
   _: Partial<CallToActionType>,
   siblingData: Partial<CallToActionType>
-) => siblingData.type === 'custom';
+) => siblingData.type === 'external';
 
 export const CallToAction: Block = {
   slug: 'callToAction',
@@ -44,12 +44,12 @@ export const CallToAction: Block = {
           required: true,
           options: [
             {
-              label: 'Page',
-              value: 'page'
+              label: 'Internal Page',
+              value: 'internal'
             },
             {
-              label: 'Custom URL',
-              value: 'custom'
+              label: 'External Link',
+              value: 'external'
             }
           ],
           admin: {
@@ -66,7 +66,7 @@ export const CallToAction: Block = {
       relationTo: 'pages',
       required: true,
       admin: {
-        condition: (_, siblingData) => siblingData.type === 'page'
+        condition: (_, siblingData) => siblingData.type === 'internal'
       }
     },
     {
