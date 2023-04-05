@@ -49,8 +49,16 @@ export const Footer = ({ socialMedia, footer }: FooterProps) => {
     <Template backgroundColor="background.footer">
       <Flex flexDirection="column" pt="2rem" pb="4rem" w="full">
         {footer && (
-          <Flex color="white" justifyContent="space-between">
-            <Flex gap={16}>
+          <Flex
+            color="white"
+            flexDirection={{ base: 'column', md: 'row' }}
+            justifyContent={{ base: 'normal', md: 'space-between' }}
+            gap={{ base: 8, md: 0 }}
+          >
+            <Flex
+              gap={{ base: 6, md: 16 }}
+              justifyContent={{ base: 'space-between', md: 'normal' }}
+            >
               {footer.linkGroups?.map((linkGroup) => (
                 <Flex key={uuidv4()} flexDirection="column" gap={4}>
                   {linkGroup.links.map((link) =>
