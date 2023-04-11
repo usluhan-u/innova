@@ -12,23 +12,6 @@ const nextConfig = {
   images: {
     domains: ['localhost']
   },
-  async exportPathMap(defaultPathMap) {
-    const paths = {
-      '/': { page: '/home' }
-    };
-
-    const locales = ['en', 'tr'];
-
-    locales.forEach((locale) => {
-      paths[`/${locale}`] = { page: '/home' };
-      paths[`/${locale}`].query = {
-        __nextLocale: locale,
-        __nextDefaultLocale: 'tr'
-      };
-    });
-
-    return paths;
-  },
   i18n: {
     locales: ['en', 'tr'],
     defaultLocale: 'tr',

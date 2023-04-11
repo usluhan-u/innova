@@ -1,29 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import payload from 'payload';
-import { Head, NotFound, RenderBlocks } from '../components';
-import { PageType } from '../collections';
 
-export interface PageProps {
-  page?: PageType;
-}
-
-const Page = ({ page }: PageProps) => {
-  if (!page) {
-    return <NotFound />;
-  }
-
-  return (
-    <>
-      <Head
-        title={page.meta?.title || page.title}
-        description={page.meta?.description}
-        keywords={page.meta?.keywords}
-        noIndex={page.meta?.noIndex}
-      />
-      <RenderBlocks layout={page.layout} />
-    </>
-  );
-};
+const Page = () => <p>Page</p>;
 
 export default Page;
 
@@ -65,7 +43,8 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   );
   const pageData = await pageRequest.json();
 
-  const paths = (pageData.docs as PageType[]).map(({ slug }) => ({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const paths = (pageData.docs as any[]).map(({ slug }) => ({
     params: { slug: slug.split('/') }
   }));
 
