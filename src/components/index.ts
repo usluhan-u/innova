@@ -10,3 +10,5 @@ export * from './CallToAction';
 export * from './TextIconCallToAction';
 export * from './LanguageSelector';
 export * from './SearchBox';
+export * from './Head';
+export * from './ButtonCallToAction';

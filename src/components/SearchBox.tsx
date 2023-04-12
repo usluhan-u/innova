@@ -26,7 +26,7 @@ export const SearchBox = () => {
 
   return (
     <InstantSearch indexName="" searchClient={meiliSearchClient}>
-      <InputGroup w={expanded ? 'full' : 'fit-content'} border="1px solid red">
+      <InputGroup w={expanded ? 'full' : 'fit-content'}>
         {expanded && (
           <>
             <InputLeftElement pos="relative">

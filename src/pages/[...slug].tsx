@@ -1,7 +1,29 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import payload from 'payload';
+import { PageType } from '../collections';
+import { NotFound } from './NotFound';
+import { Head } from '../components';
+import { NotFoundType } from '../globals';
 
-const Page = () => <p>Page</p>;
+export interface PageProps {
+  page?: PageType;
+  notFound?: NotFoundType;
+}
+
+const Page = ({ page, notFound }: PageProps) => {
+  if (!page) {
+    return <NotFound {...notFound} />;
+  }
+
+  return (
+    <Head
+      title={page.meta?.title || page.title}
+      description={page.meta?.description}
+      keywords={page.meta?.keywords}
+      noIndex={page.meta?.noIndex}
+    />
+  );
+};
 
 export default Page;
 
@@ -23,6 +45,12 @@ export const getStaticProps: GetStaticProps = async ({
     }
   });
 
+  const notFoundQuery = await payload.findGlobal({
+    slug: 'not-found',
+    locale,
+    fallbackLocale: defaultLocale
+  });
+
   if (pageQuery.docs[0]) {
     return {
       props: {
@@ -33,7 +61,9 @@ export const getStaticProps: GetStaticProps = async ({
   }
 
   return {
-    props: {}
+    props: {
+      notFound: notFoundQuery
+    }
   };
 };
 
@@ -43,8 +73,7 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   );
   const pageData = await pageRequest.json();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const paths = (pageData.docs as any[]).map(({ slug }) => ({
+  const paths = (pageData.docs as PageType[]).map(({ slug }) => ({
     params: { slug: slug.split('/') }
   }));
 

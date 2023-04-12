@@ -21,7 +21,7 @@ export const Header = ({ menu }: HeaderProps) => {
       <InternalLink href={asPath}>
         <Logo />
       </InternalLink>
-      <Flex align="center" boxSize="full" border="1px solid blue">
+      <Flex align="center" boxSize="full">
         <Flex align="center" justify="space-between" boxSize="full" gap={4}>
           <Flex align="center" boxSize="full">
             <Menu menu={menu} />

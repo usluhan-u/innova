@@ -5,7 +5,7 @@ import '@fontsource/inter/700.css';
 import '../styles/globals.css';
 import type { AppContext, AppProps } from 'next/app';
 import App from 'next/app';
-import { ChakraProvider, chakra } from '@chakra-ui/react';
+import { ChakraProvider, Flex } from '@chakra-ui/react';
 import { theme } from '../theme';
 import { FooterType, MenuType, SocialMediaType } from '../globals';
 import { Footer, Header } from '../components';
@@ -24,11 +24,11 @@ const MyApp = ({
   menu
 }: MyAppProps) => (
   <ChakraProvider theme={theme}>
-    <chakra.div minH="100vh" display="flex" flexDir="column">
+    <Flex minH="100vh" flexDir="column">
       <Header menu={menu} />
       <Component {...pageProps} />
-      <Footer socialMedia={socialMedia} footer={footer} marginTop="auto" />
-    </chakra.div>
+      <Footer socialMedia={socialMedia} footer={footer} />
+    </Flex>
   </ChakraProvider>
 );
 
