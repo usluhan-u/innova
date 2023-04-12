@@ -24,7 +24,6 @@
   },
   "overrides": [],
   "plugins": ["react", "@typescript-eslint", "unused-imports"],
-  "ignorePatterns": ["src/payload-types.ts"],
   "rules": {
     "no-undef": "off",
     "no-unused-vars": "off",

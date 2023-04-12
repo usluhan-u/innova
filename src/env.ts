@@ -7,6 +7,7 @@ if (result.error) {
 }
 
 export const env = {
+  nodeEnv: process.env.NODE_ENV || 'development',
   db: process.env.MONGODB_URI || '',
   payloadSecretKey: process.env.PAYLOAD_SECRET_KEY || '',
   port: parseInt(process.env.PORT || '3000', 10),
