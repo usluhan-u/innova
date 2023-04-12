@@ -3,7 +3,7 @@ import { buildConfig } from 'payload/config';
 import dotenv from 'dotenv';
 import redirects from '@payloadcms/plugin-redirects';
 import { Page, User } from './collections';
-import { Footer, SocialMedia } from './globals';
+import { Footer, Menu, SocialMedia } from './globals';
 
 dotenv.config();
 
@@ -13,7 +13,7 @@ export default buildConfig({
   graphQL: {
     disable: true
   },
-  globals: [SocialMedia, Footer],
+  globals: [SocialMedia, Footer, Menu],
   collections: [User, Page],
   localization: {
     locales: ['en', 'tr'],
