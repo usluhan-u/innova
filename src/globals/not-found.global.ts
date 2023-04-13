@@ -28,6 +28,6 @@ export const NotFound: GlobalConfig = {
       required: true,
       localized: true
     },
-    CallToAction
+    CallToAction()
   ]
 };

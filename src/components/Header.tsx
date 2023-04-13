@@ -5,7 +5,6 @@ import { Menu } from './Menu';
 import { InternalLink } from './InternalLink';
 import { Logo } from '../icons';
 import { LanguageSelector } from './LanguageSelector';
-import { SearchBox } from './SearchBox';
 
 export interface HeaderProps {
   menu: MenuType;
@@ -25,7 +24,7 @@ export const Header = ({ menu }: HeaderProps) => {
         <Flex align="center" justify="space-between" boxSize="full" gap={4}>
           <Flex align="center" boxSize="full">
             <Menu menu={menu} />
-            <SearchBox />
+            {/* <SearchBox /> */}
           </Flex>
           <LanguageSelector
             activeLocale={activeLocale}

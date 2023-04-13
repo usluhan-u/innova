@@ -3,9 +3,10 @@ import { IconType } from 'react-icons';
 import { CallToAction, CallToActionProps } from './CallToAction';
 
 export interface TextIconCallToActionProps
-  extends CallToActionProps,
+  extends Omit<CallToActionProps, 'children'>,
     Pick<ChakraProps, 'color'> {
   icon: IconType;
+  label: string;
 }
 
 export const TextIconCallToAction = ({
@@ -26,7 +27,9 @@ export const TextIconCallToAction = ({
     // transition="all 100ms ease-in-out"
     // _hover={{ textDecoration: 'none', transform: 'translateX(0.15em)' }}
   >
-    <CallToAction label={label} type={type} page={page} url={url} />
+    <CallToAction type={type} page={page} url={url}>
+      {label}
+    </CallToAction>
     <Icon as={icon} />
   </Flex>
 );

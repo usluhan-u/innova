@@ -90,7 +90,7 @@ export const Menu: GlobalConfig = {
               },
               type: 'array',
               minRows: 1,
-              fields: [CallToAction]
+              fields: [CallToAction()]
             }
           ],
           admin: {
@@ -169,7 +169,7 @@ export const Menu: GlobalConfig = {
           name: 'menuItem',
           label: 'Menu Item',
           type: 'group',
-          fields: [CallToAction],
+          fields: [CallToAction()],
           admin: {
             condition: (_, siblingData) => siblingData?.type === 'single'
           }

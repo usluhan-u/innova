@@ -41,7 +41,7 @@ export const Footer: GlobalConfig = {
           type: 'array',
           minRows: 1,
           fields: [
-            CallToAction,
+            CallToAction(),
             {
               name: 'bold',
               label: 'Bold',

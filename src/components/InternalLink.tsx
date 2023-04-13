@@ -1,18 +1,12 @@
-import { Link } from '@chakra-ui/next-js';
-import escapeHTML from 'escape-html';
+import Link from 'next/link';
 
 export interface InternalLinkProps {
   children: React.ReactNode | React.ReactNode[];
-  href: string;
+  slug: string;
 }
 
-export const InternalLink = ({ href, children }: InternalLinkProps) => (
-  <Link
-    href={escapeHTML(href)}
-    scroll={false}
-    textDecoration="none"
-    _hover={{ textDecoration: 'none' }}
-  >
+export const InternalLink = ({ slug, children }: InternalLinkProps) => (
+  <Link href="[...slug]" as={`/${slug}`} scroll={false}>
     {children}
   </Link>
 );

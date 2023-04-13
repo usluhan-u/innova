@@ -24,11 +24,13 @@ const MyApp = ({
   menu
 }: MyAppProps) => (
   <ChakraProvider theme={theme}>
+    {/* <Container> */}
     <Flex minH="100vh" flexDir="column">
       <Header menu={menu} />
       <Component {...pageProps} />
       <Footer socialMedia={socialMedia} footer={footer} />
     </Flex>
+    {/* </Container> */}
   </ChakraProvider>
 );
 

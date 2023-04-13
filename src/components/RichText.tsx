@@ -3,6 +3,7 @@ import escapeHTML from 'escape-html';
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Text as SlateText } from 'slate';
+import { Heading, Text, chakra } from '@chakra-ui/react';
 
 export interface RichTextContentType {
   text: string;
@@ -31,30 +32,53 @@ const serialize = (
 
     if (SlateText.isText(node)) {
       let text = (
-        <span dangerouslySetInnerHTML={{ __html: escapeHTML(node.text) }} />
+        <Text
+          dangerouslySetInnerHTML={{ __html: escapeHTML(node.text) }}
+          as="span"
+        />
       );
 
       if (node.bold) {
-        text = <b key={uuidv4()}>{text}</b>;
+        text = (
+          <Text key={uuidv4()} as="b">
+            {text}
+          </Text>
+        );
       }
 
       if (node.code) {
-        text = <code key={uuidv4()}>{text}</code>;
+        text = (
+          <Text key={uuidv4()} as="code">
+            {text}
+          </Text>
+        );
       }
 
       if (node.italic) {
-        text = <i key={uuidv4()}>{text}</i>;
+        text = (
+          <Text key={uuidv4()} as="i">
+            {text}
+          </Text>
+        );
       }
 
       if (node.underline) {
-        text = <u key={uuidv4()}>{text}</u>;
+        text = (
+          <Text key={uuidv4()} as="u">
+            {text}
+          </Text>
+        );
       }
 
       if (node.strikethrough) {
-        text = <del key={uuidv4()}>{text}</del>;
+        text = (
+          <Text key={uuidv4()} as="s">
+            {text}
+          </Text>
+        );
       }
 
-      return <React.Fragment key={uuidv4()}>{text}</React.Fragment>;
+      return <Text key={uuidv4()}>{text}</Text>;
     }
 
     if (!(node as RichTextContentType).children) {
@@ -64,39 +88,39 @@ const serialize = (
     switch ((node as RichTextContentType).type) {
       case 'h1':
         return (
-          <h1 key={uuidv4()}>
+          <Heading key={uuidv4()} as="h1">
             {serialize((node as RichTextContentType).children!)}
-          </h1>
+          </Heading>
         );
       case 'h2':
         return (
-          <h2 key={uuidv4()}>
+          <Heading key={uuidv4()} as="h2">
             {serialize((node as RichTextContentType).children!)}
-          </h2>
+          </Heading>
         );
       case 'h3':
         return (
-          <h3 key={uuidv4()}>
+          <Heading key={uuidv4()} as="h3">
             {serialize((node as RichTextContentType).children!)}
-          </h3>
+          </Heading>
         );
       case 'h4':
         return (
-          <h4 key={uuidv4()}>
+          <Heading key={uuidv4()} as="h4">
             {serialize((node as RichTextContentType).children!)}
-          </h4>
+          </Heading>
         );
       case 'h5':
         return (
-          <h5 key={uuidv4()}>
+          <Heading key={uuidv4()} as="h5">
             {serialize((node as RichTextContentType).children!)}
-          </h5>
+          </Heading>
         );
       case 'h6':
         return (
-          <h6 key={uuidv4()}>
+          <Heading key={uuidv4()} as="h6">
             {serialize((node as RichTextContentType).children!)}
-          </h6>
+          </Heading>
         );
       case 'quote':
         return (
@@ -133,13 +157,26 @@ const serialize = (
         );
       default:
         return (
-          <p key={uuidv4()}>
+          <Text key={uuidv4()} as="span">
             {serialize((node as RichTextContentType).children!)}
-          </p>
+          </Text>
         );
     }
   });
 
 export const RichText = ({ content }: RichTextProps) => (
-  <div>{serialize(content)}</div>
+  <chakra.div
+    sx={{
+      '&': {
+        '& *': {
+          whiteSpace: 'pre-wrap'
+        },
+        '& a': {
+          color: 'text.blue'
+        }
+      }
+    }}
+  >
+    {serialize(content)}
+  </chakra.div>
 );

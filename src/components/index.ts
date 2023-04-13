@@ -12,3 +12,8 @@ export * from './LanguageSelector';
 export * from './SearchBox';
 export * from './Head';
 export * from './ButtonCallToAction';
+export * from './Container';
+export * from './RenderBlocks';
+export * from './BackgroundColorRadio';
+export * from './Content';
+export * from './Tabs';

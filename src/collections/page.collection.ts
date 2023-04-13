@@ -1,17 +1,28 @@
 import { CollectionConfig } from 'payload/types';
-import { Meta, MetaType, Slug } from '../fields';
+import { Breadcrumb } from '@payloadcms/plugin-nested-docs/dist/types';
+import { Hero, HeroType, Meta, MetaType, Slug } from '../fields';
 import { generateFullTitle } from '../utils';
+import { Content, ContentType, Tabs, TabsType } from '../blocks';
+
+export type PageLayout = ContentType | TabsType;
 
 export interface PageType {
   slug: string;
   title: string;
+  fullTitle: string;
+  hero: HeroType;
+  breadcrumbs: Breadcrumb[];
   meta: MetaType;
+  layout: PageLayout[];
 }
 
 export const Page: CollectionConfig = {
   slug: 'pages',
   access: {
     read: () => true
+  },
+  admin: {
+    useAsTitle: 'fullTitle'
   },
   fields: [
     {
@@ -20,6 +31,14 @@ export const Page: CollectionConfig = {
       type: 'text',
       required: true,
       localized: true
+    },
+    Hero,
+    {
+      name: 'layout',
+      label: 'Page Layout',
+      type: 'blocks',
+      minRows: 1,
+      blocks: [Content, Tabs]
     },
     {
       name: 'fullTitle',

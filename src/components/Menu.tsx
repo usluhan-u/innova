@@ -58,17 +58,18 @@ export const Menu = ({ menu }: MenuProps) => {
                         _active={{ bgColor: 'transparent' }}
                       >
                         <CallToAction
-                          label={subMenuItem.callToAction.label}
                           type={subMenuItem.callToAction.type}
                           page={subMenuItem.callToAction.page}
                           url={subMenuItem.callToAction.url}
-                        />
+                        >
+                          {subMenuItem.callToAction.label}
+                        </CallToAction>
                       </ChakraMenuItem>
                     ))}
                   </ChakraMenuGroup>
                 ))}
               </Flex>
-              {menuItem.navigateTo && (
+              {menuItem.enableNavigateTo && menuItem.navigateTo && (
                 <Flex flexDir="column" mt={4}>
                   <Divider borderBottomColor="black" mb={4} />
                   <TextIconCallToAction
@@ -90,11 +91,12 @@ export const Menu = ({ menu }: MenuProps) => {
     if (menuItem.type === 'single' && menuItem.menuItem) {
       return (
         <CallToAction
-          label={menuItem.menuItem.label}
           type={menuItem.menuItem.type}
           page={menuItem.menuItem.page}
           url={menuItem.menuItem.url}
-        />
+        >
+          {menuItem.menuItem.label}
+        </CallToAction>
       );
     }
 

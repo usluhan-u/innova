@@ -14,7 +14,7 @@ export const CallToAction = ({
 }: CallToActionProps) => (
   <>
     {type === 'page' && page && (
-      <InternalLink href={page}>{children}</InternalLink>
+      <InternalLink slug={page.slug}>{children}</InternalLink>
     )}
     {type === 'custom' && url && (
       <ExternalLink href={url}>{children}</ExternalLink>

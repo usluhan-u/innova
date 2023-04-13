@@ -2,7 +2,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import payload from 'payload';
 import { PageType } from '../collections';
 import { NotFound } from './NotFound';
-import { Head } from '../components';
+import { Head, RenderBlocks } from '../components';
 import { NotFoundType } from '../globals';
 
 export interface PageProps {
@@ -16,12 +16,15 @@ const Page = ({ page, notFound }: PageProps) => {
   }
 
   return (
-    <Head
-      title={page.meta?.title || page.title}
-      description={page.meta?.description}
-      keywords={page.meta?.keywords}
-      noIndex={page.meta?.noIndex}
-    />
+    <>
+      <Head
+        title={page.meta?.title || page.title}
+        description={page.meta?.description}
+        keywords={page.meta?.keywords}
+        noIndex={page.meta?.noIndex}
+      />
+      <RenderBlocks layout={page.layout} />
+    </>
   );
 };
 

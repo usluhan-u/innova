@@ -28,7 +28,7 @@ export const Footer = ({ socialMedia, footer }: FooterProps) => {
   const renderLink = (link: FooterLinkGroupLinkType) => {
     if (link.callToAction.page) {
       return (
-        <InternalLink href={link.callToAction.page}>
+        <InternalLink slug={link.callToAction.page.slug}>
           {link.callToAction.label}
         </InternalLink>
       );
