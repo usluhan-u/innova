@@ -14,9 +14,13 @@ export const theme = extendTheme({
     },
     text: {
       primary: '#002946',
-      secondary: '#7893A7',
+      secondary: {
+        100: '#7893A7',
+        200: '#8A9EAD'
+      },
       blue: '#005A9B',
-      light: '#FFFFFF'
+      light: '#FFFFFF',
+      gray: '#AAA9A9'
     }
   }
 });

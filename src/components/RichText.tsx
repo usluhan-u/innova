@@ -169,7 +169,7 @@ export const RichText = ({ content }: RichTextProps) => (
     sx={{
       '&': {
         '& *': {
-          whiteSpace: 'pre-wrap'
+          my: '16px'
         },
         '& a': {
           color: 'text.blue'

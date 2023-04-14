@@ -5,6 +5,7 @@ import { Menu } from './Menu';
 import { InternalLink } from './InternalLink';
 import { Logo } from '../icons';
 import { LanguageSelector } from './LanguageSelector';
+import { Container } from './Container';
 
 export interface HeaderProps {
   menu: MenuType;
@@ -16,23 +17,27 @@ export const Header = ({ menu }: HeaderProps) => {
   const availableLocales = locales?.filter((locale) => locale !== activeLocale);
 
   return (
-    <Flex align="center" h={16} gap={10}>
-      <InternalLink href={asPath}>
-        <Logo />
-      </InternalLink>
-      <Flex align="center" boxSize="full">
-        <Flex align="center" justify="space-between" boxSize="full" gap={4}>
+    <Flex h={16}>
+      <Container>
+        <Flex align="center" gap={10} boxSize="full">
+          <InternalLink slug={asPath}>
+            <Logo />
+          </InternalLink>
           <Flex align="center" boxSize="full">
-            <Menu menu={menu} />
-            {/* <SearchBox /> */}
+            <Flex align="center" justify="space-between" boxSize="full" gap={4}>
+              <Flex align="center" boxSize="full">
+                <Menu menu={menu} />
+                {/* <SearchBox /> */}
+              </Flex>
+              <LanguageSelector
+                activeLocale={activeLocale}
+                asPath={asPath}
+                availableLocales={availableLocales}
+              />
+            </Flex>
           </Flex>
-          <LanguageSelector
-            activeLocale={activeLocale}
-            asPath={asPath}
-            availableLocales={availableLocales}
-          />
         </Flex>
-      </Flex>
+      </Container>
     </Flex>
   );
 };

@@ -11,16 +11,19 @@ export type ContentColumnWidthType =
   | '100%';
 
 export type ContentColumnAlignType = 'flex-start' | 'center' | 'flex-end';
+export type ContentColumnTextAlignType = 'left' | 'center' | 'right';
 
 export interface ContentColumnType {
   width: ContentColumnWidthType;
   align: ContentColumnAlignType;
+  textAlign: ContentColumnTextAlignType;
   content: RichTextContentType[];
 }
 
 export interface ContentType {
   blockType: 'content';
   backgroundColor: BackgroundColorType;
+  width: ContentColumnWidthType;
   columns: ContentColumnType[];
 }
 
@@ -32,6 +35,43 @@ export const Content: Block = {
   },
   fields: [
     BackgroundColor,
+    {
+      name: 'width',
+      label: 'Content Width',
+      type: 'select',
+      defaultValue: '100%',
+      required: true,
+      localized: true,
+      options: [
+        {
+          label: 'Quarter',
+          value: '25%'
+        },
+        {
+          label: 'One Third',
+          value: '33.33%'
+        },
+        {
+          label: 'Half',
+          value: '50%'
+        },
+        {
+          label: 'Two Thirds',
+          value: '66.66%'
+        },
+        {
+          label: 'Three Quarters',
+          value: '75%'
+        },
+        {
+          label: 'Full',
+          value: '100%'
+        }
+      ],
+      admin: {
+        width: '50%'
+      }
+    },
     {
       name: 'columns',
       type: 'array',
@@ -100,6 +140,28 @@ export const Content: Block = {
                 {
                   label: 'Right',
                   value: 'flex-end'
+                }
+              ]
+            },
+            {
+              name: 'textAlign',
+              label: 'Text Align',
+              type: 'select',
+              defaultValue: 'left',
+              required: true,
+              localized: true,
+              options: [
+                {
+                  label: 'Left',
+                  value: 'left'
+                },
+                {
+                  label: 'Center',
+                  value: 'center'
+                },
+                {
+                  label: 'Right',
+                  value: 'right'
                 }
               ]
             },

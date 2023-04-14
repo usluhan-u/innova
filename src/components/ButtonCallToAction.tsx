@@ -1,9 +1,9 @@
-import { Button, ChakraProps, Flex } from '@chakra-ui/react';
+import { Button, ButtonProps, Flex } from '@chakra-ui/react';
 import { CallToAction, CallToActionProps } from './CallToAction';
 
 export interface ButtonCallToActionProps
   extends Omit<CallToActionProps, 'children'>,
-    Pick<ChakraProps, 'bgColor' | 'color'> {
+    Pick<ButtonProps, 'bgColor' | 'color' | 'leftIcon' | 'rightIcon'> {
   label: string;
 }
 
@@ -12,7 +12,9 @@ export const ButtonCallToAction = ({
   type,
   page,
   url,
-  color
+  color,
+  leftIcon,
+  rightIcon
 }: ButtonCallToActionProps) => (
   <Flex align="center" gap={2} color={color}>
     <CallToAction type={type} page={page} url={url}>
@@ -20,6 +22,8 @@ export const ButtonCallToAction = ({
         color="text.light"
         bgColor="background.blue"
         fontWeight="normal"
+        leftIcon={leftIcon}
+        rightIcon={rightIcon}
         _hover={{ color: 'text.light', bgColor: 'background.blue' }}
       >
         {label}

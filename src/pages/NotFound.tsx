@@ -28,7 +28,7 @@ export const NotFound = ({
         </Text>
       )}
       {detailedDescription && (
-        <Text color="text.secondary" fontWeight="normal" fontSize={20}>
+        <Text color="text.secondary.100" fontWeight="normal" fontSize={20}>
           {detailedDescription}
         </Text>
       )}

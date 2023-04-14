@@ -6,7 +6,7 @@ export interface InternalLinkProps {
 }
 
 export const InternalLink = ({ slug, children }: InternalLinkProps) => (
-  <Link href="[...slug]" as={`/${slug}`} scroll={false}>
+  <Link href="[...slug]" as={slug} scroll={false}>
     {children}
   </Link>
 );

@@ -17,3 +17,6 @@ export * from './RenderBlocks';
 export * from './BackgroundColorRadio';
 export * from './Content';
 export * from './Tabs';
+export * from './Hero';
+export * from './BackgroundImage';
+export * from './LinkButtonCallToAction';

@@ -46,7 +46,7 @@ export const Menu = ({ menu }: MenuProps) => {
                   <ChakraMenuGroup
                     key={uuidv4()}
                     title={menuItemGroup.label}
-                    color="text.secondary"
+                    color="text.secondary.100"
                     fontWeight="medium"
                   >
                     {menuItemGroup.subMenuItems?.map((subMenuItem) => (
