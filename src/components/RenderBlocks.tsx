@@ -5,6 +5,7 @@ import { PageLayout } from '../collections';
 import { BlockType } from '../types';
 import { Content } from './Content';
 import { Tabs } from './Tabs';
+import { Accordion } from './Accordion';
 
 export interface RenderBlocksProps {
   layout: PageLayout[];
@@ -12,7 +13,8 @@ export interface RenderBlocksProps {
 
 const COMPONENTS: Record<BlockType, React.FC<any>> = {
   content: Content,
-  tabs: Tabs
+  tabs: Tabs,
+  accordion: Accordion
 };
 
 export const RenderBlocks = ({ layout }: RenderBlocksProps) => (

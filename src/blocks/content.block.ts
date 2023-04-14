@@ -1,20 +1,17 @@
 import { Block } from 'payload/types';
-import { BackgroundColor, BackgroundColorType } from '../fields';
+import {
+  BackgroundColor,
+  BackgroundColorType,
+  Width,
+  WidthType
+} from '../fields';
 import { RichTextContentType } from '../components';
-
-export type ContentColumnWidthType =
-  | '25%'
-  | '33.33%'
-  | '50%'
-  | '66.66%'
-  | '75%'
-  | '100%';
 
 export type ContentColumnAlignType = 'flex-start' | 'center' | 'flex-end';
 export type ContentColumnTextAlignType = 'left' | 'center' | 'right';
 
 export interface ContentColumnType {
-  width: ContentColumnWidthType;
+  width: WidthType;
   align: ContentColumnAlignType;
   textAlign: ContentColumnTextAlignType;
   content: RichTextContentType[];
@@ -23,7 +20,7 @@ export interface ContentColumnType {
 export interface ContentType {
   blockType: 'content';
   backgroundColor: BackgroundColorType;
-  width: ContentColumnWidthType;
+  width: WidthType;
   columns: ContentColumnType[];
 }
 
@@ -35,43 +32,7 @@ export const Content: Block = {
   },
   fields: [
     BackgroundColor,
-    {
-      name: 'width',
-      label: 'Content Width',
-      type: 'select',
-      defaultValue: '100%',
-      required: true,
-      localized: true,
-      options: [
-        {
-          label: 'Quarter',
-          value: '25%'
-        },
-        {
-          label: 'One Third',
-          value: '33.33%'
-        },
-        {
-          label: 'Half',
-          value: '50%'
-        },
-        {
-          label: 'Two Thirds',
-          value: '66.66%'
-        },
-        {
-          label: 'Three Quarters',
-          value: '75%'
-        },
-        {
-          label: 'Full',
-          value: '100%'
-        }
-      ],
-      admin: {
-        width: '50%'
-      }
-    },
+    Width,
     {
       name: 'columns',
       type: 'array',

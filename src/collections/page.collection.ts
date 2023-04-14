@@ -2,9 +2,16 @@ import { CollectionConfig } from 'payload/types';
 import { Breadcrumb } from '@payloadcms/plugin-nested-docs/dist/types';
 import { Hero, HeroType, Meta, MetaType, Slug } from '../fields';
 import { generateFullTitle } from '../utils';
-import { Content, ContentType, Tabs, TabsType } from '../blocks';
+import {
+  Accordion,
+  AccordionType,
+  Content,
+  ContentType,
+  Tabs,
+  TabsType
+} from '../blocks';
 
-export type PageLayout = ContentType | TabsType;
+export type PageLayout = ContentType | TabsType | AccordionType;
 
 export interface PageType {
   slug: string;
@@ -38,7 +45,7 @@ export const Page: CollectionConfig = {
       label: 'Page Layout',
       type: 'blocks',
       minRows: 1,
-      blocks: [Content, Tabs]
+      blocks: [Content, Tabs, Accordion]
     },
     {
       name: 'fullTitle',

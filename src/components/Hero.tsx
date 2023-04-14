@@ -40,7 +40,7 @@ export const Hero = ({
         h="full"
         justify="space-between"
       >
-        <Flex align="center" justify="space-between" mt={10}>
+        <Flex align="center" justify="space-between" h={4} mt={10}>
           <ChakraBreadcrumb>
             {breadcrumbs?.map((breadcrumb, index) => (
               <ChakraBreadcrumbItem
@@ -70,9 +70,11 @@ export const Hero = ({
           <Text fontWeight="semibold" fontSize="4xl">
             {title}
           </Text>
-          <Text fontWeight="medium" fontSize="2xl">
-            {subtitle}
-          </Text>
+          {subtitle && (
+            <Text fontWeight="medium" fontSize="2xl">
+              {subtitle}
+            </Text>
+          )}
         </Flex>
         <Flex align="center" gap={6}>
           {enableBottomCallToActions &&

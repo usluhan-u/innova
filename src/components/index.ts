@@ -20,3 +20,4 @@ export * from './Tabs';
 export * from './Hero';
 export * from './BackgroundImage';
 export * from './LinkButtonCallToAction';
+export * from './Dropdown';

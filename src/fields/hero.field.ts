@@ -8,7 +8,7 @@ interface BottomCallToAction {
 
 export interface HeroType {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   enableCallToAction?: boolean;
   callToAction?: CallToActionType;
   enableBottomCallToActions?: boolean;
@@ -33,7 +33,6 @@ export const Hero: Field = {
       name: 'subtitle',
       label: 'Subtitle',
       type: 'text',
-      required: true,
       localized: true
     },
     {
