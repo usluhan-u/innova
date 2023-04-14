@@ -5,13 +5,22 @@ import { generateFullTitle } from '../utils';
 import {
   Accordion,
   AccordionType,
+  Card,
+  CardGroup,
+  CardGroupType,
+  CardType,
   Content,
   ContentType,
   Tabs,
   TabsType
 } from '../blocks';
 
-export type PageLayout = ContentType | TabsType | AccordionType;
+export type PageLayout =
+  | ContentType
+  | TabsType
+  | AccordionType
+  | CardType
+  | CardGroupType;
 
 export interface PageType {
   slug: string;
@@ -45,7 +54,7 @@ export const Page: CollectionConfig = {
       label: 'Page Layout',
       type: 'blocks',
       minRows: 1,
-      blocks: [Content, Tabs, Accordion]
+      blocks: [Content, Tabs, Accordion, Card, CardGroup]
     },
     {
       name: 'fullTitle',

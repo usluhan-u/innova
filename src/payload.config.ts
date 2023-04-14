@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import redirects from '@payloadcms/plugin-redirects';
 import nestedDocs from '@payloadcms/plugin-nested-docs';
 import seo from '@payloadcms/plugin-seo';
-import { Media, Page, User } from './collections';
+import { Category, Media, Page, User } from './collections';
 import { Footer, Menu, NotFound, SocialMedia } from './globals';
 import { Logo, LogoIcon } from './icons';
 
@@ -17,7 +17,7 @@ export default buildConfig({
     disable: true
   },
   globals: [SocialMedia, Footer, Menu, NotFound],
-  collections: [User, Page, Media],
+  collections: [User, Page, Media, Category],
   localization: {
     locales: ['en', 'tr'],
     defaultLocale: 'tr',
