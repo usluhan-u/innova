@@ -7,6 +7,7 @@ import { CardGroup } from './CardGroup';
 import { ImageTagGroup } from './ImageTagGroup';
 import { TagGroup } from './TagGroup';
 import { Content } from './Content';
+import { MediaContent } from './MediaContent';
 
 export interface RenderBlocksProps {
   layout: PageLayout[];
@@ -17,7 +18,8 @@ const COMPONENTS: Record<BlockType, React.FC<any>> = {
   cardGroup: CardGroup,
   imageTagGroup: ImageTagGroup,
   tagGroup: TagGroup,
-  content: Content
+  content: Content,
+  mediaContent: MediaContent
 };
 
 export const RenderBlocks = ({ layout }: RenderBlocksProps) => (

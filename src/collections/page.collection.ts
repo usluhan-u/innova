@@ -11,6 +11,8 @@ import {
   ContentType,
   ImageTagGroup,
   ImageTagGroupType,
+  MediaContent,
+  MediaContentType,
   TagGroup,
   TagGroupType
 } from '../blocks';
@@ -20,14 +22,16 @@ export type PageLayout =
   | CardGroupType
   | ImageTagGroupType
   | TagGroupType
-  | ContentType;
+  | ContentType
+  | MediaContentType;
 
 export type BlockType =
   | AccordionType['blockType']
   | CardGroupType['blockType']
   | ImageTagGroupType['blockType']
   | TagGroupType['blockType']
-  | ContentType['blockType'];
+  | ContentType['blockType']
+  | MediaContentType['blockType'];
 
 export interface PageType {
   slug: string;
@@ -61,7 +65,14 @@ export const Page: CollectionConfig = {
       label: 'Page Layout',
       type: 'blocks',
       minRows: 1,
-      blocks: [Accordion, CardGroup, ImageTagGroup, TagGroup, Content]
+      blocks: [
+        Accordion,
+        CardGroup,
+        ImageTagGroup,
+        TagGroup,
+        Content,
+        MediaContent
+      ]
     },
     {
       name: 'fullTitle',

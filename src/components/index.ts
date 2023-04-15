@@ -28,3 +28,4 @@ export * from './ImageTagGroup';
 export * from './ImageTag';
 export * from './TagGroup';
 export * from './Tag';
+export * from './MediaContent';
