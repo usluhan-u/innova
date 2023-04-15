@@ -18,6 +18,7 @@ export const MediaContent = ({
       <Grid
         templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
         w={{ base: 'full', md: width }}
+        gap={8}
       >
         {contentPosition === 'left' && (
           <>

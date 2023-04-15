@@ -8,6 +8,7 @@ import { ImageTagGroup } from './ImageTagGroup';
 import { TagGroup } from './TagGroup';
 import { Content } from './Content';
 import { MediaContent } from './MediaContent';
+import { TabGroup } from './TabGroup';
 
 export interface RenderBlocksProps {
   layout: PageLayout[];
@@ -19,7 +20,8 @@ const COMPONENTS: Record<BlockType, React.FC<any>> = {
   imageTagGroup: ImageTagGroup,
   tagGroup: TagGroup,
   content: Content,
-  mediaContent: MediaContent
+  mediaContent: MediaContent,
+  tabGroup: TabGroup
 };
 
 export const RenderBlocks = ({ layout }: RenderBlocksProps) => (

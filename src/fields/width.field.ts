@@ -36,6 +36,6 @@ export const Width: Field = {
     }
   ],
   admin: {
-    width: '50%'
+    width: '70%'
   }
 };

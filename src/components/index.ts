@@ -16,7 +16,7 @@ export * from './Container';
 export * from './RenderBlocks';
 export * from './BackgroundColorRadio';
 export * from './Content';
-export * from './Tabs';
+export * from './TabGroup';
 export * from './Hero';
 export * from './BackgroundImage';
 export * from './LinkButtonCallToAction';

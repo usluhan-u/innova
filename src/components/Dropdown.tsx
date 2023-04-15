@@ -1,4 +1,4 @@
-import { Select } from '@chakra-ui/react';
+import { Flex, Select } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 
 interface DropdownOption {
@@ -19,7 +19,7 @@ export const Dropdown = ({
   value,
   onChange
 }: DropdownProps) => (
-  <>
+  <Flex flexDir="column" gap={6}>
     <Select variant="filled" value={value} onChange={onChange}>
       {options.map((option, index) => (
         <option key={uuidv4()} value={index} aria-label={option.label}>
@@ -28,5 +28,5 @@ export const Dropdown = ({
       ))}
     </Select>
     {children}
-  </>
+  </Flex>
 );

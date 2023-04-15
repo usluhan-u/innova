@@ -19,7 +19,7 @@ export const BackgroundColor: Field = {
     }
   ],
   admin: {
-    layout: 'horizontal'
+    width: '30%'
     // components: {
     //   Field: BackgroundColorRadio
     // }

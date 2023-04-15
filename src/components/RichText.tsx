@@ -160,6 +160,7 @@ const serialize = (
       case 'upload':
         return (
           <Image
+            key={uuidv4()}
             objectFit="cover"
             src={(node as RichTextContentType).value?.url}
             alt={(node as RichTextContentType).value?.alt}

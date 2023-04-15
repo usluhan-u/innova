@@ -13,6 +13,8 @@ import {
   ImageTagGroupType,
   MediaContent,
   MediaContentType,
+  TabGroup,
+  TabGroupType,
   TagGroup,
   TagGroupType
 } from '../blocks';
@@ -23,7 +25,8 @@ export type PageLayout =
   | ImageTagGroupType
   | TagGroupType
   | ContentType
-  | MediaContentType;
+  | MediaContentType
+  | TabGroupType;
 
 export type BlockType =
   | AccordionType['blockType']
@@ -31,7 +34,8 @@ export type BlockType =
   | ImageTagGroupType['blockType']
   | TagGroupType['blockType']
   | ContentType['blockType']
-  | MediaContentType['blockType'];
+  | MediaContentType['blockType']
+  | TabGroupType['blockType'];
 
 export interface PageType {
   slug: string;
@@ -71,7 +75,8 @@ export const Page: CollectionConfig = {
         ImageTagGroup,
         TagGroup,
         Content,
-        MediaContent
+        MediaContent,
+        TabGroup
       ]
     },
     {
