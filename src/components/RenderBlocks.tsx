@@ -9,6 +9,7 @@ import { TagGroup } from './TagGroup';
 import { Content } from './Content';
 import { MediaContent } from './MediaContent';
 import { TabGroup } from './TabGroup';
+import { DotSlider } from './DotSlider';
 
 export interface RenderBlocksProps {
   layout: PageLayout[];
@@ -21,7 +22,8 @@ const COMPONENTS: Record<BlockType, React.FC<any>> = {
   tagGroup: TagGroup,
   content: Content,
   mediaContent: MediaContent,
-  tabGroup: TabGroup
+  tabGroup: TabGroup,
+  dotSlider: DotSlider
 };
 
 export const RenderBlocks = ({ layout }: RenderBlocksProps) => (

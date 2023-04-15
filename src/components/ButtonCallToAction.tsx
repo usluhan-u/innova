@@ -12,19 +12,20 @@ export const ButtonCallToAction = ({
   type,
   page,
   url,
-  color,
+  color = 'text.light',
   leftIcon,
-  rightIcon
+  rightIcon,
+  bgColor = 'background.blue'
 }: ButtonCallToActionProps) => (
   <Flex align="center" gap={2} color={color}>
     <CallToAction type={type} page={page} url={url}>
       <Button
-        color="text.light"
-        bgColor="background.blue"
+        color={color}
+        bgColor={bgColor}
         fontWeight="normal"
         leftIcon={leftIcon}
         rightIcon={rightIcon}
-        _hover={{ color: 'text.light', bgColor: 'background.blue' }}
+        _hover={{ color, bgColor }}
       >
         {label}
       </Button>
