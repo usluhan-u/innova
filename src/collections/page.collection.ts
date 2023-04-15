@@ -1,32 +1,35 @@
 import { CollectionConfig } from 'payload/types';
 import { Breadcrumb } from '@payloadcms/plugin-nested-docs/dist/types';
-import { Hero, HeroType, Meta, MetaType, Slug } from '../fields';
+import { Meta, MetaType, Slug } from '../fields';
 import { generateFullTitle } from '../utils';
 import {
   Accordion,
   AccordionType,
-  Card,
   CardGroup,
   CardGroupType,
-  CardType,
-  Content,
-  ContentType,
-  Tabs,
-  TabsType
+  ImageTagGroup,
+  ImageTagGroupType,
+  TagGroup,
+  TagGroupType
 } from '../blocks';
 
 export type PageLayout =
-  | ContentType
-  | TabsType
   | AccordionType
-  | CardType
-  | CardGroupType;
+  | CardGroupType
+  | ImageTagGroupType
+  | TagGroupType;
+
+export type BlockType =
+  | AccordionType['blockType']
+  | CardGroupType['blockType']
+  | ImageTagGroupType['blockType']
+  | TagGroupType['blockType'];
 
 export interface PageType {
   slug: string;
   title: string;
   fullTitle: string;
-  hero: HeroType;
+  // hero: HeroType;
   breadcrumbs: Breadcrumb[];
   meta: MetaType;
   layout: PageLayout[];
@@ -48,13 +51,13 @@ export const Page: CollectionConfig = {
       required: true,
       localized: true
     },
-    Hero,
+    // Hero,
     {
       name: 'layout',
       label: 'Page Layout',
       type: 'blocks',
       minRows: 1,
-      blocks: [Content, Tabs, Accordion, Card, CardGroup]
+      blocks: [Accordion, CardGroup, ImageTagGroup, TagGroup]
     },
     {
       name: 'fullTitle',

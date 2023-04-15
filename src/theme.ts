@@ -21,6 +21,9 @@ export const theme = extendTheme({
       blue: '#005A9B',
       light: '#FFFFFF',
       gray: '#AAA9A9'
+    },
+    border: {
+      primary: '#E3E3E3'
     }
   }
 });

@@ -23,3 +23,8 @@ export * from './LinkButtonCallToAction';
 export * from './Dropdown';
 export * from './Card';
 export * from './CardGroup';
+export * from './AutoPosition';
+export * from './ImageTagGroup';
+export * from './ImageTag';
+export * from './TagGroup';
+export * from './Tag';

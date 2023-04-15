@@ -106,7 +106,7 @@ export const Menu = ({ menu }: MenuProps) => {
   return (
     <Flex w="full" align="center" gap={8}>
       <ChakraMenu isOpen={isOpen}>
-        {menu.menuItems.map((menuItem) => (
+        {menu.menuItems?.map((menuItem) => (
           <React.Fragment key={uuidv4()}>
             {renderMenuItem(menuItem)}
           </React.Fragment>

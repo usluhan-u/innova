@@ -4,4 +4,4 @@ export * from './meta.field';
 export * from './background-color.field';
 export * from './hero.field';
 export * from './content-width.field';
-export * from './card.field';
+export * from './call-to-action-toggle.field';

@@ -20,7 +20,7 @@ export interface MenuItemType {
 }
 
 export interface MenuType {
-  menuItems: MenuItemType[];
+  menuItems?: MenuItemType[];
 }
 
 export const Menu: GlobalConfig = {

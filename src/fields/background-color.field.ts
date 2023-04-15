@@ -6,7 +6,7 @@ export const BackgroundColor: Field = {
   name: 'backgroundColor',
   label: 'Background Color',
   type: 'radio',
-  defaultValue: 'primary',
+  defaultValue: 'background.primary',
   required: true,
   options: [
     {

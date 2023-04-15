@@ -5,24 +5,24 @@ import {
   Width,
   WidthType
 } from '../fields';
+import { UploadedMediaType } from '../collections';
 
-interface AccordionItemType {
-  title: string;
-  content: string;
+export interface ImageTagGroupItemType {
+  image: UploadedMediaType;
 }
 
-export interface AccordionType {
-  blockType: 'accordion';
+export interface ImageTagGroupType {
+  blockType: 'imageTagGroup';
   backgroundColor: BackgroundColorType;
   width: WidthType;
-  items: AccordionItemType[];
+  items: ImageTagGroupItemType[];
 }
 
-export const Accordion: Block = {
-  slug: 'accordion',
+export const ImageTagGroup: Block = {
+  slug: 'imageTagGroup',
   labels: {
-    singular: 'Accordion',
-    plural: 'Accordions'
+    singular: 'Image Tag Group',
+    plural: 'Image Tag Groups'
   },
   fields: [
     {
@@ -39,16 +39,10 @@ export const Accordion: Block = {
       minRows: 1,
       fields: [
         {
-          name: 'title',
-          label: 'Title',
-          type: 'text',
-          required: true,
-          localized: true
-        },
-        {
-          name: 'content',
-          label: 'Content',
-          type: 'textarea',
+          name: 'image',
+          label: 'Image',
+          type: 'upload',
+          relationTo: 'medias',
           required: true,
           localized: true
         }

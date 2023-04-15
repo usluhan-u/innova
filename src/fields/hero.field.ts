@@ -1,6 +1,10 @@
 import { Field } from 'payload/types';
 import { CallToAction, CallToActionType } from './call-to-action.field';
 import { UploadedMediaType } from '../collections';
+import {
+  CallToActionToggle,
+  CallToActionToggleType
+} from './call-to-action-toggle.field';
 
 interface BottomCallToAction {
   callToAction: CallToActionType;
@@ -9,8 +13,7 @@ interface BottomCallToAction {
 export interface HeroType {
   title: string;
   subtitle?: string;
-  enableCallToAction?: boolean;
-  callToAction?: CallToActionType;
+  callToActionToggle: CallToActionToggleType;
   enableBottomCallToActions?: boolean;
   bottomCallToActions?: BottomCallToAction[];
   bgImage: UploadedMediaType;
@@ -35,17 +38,7 @@ export const Hero: Field = {
       type: 'text',
       localized: true
     },
-    {
-      name: 'enableCallToAction',
-      label: 'Call to Action',
-      type: 'checkbox',
-      defaultValue: false,
-      required: true
-    },
-    CallToAction({
-      label: false,
-      condition: (_, siblingData) => Boolean(siblingData?.enableCallToAction)
-    }),
+    CallToActionToggle,
     {
       name: 'enableBottomCallToActions',
       label: 'Bottom Call to Actions',

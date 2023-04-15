@@ -12,8 +12,8 @@ export interface FooterLinkGroupType {
 }
 
 export interface FooterType {
-  linkGroups: FooterLinkGroupType[];
-  contact: RichTextContentType[];
+  linkGroups?: FooterLinkGroupType[];
+  contact?: RichTextContentType[];
 }
 
 export const Footer: GlobalConfig = {

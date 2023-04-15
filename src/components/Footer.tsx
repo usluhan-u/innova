@@ -60,7 +60,7 @@ export const Footer = ({ socialMedia, footer }: FooterProps) => {
               justify={{ base: 'space-between', md: 'initial' }}
               gap={{ base: 6, md: 12 }}
             >
-              {footer.linkGroups.map((linkGroup) => (
+              {footer.linkGroups?.map((linkGroup) => (
                 <Flex
                   key={uuidv4()}
                   flexDir="column"
@@ -78,7 +78,7 @@ export const Footer = ({ socialMedia, footer }: FooterProps) => {
                 </Flex>
               ))}
             </Flex>
-            <RichText content={footer.contact} />
+            {footer.contact && <RichText content={footer.contact} />}
           </Flex>
           <Divider my={8} />
           <Flex align="center" justify="space-between">

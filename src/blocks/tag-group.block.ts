@@ -7,28 +7,27 @@ import {
   Width,
   WidthType
 } from '../fields';
-import { CategoryType, UploadedMediaType } from '../collections';
+import { UploadedMediaType } from '../collections';
 
-export interface CardGroupItemType {
+export interface TagGroupItemType {
   title: string;
-  date: string;
-  category?: CategoryType;
-  image: UploadedMediaType;
+  content?: string;
   callToActionToggle: CallToActionToggleType;
+  icon: UploadedMediaType;
 }
 
-export interface CardGroupType {
-  blockType: 'cardGroup';
+export interface TagGroupType {
+  blockType: 'tagGroup';
   backgroundColor: BackgroundColorType;
   width: WidthType;
-  items: CardGroupItemType[];
+  items: TagGroupItemType[];
 }
 
-export const CardGroup: Block = {
-  slug: 'cardGroup',
+export const TagGroup: Block = {
+  slug: 'tagGroup',
   labels: {
-    singular: 'Card Group',
-    plural: 'Card Groups'
+    singular: 'Tag Group',
+    plural: 'Tag Groups'
   },
   fields: [
     {
@@ -52,22 +51,14 @@ export const CardGroup: Block = {
           localized: true
         },
         {
-          name: 'date',
-          label: 'Date',
-          type: 'date',
-          required: true,
+          name: 'content',
+          label: 'Content',
+          type: 'textarea',
           localized: true
         },
         {
-          name: 'category',
-          label: 'Category',
-          type: 'relationship',
-          relationTo: 'categories',
-          localized: true
-        },
-        {
-          name: 'image',
-          label: 'Image',
+          name: 'icon',
+          label: 'Icon',
           type: 'upload',
           relationTo: 'medias',
           required: true,
