@@ -7,12 +7,9 @@ import {
 } from '../fields';
 import { RichTextContentType } from '../components';
 
-export type ContentColumnAlignType = 'flex-start' | 'center' | 'flex-end';
 export type ContentColumnTextAlignType = 'left' | 'center' | 'right';
 
 export interface ContentColumnType {
-  width: WidthType;
-  align: ContentColumnAlignType;
   textAlign: ContentColumnTextAlignType;
   content: RichTextContentType[];
 }
@@ -31,8 +28,10 @@ export const Content: Block = {
     plural: 'Contents'
   },
   fields: [
-    BackgroundColor,
-    Width,
+    {
+      type: 'row',
+      fields: [BackgroundColor, Width]
+    },
     {
       name: 'columns',
       type: 'array',
@@ -43,96 +42,32 @@ export const Content: Block = {
       },
       fields: [
         {
-          type: 'row',
-          fields: [
+          name: 'textAlign',
+          label: 'Text Align',
+          type: 'radio',
+          defaultValue: 'left',
+          required: true,
+          localized: true,
+          options: [
             {
-              name: 'width',
-              label: 'Width',
-              type: 'select',
-              defaultValue: '100%',
-              required: true,
-              localized: true,
-              options: [
-                {
-                  label: 'Quarter',
-                  value: '25%'
-                },
-                {
-                  label: 'One Third',
-                  value: '33.33%'
-                },
-                {
-                  label: 'Half',
-                  value: '50%'
-                },
-                {
-                  label: 'Two Thirds',
-                  value: '66.66%'
-                },
-                {
-                  label: 'Three Quarters',
-                  value: '75%'
-                },
-                {
-                  label: 'Full',
-                  value: '100%'
-                }
-              ],
-              admin: {
-                width: '50%'
-              }
+              label: 'Left',
+              value: 'left'
             },
             {
-              name: 'align',
-              label: 'Align',
-              type: 'select',
-              defaultValue: 'flex-start',
-              required: true,
-              localized: true,
-              options: [
-                {
-                  label: 'Left',
-                  value: 'flex-start'
-                },
-                {
-                  label: 'Center',
-                  value: 'center'
-                },
-                {
-                  label: 'Right',
-                  value: 'flex-end'
-                }
-              ]
+              label: 'Center',
+              value: 'center'
             },
             {
-              name: 'textAlign',
-              label: 'Text Align',
-              type: 'select',
-              defaultValue: 'left',
-              required: true,
-              localized: true,
-              options: [
-                {
-                  label: 'Left',
-                  value: 'left'
-                },
-                {
-                  label: 'Center',
-                  value: 'center'
-                },
-                {
-                  label: 'Right',
-                  value: 'right'
-                }
-              ]
-            },
-            {
-              name: 'content',
-              type: 'richText',
-              required: true,
-              localized: true
+              label: 'Right',
+              value: 'right'
             }
           ]
+        },
+        {
+          name: 'content',
+          type: 'richText',
+          required: true,
+          localized: true
         }
       ]
     }

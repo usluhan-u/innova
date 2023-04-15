@@ -7,6 +7,8 @@ import {
   AccordionType,
   CardGroup,
   CardGroupType,
+  Content,
+  ContentType,
   ImageTagGroup,
   ImageTagGroupType,
   TagGroup,
@@ -17,13 +19,15 @@ export type PageLayout =
   | AccordionType
   | CardGroupType
   | ImageTagGroupType
-  | TagGroupType;
+  | TagGroupType
+  | ContentType;
 
 export type BlockType =
   | AccordionType['blockType']
   | CardGroupType['blockType']
   | ImageTagGroupType['blockType']
-  | TagGroupType['blockType'];
+  | TagGroupType['blockType']
+  | ContentType['blockType'];
 
 export interface PageType {
   slug: string;
@@ -57,7 +61,7 @@ export const Page: CollectionConfig = {
       label: 'Page Layout',
       type: 'blocks',
       minRows: 1,
-      blocks: [Accordion, CardGroup, ImageTagGroup, TagGroup]
+      blocks: [Accordion, CardGroup, ImageTagGroup, TagGroup, Content]
     },
     {
       name: 'fullTitle',

@@ -6,6 +6,7 @@ import { Accordion } from './Accordion';
 import { CardGroup } from './CardGroup';
 import { ImageTagGroup } from './ImageTagGroup';
 import { TagGroup } from './TagGroup';
+import { Content } from './Content';
 
 export interface RenderBlocksProps {
   layout: PageLayout[];
@@ -15,7 +16,8 @@ const COMPONENTS: Record<BlockType, React.FC<any>> = {
   accordion: Accordion,
   cardGroup: CardGroup,
   imageTagGroup: ImageTagGroup,
-  tagGroup: TagGroup
+  tagGroup: TagGroup,
+  content: Content
 };
 
 export const RenderBlocks = ({ layout }: RenderBlocksProps) => (

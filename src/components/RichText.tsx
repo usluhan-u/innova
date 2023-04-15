@@ -3,7 +3,8 @@ import escapeHTML from 'escape-html';
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Text as SlateText } from 'slate';
-import { Heading, Text, chakra } from '@chakra-ui/react';
+import { Heading, Image, Text, chakra } from '@chakra-ui/react';
+import { UploadedMediaType } from '../collections';
 
 export interface RichTextContentType {
   text: string;
@@ -15,6 +16,7 @@ export interface RichTextContentType {
   underline?: boolean;
   strikethrough?: boolean;
   code?: boolean;
+  value?: UploadedMediaType;
   children?: RichTextContentType[];
 }
 
@@ -154,6 +156,17 @@ const serialize = (
           >
             {serialize((node as RichTextContentType).children!)}
           </a>
+        );
+      case 'upload':
+        return (
+          <Image
+            objectFit="cover"
+            src={(node as RichTextContentType).value?.url}
+            alt={(node as RichTextContentType).value?.alt}
+            h="lg"
+            w="full"
+            borderRadius="lg"
+          />
         );
       default:
         return (
