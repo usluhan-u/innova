@@ -80,7 +80,11 @@ const serialize = (
         );
       }
 
-      return <Text key={uuidv4()}>{text}</Text>;
+      return (
+        <Text key={uuidv4()} my="0">
+          {text}
+        </Text>
+      );
     }
 
     if (!(node as RichTextContentType).children) {

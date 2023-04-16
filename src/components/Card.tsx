@@ -17,7 +17,7 @@ export interface CardProps {
 }
 
 export const Card = ({ card }: CardProps) => (
-  <ChakraCard boxSize="full" overflow="hidden">
+  <ChakraCard overflow="hidden">
     <Image
       objectFit="cover"
       src={card.image.url}

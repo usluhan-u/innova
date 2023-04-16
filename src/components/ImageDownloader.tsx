@@ -2,6 +2,7 @@ import {
   Card,
   CardBody,
   CardFooter,
+  Center,
   IconButton,
   Image
 } from '@chakra-ui/react';
@@ -29,24 +30,26 @@ export const ImageDownloader = ({ imageDownloader }: ImageDownloaderProps) => {
 
   return (
     <Card
+      boxSize="full"
       borderWidth="1px"
       borderStyle="solid"
       borderColor="border.primary"
       variant="outline"
     >
       <CardBody>
-        <Image
-          objectFit="contain"
-          src={imageDownloader.image.url}
-          alt={imageDownloader.image.alt}
-          boxSize="full"
-        />
+        <Center boxSize="full">
+          <Image
+            objectFit="contain"
+            src={imageDownloader.image.url}
+            alt={imageDownloader.image.alt}
+          />
+        </Center>
       </CardBody>
-      <CardFooter justify="flex-end">
+      <CardFooter p="-9" justify="flex-end">
         <IconButton
           variant="ghost"
           aria-label="Download"
-          icon={<FiDownload />}
+          icon={<FiDownload size="1em" />}
           color="background.blue"
           onClick={handleDownload}
         />

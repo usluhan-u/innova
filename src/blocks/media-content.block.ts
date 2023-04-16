@@ -2,6 +2,8 @@ import { Block } from 'payload/types';
 import {
   BackgroundColor,
   BackgroundColorType,
+  CallToActionToggle,
+  CallToActionToggleType,
   Width,
   WidthType
 } from '../fields';
@@ -14,6 +16,7 @@ export interface MediaContentType {
   width: WidthType;
   contentPosition: 'left' | 'right';
   content: RichTextContentType[];
+  callToActionToggle: CallToActionToggleType;
   image: UploadedMediaType;
 }
 
@@ -56,6 +59,7 @@ export const MediaContent: Block = {
       required: true,
       localized: true
     },
+    CallToActionToggle,
     {
       name: 'image',
       label: 'Image',

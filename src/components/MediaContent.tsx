@@ -1,8 +1,10 @@
-import { Grid, GridItem, Image } from '@chakra-ui/react';
+import { Flex, Grid, GridItem, Image } from '@chakra-ui/react';
+import { FiArrowRight } from 'react-icons/fi';
 import { MediaContentType } from '../blocks';
 import { AutoPosition } from './AutoPosition';
 import { BackgroundColor } from './BackgroundColor';
 import { RichText } from './RichText';
+import { TextIconCallToAction } from './TextIconCallToAction';
 
 export interface MediaContentProps extends MediaContentType {}
 
@@ -11,7 +13,8 @@ export const MediaContent = ({
   width,
   content,
   contentPosition,
-  image
+  image,
+  callToActionToggle
 }: MediaContentProps) => (
   <BackgroundColor bgColor={backgroundColor}>
     <AutoPosition>
@@ -27,12 +30,22 @@ export const MediaContent = ({
                 objectFit="cover"
                 src={image.url}
                 alt={image.alt}
-                w="xl"
+                boxSize="full"
                 borderRadius="lg"
               />
             </GridItem>
             <GridItem>
-              <RichText content={content} />
+              <Flex flexDir="column" justify="space-between">
+                <RichText content={content} />
+                {callToActionToggle.enableCallToAction &&
+                  callToActionToggle.callToAction && (
+                    <TextIconCallToAction
+                      {...callToActionToggle.callToAction}
+                      color="text.blue"
+                      icon={FiArrowRight}
+                    />
+                  )}
+              </Flex>
             </GridItem>
           </>
         )}
@@ -40,15 +53,25 @@ export const MediaContent = ({
         {contentPosition === 'right' && (
           <>
             <GridItem>
-              <RichText content={content} />
+              <Flex flexDir="column" justify="space-between" boxSize="full">
+                <RichText content={content} />
+                {callToActionToggle.enableCallToAction &&
+                  callToActionToggle.callToAction && (
+                    <TextIconCallToAction
+                      {...callToActionToggle.callToAction}
+                      color="text.blue"
+                      icon={FiArrowRight}
+                    />
+                  )}
+              </Flex>
             </GridItem>
             <GridItem>
               <Image
                 objectFit="cover"
                 src={image.url}
                 alt={image.alt}
-                w="xl"
                 borderRadius="lg"
+                boxSize="full"
               />
             </GridItem>
           </>

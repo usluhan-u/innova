@@ -1,4 +1,4 @@
-import { Flex, Grid, GridItem } from '@chakra-ui/react';
+import { Grid, GridItem } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 import { TagGroupType } from '../blocks';
 import { AutoPosition } from './AutoPosition';
@@ -17,9 +17,7 @@ export const TagGroup = ({ backgroundColor, width, items }: TagGroupProps) => (
       >
         {items.map((item) => (
           <GridItem key={uuidv4()}>
-            <Flex minH={18}>
-              <Tag tag={item} />
-            </Flex>
+            <Tag tag={item} />
           </GridItem>
         ))}
       </Grid>

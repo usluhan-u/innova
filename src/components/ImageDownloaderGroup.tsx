@@ -1,4 +1,4 @@
-import { Flex, Grid } from '@chakra-ui/react';
+import { Grid } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 import { ImageDownloaderGroupType } from '../blocks';
 import { AutoPosition } from './AutoPosition';
@@ -20,9 +20,7 @@ export const ImageDownloaderGroup = ({
         gap={6}
       >
         {items.map((item) => (
-          <Flex key={uuidv4()} boxSize="32">
-            <ImageDownloader imageDownloader={item} />
-          </Flex>
+          <ImageDownloader key={uuidv4()} imageDownloader={item} />
         ))}
       </Grid>
     </AutoPosition>
