@@ -3,9 +3,10 @@ import payload from 'payload';
 import next from 'next';
 import nextBuild from 'next/dist/build';
 import path from 'path';
+import { IncomingMessage, ServerResponse } from 'http';
 import { env } from './env';
 
-const DEV = process.env.NODE_ENV !== 'production';
+const DEV = env.nodeEnv !== 'production';
 const PORT = env.port;
 
 const app = express();
@@ -25,7 +26,11 @@ const boilerplate = async () => {
     const nextApp = next({ dev: DEV });
     const nextHandler = nextApp.getRequestHandler();
 
-    app.get('*', (req, res) => nextHandler(req, res));
+    app.get(
+      '*',
+      (request: IncomingMessage, response: ServerResponse<IncomingMessage>) =>
+        nextHandler(request, response)
+    );
 
     nextApp.prepare().then(() => {
       payload.logger.info(`Client is ready!`);

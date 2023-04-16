@@ -1,27 +1,32 @@
-import React from 'react';
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import escapeHTML from 'escape-html';
-import { Text as SlateText } from 'slate';
+import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { chakra, ChakraProps } from '@chakra-ui/react';
+import { Text as SlateText } from 'slate';
+import { Heading, Image, Text, chakra } from '@chakra-ui/react';
+import { UploadedMediaType } from '../collections';
 
-interface RichTextNodeValue {
-  url: string;
-  alt: string;
-}
-
-export interface RichTextNode {
-  type: string;
-  value?: RichTextNodeValue;
-  children?: RichTextNode[];
+export interface RichTextContentType {
+  text: string;
+  type?: string;
+  linkType?: string;
   url?: string;
-  [key: string]: unknown;
+  bold?: boolean;
+  italic?: boolean;
+  underline?: boolean;
+  strikethrough?: boolean;
+  code?: boolean;
+  value?: UploadedMediaType;
+  children?: RichTextContentType[];
 }
 
-export interface RichTextProps extends ChakraProps {
-  content: RichTextNode[];
+export interface RichTextProps {
+  content: RichTextContentType[];
 }
 
-const serialize = (nodes: RichTextNode[]): (React.ReactElement | null)[] =>
+const serialize = (
+  nodes: RichTextContentType[]
+): (React.ReactElement | null)[] =>
   nodes.map((node) => {
     if (!node) {
       return null;
@@ -29,74 +34,163 @@ const serialize = (nodes: RichTextNode[]): (React.ReactElement | null)[] =>
 
     if (SlateText.isText(node)) {
       let text = (
-        <span dangerouslySetInnerHTML={{ __html: escapeHTML(node.text) }} />
+        <Text
+          dangerouslySetInnerHTML={{ __html: escapeHTML(node.text) }}
+          as="span"
+        />
       );
 
       if (node.bold) {
-        text = <b key={uuidv4()}>{text}</b>;
+        text = (
+          <Text key={uuidv4()} as="b">
+            {text}
+          </Text>
+        );
       }
 
       if (node.code) {
-        text = <code key={uuidv4()}>{text}</code>;
+        text = (
+          <Text key={uuidv4()} as="code">
+            {text}
+          </Text>
+        );
       }
 
       if (node.italic) {
-        text = <i key={uuidv4()}>{text}</i>;
+        text = (
+          <Text key={uuidv4()} as="i">
+            {text}
+          </Text>
+        );
       }
 
       if (node.underline) {
-        text = <u key={uuidv4()}>{text}</u>;
+        text = (
+          <Text key={uuidv4()} as="u">
+            {text}
+          </Text>
+        );
       }
 
       if (node.strikethrough) {
-        text = <del key={uuidv4()}>{text}</del>;
+        text = (
+          <Text key={uuidv4()} as="s">
+            {text}
+          </Text>
+        );
       }
 
-      return <React.Fragment key={uuidv4()}>{text}</React.Fragment>;
+      return <Text key={uuidv4()}>{text}</Text>;
     }
 
-    if (!node.children) {
+    if (!(node as RichTextContentType).children) {
       return null;
     }
 
-    switch (node.type) {
+    switch ((node as RichTextContentType).type) {
       case 'h1':
-        return <h1 key={uuidv4()}>{serialize(node.children)}</h1>;
+        return (
+          <Heading key={uuidv4()} as="h1">
+            {serialize((node as RichTextContentType).children!)}
+          </Heading>
+        );
       case 'h2':
-        return <h2 key={uuidv4()}>{serialize(node.children)}</h2>;
+        return (
+          <Heading key={uuidv4()} as="h2">
+            {serialize((node as RichTextContentType).children!)}
+          </Heading>
+        );
       case 'h3':
-        return <h3 key={uuidv4()}>{serialize(node.children)}</h3>;
+        return (
+          <Heading key={uuidv4()} as="h3">
+            {serialize((node as RichTextContentType).children!)}
+          </Heading>
+        );
       case 'h4':
-        return <h4 key={uuidv4()}>{serialize(node.children)}</h4>;
+        return (
+          <Heading key={uuidv4()} as="h4">
+            {serialize((node as RichTextContentType).children!)}
+          </Heading>
+        );
       case 'h5':
-        return <h5 key={uuidv4()}>{serialize(node.children)}</h5>;
+        return (
+          <Heading key={uuidv4()} as="h5">
+            {serialize((node as RichTextContentType).children!)}
+          </Heading>
+        );
       case 'h6':
-        return <h6 key={uuidv4()}>{serialize(node.children)}</h6>;
+        return (
+          <Heading key={uuidv4()} as="h6">
+            {serialize((node as RichTextContentType).children!)}
+          </Heading>
+        );
       case 'quote':
         return (
-          <blockquote key={uuidv4()}>{serialize(node.children)}</blockquote>
+          <blockquote key={uuidv4()}>
+            {serialize((node as RichTextContentType).children!)}
+          </blockquote>
         );
       case 'ul':
-        return <ul key={uuidv4()}>{serialize(node.children)}</ul>;
+        return (
+          <ul key={uuidv4()}>
+            {serialize((node as RichTextContentType).children!)}
+          </ul>
+        );
       case 'ol':
-        return <ol key={uuidv4()}>{serialize(node.children)}</ol>;
+        return (
+          <ol key={uuidv4()}>
+            {serialize((node as RichTextContentType).children!)}
+          </ol>
+        );
       case 'li':
-        return <li key={uuidv4()}>{serialize(node.children)}</li>;
+        return (
+          <li key={uuidv4()}>
+            {serialize((node as RichTextContentType).children!)}
+          </li>
+        );
       case 'link':
         return (
-          <a href={escapeHTML(node.url)} key={uuidv4()}>
-            {serialize(node.children)}
+          <a
+            key={uuidv4()}
+            href={escapeHTML((node as RichTextContentType).url)}
+          >
+            {serialize((node as RichTextContentType).children!)}
           </a>
         );
+      case 'upload':
+        return (
+          <Image
+            key={uuidv4()}
+            objectFit="cover"
+            src={(node as RichTextContentType).value?.url}
+            alt={(node as RichTextContentType).value?.alt}
+            h="lg"
+            w="full"
+            borderRadius="lg"
+          />
+        );
       default:
-        return <p key={uuidv4()}>{serialize(node.children)}</p>;
+        return (
+          <Text key={uuidv4()} as="span">
+            {serialize((node as RichTextContentType).children!)}
+          </Text>
+        );
     }
   });
 
-export const RichText = chakra(({ content, ...rest }: RichTextProps) => {
-  if (!content) {
-    return null;
-  }
-
-  return <chakra.div {...rest}>{serialize(content)}</chakra.div>;
-});
+export const RichText = ({ content }: RichTextProps) => (
+  <chakra.div
+    sx={{
+      '&': {
+        '& *': {
+          my: '16px'
+        },
+        '& a': {
+          color: 'text.blue'
+        }
+      }
+    }}
+  >
+    {serialize(content)}
+  </chakra.div>
+);

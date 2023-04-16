@@ -1,2 +1,4 @@
-export * from './contact-us';
-export * from './script.global';
+export * from './social-media.global';
+export * from './footer.global';
+export * from './menu.global';
+export * from './not-found.global';

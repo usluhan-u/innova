@@ -1,68 +1,43 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { Flex } from '@chakra-ui/react';
-import { PageLayout } from '../collections';
+import React from 'react';
+import { BlockType, PageLayout } from '../collections';
+import { Accordion } from './Accordion';
+import { CardGroup } from './CardGroup';
+import { ImageTagGroup } from './ImageTagGroup';
+import { TagGroup } from './TagGroup';
 import { Content } from './Content';
-import { Media } from './Media';
 import { MediaContent } from './MediaContent';
-import { MediaSlider } from './MediaSlider';
-import { CallToAction } from './CallToAction';
-import { BackgroundColorType } from '../fields';
-import { Template } from './Template';
-import { Tabs } from './Tabs';
-import { SmallCards } from './SmallCards';
-import { BlockType } from '../types';
-import { Cards } from './Cards';
+import { TabGroup } from './TabGroup';
+import { DotSlider } from './DotSlider';
+import { DocumentDownloaderGroup } from './DocumentDownloaderGroup';
 
-interface RenderBlocksProps {
+export interface RenderBlocksProps {
   layout: PageLayout[];
-  paddingY?: string | number;
 }
 
-const components: Record<BlockType, React.FC<any>> = {
+const COMPONENTS: Record<BlockType, React.FC<any>> = {
+  accordion: Accordion,
+  cardGroup: CardGroup,
+  imageTagGroup: ImageTagGroup,
+  tagGroup: TagGroup,
   content: Content,
-  media: Media,
   mediaContent: MediaContent,
-  mediaSlider: MediaSlider,
-  callToAction: CallToAction,
-  tabs: Tabs,
-  smallCards: SmallCards,
-  cards: Cards
+  tabGroup: TabGroup,
+  dotSlider: DotSlider,
+  documentDownloaderGroup: DocumentDownloaderGroup
 };
 
-export const RenderBlocks = ({ layout, paddingY = 20 }: RenderBlocksProps) => {
-  const getBackgroundColor = (layoutBgColor: BackgroundColorType) => {
-    const backgroundColorMap: Record<BackgroundColorType, string> = {
-      white: 'background.primary',
-      gray: 'background.secondary'
-    };
+export const RenderBlocks = ({ layout }: RenderBlocksProps) => (
+  <>
+    {layout.map((block) => {
+      const Block = COMPONENTS[block.blockType];
 
-    return backgroundColorMap[layoutBgColor];
-  };
-
-  return (
-    <>
-      {layout.map((block) => {
-        const Block: React.FC<any> = components[block.blockType];
-
-        return (
-          <Template
-            key={uuidv4()}
-            backgroundColor={
-              block.blockType !== 'callToAction'
-                ? getBackgroundColor(block.backgroundColor)
-                : 'transparent'
-            }
-          >
-            {Block ? (
-              <Flex py={paddingY} w="full">
-                <Block {...block} />
-              </Flex>
-            ) : null}
-          </Template>
-        );
-      })}
-    </>
-  );
-};
+      return (
+        <React.Fragment key={uuidv4()}>
+          {Block && <Block {...block} />}
+        </React.Fragment>
+      );
+    })}
+  </>
+);

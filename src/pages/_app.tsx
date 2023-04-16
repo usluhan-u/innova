@@ -1,66 +1,58 @@
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
 import '../styles/globals.css';
-import { ChakraProvider, useMediaQuery } from '@chakra-ui/react';
 import type { AppContext, AppProps } from 'next/app';
 import App from 'next/app';
-import { v4 as uuidv4 } from 'uuid';
-import { Helmet } from 'react-helmet';
+import { ChakraProvider, Flex } from '@chakra-ui/react';
 import { theme } from '../theme';
-import { Header, ContactUs } from '../components';
-import { ContactUsType, ScriptType } from '../globals';
-import { MenuType } from '../collections';
+import { FooterType, MenuType, SocialMediaType } from '../globals';
+import { Footer, Header } from '../components';
 
 interface MyAppProps extends AppProps {
-  menuList: MenuType[];
-  externalScripts: string[];
-  contactUs: ContactUsType;
+  socialMedia: SocialMediaType;
+  footer: FooterType;
+  menu: MenuType;
 }
 
 const MyApp = ({
   Component,
   pageProps,
-  menuList,
-  externalScripts,
-  contactUs
-}: MyAppProps) => {
-  const [isLargerThanMd] = useMediaQuery('(min-width: 768px)');
-
-  return (
-    <ChakraProvider theme={theme}>
-      <Helmet>
-        {externalScripts.map((script) => (
-          <script key={uuidv4()} dangerouslySetInnerHTML={{ __html: script }} />
-        ))}
-      </Helmet>
-      <Header menuList={menuList} />
+  socialMedia,
+  footer,
+  menu
+}: MyAppProps) => (
+  <ChakraProvider theme={theme}>
+    <Flex minH="100vh" flexDir="column">
+      <Header menu={menu} />
       <Component {...pageProps} />
-      {isLargerThanMd && Object.keys(contactUs?.form).length && (
-        <ContactUs {...contactUs} />
-      )}
-    </ChakraProvider>
-  );
-};
+      <Footer socialMedia={socialMedia} footer={footer} />
+    </Flex>
+  </ChakraProvider>
+);
 
 export default MyApp;
 
 MyApp.getInitialProps = async (appContext: AppContext) => {
   const appProps = await App.getInitialProps(appContext);
 
-  const [menuQuery, scriptsQuery, contactUsQuery] = await Promise.all([
+  const [socialMediaQuery, footerQuery, menuQuery] = await Promise.all([
     fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/menus?limit=100&locale=${appContext.ctx.locale}&fallback-locale=${appContext.ctx.defaultLocale}`
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/globals/social-media?locale=${appContext.ctx.locale}&fallback-locale=${appContext.ctx.defaultLocale}`
     ).then((res) => res.json()),
     fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/globals/scripts?limit=100`
-    ).then((res) => res.json()) as Promise<ScriptType | undefined>,
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/globals/footer?locale=${appContext.ctx.locale}&fallback-locale=${appContext.ctx.defaultLocale}`
+    ).then((res) => res.json()),
     fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/globals/contactUs?locale=${appContext.ctx.locale}&fallback-locale=${appContext.ctx.defaultLocale}`
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/globals/menu?locale=${appContext.ctx.locale}&fallback-locale=${appContext.ctx.defaultLocale}`
     ).then((res) => res.json())
   ]);
 
   return {
     ...appProps,
-    menuList: menuQuery.docs,
-    externalScripts: scriptsQuery?.scripts?.map((script) => script.script),
-    contactUs: contactUsQuery
+    socialMedia: socialMediaQuery,
+    footer: footerQuery,
+    menu: menuQuery
   };
 };

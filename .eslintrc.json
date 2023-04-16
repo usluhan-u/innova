@@ -24,11 +24,10 @@
   },
   "overrides": [],
   "plugins": ["react", "@typescript-eslint", "unused-imports"],
-  "ignorePatterns": ["src/payload-types.ts"],
   "rules": {
     "no-undef": "off",
     "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error",
     "unused-imports/no-unused-imports": "error",
     "react/jsx-filename-extension": ["error", { "extensions": [".tsx"] }],
     "react/require-default-props": "off",

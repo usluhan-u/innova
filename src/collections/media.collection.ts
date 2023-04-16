@@ -1,17 +1,24 @@
 import path from 'path';
 import { CollectionConfig } from 'payload/types';
 
+export interface UploadedMediaType {
+  alt: string;
+  url: string;
+  filename: string;
+  mimeType: string;
+  filesize: number;
+  width: number;
+  height: number;
+}
+
 export const Media: CollectionConfig = {
   slug: 'medias',
   access: {
     read: () => true
   },
-  admin: {
-    useAsTitle: 'filename'
-  },
   upload: {
     staticDir: path.resolve(__dirname, '../../media'),
-    mimeTypes: ['image/png', 'image/jpeg']
+    mimeTypes: ['*']
   },
   fields: [
     {

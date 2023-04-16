@@ -1,18 +1,14 @@
 import { Flex, FlexProps } from '@chakra-ui/react';
 
-interface BackgroundColorProps extends Pick<FlexProps, 'backgroundColor'> {
+export interface BackgroundColorProps extends Pick<FlexProps, 'bgColor'> {
   children: React.ReactNode | React.ReactNode[];
 }
 
 export const BackgroundColor = ({
   children,
-  backgroundColor
+  bgColor
 }: BackgroundColorProps) => (
-  <Flex
-    alignItems="center"
-    justifyContent="center"
-    backgroundColor={backgroundColor}
-  >
+  <Flex boxSize="full" bgColor={bgColor}>
     {children}
   </Flex>
 );

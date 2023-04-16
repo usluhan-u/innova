@@ -1,86 +1,78 @@
-import { Field } from 'payload/types';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { GroupField } from 'payload/types';
+import { PageType } from '../collections';
 
-interface CallToActionType {
+export interface CallToActionType {
   label: string;
-  type: 'internal' | 'external';
-  internal: string;
-  url: string;
-  newTab: boolean;
+  type: 'page' | 'custom';
+  page?: PageType;
+  url?: string;
 }
 
-const customURLCondition = (
-  _: Partial<unknown>,
-  siblingData: Partial<CallToActionType>
-) => siblingData.type === 'external';
+interface Args {
+  label?: string | false;
+  condition?: (data: any, siblingData: any) => boolean;
+}
 
-export const CallToAction: Field = {
-  name: 'callToAction',
-  label: 'Call to Action',
-  type: 'group',
-  fields: [
-    {
-      type: 'row',
-      fields: [
-        {
-          name: 'label',
-          label: 'Button Label',
-          type: 'text',
-          required: true,
-          localized: true,
-          admin: {
-            width: '50%'
+export const CallToAction = (args?: Args): GroupField => {
+  const { label, condition } = args || {};
+
+  return {
+    name: 'callToAction',
+    label: typeof label === 'boolean' ? label : label || 'Call to Action',
+    type: 'group',
+    fields: [
+      {
+        name: 'label',
+        label: 'Label',
+        type: 'text',
+        required: true,
+        localized: true
+      },
+      {
+        name: 'type',
+        label: 'Type',
+        type: 'radio',
+        defaultValue: 'page',
+        required: true,
+        options: [
+          {
+            label: 'Page',
+            value: 'page'
+          },
+          {
+            label: 'Custom URL',
+            value: 'custom'
           }
-        },
-        {
-          name: 'type',
-          label: 'Button Type',
-          type: 'radio',
-          defaultValue: 'internal',
-          required: true,
-          options: [
-            {
-              label: 'Internal Link',
-              value: 'internal'
-            },
-            {
-              label: 'External Link',
-              value: 'external'
-            }
-          ],
-          admin: {
-            width: '50%',
-            layout: 'horizontal'
-          }
+        ],
+        admin: {
+          layout: 'horizontal'
         }
-      ]
-    },
-    {
-      name: 'internal',
-      label: 'Link to Page',
-      type: 'relationship',
-      relationTo: 'pages',
-      required: true,
-      admin: {
-        condition: (_, siblingData) => siblingData.type === 'internal'
+      },
+      {
+        name: 'page',
+        label: 'Page',
+        type: 'relationship',
+        relationTo: 'pages',
+        required: true,
+        localized: true,
+        admin: {
+          condition: (_, siblingData) => siblingData?.type === 'page'
+        }
+      },
+      {
+        name: 'url',
+        label: 'URL',
+        type: 'text',
+        required: true,
+        localized: true,
+        admin: {
+          condition: (_, siblingData) => siblingData?.type === 'custom'
+        }
       }
-    },
-    {
-      name: 'url',
-      label: 'Button URL',
-      type: 'text',
-      required: true,
-      localized: true,
-      admin: {
-        condition: customURLCondition
-      }
-    },
-    {
-      name: 'newTab',
-      type: 'checkbox',
-      label: 'Open in new tab',
-      admin: {
-        condition: customURLCondition
-      }
+    ],
+    admin: {
+      condition
     }
-  ]
+  };
 };

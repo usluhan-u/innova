@@ -1,29 +1,24 @@
-import { Button, ThemeTypings } from '@chakra-ui/react';
+import { CallToActionType } from '../fields';
 import { ExternalLink } from './ExternalLink';
 import { InternalLink } from './InternalLink';
-import { CallToActionType } from '../blocks';
 
-export interface CallToActionProps extends CallToActionType {
-  backgroundColor?: ThemeTypings['colorSchemes'];
+export interface CallToActionProps extends Omit<CallToActionType, 'label'> {
+  children: React.ReactNode | React.ReactNode[];
 }
 
 export const CallToAction = ({
-  backgroundColor = 'blue',
-  url,
+  children,
   type,
-  newTab,
-  label
+  page,
+  url
 }: CallToActionProps) => (
   <>
-    {type === 'page' && (
-      <InternalLink href="[...slug]">
-        <Button colorScheme={backgroundColor}>{label}</Button>
-      </InternalLink>
+    {type === 'page' && page && (
+      <InternalLink slug={page.slug}>{children}</InternalLink>
     )}
     {type === 'custom' && url && (
-      <ExternalLink href={url} newTab={newTab}>
-        <Button colorScheme={backgroundColor}>{label}</Button>
-      </ExternalLink>
+      <ExternalLink href={url}>{children}</ExternalLink>
     )}
+    {type !== 'page' && type !== 'custom' && <>{null}</>}
   </>
 );

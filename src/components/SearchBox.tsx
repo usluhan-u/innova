@@ -1,33 +1,48 @@
+import { instantMeiliSearch } from '@meilisearch/instant-meilisearch';
+import { InstantSearch, Hits, Highlight } from 'react-instantsearch-dom';
 import {
+  Icon,
   Input,
   InputGroup,
   InputLeftElement,
   InputRightElement
 } from '@chakra-ui/react';
-import { SearchIcon, CloseIcon } from '@chakra-ui/icons';
+import { FaSearch } from 'react-icons/fa';
+import { IoClose } from 'react-icons/io5';
+import React from 'react';
 
-export interface SearchBoxProps {
-  expanded: boolean;
-  handleToggle: () => void;
-  placeholder?: string;
+interface HitProps {
+  hit: unknown;
 }
 
-export const SearchBox = ({
-  placeholder,
-  expanded,
-  handleToggle
-}: SearchBoxProps) => (
-  <InputGroup w={expanded ? 'full' : 'fit-content'}>
-    {expanded && (
-      <>
-        <InputLeftElement pos="relative">
-          <SearchIcon boxSize={5} />
-        </InputLeftElement>
-        <Input variant="unstyled" placeholder={placeholder} />
-      </>
-    )}
-    <InputRightElement onClick={handleToggle} pos="relative">
-      {expanded ? <CloseIcon boxSize={4} /> : <SearchIcon boxSize={5} />}
-    </InputRightElement>
-  </InputGroup>
-);
+const Hit = ({ hit }: HitProps) => <Highlight hit={hit} />;
+
+export const SearchBox = () => {
+  const [expanded, setExpanded] = React.useState(false);
+
+  const meiliSearchClient = instantMeiliSearch(
+    process.env.NEXT_PUBLIC_MEILISEARCH_URL || 'http://localhost:7700'
+  );
+
+  return (
+    <InstantSearch indexName="" searchClient={meiliSearchClient}>
+      <InputGroup w={expanded ? 'full' : 'fit-content'}>
+        {expanded && (
+          <>
+            <InputLeftElement pos="relative">
+              <Icon as={FaSearch} boxSize={5} />
+            </InputLeftElement>
+            <Input variant="unstyled" />
+          </>
+        )}
+        <InputRightElement
+          pos="relative"
+          onClick={() => setExpanded(!expanded)}
+        >
+          <Icon as={expanded ? IoClose : FaSearch} boxSize={expanded ? 7 : 5} />
+        </InputRightElement>
+      </InputGroup>
+      <Hits hitComponent={Hit} />
+    </InstantSearch>
+  );
+};

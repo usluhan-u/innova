@@ -1,19 +1,23 @@
 import { Block } from 'payload/types';
-import { BackgroundColor, BackgroundColorType } from '../fields';
-import { RichTextNode } from '../components';
-import { Alignment } from '../types';
+import {
+  BackgroundColor,
+  BackgroundColorType,
+  Width,
+  WidthType
+} from '../fields';
+import { RichTextContentType } from '../components';
 
-export type ContentColumnWidth = 'oneThird' | 'half' | 'twoThirds' | 'full';
+export type ContentColumnTextAlignType = 'left' | 'center' | 'right';
 
-interface ContentColumnType {
-  width: ContentColumnWidth;
-  alignment: Alignment;
-  content: RichTextNode[];
+export interface ContentColumnType {
+  textAlign: ContentColumnTextAlignType;
+  content: RichTextContentType[];
 }
 
 export interface ContentType {
   blockType: 'content';
   backgroundColor: BackgroundColorType;
+  width: WidthType;
   columns: ContentColumnType[];
 }
 
@@ -21,10 +25,13 @@ export const Content: Block = {
   slug: 'content',
   labels: {
     singular: 'Content',
-    plural: 'Content Blocks'
+    plural: 'Contents'
   },
   fields: [
-    BackgroundColor,
+    {
+      type: 'row',
+      fields: [BackgroundColor, Width]
+    },
     {
       name: 'columns',
       type: 'array',
@@ -35,59 +42,24 @@ export const Content: Block = {
       },
       fields: [
         {
-          type: 'row',
-          fields: [
+          name: 'textAlign',
+          label: 'Text Align',
+          type: 'radio',
+          defaultValue: 'left',
+          required: true,
+          localized: true,
+          options: [
             {
-              name: 'width',
-              label: 'Column Width',
-              type: 'select',
-              defaultValue: 'full',
-              required: true,
-              options: [
-                {
-                  label: 'One Third',
-                  value: 'oneThird'
-                },
-                {
-                  label: 'Half',
-                  value: 'half'
-                },
-                {
-                  label: 'Two Thirds',
-                  value: 'twoThirds'
-                },
-                {
-                  label: 'Full Width',
-                  value: 'full'
-                }
-              ],
-              admin: {
-                width: '50%'
-              }
+              label: 'Left',
+              value: 'left'
             },
             {
-              name: 'alignment',
-              label: 'Alignment',
-              type: 'select',
-              defaultValue: 'left',
-              required: true,
-              options: [
-                {
-                  label: 'Left',
-                  value: 'left'
-                },
-                {
-                  label: 'Center',
-                  value: 'center'
-                },
-                {
-                  label: 'Right',
-                  value: 'right'
-                }
-              ],
-              admin: {
-                width: '50%'
-              }
+              label: 'Center',
+              value: 'center'
+            },
+            {
+              label: 'Right',
+              value: 'right'
             }
           ]
         },

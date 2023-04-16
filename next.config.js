@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 require('dotenv').config();
 
 /**
@@ -11,21 +12,6 @@ const nextConfig = {
   images: {
     domains: ['localhost']
   },
-  async exportPathMap(defaultPathMap) {
-    return {
-      '/': { page: '/home' }
-    };
-  },
-
-  // async redirects() {
-  //   return [
-  //     {
-  //       source: '/home',
-  //       destination: '/',
-  //       permanent: true
-  //     }
-  //   ];
-  // },
   i18n: {
     locales: ['en', 'tr'],
     defaultLocale: 'tr',

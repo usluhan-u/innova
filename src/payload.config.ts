@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { buildConfig } from 'payload/config';
 import dotenv from 'dotenv';
-import path from 'path';
+import redirects from '@payloadcms/plugin-redirects';
 import nestedDocs from '@payloadcms/plugin-nested-docs';
 import seo from '@payloadcms/plugin-seo';
-import redirects from '@payloadcms/plugin-redirects';
-import { Home, Category, Media, Menu, Page, User } from './collections';
-import { Script, ContactUs } from './globals';
+import { Category, Media, Page, User } from './collections';
+import { Footer, Menu, NotFound, SocialMedia } from './globals';
+import { Logo, LogoIcon } from './icons';
 
 dotenv.config();
 
@@ -16,54 +16,41 @@ export default buildConfig({
   graphQL: {
     disable: true
   },
-  collections: [Home, Page, Menu, Media, Category, User],
-  globals: [Script, ContactUs],
+  globals: [SocialMedia, Footer, Menu, NotFound],
+  collections: [User, Page, Media, Category],
   localization: {
     locales: ['en', 'tr'],
     defaultLocale: 'tr',
     fallback: true
   },
   admin: {
-    user: User.slug
-    // meta: {
-    //   titleSuffix: '- İnnova',
-    //   favicon: '/assets/icon.svg',
-    //   ogImage: '/assets/logo.svg'
-    // },
-    // components: {
-    //   graphics: {
-    //     Logo,
-    //     Icon
-    //   }
-    // }
+    user: User.slug,
+    meta: {
+      titleSuffix: '- İnnova',
+      favicon: '/images/logo-icon.svg',
+      ogImage: '/images/logo.svg'
+    },
+    components: {
+      graphics: {
+        Logo,
+        Icon: LogoIcon
+      }
+    }
   },
   plugins: [
-    redirects({
-      collections: [Page.slug]
-    }),
+    redirects({ collections: [Page.slug] }),
     seo({
-      globals: [],
-      collections: [
-        Menu.slug,
-        Media.slug,
-        User.slug,
-        Category.slug,
-        Page.slug,
-        Home.slug
-      ],
-      generateTitle: ({ doc }: { doc: any }) => `İnnova — ${doc.title.value}`,
-      generateDescription: ({ doc }: { doc: any }) => doc.excerpt
+      collections: [Page.slug],
+      generateTitle: ({ doc }) => `İnnova - ${doc.title.value}`,
+      generateDescription: ({ doc }) => doc.excerpt.value
     }),
     nestedDocs({
       collections: [Page.slug],
       parentFieldSlug: 'parent',
       breadcrumbsFieldSlug: 'breadcrumbs',
-      generateLabel: (_, page) => page.title as string,
+      generateLabel: (_, page) => (page.title as string) || '',
       generateURL: (pages) =>
         pages.reduce((url, page) => `${url}/${page.slug}`, '')
     })
-  ],
-  typescript: {
-    outputFile: path.resolve(__dirname, 'payload-types.ts')
-  }
+  ]
 });

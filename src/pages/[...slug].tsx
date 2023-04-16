@@ -1,15 +1,18 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import payload from 'payload';
-import { Head, NotFound, RenderBlocks } from '../components';
 import { PageType } from '../collections';
+import { NotFound } from './NotFound';
+import { Head, RenderBlocks } from '../components';
+import { NotFoundType } from '../globals';
 
 export interface PageProps {
   page?: PageType;
+  notFound?: NotFoundType;
 }
 
-const Page = ({ page }: PageProps) => {
+const Page = ({ page, notFound }: PageProps) => {
   if (!page) {
-    return <NotFound />;
+    return <NotFound {...notFound} />;
   }
 
   return (
@@ -20,6 +23,13 @@ const Page = ({ page }: PageProps) => {
         keywords={page.meta?.keywords}
         noIndex={page.meta?.noIndex}
       />
+      {/* <Hero
+        {...{
+          ...page.hero,
+          breadcrumbs: page.breadcrumbs,
+          activeSlug: page.slug
+        }}
+      /> */}
       <RenderBlocks layout={page.layout} />
     </>
   );
@@ -45,6 +55,12 @@ export const getStaticProps: GetStaticProps = async ({
     }
   });
 
+  const notFoundQuery = await payload.findGlobal({
+    slug: 'not-found',
+    locale,
+    fallbackLocale: defaultLocale
+  });
+
   if (pageQuery.docs[0]) {
     return {
       props: {
@@ -55,7 +71,9 @@ export const getStaticProps: GetStaticProps = async ({
   }
 
   return {
-    props: {}
+    props: {
+      notFound: notFoundQuery
+    }
   };
 };
 

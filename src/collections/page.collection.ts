@@ -1,73 +1,92 @@
 import { CollectionConfig } from 'payload/types';
-import {
-  CallToAction,
-  Content,
-  Media,
-  MediaContent,
-  MediaSlider,
-  CallToActionType,
-  ContentType,
-  MediaContentType,
-  MediaType,
-  MediaSliderType,
-  Tabs,
-  TabsType,
-  SmallCardsType,
-  SmallCards,
-  CardsType,
-  Cards
-} from '../blocks';
+import { Breadcrumb } from '@payloadcms/plugin-nested-docs/dist/types';
 import { Meta, MetaType, Slug } from '../fields';
 import { generateFullTitle } from '../utils';
+import {
+  Accordion,
+  AccordionType,
+  CardGroup,
+  CardGroupType,
+  Content,
+  ContentType,
+  DocumentDownloaderGroup,
+  DocumentDownloaderGroupType,
+  DotSlider,
+  DotSliderType,
+  ImageTagGroup,
+  ImageTagGroupType,
+  MediaContent,
+  MediaContentType,
+  TabGroup,
+  TabGroupType,
+  TagGroup,
+  TagGroupType
+} from '../blocks';
 
 export type PageLayout =
-  | MediaContentType
+  | AccordionType
+  | CardGroupType
+  | ImageTagGroupType
+  | TagGroupType
   | ContentType
-  | MediaSliderType
-  | MediaType
-  | CallToActionType
-  | TabsType
-  | SmallCardsType
-  | CardsType;
+  | MediaContentType
+  | TabGroupType
+  | DotSliderType
+  | DocumentDownloaderGroupType;
+
+export type BlockType =
+  | AccordionType['blockType']
+  | CardGroupType['blockType']
+  | ImageTagGroupType['blockType']
+  | TagGroupType['blockType']
+  | ContentType['blockType']
+  | MediaContentType['blockType']
+  | TabGroupType['blockType']
+  | DotSliderType['blockType']
+  | DocumentDownloaderGroupType['blockType'];
 
 export interface PageType {
-  id: string;
-  title: string;
-  layout: PageLayout[];
   slug: string;
+  title: string;
+  fullTitle: string;
+  // hero: HeroType;
+  breadcrumbs: Breadcrumb[];
   meta: MetaType;
+  layout: PageLayout[];
 }
 
 export const Page: CollectionConfig = {
   slug: 'pages',
-  admin: {
-    useAsTitle: 'fullTitle'
-  },
   access: {
     read: () => true
+  },
+  admin: {
+    useAsTitle: 'fullTitle'
   },
   fields: [
     {
       name: 'title',
-      label: 'Page Title',
+      label: 'Title',
       type: 'text',
       required: true,
       localized: true
     },
+    // Hero,
     {
       name: 'layout',
       label: 'Page Layout',
       type: 'blocks',
       minRows: 1,
       blocks: [
-        MediaContent,
+        Accordion,
+        CardGroup,
+        ImageTagGroup,
+        TagGroup,
         Content,
-        MediaSlider,
-        Media,
-        CallToAction,
-        Tabs,
-        SmallCards,
-        Cards
+        MediaContent,
+        TabGroup,
+        DotSlider,
+        DocumentDownloaderGroup
       ]
     },
     {

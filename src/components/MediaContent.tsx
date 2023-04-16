@@ -1,46 +1,59 @@
-import { Flex, SimpleGrid, VStack } from '@chakra-ui/react';
+import { Grid, GridItem, Image } from '@chakra-ui/react';
+import { MediaContentType } from '../blocks';
+import { AutoPosition } from './AutoPosition';
+import { BackgroundColor } from './BackgroundColor';
 import { RichText } from './RichText';
-import { MediaContentAlignment, MediaContentType } from '../blocks';
-import { MediaViewer } from './MediaViewer';
-import { ExternalLink } from './ExternalLink';
 
 export interface MediaContentProps extends MediaContentType {}
 
-export const MediaContent = ({ header, content }: MediaContentProps) => {
-  const getAlignment = (alignment: MediaContentAlignment) => {
-    const alignmentMap: Record<string, string> = {
-      contentOnLeft: '1',
-      contentOnRight: '2'
-    };
-
-    return alignmentMap[alignment] || alignmentMap.contentOnLeft;
-  };
-
-  return (
-    <Flex gap={{ base: 6, md: 16 }} flexDirection="column">
-      {header && (
-        <RichText content={header.content} textAlign={header.alignment} />
-      )}
-      <SimpleGrid
-        columns={{ base: 1, md: 2 }}
-        alignItems="center"
-        justifyContent={{ base: 'center', md: 'space-between' }}
-        spacing={{ base: 4, md: 16 }}
-        w="full"
+export const MediaContent = ({
+  backgroundColor,
+  width,
+  content,
+  contentPosition,
+  image
+}: MediaContentProps) => (
+  <BackgroundColor bgColor={backgroundColor}>
+    <AutoPosition>
+      <Grid
+        templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
+        w={{ base: 'full', md: width }}
+        gap={8}
       >
-        <MediaViewer media={content.media} size={{ w: 'full', h: 'full' }} />
-        <VStack alignItems="normal" spacing={4}>
-          <RichText content={content.content} />
-          {content.externalLink && (
-            <ExternalLink
-              href={content.externalLink?.url}
-              newTab={content.externalLink.newTab}
-            >
-              {content.externalLink?.label}
-            </ExternalLink>
-          )}
-        </VStack>
-      </SimpleGrid>
-    </Flex>
-  );
-};
+        {contentPosition === 'left' && (
+          <>
+            <GridItem>
+              <Image
+                objectFit="cover"
+                src={image.url}
+                alt={image.alt}
+                w="xl"
+                borderRadius="lg"
+              />
+            </GridItem>
+            <GridItem>
+              <RichText content={content} />
+            </GridItem>
+          </>
+        )}
+
+        {contentPosition === 'right' && (
+          <>
+            <GridItem>
+              <RichText content={content} />
+            </GridItem>
+            <GridItem>
+              <Image
+                objectFit="cover"
+                src={image.url}
+                alt={image.alt}
+                w="xl"
+                borderRadius="lg"
+              />
+            </GridItem>
+          </>
+        )}
+      </Grid>
+    </AutoPosition>
+  </BackgroundColor>
+);
