@@ -10,6 +10,7 @@ import { Content } from './Content';
 import { MediaContent } from './MediaContent';
 import { TabGroup } from './TabGroup';
 import { DotSlider } from './DotSlider';
+import { DocumentDownloaderGroup } from './DocumentDownloaderGroup';
 
 export interface RenderBlocksProps {
   layout: PageLayout[];
@@ -23,7 +24,8 @@ const COMPONENTS: Record<BlockType, React.FC<any>> = {
   content: Content,
   mediaContent: MediaContent,
   tabGroup: TabGroup,
-  dotSlider: DotSlider
+  dotSlider: DotSlider,
+  documentDownloaderGroup: DocumentDownloaderGroup
 };
 
 export const RenderBlocks = ({ layout }: RenderBlocksProps) => (

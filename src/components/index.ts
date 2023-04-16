@@ -31,3 +31,5 @@ export * from './Tag';
 export * from './MediaContent';
 export * from './DotSlider';
 export * from './Slider';
+export * from './DocumentDownloaderGroup';
+export * from './DocumentDownloader';

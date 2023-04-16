@@ -20,17 +20,6 @@ const SliderWrapper = ({ children, width }: SliderWrapperProps) => (
     flexDir="column"
     overflow="hidden"
   >
-    <link
-      rel="stylesheet"
-      type="text/css"
-      charSet="UTF-8"
-      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
-    />
     {children}
   </Flex>
 );
@@ -75,12 +64,7 @@ const Slide = ({
 export const DotSlider = ({ items, width }: DotSliderProps) => {
   const slides = items.map((item) => <Slide {...item} key={uuidv4()} />);
 
-  const settings: Omit<SliderProps, 'slides'> = {
-    dots: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: true
-  };
+  const settings: Omit<SliderProps, 'slides'> = {};
 
   return (
     <SliderWrapper width={width}>
