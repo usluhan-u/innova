@@ -33,3 +33,5 @@ export * from './DotSlider';
 export * from './Slider';
 export * from './DocumentDownloaderGroup';
 export * from './DocumentDownloader';
+export * from './ImageDownloaderGroup';
+export * from './ImageDownloader';

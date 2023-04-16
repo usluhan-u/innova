@@ -11,6 +11,7 @@ import { MediaContent } from './MediaContent';
 import { TabGroup } from './TabGroup';
 import { DotSlider } from './DotSlider';
 import { DocumentDownloaderGroup } from './DocumentDownloaderGroup';
+import { ImageDownloaderGroup } from './ImageDownloaderGroup';
 
 export interface RenderBlocksProps {
   layout: PageLayout[];
@@ -25,7 +26,8 @@ const COMPONENTS: Record<BlockType, React.FC<any>> = {
   mediaContent: MediaContent,
   tabGroup: TabGroup,
   dotSlider: DotSlider,
-  documentDownloaderGroup: DocumentDownloaderGroup
+  documentDownloaderGroup: DocumentDownloaderGroup,
+  imageDownloaderGroup: ImageDownloaderGroup
 };
 
 export const RenderBlocks = ({ layout }: RenderBlocksProps) => (

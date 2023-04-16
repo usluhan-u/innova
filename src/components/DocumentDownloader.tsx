@@ -63,6 +63,7 @@ export const DocumentDownloader = ({
             variant="unstyled"
             aria-label="Download"
             icon={<FiDownload size="1.5em" />}
+            color="background.blue"
             onClick={handleDownload}
           />
         </Flex>
