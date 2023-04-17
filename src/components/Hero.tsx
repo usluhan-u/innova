@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { Breadcrumb } from '@payloadcms/plugin-nested-docs/dist/types';
 import { v4 as uuidv4 } from 'uuid';
-import { FaArrowRight } from 'react-icons/fa';
+import { FiArrowRight } from 'react-icons/fi';
 import { useRouter } from 'next/router';
 import { HeroType } from '../fields';
 import { BackgroundImage } from './BackgroundImage';
@@ -83,7 +83,7 @@ export const Hero = ({
                 callToActionToggle.callToAction && (
                   <ButtonCallToAction
                     {...callToActionToggle.callToAction}
-                    rightIcon={<FaArrowRight />}
+                    rightIcon={<FiArrowRight />}
                   />
                 )}
             </Flex>

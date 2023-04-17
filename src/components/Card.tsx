@@ -8,7 +8,7 @@ import {
   Text
 } from '@chakra-ui/react';
 import { format } from 'date-fns';
-import { FaArrowRight } from 'react-icons/fa';
+import { FiArrowRight } from 'react-icons/fi';
 import { TextIconCallToAction } from './TextIconCallToAction';
 import { CardGroupItemType } from '../blocks';
 
@@ -45,7 +45,7 @@ export const Card = ({ card }: CardProps) => (
           <TextIconCallToAction
             {...card.callToActionToggle.callToAction}
             color="text.blue"
-            icon={FaArrowRight}
+            icon={FiArrowRight}
           />
         )}
     </ChakraCardFooter>

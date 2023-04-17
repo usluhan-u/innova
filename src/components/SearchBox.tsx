@@ -7,7 +7,7 @@ import {
   InputLeftElement,
   InputRightElement
 } from '@chakra-ui/react';
-import { FaSearch } from 'react-icons/fa';
+import { FiSearch } from 'react-icons/fi';
 import { IoClose } from 'react-icons/io5';
 import React from 'react';
 
@@ -30,7 +30,7 @@ export const SearchBox = () => {
         {expanded && (
           <>
             <InputLeftElement pos="relative">
-              <Icon as={FaSearch} boxSize={5} />
+              <Icon as={FiSearch} boxSize={5} />
             </InputLeftElement>
             <Input variant="unstyled" />
           </>
@@ -39,7 +39,7 @@ export const SearchBox = () => {
           pos="relative"
           onClick={() => setExpanded(!expanded)}
         >
-          <Icon as={expanded ? IoClose : FaSearch} boxSize={expanded ? 7 : 5} />
+          <Icon as={expanded ? IoClose : FiSearch} boxSize={expanded ? 7 : 5} />
         </InputRightElement>
       </InputGroup>
       <Hits hitComponent={Hit} />

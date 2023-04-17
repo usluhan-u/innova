@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 import React from 'react';
-import { FaArrowRight, FaChevronDown } from 'react-icons/fa';
+import { FiArrowRight, FiChevronDown } from 'react-icons/fi';
 import { MenuItemType, MenuType } from '../globals';
 import { CallToAction } from './CallToAction';
 import { TextIconCallToAction } from './TextIconCallToAction';
@@ -29,7 +29,7 @@ export const Menu = ({ menu }: MenuProps) => {
         <>
           <ChakraMenuButton
             as={Button}
-            rightIcon={<FaChevronDown />}
+            rightIcon={<FiChevronDown />}
             bgColor="transparent"
             color="text.primary"
             fontWeight="normal"
@@ -77,7 +77,7 @@ export const Menu = ({ menu }: MenuProps) => {
                     type={menuItem.navigateTo.type}
                     page={menuItem.navigateTo.page}
                     url={menuItem.navigateTo.url}
-                    icon={FaArrowRight}
+                    icon={FiArrowRight}
                     color="text.blue"
                   />
                 </Flex>

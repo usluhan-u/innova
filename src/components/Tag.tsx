@@ -8,7 +8,7 @@ import {
   Flex,
   Center
 } from '@chakra-ui/react';
-import { FaArrowRight } from 'react-icons/fa';
+import { FiArrowRight } from 'react-icons/fi';
 import { TagGroupItemType } from '../blocks';
 import { TextIconCallToAction } from './TextIconCallToAction';
 
@@ -55,7 +55,7 @@ export const Tag = ({ tag }: TagProps) => (
         <CardFooter>
           <TextIconCallToAction
             {...tag.callToActionToggle.callToAction}
-            icon={FaArrowRight}
+            icon={FiArrowRight}
             color="text.blue"
           />
         </CardFooter>
