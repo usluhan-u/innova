@@ -1,4 +1,4 @@
-import { Button, ButtonProps, Flex } from '@chakra-ui/react';
+import { Button, ButtonProps, Center } from '@chakra-ui/react';
 import { CallToAction, CallToActionProps } from './CallToAction';
 
 export interface ButtonCallToActionProps
@@ -17,7 +17,7 @@ export const ButtonCallToAction = ({
   rightIcon,
   bgColor = 'background.blue'
 }: ButtonCallToActionProps) => (
-  <Flex align="center" gap={2} color={color}>
+  <Center color={color}>
     <CallToAction type={type} page={page} url={url}>
       <Button
         color={color}
@@ -30,5 +30,5 @@ export const ButtonCallToAction = ({
         {label}
       </Button>
     </CallToAction>
-  </Flex>
+  </Center>
 );

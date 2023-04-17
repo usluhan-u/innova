@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import redirects from '@payloadcms/plugin-redirects';
 import nestedDocs from '@payloadcms/plugin-nested-docs';
 import seo from '@payloadcms/plugin-seo';
+// import formBuilder from '@payloadcms/plugin-form-builder';
 import { Category, Media, Page, User } from './collections';
 import { Footer, Menu, NotFound, SocialMedia } from './globals';
 import { Logo, LogoIcon } from './icons';
@@ -39,10 +40,11 @@ export default buildConfig({
   },
   plugins: [
     redirects({ collections: [Page.slug] }),
+    // formBuilder({  }),
     seo({
       collections: [Page.slug],
-      generateTitle: ({ doc }) => `İnnova - ${doc.title.value}`,
-      generateDescription: ({ doc }) => doc.excerpt.value
+      generateTitle: ({ doc }: any) => `İnnova - ${doc.title.value}`,
+      generateDescription: ({ doc }: any) => doc.excerpt.value
     }),
     nestedDocs({
       collections: [Page.slug],

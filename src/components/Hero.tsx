@@ -4,16 +4,19 @@ import {
   BreadcrumbLink as ChakraBreadcrumbLink,
   Flex,
   Image,
-  Text
+  Select,
+  Text,
+  useMediaQuery
 } from '@chakra-ui/react';
 import { Breadcrumb } from '@payloadcms/plugin-nested-docs/dist/types';
 import { v4 as uuidv4 } from 'uuid';
 import { FaArrowRight } from 'react-icons/fa';
+import { useRouter } from 'next/router';
 import { HeroType } from '../fields';
-import { Container } from './Container';
 import { BackgroundImage } from './BackgroundImage';
 import { ButtonCallToAction } from './ButtonCallToAction';
 import { LinkButtonCallToAction } from './LinkButtonCallToAction';
+import { Container } from './Container';
 
 export interface HeroProps extends HeroType {
   breadcrumbs?: Breadcrumb[];
@@ -21,75 +24,124 @@ export interface HeroProps extends HeroType {
 }
 
 export const Hero = ({
-  bgImage,
+  backgroundImage,
   subtitle,
   title,
-  enableCallToAction,
-  callToAction,
   logo,
   breadcrumbs,
-  enableBottomCallToActions,
-  bottomCallToActions,
+  callToActionToggle,
+  callToActionGroup,
+  enableCallToActionGroup,
   activeSlug
-}: HeroProps) => (
-  <BackgroundImage url={bgImage.url}>
-    <Container>
-      <Flex
-        flexDir="column"
-        color="text.light"
-        h="full"
-        justify="space-between"
-      >
-        <Flex align="center" justify="space-between" h={4} mt={10}>
-          <ChakraBreadcrumb>
-            {breadcrumbs?.map((breadcrumb, index) => (
-              <ChakraBreadcrumbItem
-                key={uuidv4()}
-                textColor={
-                  index === breadcrumbs.length - 1 ? 'text.light' : 'text.gray'
-                }
-                isCurrentPage={index === breadcrumbs.length - 1}
-              >
-                <ChakraBreadcrumbLink href={breadcrumb.url}>
-                  {breadcrumb.label}
-                </ChakraBreadcrumbLink>
-              </ChakraBreadcrumbItem>
-            ))}
-          </ChakraBreadcrumb>
-          <Flex align="center" gap={6}>
-            {logo && <Image src={logo?.url} alt={logo?.alt} />}
-            {enableCallToAction && callToAction && (
-              <ButtonCallToAction
-                {...callToAction}
-                rightIcon={<FaArrowRight />}
-              />
+}: HeroProps) => {
+  const [isLargerThanMd] = useMediaQuery('(min-width: 768px)');
+  const router = useRouter();
+
+  return (
+    <BackgroundImage url={backgroundImage.url}>
+      <Container>
+        <Flex
+          boxSize="full"
+          flexDir="column"
+          color="text.light"
+          justify="space-between"
+          gap={{ base: 2, md: 0 }}
+          pt={6}
+        >
+          <Flex
+            flexDir={{ base: 'column', md: 'row' }}
+            align={{ base: 'flex-start', md: 'center' }}
+            justify="space-between"
+            gap={4}
+          >
+            <ChakraBreadcrumb>
+              {breadcrumbs?.map((breadcrumb, index) => (
+                <ChakraBreadcrumbItem
+                  key={uuidv4()}
+                  fontWeight="normal"
+                  fontSize="sm"
+                  textColor={
+                    index === breadcrumbs.length - 1
+                      ? 'text.light'
+                      : 'text.gray'
+                  }
+                  isCurrentPage={index === breadcrumbs.length - 1}
+                >
+                  <ChakraBreadcrumbLink href={breadcrumb.url}>
+                    {breadcrumb.label}
+                  </ChakraBreadcrumbLink>
+                </ChakraBreadcrumbItem>
+              ))}
+            </ChakraBreadcrumb>
+            <Flex
+              flexDir={{ base: 'column', md: 'row' }}
+              align={{ base: 'flex-start', md: 'center' }}
+              gap={4}
+            >
+              {logo && <Image src={logo?.url} alt={logo?.alt} />}
+              {callToActionToggle.enableCallToAction &&
+                callToActionToggle.callToAction && (
+                  <ButtonCallToAction
+                    {...callToActionToggle.callToAction}
+                    rightIcon={<FaArrowRight />}
+                  />
+                )}
+            </Flex>
+          </Flex>
+          <Flex flexDir="column" gap={{ base: 4, md: 0 }}>
+            <Text fontWeight="semibold" fontSize={{ base: '2xl', md: '4xl' }}>
+              {title}
+            </Text>
+            {subtitle && (
+              <Text fontWeight="medium" fontSize={{ base: 'md', md: '2xl' }}>
+                {subtitle}
+              </Text>
             )}
           </Flex>
-        </Flex>
-        <Flex flexDir="column">
-          <Text fontWeight="semibold" fontSize="4xl">
-            {title}
-          </Text>
-          {subtitle && (
-            <Text fontWeight="medium" fontSize="2xl">
-              {subtitle}
-            </Text>
+          {enableCallToActionGroup && callToActionGroup && (
+            <>
+              {isLargerThanMd ? (
+                <Flex gap={8}>
+                  {callToActionGroup.items?.map((item) => (
+                    <LinkButtonCallToAction
+                      key={uuidv4()}
+                      {...item.callToAction}
+                      active={
+                        item.callToAction.page?.slug === activeSlug ||
+                        item.callToAction.url === activeSlug
+                      }
+                    />
+                  ))}
+                </Flex>
+              ) : (
+                <Select
+                  variant="filled"
+                  value={activeSlug}
+                  color="text.primary"
+                  bgColor="background.gray"
+                  borderRadius="3xl"
+                  border="none"
+                  py={4}
+                  onChange={(e) => router.push(e.target.value)}
+                  _focus={{ bgColor: 'background.gray' }}
+                >
+                  {callToActionGroup.items?.map((item) => (
+                    <option
+                      key={uuidv4()}
+                      value={
+                        item.callToAction.page?.slug || item.callToAction.url
+                      }
+                      aria-label={item.callToAction.label}
+                    >
+                      {item.callToAction.label}
+                    </option>
+                  ))}
+                </Select>
+              )}
+            </>
           )}
         </Flex>
-        <Flex align="center" gap={6}>
-          {enableBottomCallToActions &&
-            bottomCallToActions?.map((bottomCallToAction) => (
-              <LinkButtonCallToAction
-                key={uuidv4()}
-                {...bottomCallToAction.callToAction}
-                active={
-                  bottomCallToAction.callToAction.page?.slug === activeSlug ||
-                  bottomCallToAction.callToAction.url === activeSlug
-                }
-              />
-            ))}
-        </Flex>
-      </Flex>
-    </Container>
-  </BackgroundImage>
-);
+      </Container>
+    </BackgroundImage>
+  );
+};

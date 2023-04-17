@@ -6,17 +6,21 @@ import {
   CallToActionToggleType
 } from './call-to-action-toggle.field';
 
-interface BottomCallToAction {
+interface CallToActionGroupItemType {
   callToAction: CallToActionType;
+}
+
+interface CallToActionGroupType {
+  items: CallToActionGroupItemType[];
 }
 
 export interface HeroType {
   title: string;
   subtitle?: string;
   callToActionToggle: CallToActionToggleType;
-  enableBottomCallToActions?: boolean;
-  bottomCallToActions?: BottomCallToAction[];
-  bgImage: UploadedMediaType;
+  enableCallToActionGroup?: boolean;
+  callToActionGroup?: CallToActionGroupType;
+  backgroundImage: UploadedMediaType;
   logo?: UploadedMediaType;
 }
 
@@ -40,28 +44,35 @@ export const Hero: Field = {
     },
     CallToActionToggle,
     {
-      name: 'enableBottomCallToActions',
-      label: 'Bottom Call to Actions',
+      name: 'enableCallToActionGroup',
+      label: 'Call to Action Group',
       type: 'checkbox',
       defaultValue: false,
       required: true
     },
     {
-      name: 'bottomCallToActions',
-      labels: {
-        singular: 'Bottom Call to Action',
-        plural: 'Bottom Call to Actions'
-      },
-      type: 'array',
-      minRows: 1,
-      fields: [CallToAction({ label: false })],
+      name: 'callToActionGroup',
+      label: false,
+      type: 'group',
+      fields: [
+        {
+          name: 'items',
+          labels: {
+            singular: 'Item',
+            plural: 'Items'
+          },
+          type: 'array',
+          minRows: 1,
+          fields: [CallToAction({ label: false })]
+        }
+      ],
       admin: {
         condition: (_, siblingData) =>
-          Boolean(siblingData?.enableBottomCallToActions)
+          Boolean(siblingData?.enableCallToActionGroup)
       }
     },
     {
-      name: 'bgImage',
+      name: 'backgroundImage',
       label: 'Background Image',
       type: 'upload',
       relationTo: 'medias',
