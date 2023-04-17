@@ -38,7 +38,6 @@ export const Card = ({ card }: CardProps) => (
         )}
       </Flex>
     </ChakraCardBody>
-
     <ChakraCardFooter justify="space-between" flexWrap="wrap">
       {card.callToActionToggle.enableCallToAction &&
         card.callToActionToggle.callToAction && (

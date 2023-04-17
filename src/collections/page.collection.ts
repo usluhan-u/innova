@@ -8,6 +8,8 @@ import {
   CardGroup,
   CardGroupType,
   Content,
+  ContentCardGroup,
+  ContentCardGroupType,
   ContentType,
   DocumentDownloaderGroup,
   DocumentDownloaderGroupType,
@@ -35,7 +37,8 @@ export type PageLayout =
   | TabGroupType
   | DotSliderType
   | DocumentDownloaderGroupType
-  | ImageDownloaderGroupType;
+  | ImageDownloaderGroupType
+  | ContentCardGroupType;
 
 export type BlockType =
   | AccordionType['blockType']
@@ -47,7 +50,8 @@ export type BlockType =
   | TabGroupType['blockType']
   | DotSliderType['blockType']
   | DocumentDownloaderGroupType['blockType']
-  | ImageDownloaderGroupType['blockType'];
+  | ImageDownloaderGroupType['blockType']
+  | ContentCardGroupType['blockType'];
 
 export interface PageType {
   slug: string;
@@ -100,7 +104,8 @@ export const Page: CollectionConfig = {
                 TabGroup,
                 DotSlider,
                 DocumentDownloaderGroup,
-                ImageDownloaderGroup
+                ImageDownloaderGroup,
+                ContentCardGroup
               ]
             }
           ]

@@ -35,3 +35,5 @@ export * from './DocumentDownloaderGroup';
 export * from './DocumentDownloader';
 export * from './ImageDownloaderGroup';
 export * from './ImageDownloader';
+export * from './ContentCard';
+export * from './ContentCardGroup';
