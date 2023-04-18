@@ -4,10 +4,10 @@ import dotenv from 'dotenv';
 import redirects from '@payloadcms/plugin-redirects';
 import nestedDocs from '@payloadcms/plugin-nested-docs';
 import seo from '@payloadcms/plugin-seo';
-// import formBuilder from '@payloadcms/plugin-form-builder';
+import formBuilder from '@payloadcms/plugin-form-builder';
 import { Category, Media, Page, User } from './collections';
 import { Footer, Menu, NotFound, SocialMedia } from './globals';
-import { Logo, LogoIcon } from './icons';
+import { Logo } from './icons';
 
 dotenv.config();
 
@@ -17,8 +17,8 @@ export default buildConfig({
   graphQL: {
     disable: true
   },
+  collections: [Category, Page, Media, User],
   globals: [SocialMedia, Footer, Menu, NotFound],
-  collections: [User, Page, Media, Category],
   localization: {
     locales: ['en', 'tr'],
     defaultLocale: 'tr',
@@ -34,13 +34,28 @@ export default buildConfig({
     components: {
       graphics: {
         Logo,
-        Icon: LogoIcon
+        Icon: Logo
       }
     }
   },
   plugins: [
-    redirects({ collections: [Page.slug] }),
-    // formBuilder({  }),
+    formBuilder({
+      formOverrides: {
+        admin: {
+          group: 'Content'
+        }
+      },
+      formSubmissionOverrides: {
+        admin: {
+          group: 'Admin'
+        }
+      },
+      redirectRelationships: [Page.slug]
+    }),
+    redirects({
+      collections: [Page.slug],
+      overrides: { admin: { group: 'Admin' } }
+    }),
     seo({
       collections: [Page.slug],
       generateTitle: ({ doc }: any) => `İnnova - ${doc.title.value}`,

@@ -20,6 +20,9 @@ export const Media: CollectionConfig = {
     staticDir: path.resolve(__dirname, '../../media'),
     mimeTypes: ['*']
   },
+  admin: {
+    group: 'Content'
+  },
   fields: [
     {
       name: 'alt',

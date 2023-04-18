@@ -13,6 +13,9 @@ export const NotFound: GlobalConfig = {
   access: {
     read: () => true
   },
+  admin: {
+    group: 'Global'
+  },
   fields: [
     {
       name: 'description',

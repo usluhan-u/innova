@@ -6,6 +6,9 @@ export const User: CollectionConfig = {
   access: {
     read: () => true
   },
+  admin: {
+    group: 'Admin'
+  },
   fields: [
     // Email added by default
     // Add more fields as needed

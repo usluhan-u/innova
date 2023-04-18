@@ -69,7 +69,8 @@ export const Page: CollectionConfig = {
     read: () => true
   },
   admin: {
-    useAsTitle: 'fullTitle'
+    useAsTitle: 'fullTitle',
+    group: 'Content'
   },
   fields: [
     {
