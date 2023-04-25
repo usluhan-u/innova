@@ -3,7 +3,8 @@ import escapeHTML from 'escape-html';
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Text as SlateText } from 'slate';
-import { Heading, Image, Text, chakra } from '@chakra-ui/react';
+import { Heading, Icon, Image, Text, chakra } from '@chakra-ui/react';
+import { FiCheck, FiCheckCircle } from 'react-icons/fi';
 import { UploadedMediaType } from '../fields';
 
 export interface RichTextContentType {
@@ -171,6 +172,24 @@ const serialize = (
             h="lg"
             w="full"
             borderRadius="lg"
+          />
+        );
+      case 'check':
+        return (
+          <Icon
+            key={uuidv4()}
+            as={FiCheck}
+            fontSize="1.5rem"
+            color="background.blue"
+          />
+        );
+      case 'check-circle':
+        return (
+          <Icon
+            key={uuidv4()}
+            as={FiCheckCircle}
+            fontSize="1.5rem"
+            color="background.blue"
           />
         );
       default:
