@@ -27,7 +27,7 @@ const MyApp = ({
     <Flex minH="100vh" flexDir="column">
       <Header menu={menu} />
       <Component {...pageProps} />
-      <Footer socialMedia={socialMedia} footer={footer} />
+      <Footer socialMedia={socialMedia} footer={footer} marginTop="auto" />
     </Flex>
   </ChakraProvider>
 );

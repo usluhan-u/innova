@@ -1,11 +1,11 @@
 import { ChakraProps, Divider, Flex, chakra } from '@chakra-ui/react';
 import {
-  FiFacebook,
-  FiInstagram,
-  FiLinkedin,
-  FiTwitter,
-  FiYoutube
-} from 'react-icons/fi';
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedin,
+  FaTwitter,
+  FaYoutube
+} from 'react-icons/fa';
 import { v4 as uuidv4 } from 'uuid';
 import {
   FooterLinkGroupLinkType,
@@ -85,19 +85,19 @@ export const Footer = ({ socialMedia, footer }: FooterProps) => {
             <LogoDark />
             <Flex align="center" gap={2}>
               {socialMedia.facebook && (
-                <SocialMedia icon={FiFacebook} href={socialMedia.facebook} />
+                <SocialMedia icon={FaFacebookF} href={socialMedia.facebook} />
               )}
               {socialMedia.linkedIn && (
-                <SocialMedia icon={FiLinkedin} href={socialMedia.linkedIn} />
+                <SocialMedia icon={FaLinkedin} href={socialMedia.linkedIn} />
               )}
               {socialMedia.youtube && (
-                <SocialMedia icon={FiYoutube} href={socialMedia.youtube} />
+                <SocialMedia icon={FaYoutube} href={socialMedia.youtube} />
               )}
               {socialMedia.twitter && (
-                <SocialMedia icon={FiTwitter} href={socialMedia.twitter} />
+                <SocialMedia icon={FaTwitter} href={socialMedia.twitter} />
               )}
               {socialMedia.instagram && (
-                <SocialMedia icon={FiInstagram} href={socialMedia.instagram} />
+                <SocialMedia icon={FaInstagram} href={socialMedia.instagram} />
               )}
             </Flex>
           </Flex>

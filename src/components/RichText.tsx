@@ -82,7 +82,7 @@ const serialize = (
       }
 
       return (
-        <Text key={uuidv4()} my="0">
+        <Text key={uuidv4()} as="span" my="0">
           {text}
         </Text>
       );
@@ -194,7 +194,7 @@ const serialize = (
         );
       default:
         return (
-          <Text key={uuidv4()} as="span">
+          <Text key={uuidv4()} as="p">
             {serialize((node as RichTextContentType).children!)}
           </Text>
         );

@@ -90,12 +90,8 @@ export const Menu = ({ menu }: MenuProps) => {
 
     if (menuItem.type === 'single' && menuItem.menuItem) {
       return (
-        <CallToAction
-          type={menuItem.menuItem.type}
-          page={menuItem.menuItem.page}
-          url={menuItem.menuItem.url}
-        >
-          {menuItem.menuItem.label}
+        <CallToAction {...menuItem.menuItem.callToAction}>
+          {menuItem.label}
         </CallToAction>
       );
     }

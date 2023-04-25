@@ -13,10 +13,12 @@ export interface MenuItemGroupType {
 export interface MenuItemType {
   label: string;
   type: 'multiple' | 'single';
-  menuItemGroups?: MenuItemGroupType[];
-  menuItem?: CallToActionType;
+  menuItemGroups: MenuItemGroupType[];
+  menuItem: {
+    callToAction: CallToActionType;
+  };
   enableNavigateTo: boolean;
-  navigateTo?: CallToActionType;
+  navigateTo: CallToActionType;
 }
 
 export interface MenuType {
