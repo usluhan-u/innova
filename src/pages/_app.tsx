@@ -26,7 +26,7 @@ const MyApp = ({
   <ChakraProvider theme={theme}>
     <Flex minH="100vh" flexDir="column">
       <Header menu={menu} />
-      <Component {...pageProps} />
+      <Component {...pageProps} flexGrow={1} />
       <Footer socialMedia={socialMedia} footer={footer} marginTop="auto" />
     </Flex>
   </ChakraProvider>
