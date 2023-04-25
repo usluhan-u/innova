@@ -2,10 +2,10 @@ import { Block } from 'payload/types';
 import {
   BackgroundColor,
   BackgroundColorType,
+  UploadedMediaType,
   Width,
   WidthType
 } from '../fields';
-import { UploadedMediaType } from '../collections';
 
 export interface DocumentDownloaderGroupItemType {
   language: 'en' | 'tr';
@@ -28,10 +28,8 @@ export const DocumentDownloaderGroup: Block = {
     plural: 'Document Downloader Groups'
   },
   fields: [
-    {
-      type: 'row',
-      fields: [BackgroundColor, Width]
-    },
+    BackgroundColor,
+    Width,
     {
       name: 'items',
       labels: {
@@ -43,7 +41,7 @@ export const DocumentDownloaderGroup: Block = {
       fields: [
         {
           name: 'language',
-          label: 'Language',
+          label: 'Document Language',
           type: 'radio',
           defaultValue: 'tr',
           required: true,

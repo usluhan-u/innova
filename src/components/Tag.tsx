@@ -50,15 +50,14 @@ export const Tag = ({ tag }: TagProps) => (
         </Flex>
       </Center>
     </CardBody>
-    {tag.callToActionToggle.enableCallToAction &&
-      tag.callToActionToggle.callToAction && (
-        <CardFooter>
-          <TextIconCallToAction
-            {...tag.callToActionToggle.callToAction}
-            icon={FiArrowRight}
-            color="text.blue"
-          />
-        </CardFooter>
-      )}
+    {tag.callToAction.enable && tag.callToAction.callToAction && (
+      <CardFooter>
+        <TextIconCallToAction
+          {...tag.callToAction.callToAction}
+          icon={FiArrowRight}
+          color="text.blue"
+        />
+      </CardFooter>
+    )}
   </Card>
 );

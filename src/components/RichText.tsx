@@ -4,7 +4,7 @@ import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Text as SlateText } from 'slate';
 import { Heading, Image, Text, chakra } from '@chakra-ui/react';
-import { UploadedMediaType } from '../collections';
+import { UploadedMediaType } from '../fields';
 
 export interface RichTextContentType {
   text: string;

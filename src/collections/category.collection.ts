@@ -10,13 +10,15 @@ export const Category: CollectionConfig = {
     read: () => true
   },
   admin: {
-    group: 'Content'
+    useAsTitle: 'label',
+    defaultColumns: ['label']
   },
   fields: [
     {
       name: 'label',
       label: 'Label',
       type: 'text',
+      unique: true,
       required: true,
       localized: true
     }

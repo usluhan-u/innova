@@ -5,7 +5,7 @@ export type WidthType = '25%' | '33.33%' | '50%' | '66.66%' | '75%' | '100%';
 export const Width: Field = {
   name: 'width',
   label: 'Width',
-  type: 'radio',
+  type: 'select',
   defaultValue: '100%',
   required: true,
   localized: true,
@@ -34,8 +34,5 @@ export const Width: Field = {
       label: 'Full',
       value: '100%'
     }
-  ],
-  admin: {
-    width: '70%'
-  }
+  ]
 };

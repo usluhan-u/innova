@@ -1,10 +1,4 @@
 import { Block } from 'payload/types';
-import {
-  BackgroundColor,
-  BackgroundColorType,
-  Width,
-  WidthType
-} from '../fields';
 import { RichTextContentType } from '../components';
 
 export type ContentColumnTextAlignType = 'left' | 'center' | 'right';
@@ -16,8 +10,6 @@ export interface ContentColumnType {
 
 export interface ContentType {
   blockType: 'content';
-  backgroundColor: BackgroundColorType;
-  width: WidthType;
   columns: ContentColumnType[];
 }
 
@@ -28,10 +20,6 @@ export const Content: Block = {
     plural: 'Contents'
   },
   fields: [
-    {
-      type: 'row',
-      fields: [BackgroundColor, Width]
-    },
     {
       name: 'columns',
       type: 'array',

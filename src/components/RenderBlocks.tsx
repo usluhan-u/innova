@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { v4 as uuidv4 } from 'uuid';
 import React from 'react';
-import { BlockType, PageLayout } from '../collections';
+import { PageBlockType, PageLayout } from '../collections';
 import { Accordion } from './Accordion';
 import { CardGroup } from './CardGroup';
 import { ImageTagGroup } from './ImageTagGroup';
@@ -18,7 +18,7 @@ export interface RenderBlocksProps {
   layout: PageLayout[];
 }
 
-const COMPONENTS: Record<BlockType, React.FC<any>> = {
+const COMPONENTS: Record<PageBlockType, React.FC<any>> = {
   accordion: Accordion,
   cardGroup: CardGroup,
   imageTagGroup: ImageTagGroup,

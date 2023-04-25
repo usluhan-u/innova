@@ -1,40 +1,35 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { GroupField } from 'payload/types';
+import { Field } from 'payload/types';
 import { PageType } from '../collections';
 
 export interface CallToActionType {
   label: string;
   type: 'page' | 'custom';
+  newTab?: boolean;
   page?: PageType;
   url?: string;
 }
 
 interface Args {
   label?: string | false;
+  required?: boolean;
   condition?: (data: any, siblingData: any) => boolean;
 }
 
-export const CallToAction = (args?: Args): GroupField => {
-  const { label, condition } = args || {};
+export const CallToAction = (args?: Args): Field => {
+  const { label, condition, required } = args || {};
 
   return {
+    label: typeof label === 'boolean' ? label : label || 'Call To Action',
     name: 'callToAction',
-    label: typeof label === 'boolean' ? label : label || 'Call to Action',
     type: 'group',
     fields: [
-      {
-        name: 'label',
-        label: 'Label',
-        type: 'text',
-        required: true,
-        localized: true
-      },
       {
         name: 'type',
         label: 'Type',
         type: 'radio',
         defaultValue: 'page',
-        required: true,
+        required,
         options: [
           {
             label: 'Page',
@@ -50,11 +45,18 @@ export const CallToAction = (args?: Args): GroupField => {
         }
       },
       {
+        name: 'label',
+        label: 'Label',
+        type: 'text',
+        required,
+        localized: true
+      },
+      {
         name: 'page',
         label: 'Page',
         type: 'relationship',
         relationTo: 'pages',
-        required: true,
+        required,
         localized: true,
         admin: {
           condition: (_, siblingData) => siblingData?.type === 'page'
@@ -64,11 +66,16 @@ export const CallToAction = (args?: Args): GroupField => {
         name: 'url',
         label: 'URL',
         type: 'text',
-        required: true,
+        required,
         localized: true,
         admin: {
           condition: (_, siblingData) => siblingData?.type === 'custom'
         }
+      },
+      {
+        name: 'newTab',
+        label: 'Open in New Tab',
+        type: 'checkbox'
       }
     ],
     admin: {

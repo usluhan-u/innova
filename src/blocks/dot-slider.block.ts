@@ -1,17 +1,17 @@
 import { Block } from 'payload/types';
 import {
-  CallToActionToggle,
-  CallToActionToggleType,
+  CallToAction,
+  CallToActionType,
+  UploadedMediaType,
   Width,
   WidthType
 } from '../fields';
-import { UploadedMediaType } from '../collections';
 
 export interface DotSliderItemType {
   title?: string;
   description?: string;
   backgroundImage: UploadedMediaType;
-  callToActionToggle: CallToActionToggleType;
+  callToAction: CallToActionType;
 }
 
 export interface DotSliderType {
@@ -61,7 +61,7 @@ export const DotSlider: Block = {
           required: true,
           localized: true
         },
-        CallToActionToggle
+        CallToAction()
       ]
     }
   ]

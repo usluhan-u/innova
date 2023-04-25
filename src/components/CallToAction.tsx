@@ -10,14 +10,19 @@ export const CallToAction = ({
   children,
   type,
   page,
-  url
+  url,
+  newTab
 }: CallToActionProps) => (
   <>
     {type === 'page' && page && (
-      <InternalLink slug={page.slug}>{children}</InternalLink>
+      <InternalLink slug={page.slug} newTab={newTab}>
+        {children}
+      </InternalLink>
     )}
     {type === 'custom' && url && (
-      <ExternalLink href={url}>{children}</ExternalLink>
+      <ExternalLink href={url} newTab={newTab}>
+        {children}
+      </ExternalLink>
     )}
     {type !== 'page' && type !== 'custom' && <>{null}</>}
   </>

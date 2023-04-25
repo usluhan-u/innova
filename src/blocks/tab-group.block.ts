@@ -31,10 +31,8 @@ export const TabGroup: Block = {
     plural: 'Tab Groups'
   },
   fields: [
-    {
-      type: 'row',
-      fields: [BackgroundColor, Width]
-    },
+    BackgroundColor,
+    Width,
     {
       type: 'row',
       fields: [

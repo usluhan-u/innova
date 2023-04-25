@@ -1,10 +1,4 @@
 import { Block } from 'payload/types';
-import {
-  BackgroundColor,
-  BackgroundColorType,
-  Width,
-  WidthType
-} from '../fields';
 
 interface AccordionItemType {
   title: string;
@@ -13,8 +7,6 @@ interface AccordionItemType {
 
 export interface AccordionType {
   blockType: 'accordion';
-  backgroundColor: BackgroundColorType;
-  width: WidthType;
   items: AccordionItemType[];
 }
 
@@ -25,10 +17,6 @@ export const Accordion: Block = {
     plural: 'Accordions'
   },
   fields: [
-    {
-      type: 'row',
-      fields: [BackgroundColor, Width]
-    },
     {
       name: 'items',
       labels: {

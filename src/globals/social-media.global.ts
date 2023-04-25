@@ -14,9 +14,6 @@ export const SocialMedia: GlobalConfig = {
   access: {
     read: () => true
   },
-  admin: {
-    group: 'Global'
-  },
   fields: [
     {
       name: 'facebook',

@@ -1,2 +1,2 @@
-export * from './format-slug.util';
-export * from './generate-full-title';
+export * from './regenerate-page';
+export * from './deep-merge';

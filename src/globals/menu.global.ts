@@ -29,9 +29,6 @@ export const Menu: GlobalConfig = {
   access: {
     read: () => true
   },
-  admin: {
-    group: 'Global'
-  },
   fields: [
     {
       name: 'menuItems',

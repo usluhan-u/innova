@@ -2,17 +2,17 @@ import { Block } from 'payload/types';
 import {
   BackgroundColor,
   BackgroundColorType,
-  CallToActionToggle,
-  CallToActionToggleType,
+  CallToAction,
+  CallToActionType,
+  UploadedMediaType,
   Width,
   WidthType
 } from '../fields';
-import { UploadedMediaType } from '../collections';
 
 export interface TagGroupItemType {
   title: string;
   content?: string;
-  callToActionToggle: CallToActionToggleType;
+  callToAction: CallToActionType;
   icon: UploadedMediaType;
 }
 
@@ -30,10 +30,8 @@ export const TagGroup: Block = {
     plural: 'Tag Groups'
   },
   fields: [
-    {
-      type: 'row',
-      fields: [BackgroundColor, Width]
-    },
+    BackgroundColor,
+    Width,
     {
       name: 'items',
       labels: {
@@ -64,7 +62,7 @@ export const TagGroup: Block = {
           required: true,
           localized: true
         },
-        CallToActionToggle
+        CallToAction()
       ]
     }
   ]

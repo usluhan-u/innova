@@ -10,10 +10,29 @@ import {
 import { format } from 'date-fns';
 import { FiArrowRight } from 'react-icons/fi';
 import { TextIconCallToAction } from './TextIconCallToAction';
-import { CardGroupItemType } from '../blocks';
+import { CategoryType } from '../collections';
+import { UploadedMediaType } from '../fields';
+
+export interface CardItem {
+  title: string;
+  date: string;
+  category?: CategoryType;
+  image: UploadedMediaType;
+  callToActionToggle: {
+    enableCallToAction: boolean;
+    callToAction: {
+      label: string;
+      type: 'page' | 'custom';
+      page?: {
+        slug: string;
+      };
+      url?: string;
+    };
+  };
+}
 
 export interface CardProps {
-  card: CardGroupItemType;
+  card: CardItem;
 }
 
 export const Card = ({ card }: CardProps) => (

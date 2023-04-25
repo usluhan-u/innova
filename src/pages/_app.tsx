@@ -37,7 +37,7 @@ export default MyApp;
 MyApp.getInitialProps = async (appContext: AppContext) => {
   const appProps = await App.getInitialProps(appContext);
 
-  const [socialMediaQuery, footerQuery, menuQuery] = await Promise.all([
+  const [socialMedia, footer, menu] = (await Promise.all([
     fetch(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/api/globals/social-media?locale=${appContext.ctx.locale}&fallback-locale=${appContext.ctx.defaultLocale}`
     ).then((res) => res.json()),
@@ -47,12 +47,12 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
     fetch(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/api/globals/menu?locale=${appContext.ctx.locale}&fallback-locale=${appContext.ctx.defaultLocale}`
     ).then((res) => res.json())
-  ]);
+  ])) as [SocialMediaType, FooterType, MenuType];
 
   return {
     ...appProps,
-    socialMedia: socialMediaQuery,
-    footer: footerQuery,
-    menu: menuQuery
+    socialMedia,
+    footer,
+    menu
   };
 };

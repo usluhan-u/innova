@@ -12,13 +12,14 @@ export const ButtonCallToAction = ({
   type,
   page,
   url,
+  newTab,
   color = 'text.light',
   leftIcon,
   rightIcon,
   bgColor = 'background.blue'
 }: ButtonCallToActionProps) => (
   <Center color={color}>
-    <CallToAction type={type} page={page} url={url}>
+    <CallToAction type={type} page={page} url={url} newTab={newTab}>
       <Button
         color={color}
         bgColor={bgColor}

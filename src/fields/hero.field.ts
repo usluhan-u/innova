@@ -1,25 +1,16 @@
 import { Field } from 'payload/types';
+import { Media, UploadedMediaType } from './media.field';
+import { CallToActionGroup } from './call-to-action-group.field';
 import { CallToAction, CallToActionType } from './call-to-action.field';
-import { UploadedMediaType } from '../collections';
-import {
-  CallToActionToggle,
-  CallToActionToggleType
-} from './call-to-action-toggle.field';
-
-interface CallToActionGroupItemType {
-  callToAction: CallToActionType;
-}
-
-interface CallToActionGroupType {
-  items: CallToActionGroupItemType[];
-}
 
 export interface HeroType {
+  type: 'home' | 'default';
   title: string;
-  subtitle?: string;
-  callToActionToggle: CallToActionToggleType;
-  enableCallToActionGroup?: boolean;
-  callToActionGroup?: CallToActionGroupType;
+  description?: string;
+  callToAction: CallToActionType;
+  callToActionGroup: {
+    callToAction: CallToActionType;
+  }[];
   backgroundImage: UploadedMediaType;
   logo?: UploadedMediaType;
 }
@@ -30,61 +21,60 @@ export const Hero: Field = {
   type: 'group',
   fields: [
     {
+      name: 'type',
+      label: 'Type',
+      type: 'select',
+      defaultValue: 'default',
+      required: true,
+      localized: true,
+      options: [
+        {
+          label: 'Home',
+          value: 'home'
+        },
+        {
+          label: 'Default',
+          value: 'default'
+        }
+      ]
+    },
+    {
       name: 'title',
       label: 'Title',
       type: 'text',
       required: true,
-      localized: true
-    },
-    {
-      name: 'subtitle',
-      label: 'Subtitle',
-      type: 'text',
-      localized: true
-    },
-    CallToActionToggle,
-    {
-      name: 'enableCallToActionGroup',
-      label: 'Call to Action Group',
-      type: 'checkbox',
-      defaultValue: false,
-      required: true
-    },
-    {
-      name: 'callToActionGroup',
-      label: false,
-      type: 'group',
-      fields: [
-        {
-          name: 'items',
-          labels: {
-            singular: 'Item',
-            plural: 'Items'
-          },
-          type: 'array',
-          minRows: 1,
-          fields: [CallToAction({ label: false })]
-        }
-      ],
+      localized: true,
       admin: {
-        condition: (_, siblingData) =>
-          Boolean(siblingData?.enableCallToActionGroup)
+        condition: (_, siblingData) => siblingData?.type === 'default'
       }
     },
     {
+      name: 'description',
+      label: 'Description',
+      type: 'text',
+      required: true,
+      localized: true,
+      admin: {
+        condition: (_, siblingData) => siblingData?.type === 'default'
+      }
+    },
+    CallToAction({
+      condition: (_, siblingData) => siblingData?.type === 'default'
+    }),
+    CallToActionGroup({
+      condition: (_, siblingData) => siblingData?.type === 'default'
+    }),
+    Media({
       name: 'backgroundImage',
       label: 'Background Image',
-      type: 'upload',
-      relationTo: 'medias',
       required: true,
-      localized: true
-    },
-    {
+      condition: (_, siblingData) => siblingData?.type === 'default'
+    }),
+    Media({
       name: 'logo',
       label: 'Logo',
-      type: 'upload',
-      relationTo: 'medias',
-      localized: true
-    }
+      required: false,
+      condition: (_, siblingData) => siblingData?.type === 'default'
+    })
   ]
 };

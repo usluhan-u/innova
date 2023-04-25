@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts && nodemon",
+    "dev": "nodemon",
     "dev:client": "next dev",
     "copyfiles": "copyfiles -u 1 \"src/media/**/*.{svg,jpg,png}\" build/media",
     "build:client": "next build",

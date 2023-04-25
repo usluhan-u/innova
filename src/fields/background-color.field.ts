@@ -8,6 +8,7 @@ export const BackgroundColor: Field = {
   type: 'radio',
   defaultValue: 'background.primary',
   required: true,
+  localized: true,
   options: [
     {
       label: 'White',
@@ -17,11 +18,5 @@ export const BackgroundColor: Field = {
       label: 'Gray',
       value: 'background.secondary'
     }
-  ],
-  admin: {
-    width: '30%'
-    // components: {
-    //   Field: BackgroundColorRadio
-    // }
-  }
+  ]
 };

@@ -1,0 +1,13 @@
+{
+  "localization": {
+    "locales": [
+      "en",
+      "tr"
+    ],
+    "defaultLocale": "tr",
+    "fallback": true
+  },
+  "cors": [
+    "http://localhost:3000"
+  ]
+}

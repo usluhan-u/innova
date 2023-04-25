@@ -1,4 +1,4 @@
-import { Card, CardBody, Flex, IconButton, Text } from '@chakra-ui/react';
+import { Card, CardBody, Flex, Icon, Text } from '@chakra-ui/react';
 import { FiDownload } from 'react-icons/fi';
 import { DocumentDownloaderGroupItemType } from '../blocks';
 import { Pdf } from '../icons';
@@ -37,7 +37,7 @@ export const DocumentDownloader = ({
   };
 
   return (
-    <Card>
+    <Card onClick={handleDownload} _hover={{ cursor: 'pointer' }}>
       <CardBody>
         <Flex align="center" justify="space-between">
           <Flex align="center" gap={4} w="full">
@@ -59,13 +59,7 @@ export const DocumentDownloader = ({
               </Text>
             </Flex>
           </Flex>
-          <IconButton
-            variant="unstyled"
-            aria-label="Download"
-            icon={<FiDownload size="1.5em" />}
-            color="background.blue"
-            onClick={handleDownload}
-          />
+          <Icon as={FiDownload} fontSize="1.5rem" color="background.blue" />
         </Flex>
       </CardBody>
     </Card>

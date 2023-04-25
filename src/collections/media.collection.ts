@@ -1,14 +1,9 @@
 import path from 'path';
 import { CollectionConfig } from 'payload/types';
+import { UploadedMediaType } from '../fields';
 
-export interface UploadedMediaType {
+export interface MediaType extends UploadedMediaType {
   alt: string;
-  url: string;
-  filename: string;
-  mimeType: string;
-  filesize: number;
-  width: number;
-  height: number;
 }
 
 export const Media: CollectionConfig = {
@@ -19,9 +14,6 @@ export const Media: CollectionConfig = {
   upload: {
     staticDir: path.resolve(__dirname, '../../media'),
     mimeTypes: ['*']
-  },
-  admin: {
-    group: 'Content'
   },
   fields: [
     {

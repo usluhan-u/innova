@@ -1,19 +1,15 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import payload from 'payload';
+import { PaginatedDocs } from 'payload/dist/mongoose/types';
 import { PageType } from '../collections';
-import { NotFound } from './NotFound';
+import Custom404 from './404';
 import { Head, Hero, RenderBlocks } from '../components';
-import { NotFoundType } from '../globals';
 
 export interface PageProps {
   page?: PageType;
-  notFound?: NotFoundType;
 }
 
-const Page = ({ page, notFound }: PageProps) => {
-  if (!page) {
-    return <NotFound {...notFound} />;
-  }
+const Page = ({ page }: PageProps) => {
+  if (!page) return <Custom404 />;
 
   return (
     <>
@@ -42,36 +38,16 @@ export const getStaticProps: GetStaticProps = async ({
 }) => {
   const slug = params?.slug ? (params.slug as string[]).join('/') : 'home';
 
-  const pageQuery = await payload.find({
-    collection: 'pages',
-    locale,
-    fallbackLocale: defaultLocale,
-    where: {
-      slug: {
-        equals: slug
-      }
-    }
-  });
-
-  const notFoundQuery = await payload.findGlobal({
-    slug: 'not-found',
-    locale,
-    fallbackLocale: defaultLocale
-  });
-
-  if (pageQuery.docs[0]) {
-    return {
-      props: {
-        page: pageQuery.docs[0]
-      },
-      revalidate: 1
-    };
-  }
+  const pageQuery = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/pages?where[slug][equals]=${slug}&locale=${locale}&fallbackLocale=${defaultLocale}`
+  );
+  const page: PaginatedDocs<PageType> = await pageQuery.json();
 
   return {
     props: {
-      notFound: notFoundQuery
-    }
+      page: page.docs[0]
+    },
+    revalidate: 1
   };
 };
 
@@ -79,9 +55,9 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   const pageRequest = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/api/pages?limit=100`
   );
-  const pageData = await pageRequest.json();
+  const pageData: PaginatedDocs<PageType> = await pageRequest.json();
 
-  const paths = (pageData.docs as PageType[]).map(({ slug }) => ({
+  const paths = pageData.docs.map(({ slug }) => ({
     params: { slug: slug.split('/') }
   }));
 

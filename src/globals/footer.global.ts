@@ -22,9 +22,6 @@ export const Footer: GlobalConfig = {
   access: {
     read: () => true
   },
-  admin: {
-    group: 'Global'
-  },
   fields: [
     {
       name: 'linkGroups',

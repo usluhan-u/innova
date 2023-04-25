@@ -2,8 +2,8 @@ import { Block } from 'payload/types';
 import {
   BackgroundColor,
   BackgroundColorType,
-  CallToActionToggle,
-  CallToActionToggleType,
+  CallToAction,
+  CallToActionType,
   Width,
   WidthType
 } from '../fields';
@@ -11,7 +11,7 @@ import { RichTextContentType } from '../components';
 
 export interface ContentCardGroupItemType {
   content: RichTextContentType[];
-  callToActionToggle: CallToActionToggleType;
+  callToAction: CallToActionType;
 }
 
 export interface ContentCardGroupType {
@@ -28,10 +28,8 @@ export const ContentCardGroup: Block = {
     plural: 'Content Card Groups'
   },
   fields: [
-    {
-      type: 'row',
-      fields: [BackgroundColor, Width]
-    },
+    BackgroundColor,
+    Width,
     {
       name: 'items',
       labels: {
@@ -48,7 +46,7 @@ export const ContentCardGroup: Block = {
           required: true,
           localized: true
         },
-        CallToActionToggle
+        CallToAction()
       ]
     }
   ]

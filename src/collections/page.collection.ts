@@ -1,12 +1,22 @@
 import { CollectionConfig } from 'payload/types';
 import { Breadcrumb } from '@payloadcms/plugin-nested-docs/dist/types';
-import { Hero, HeroType, Meta, MetaType, Slug } from '../fields';
-import { generateFullTitle } from '../utils';
+import {
+  FullTitle,
+  Hero,
+  HeroType,
+  Meta,
+  MetaType,
+  Slug,
+  ParentPage,
+  Breadcrumbs,
+  BackgroundColor,
+  Width,
+  BackgroundColorType,
+  WidthType
+} from '../fields';
 import {
   Accordion,
   AccordionType,
-  CardGroup,
-  CardGroupType,
   Content,
   ContentCardGroup,
   ContentCardGroupType,
@@ -26,10 +36,10 @@ import {
   TagGroup,
   TagGroupType
 } from '../blocks';
+import { regeneratePage } from '../utils';
 
 export type PageLayout =
   | AccordionType
-  | CardGroupType
   | ImageTagGroupType
   | TagGroupType
   | ContentType
@@ -40,9 +50,8 @@ export type PageLayout =
   | ImageDownloaderGroupType
   | ContentCardGroupType;
 
-export type BlockType =
+export type PageBlockType =
   | AccordionType['blockType']
-  | CardGroupType['blockType']
   | ImageTagGroupType['blockType']
   | TagGroupType['blockType']
   | ContentType['blockType']
@@ -58,6 +67,8 @@ export interface PageType {
   title: string;
   fullTitle: string;
   hero: HeroType;
+  backgroundColor: BackgroundColorType;
+  width: WidthType;
   breadcrumbs: Breadcrumb[];
   meta: MetaType;
   layout: PageLayout[];
@@ -69,13 +80,26 @@ export const Page: CollectionConfig = {
     read: () => true
   },
   admin: {
-    useAsTitle: 'fullTitle',
-    group: 'Content'
+    useAsTitle: 'title',
+    defaultColumns: ['title', 'slug', 'parent', 'createdAt', 'updatedAt']
+  },
+  versions: {
+    drafts: true
+  },
+  hooks: {
+    afterChange: [
+      ({ doc }) => {
+        regeneratePage({
+          collection: 'pages',
+          doc
+        });
+      }
+    ]
   },
   fields: [
     {
-      name: 'title',
       label: 'Title',
+      name: 'title',
       type: 'text',
       required: true,
       localized: true
@@ -88,16 +112,17 @@ export const Page: CollectionConfig = {
           fields: [Hero]
         },
         {
-          label: 'Page Layout',
+          label: 'Content',
           fields: [
+            BackgroundColor,
+            Width,
             {
               name: 'layout',
-              label: 'Page Layout',
+              label: 'Layout',
               type: 'blocks',
-              minRows: 1,
+              // minRows: 1,
               blocks: [
                 Accordion,
-                CardGroup,
                 ImageTagGroup,
                 TagGroup,
                 Content,
@@ -113,72 +138,10 @@ export const Page: CollectionConfig = {
         }
       ]
     },
-    {
-      name: 'fullTitle',
-      type: 'text',
-      localized: true,
-      hooks: {
-        beforeChange: [
-          async ({ data, originalDoc }) =>
-            generateFullTitle(data?.breadcrumbs || originalDoc.breadcrumbs)
-        ]
-      },
-      admin: {
-        components: {
-          Field: () => null
-        }
-      }
-    },
-    {
-      name: 'breadcrumbs',
-      type: 'array',
-      fields: [
-        {
-          name: 'page',
-          type: 'relationship',
-          relationTo: 'pages',
-          maxDepth: 0,
-          admin: {
-            disabled: true
-          }
-        },
-        {
-          type: 'row',
-          fields: [
-            {
-              name: 'url',
-              label: 'URL',
-              type: 'text',
-              admin: {
-                width: '50%'
-              }
-            },
-            {
-              name: 'label',
-              type: 'text',
-              admin: {
-                width: '50%'
-              }
-            }
-          ]
-        }
-      ],
-      admin: {
-        disabled: true
-      }
-    },
+    FullTitle,
+    Breadcrumbs,
     Slug,
-    {
-      name: 'parent',
-      label: 'Parent Page',
-      type: 'relationship',
-      relationTo: 'pages',
-      maxDepth: 0,
-      index: true,
-      admin: {
-        position: 'sidebar'
-      }
-    },
+    ParentPage,
     Meta
   ]
 };

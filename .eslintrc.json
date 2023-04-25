@@ -22,7 +22,6 @@
       "jsx": true
     }
   },
-  "overrides": [],
   "plugins": ["react", "@typescript-eslint", "unused-imports"],
   "rules": {
     "no-undef": "off",

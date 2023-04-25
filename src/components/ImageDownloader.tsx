@@ -3,7 +3,7 @@ import {
   CardBody,
   CardFooter,
   Center,
-  IconButton,
+  Icon,
   Image
 } from '@chakra-ui/react';
 import { FiDownload } from 'react-icons/fi';
@@ -35,6 +35,8 @@ export const ImageDownloader = ({ imageDownloader }: ImageDownloaderProps) => {
       borderStyle="solid"
       borderColor="border.primary"
       variant="outline"
+      onClick={handleDownload}
+      _hover={{ cursor: 'pointer' }}
     >
       <CardBody>
         <Center boxSize="full">
@@ -45,14 +47,8 @@ export const ImageDownloader = ({ imageDownloader }: ImageDownloaderProps) => {
           />
         </Center>
       </CardBody>
-      <CardFooter p="-9" justify="flex-end">
-        <IconButton
-          variant="ghost"
-          aria-label="Download"
-          icon={<FiDownload size="1em" />}
-          color="background.blue"
-          onClick={handleDownload}
-        />
+      <CardFooter p="2" justify="flex-end">
+        <Icon as={FiDownload} fontSize="1rem" color="background.blue" />
       </CardFooter>
     </Card>
   );

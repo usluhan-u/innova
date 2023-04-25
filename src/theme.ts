@@ -25,7 +25,8 @@ export const theme = extendTheme({
       gray: '#AAA9A9'
     },
     border: {
-      primary: '#E3E3E3'
+      primary: '#E3E3E3',
+      secondary: '#BDCAD3'
     }
   }
 });

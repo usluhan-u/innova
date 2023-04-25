@@ -2,10 +2,10 @@ import { Block } from 'payload/types';
 import {
   BackgroundColor,
   BackgroundColorType,
+  UploadedMediaType,
   Width,
   WidthType
 } from '../fields';
-import { UploadedMediaType } from '../collections';
 
 export interface ImageTagGroupItemType {
   image: UploadedMediaType;
@@ -25,10 +25,8 @@ export const ImageTagGroup: Block = {
     plural: 'Image Tag Groups'
   },
   fields: [
-    {
-      type: 'row',
-      fields: [BackgroundColor, Width]
-    },
+    BackgroundColor,
+    Width,
     {
       name: 'items',
       labels: {
