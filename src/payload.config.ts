@@ -7,6 +7,7 @@ import seo from '@payloadcms/plugin-seo';
 import formBuilder from '@payloadcms/plugin-form-builder';
 import path from 'path';
 import {
+  AwardPost,
   BlogPost,
   Category,
   Media,
@@ -34,6 +35,7 @@ export default buildConfig({
     BlogPost,
     SuccessStoryPost,
     NewsPost,
+    AwardPost,
     Page,
     Media,
     User
@@ -67,7 +69,8 @@ export default buildConfig({
         Page.slug,
         BlogPost.slug,
         NewsPost.slug,
-        SuccessStoryPost.slug
+        SuccessStoryPost.slug,
+        AwardPost.slug
       ]
     }),
     redirects({
@@ -75,7 +78,8 @@ export default buildConfig({
         Page.slug,
         BlogPost.slug,
         NewsPost.slug,
-        SuccessStoryPost.slug
+        SuccessStoryPost.slug,
+        AwardPost.slug
       ]
     }),
     seo({
@@ -83,13 +87,20 @@ export default buildConfig({
         Page.slug,
         BlogPost.slug,
         NewsPost.slug,
-        SuccessStoryPost.slug
+        SuccessStoryPost.slug,
+        AwardPost.slug
       ],
       generateTitle: ({ doc }: any) => `İnnova - ${doc.title.value}`,
       generateDescription: ({ doc }: any) => doc.excerpt.value
     }),
     nestedDocs({
-      collections: [Page.slug],
+      collections: [
+        Page.slug,
+        BlogPost.slug,
+        NewsPost.slug,
+        SuccessStoryPost.slug,
+        AwardPost.slug
+      ],
       parentFieldSlug: 'parent',
       breadcrumbsFieldSlug: 'breadcrumbs',
       generateLabel: (_, page) => (page.title as string) || '',

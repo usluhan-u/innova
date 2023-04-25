@@ -10,3 +10,4 @@ export * from './breadcrumbs.field';
 export * from './media.field';
 export * from './block-fields.field';
 export * from './call-to-action-group.field';
+export * from './rich-text';

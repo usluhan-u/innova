@@ -11,6 +11,7 @@ import {
   Meta,
   MetaType,
   ParentPage,
+  RichText,
   Slug,
   UploadedMediaType,
   Width,
@@ -77,13 +78,7 @@ export const SuccessStoryPost: CollectionConfig = {
           fields: [
             BackgroundColor,
             Width,
-            {
-              name: 'content',
-              label: 'Content',
-              type: 'richText',
-              required: true,
-              localized: true
-            },
+            RichText({ name: 'content', label: 'Content', required: true }),
             Media({
               name: 'featuredImage',
               label: 'Featured Image',

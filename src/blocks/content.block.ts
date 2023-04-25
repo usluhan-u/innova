@@ -1,5 +1,6 @@
 import { Block } from 'payload/types';
 import { RichTextContentType } from '../components';
+import { RichText } from '../fields';
 
 export type ContentColumnTextAlignType = 'left' | 'center' | 'right';
 
@@ -51,12 +52,7 @@ export const Content: Block = {
             }
           ]
         },
-        {
-          name: 'content',
-          type: 'richText',
-          required: true,
-          localized: true
-        }
+        RichText({ name: 'content', label: 'Content', required: true })
       ]
     }
   ]

@@ -1,5 +1,10 @@
 import { Block } from 'payload/types';
-import { CallToAction, CallToActionType, UploadedMediaType } from '../fields';
+import {
+  CallToAction,
+  CallToActionType,
+  RichText,
+  UploadedMediaType
+} from '../fields';
 import { RichTextContentType } from '../components';
 
 export interface MediaContentType {
@@ -38,13 +43,7 @@ export const MediaContent: Block = {
         layout: 'horizontal'
       }
     },
-    {
-      name: 'content',
-      label: 'Content',
-      type: 'richText',
-      required: true,
-      localized: true
-    },
+    RichText({ name: 'content', label: 'Content', required: true }),
     CallToAction(),
     {
       name: 'image',

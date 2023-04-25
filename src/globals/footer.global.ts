@@ -1,5 +1,5 @@
 import { GlobalConfig } from 'payload/types';
-import { CallToAction, CallToActionType } from '../fields';
+import { CallToAction, CallToActionType, RichText } from '../fields';
 import { RichTextContentType } from '../components';
 
 export interface FooterLinkGroupLinkType {
@@ -53,12 +53,6 @@ export const Footer: GlobalConfig = {
         }
       ]
     },
-    {
-      name: 'contact',
-      label: 'Contact',
-      type: 'richText',
-      required: true,
-      localized: true
-    }
+    RichText({ name: 'contact', label: 'Contact', required: true })
   ]
 };

@@ -4,6 +4,7 @@ import {
   BackgroundColorType,
   CallToAction,
   CallToActionType,
+  RichText,
   Width,
   WidthType
 } from '../fields';
@@ -39,13 +40,7 @@ export const ContentCardGroup: Block = {
       type: 'array',
       minRows: 1,
       fields: [
-        {
-          name: 'content',
-          label: 'Content',
-          type: 'richText',
-          required: true,
-          localized: true
-        },
+        RichText({ name: 'content', label: 'Content', required: true }),
         CallToAction()
       ]
     }
