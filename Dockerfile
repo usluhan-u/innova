@@ -19,7 +19,6 @@ COPY package*.json  ./
 
 RUN yarn install --production
 COPY --from=builder /home/node/app/build ./build
-COPY --from=builder /home/node/app/build ./build
 
 EXPOSE 3000
 
