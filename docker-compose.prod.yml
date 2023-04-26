@@ -10,7 +10,7 @@ services:
       - .:/home/node/app
       - node_modules:/home/node/app/node_modules
     working_dir: /home/node/app/
-    command: sh -c "yarn install --production && yarn build"
+    command: sh -c "yarn workspaces focus --all --production && yarn build"
     depends_on:
       - mongo
     environment:

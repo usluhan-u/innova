@@ -17,7 +17,7 @@ ENV PAYLOAD_CONFIG_PATH=build/payload.config.js
 WORKDIR /home/node/app
 COPY package*.json  ./
 
-RUN yarn install --production
+RUN yarn workspaces focus --all --production
 COPY --from=builder /home/node/app/build ./build
 
 EXPOSE 3000
