@@ -26,7 +26,7 @@ const SliderWrapper = ({ children, width }: SliderWrapperProps) => (
 
 const Slide = ({
   backgroundImage,
-  callToAction: callToActionToggle,
+  callToAction,
   description,
   title
 }: DotSliderItemType) => (
@@ -49,9 +49,9 @@ const Slide = ({
           {description}
         </Text>
       )}
-      {callToActionToggle.enable && callToActionToggle.callToAction && (
+      {callToAction && Object.keys(callToAction) && (
         <ButtonCallToAction
-          {...callToActionToggle.callToAction}
+          {...callToAction}
           bgColor="background.light"
           color="text.blue"
         />

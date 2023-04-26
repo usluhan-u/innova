@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from 'uuid';
 import React from 'react';
 import { PageBlockType, PageLayout } from '../collections';
 import { Accordion } from './Accordion';
-import { CardGroup } from './CardGroup';
 import { ImageTagGroup } from './ImageTagGroup';
 import { TagGroup } from './TagGroup';
 import { Content } from './Content';
@@ -20,7 +19,6 @@ export interface RenderBlocksProps {
 
 const COMPONENTS: Record<PageBlockType, React.FC<any>> = {
   accordion: Accordion,
-  cardGroup: CardGroup,
   imageTagGroup: ImageTagGroup,
   tagGroup: TagGroup,
   content: Content,

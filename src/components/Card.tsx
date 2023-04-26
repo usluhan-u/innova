@@ -11,24 +11,22 @@ import { format } from 'date-fns';
 import { FiArrowRight } from 'react-icons/fi';
 import { TextIconCallToAction } from './TextIconCallToAction';
 import { CategoryType } from '../collections';
-import { UploadedMediaType } from '../fields';
+import { CallToActionType, UploadedMediaType } from '../fields';
 
 export interface CardItem {
   title: string;
   date: string;
   category?: CategoryType;
   image: UploadedMediaType;
-  callToActionToggle: {
-    enableCallToAction: boolean;
-    callToAction: {
-      label: string;
-      type: 'page' | 'custom';
-      page?: {
-        slug: string;
-      };
-      url?: string;
-    };
-  };
+  callToAction?: CallToActionType;
+  // callToAction?: {
+  //   label: string;
+  //   type: 'page' | 'custom';
+  //   page?: {
+  //     slug: string;
+  //   };
+  //   url?: string;
+  // };
 }
 
 export interface CardProps {
@@ -58,14 +56,13 @@ export const Card = ({ card }: CardProps) => (
       </Flex>
     </ChakraCardBody>
     <ChakraCardFooter justify="space-between" flexWrap="wrap">
-      {card.callToActionToggle.enableCallToAction &&
-        card.callToActionToggle.callToAction && (
-          <TextIconCallToAction
-            {...card.callToActionToggle.callToAction}
-            color="text.blue"
-            icon={FiArrowRight}
-          />
-        )}
+      {card.callToAction && Object.keys(card.callToAction) && (
+        <TextIconCallToAction
+          {...card.callToAction}
+          color="text.blue"
+          icon={FiArrowRight}
+        />
+      )}
     </ChakraCardFooter>
   </ChakraCard>
 );

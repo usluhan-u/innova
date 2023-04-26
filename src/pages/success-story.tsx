@@ -29,14 +29,13 @@ const SuccessStory = ({ successStoryPosts, page }: SuccessStoryProps) => {
       image: featuredImage,
       title,
       category,
-      callToActionToggle: {
-        enableCallToAction: true,
-        callToAction: {
-          label: 'Read More',
-          type: 'page',
-          page: {
-            slug: `/success-story/${slug}`
-          }
+      callToAction: {
+        label: 'Read More',
+        type: 'page',
+        page: {
+          ...successStoryPost,
+          slug: `/success-story/${slug}`,
+          layout: []
         }
       }
     };

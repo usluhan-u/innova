@@ -19,14 +19,13 @@ export const ContentCard = ({ contentCard }: ContentCardProps) => (
     </ChakraCardBody>
 
     <ChakraCardFooter justify="space-between" flexWrap="wrap">
-      {contentCard.callToAction.enable &&
-        contentCard.callToAction.callToAction && (
-          <TextIconCallToAction
-            {...contentCard.callToAction.callToAction}
-            color="text.blue"
-            icon={FiArrowRight}
-          />
-        )}
+      {contentCard.callToAction && Object.keys(contentCard.callToAction) && (
+        <TextIconCallToAction
+          {...contentCard.callToAction}
+          color="text.blue"
+          icon={FiArrowRight}
+        />
+      )}
     </ChakraCardFooter>
   </ChakraCard>
 );

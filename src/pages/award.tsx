@@ -27,14 +27,13 @@ const Award = ({ awardPosts, page }: AwardProps) => {
       date: publishDate,
       image: featuredImage,
       title,
-      callToActionToggle: {
-        enableCallToAction: true,
-        callToAction: {
-          label: 'Read More',
-          type: 'page',
-          page: {
-            slug: `/award/${slug}`
-          }
+      callToAction: {
+        label: 'Read More',
+        type: 'page',
+        page: {
+          ...awardPost,
+          slug: `/award/${slug}`,
+          layout: []
         }
       }
     };

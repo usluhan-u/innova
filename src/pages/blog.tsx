@@ -28,14 +28,13 @@ const Blog = ({ blogPosts, page }: BlogProps) => {
       image: featuredImage,
       title,
       category,
-      callToActionToggle: {
-        enableCallToAction: true,
-        callToAction: {
-          label: 'Read More',
-          type: 'page',
-          page: {
-            slug: `/blog/${slug}`
-          }
+      callToAction: {
+        label: 'Read More',
+        type: 'page',
+        page: {
+          ...blogPost,
+          slug: `/blog/${slug}`,
+          layout: []
         }
       }
     };

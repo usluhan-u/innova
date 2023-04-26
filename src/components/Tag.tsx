@@ -50,10 +50,10 @@ export const Tag = ({ tag }: TagProps) => (
         </Flex>
       </Center>
     </CardBody>
-    {tag.callToAction.enable && tag.callToAction.callToAction && (
+    {tag.callToAction && Object.keys(tag.callToAction) && (
       <CardFooter>
         <TextIconCallToAction
-          {...tag.callToAction.callToAction}
+          {...tag.callToAction}
           icon={FiArrowRight}
           color="text.blue"
         />

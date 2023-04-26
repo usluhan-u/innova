@@ -10,7 +10,7 @@ export const MediaContent = ({
   content,
   contentPosition,
   image,
-  callToAction: callToActionToggle
+  callToAction
 }: MediaContentProps) => (
   <Grid
     templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
@@ -31,9 +31,9 @@ export const MediaContent = ({
         <GridItem>
           <Flex flexDir="column" justify="space-between">
             <RichText content={content} />
-            {callToActionToggle.enable && callToActionToggle.callToAction && (
+            {callToAction && Object.keys(callToAction) && (
               <TextIconCallToAction
-                {...callToActionToggle.callToAction}
+                {...callToAction}
                 color="text.blue"
                 icon={FiArrowRight}
               />
@@ -48,9 +48,9 @@ export const MediaContent = ({
         <GridItem>
           <Flex flexDir="column" justify="space-between" boxSize="full">
             <RichText content={content} />
-            {callToActionToggle.enable && callToActionToggle.callToAction && (
+            {callToAction && Object.keys(callToAction) && (
               <TextIconCallToAction
-                {...callToActionToggle.callToAction}
+                {...callToAction}
                 color="text.blue"
                 icon={FiArrowRight}
               />

@@ -27,14 +27,13 @@ const News = ({ newsPosts, page }: NewsProps) => {
       date: publishDate,
       image: featuredImage,
       title,
-      callToActionToggle: {
-        enableCallToAction: true,
-        callToAction: {
-          label: 'Read More',
-          type: 'page',
-          page: {
-            slug: `/news/${slug}`
-          }
+      callToAction: {
+        label: 'Read More',
+        type: 'page',
+        page: {
+          ...newsPost,
+          slug: `/news/${slug}`,
+          layout: []
         }
       }
     };
