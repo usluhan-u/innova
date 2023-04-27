@@ -1,4 +1,5 @@
-import { Link } from '@chakra-ui/next-js';
+import NextLink from 'next/link';
+import { chakra } from '@chakra-ui/react';
 import escapeHTML from 'escape-html';
 
 export interface ExternalLinkProps {
@@ -6,6 +7,8 @@ export interface ExternalLinkProps {
   href: string;
   newTab?: boolean;
 }
+
+const Link = chakra(NextLink);
 
 export const ExternalLink = ({ children, href, newTab }: ExternalLinkProps) => {
   const newTabProps = newTab

@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { PaginatedDocs } from 'payload/dist/mongoose/types';
 import { PageType } from '../collections';
-import Custom404 from './404';
+import NotFound from './not-found';
 import { Head, Hero, RenderBlocks } from '../components';
 import { getList, getPageBySlug } from '../api';
 
@@ -10,7 +10,7 @@ export interface PageProps {
 }
 
 const Page = ({ page }: PageProps) => {
-  if (!page) return <Custom404 />;
+  if (!page) return <NotFound />;
 
   return (
     <>

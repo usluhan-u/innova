@@ -8,7 +8,7 @@ export interface NotFoundProps {
   notFound?: NotFoundType;
 }
 
-const Custom404 = ({ notFound }: NotFoundProps) => (
+const NotFound = ({ notFound }: NotFoundProps) => (
   <Center
     boxSize="full"
     flexDir="column"
@@ -39,14 +39,14 @@ const Custom404 = ({ notFound }: NotFoundProps) => (
   </Center>
 );
 
-export default Custom404;
+export default NotFound;
 
 export const getStaticProps: GetStaticProps = async ({
   locale,
   defaultLocale
 }) => {
   const notFound = await getCustomPageData<NotFoundType>({
-    endpoint: 'not-found',
+    endpoint: 'globals/not-found',
     locale,
     defaultLocale
   });
