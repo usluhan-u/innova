@@ -11,6 +11,7 @@ import {
   Hero
 } from '../components';
 import Custom404 from './404';
+import { getCustomPageData, getPageBySlug } from '../api';
 
 export interface AwardProps {
   awardPosts: AwardPostType[];
@@ -72,12 +73,8 @@ export const getStaticProps: GetStaticProps = async ({
   defaultLocale
 }) => {
   const [page, awardPosts] = (await Promise.all([
-    fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/pages?where[slug][equals]=award&locale=${locale}&fallbackLocale=${defaultLocale}`
-    ).then((res) => res.json()),
-    fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/award-posts?locale=${locale}&fallbackLocale=${defaultLocale}`
-    ).then((res) => res.json())
+    getPageBySlug({ slug: 'award', locale, defaultLocale }),
+    getCustomPageData({ endpoint: 'award-posts', locale, defaultLocale })
   ])) as [PaginatedDocs<PageType>, PaginatedDocs<AwardPostType>];
 
   return {

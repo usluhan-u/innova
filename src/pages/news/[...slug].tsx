@@ -4,6 +4,7 @@ import { Flex } from '@chakra-ui/react';
 import { NewsPostType } from '../../collections';
 import { AutoPosition, BackgroundColor, Content } from '../../components';
 import Custom404 from '../404';
+import { getCustomPageDataBySlug, getList } from '../../api';
 
 interface NewsPostProps {
   newsPost?: NewsPostType;
@@ -35,10 +36,12 @@ export const getStaticProps: GetStaticProps = async ({
 }) => {
   const slug = params?.slug ? (params.slug as string[]).join('/') : 'home';
 
-  const newsPostQuery = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/news-posts?where[slug][equals]=${slug}&locale=${locale}&fallbackLocale=${defaultLocale}`
-  );
-  const newsPost: PaginatedDocs<NewsPostType> = await newsPostQuery.json();
+  const newsPost = await getCustomPageDataBySlug<PaginatedDocs<NewsPostType>>({
+    endpoint: 'news-posts',
+    slug,
+    locale,
+    defaultLocale
+  });
 
   return {
     props: {
@@ -49,10 +52,9 @@ export const getStaticProps: GetStaticProps = async ({
 };
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-  const request = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/news-posts`
-  );
-  const data: PaginatedDocs<NewsPostType> = await request.json();
+  const data = await getList<PaginatedDocs<NewsPostType>>({
+    endpoint: 'news-posts'
+  });
 
   const paths = data.docs.map(({ slug }) => ({
     params: { slug: slug.split('/') }

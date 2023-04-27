@@ -2,6 +2,7 @@ import { Center, Text } from '@chakra-ui/react';
 import { GetStaticProps } from 'next';
 import { ButtonCallToAction } from '../components';
 import { NotFoundType } from '../globals';
+import { getCustomPageData } from '../api';
 
 export interface NotFoundProps {
   notFound?: NotFoundType;
@@ -44,15 +45,15 @@ export const getStaticProps: GetStaticProps = async ({
   locale,
   defaultLocale
 }) => {
-  const notFoundQuery = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/globals/not-found?locale=${locale}&fallbackLocale=${defaultLocale}`
-  );
-
-  const notFound = await notFoundQuery.json();
+  const notFound = await getCustomPageData<NotFoundType>({
+    endpoint: 'not-found',
+    locale,
+    defaultLocale
+  });
 
   return {
     props: {
-      notFound
+      notFound: notFound || null
     },
     revalidate: 1
   };

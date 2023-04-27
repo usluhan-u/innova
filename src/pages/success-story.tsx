@@ -11,6 +11,7 @@ import {
   Hero
 } from '../components';
 import Custom404 from './404';
+import { getCustomPageData, getPageBySlug } from '../api';
 
 export interface SuccessStoryProps {
   successStoryPosts: SuccessStoryPostType[];
@@ -74,12 +75,12 @@ export const getStaticProps: GetStaticProps = async ({
   defaultLocale
 }) => {
   const [page, successStoryPosts] = (await Promise.all([
-    fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/pages?where[slug][equals]=success-story&locale=${locale}&fallbackLocale=${defaultLocale}`
-    ).then((res) => res.json()),
-    fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/success-story-posts?locale=${locale}&fallbackLocale=${defaultLocale}`
-    ).then((res) => res.json())
+    getPageBySlug({ slug: 'success-story', locale, defaultLocale }),
+    getCustomPageData({
+      endpoint: 'success-story-posts',
+      locale,
+      defaultLocale
+    })
   ])) as [PaginatedDocs<PageType>, PaginatedDocs<SuccessStoryPostType>];
 
   return {

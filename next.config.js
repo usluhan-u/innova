@@ -10,7 +10,7 @@ const nextConfig = {
     SERVER_URL: process.env.PAYLOAD_PUBLIC_SERVER_URL
   },
   images: {
-    domains: ['localhost']
+    domains: [process.env.IMAGE_DOMAIN]
   },
   i18n: {
     locales: ['en', 'tr'],

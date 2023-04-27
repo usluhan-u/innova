@@ -11,6 +11,7 @@ import {
   Hero
 } from '../components';
 import Custom404 from './404';
+import { getCustomPageData, getPageBySlug } from '../api';
 
 export interface BlogProps {
   blogPosts: BlogPostType[];
@@ -73,12 +74,8 @@ export const getStaticProps: GetStaticProps = async ({
   defaultLocale
 }) => {
   const [page, blogPosts] = (await Promise.all([
-    fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/pages?where[slug][equals]=blog&locale=${locale}&fallbackLocale=${defaultLocale}`
-    ).then((res) => res.json()),
-    fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/blog-posts?locale=${locale}&fallbackLocale=${defaultLocale}`
-    ).then((res) => res.json())
+    getPageBySlug({ slug: 'blog', locale, defaultLocale }),
+    getCustomPageData({ endpoint: 'blog-posts', locale, defaultLocale })
   ])) as [PaginatedDocs<PageType>, PaginatedDocs<BlogPostType>];
 
   return {

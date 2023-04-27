@@ -4,6 +4,7 @@ import { Flex } from '@chakra-ui/react';
 import { BlogPostType } from '../../collections';
 import { AutoPosition, BackgroundColor, Content } from '../../components';
 import Custom404 from '../404';
+import { getCustomPageDataBySlug, getList } from '../../api';
 
 interface BlogPostProps {
   blogPost?: BlogPostType;
@@ -35,10 +36,12 @@ export const getStaticProps: GetStaticProps = async ({
 }) => {
   const slug = params?.slug ? (params.slug as string[]).join('/') : 'home';
 
-  const blogPostQuery = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/blog-posts?where[slug][equals]=${slug}&locale=${locale}&fallbackLocale=${defaultLocale}`
-  );
-  const blogPost: PaginatedDocs<BlogPostType> = await blogPostQuery.json();
+  const blogPost = await getCustomPageDataBySlug<PaginatedDocs<BlogPostType>>({
+    endpoint: 'blog-posts',
+    slug,
+    locale,
+    defaultLocale
+  });
 
   return {
     props: {
@@ -49,10 +52,9 @@ export const getStaticProps: GetStaticProps = async ({
 };
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-  const request = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/blog-posts`
-  );
-  const data: PaginatedDocs<BlogPostType> = await request.json();
+  const data = await getList<PaginatedDocs<BlogPostType>>({
+    endpoint: 'blog-posts'
+  });
 
   const paths = data.docs.map(({ slug }) => ({
     params: { slug: slug.split('/') }

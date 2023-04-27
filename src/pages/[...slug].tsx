@@ -3,6 +3,7 @@ import { PaginatedDocs } from 'payload/dist/mongoose/types';
 import { PageType } from '../collections';
 import Custom404 from './404';
 import { Head, Hero, RenderBlocks } from '../components';
+import { getList, getPageBySlug } from '../api';
 
 export interface PageProps {
   page?: PageType;
@@ -38,10 +39,11 @@ export const getStaticProps: GetStaticProps = async ({
 }) => {
   const slug = params?.slug ? (params.slug as string[]).join('/') : 'home';
 
-  const pageQuery = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/pages?where[slug][equals]=${slug}&locale=${locale}&fallbackLocale=${defaultLocale}`
-  );
-  const page: PaginatedDocs<PageType> = await pageQuery.json();
+  const page = await getPageBySlug<PaginatedDocs<PageType>>({
+    slug,
+    locale,
+    defaultLocale
+  });
 
   return {
     props: {
@@ -52,12 +54,11 @@ export const getStaticProps: GetStaticProps = async ({
 };
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-  const pageRequest = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/pages?limit=100`
-  );
-  const pageData: PaginatedDocs<PageType> = await pageRequest.json();
+  const data = await getList<PaginatedDocs<PageType>>({
+    endpoint: 'pages?limit=100'
+  });
 
-  const paths = pageData.docs.map(({ slug }) => ({
+  const paths = data.docs.map(({ slug }) => ({
     params: { slug: slug.split('/') }
   }));
 

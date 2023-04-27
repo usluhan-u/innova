@@ -4,6 +4,7 @@ import { Flex } from '@chakra-ui/react';
 import { SuccessStoryPostType } from '../../collections';
 import { AutoPosition, BackgroundColor, Content } from '../../components';
 import Custom404 from '../404';
+import { getCustomPageDataBySlug, getList } from '../../api';
 
 interface SuccessStoryPostProps {
   successStoryPost?: SuccessStoryPostType;
@@ -35,10 +36,14 @@ export const getStaticProps: GetStaticProps = async ({
 }) => {
   const slug = params?.slug ? (params.slug as string[]).join('/') : 'home';
 
-  const successStoryPostQuery = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/success-story-posts?where[slug][equals]=${slug}&locale=${locale}&fallbackLocale=${defaultLocale}`
-  );
-  const successStoryPost = await successStoryPostQuery.json();
+  const successStoryPost = await getCustomPageDataBySlug<
+    PaginatedDocs<SuccessStoryPostType>
+  >({
+    endpoint: 'success-story-posts',
+    slug,
+    locale,
+    defaultLocale
+  });
 
   return {
     props: {
@@ -49,10 +54,9 @@ export const getStaticProps: GetStaticProps = async ({
 };
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-  const request = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/success-story-posts`
-  );
-  const data: PaginatedDocs<SuccessStoryPostType> = await request.json();
+  const data = await getList<PaginatedDocs<SuccessStoryPostType>>({
+    endpoint: 'success-story-posts'
+  });
 
   const paths = data.docs.map(({ slug }) => ({
     params: { slug: slug.split('/') }
