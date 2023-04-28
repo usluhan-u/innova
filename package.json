@@ -10,7 +10,7 @@
     "build:client": "next build",
     "build:server": "tsc --project tsconfig.server.json",
     "build:payload": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload build",
-    "build": "cross-env NODE_ENV=production yarn build:payload && yarn build:server && yarn copyfiles && NEXT_BUILD=true yarn build:client",
+    "build": "cross-env NODE_ENV=production yarn build:payload && yarn build:server && yarn copyfiles && yarn build:client",
     "serve": "cross-env NODE_ENV=production PAYLOAD_CONFIG_PATH=build/payload.config.js node build/server.js",
     "lint": "eslint src/**/*.{ts,tsx} --fix",
     "format": "prettier --write src/**/*.{ts,tsx}",

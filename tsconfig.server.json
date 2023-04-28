@@ -2,9 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "module": "CommonJS",
-    "outDir": "dist",
-    "target": "ESNext",
-    "isolatedModules": false,
-    "noEmit": false
+    "outDir": "build",
+    "target": "ESNext"
   }
 }
