@@ -12,11 +12,11 @@ import {
 import NotFound from '../not-found';
 import { getCustomPageDataBySlug, getAll } from '../../api';
 
-interface SuccessStoryProps {
+interface AwardProps {
   data: PostType | null;
 }
 
-const SuccessStory = ({ data }: SuccessStoryProps) => {
+const Award = ({ data }: AwardProps) => {
   if (data === null) return <NotFound />;
 
   return (
@@ -46,7 +46,7 @@ const SuccessStory = ({ data }: SuccessStoryProps) => {
   );
 };
 
-export default SuccessStory;
+export default Award;
 
 export const getStaticProps: GetStaticProps = async ({
   params,
@@ -56,7 +56,7 @@ export const getStaticProps: GetStaticProps = async ({
   const slug =
     params?.slug && Array.isArray(params.slug)
       ? params.slug.join('/')
-      : 'success-stories';
+      : 'awards';
 
   const data = await getCustomPageDataBySlug<PaginatedDocs<PostType>>({
     endpoint: 'posts',
