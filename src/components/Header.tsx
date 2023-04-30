@@ -157,7 +157,7 @@ export const Header = ({ menu }: HeaderProps) => {
     <Flex h={16}>
       <Container>
         <Flex align="center" justify="space-between" gap={10} boxSize="full">
-          <InternalLink slug={asPath}>
+          <InternalLink slug="home">
             <Logo />
           </InternalLink>
           {isLargerThanMd ? (

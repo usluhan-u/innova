@@ -52,7 +52,6 @@ export const Hero: Field = {
       name: 'description',
       label: 'Description',
       type: 'text',
-      required: true,
       localized: true,
       admin: {
         condition: (_, siblingData) => siblingData?.type === 'default'

@@ -4,41 +4,7 @@ import getConfig from 'next/config';
 const { publicRuntimeConfig } = getConfig();
 const { SERVER_URL } = publicRuntimeConfig;
 
-export const getPageBySlug = async <T>({
-  slug,
-  locale,
-  defaultLocale
-}: {
-  slug: string;
-  locale?: string;
-  defaultLocale?: string;
-}) => {
-  const query = await fetch(
-    `${SERVER_URL}/api/pages?where[slug][equals]=${slug}&locale=${locale}&fallbackLocale=${defaultLocale}`
-  );
-
-  const data: T = await query.json();
-
-  return data;
-};
-
-export const getCustomPageData = async <T>({
-  endpoint,
-  locale,
-  defaultLocale
-}: {
-  endpoint: string;
-  locale?: string;
-  defaultLocale?: string;
-}) => {
-  const query = await fetch(
-    `${SERVER_URL}/api/${endpoint}?locale=${locale}&fallbackLocale=${defaultLocale}`
-  );
-
-  const data: T = await query.json();
-
-  return data;
-};
+const BASE_URL = `${SERVER_URL}/api`;
 
 export const getCustomPageDataBySlug = async <T>({
   endpoint,
@@ -52,7 +18,7 @@ export const getCustomPageDataBySlug = async <T>({
   defaultLocale?: string;
 }) => {
   const query = await fetch(
-    `${SERVER_URL}/api/${endpoint}?where[slug][equals]=${slug}&locale=${locale}&fallbackLocale=${defaultLocale}`
+    `${BASE_URL}/${endpoint}?where[slug][equals]=${slug}&locale=${locale}&fallbackLocale=${defaultLocale}`
   );
 
   const data: T = await query.json();
@@ -60,8 +26,62 @@ export const getCustomPageDataBySlug = async <T>({
   return data;
 };
 
-export const getList = async <T>({ endpoint }: { endpoint: string }) => {
-  const query = await fetch(`${SERVER_URL}/api/${endpoint}`);
+export const getPageBySlug = async <T>({
+  slug,
+  locale,
+  defaultLocale
+}: {
+  slug: string;
+  locale?: string;
+  defaultLocale?: string;
+}) =>
+  getCustomPageDataBySlug<T>({
+    endpoint: 'pages',
+    slug,
+    locale,
+    defaultLocale
+  });
+
+export const getCustomPageData = async <T>({
+  endpoint,
+  locale,
+  defaultLocale
+}: {
+  endpoint: string;
+  locale?: string;
+  defaultLocale?: string;
+}) => {
+  const query = await fetch(
+    `${BASE_URL}/${endpoint}?locale=${locale}&fallbackLocale=${defaultLocale}`
+  );
+
+  const data: T = await query.json();
+
+  return data;
+};
+
+export const getCustomPageDataByCondition = async <T>({
+  endpoint,
+  condition,
+  locale,
+  defaultLocale
+}: {
+  endpoint: string;
+  condition: string;
+  locale?: string;
+  defaultLocale?: string;
+}) => {
+  const query = await fetch(
+    `${BASE_URL}/${endpoint}?where${condition}&locale=${locale}&fallbackLocale=${defaultLocale}`
+  );
+
+  const data: T = await query.json();
+
+  return data;
+};
+
+export const getAll = async <T>({ endpoint }: { endpoint: string }) => {
+  const query = await fetch(`${BASE_URL}/${endpoint}`);
 
   const data: T = await query.json();
 

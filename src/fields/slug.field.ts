@@ -1,39 +1,29 @@
-import { Field, FieldHook } from 'payload/types';
+import { Field } from 'payload/types';
+import { populateSlug } from '../hooks';
 
-const format = (value: string) =>
-  value
-    .replace(/ /g, '-')
-    .replace(/[^\w-/]+/g, '')
-    .toLowerCase();
+interface Args {
+  fieldToUse?: string;
+  required?: boolean;
+  readOnly?: boolean;
+}
 
-export const formatSlug =
-  (fallback: string): FieldHook =>
-  ({ value, originalDoc, data }) => {
-    if (typeof value === 'string') {
-      return format(value);
+export const Slug = (args?: Args): Field => {
+  const { fieldToUse = 'name', required = true, readOnly = false } = args || {};
+
+  return {
+    name: 'slug',
+    label: 'Slug',
+    type: 'text',
+    required,
+    unique: true,
+    localized: true,
+    index: true,
+    admin: {
+      position: 'sidebar',
+      readOnly
+    },
+    hooks: {
+      beforeValidate: [populateSlug(fieldToUse)]
     }
-
-    const fallbackData =
-      (data && data[fallback]) || (originalDoc && originalDoc[fallback]);
-
-    if (fallbackData && typeof fallbackData === 'string') {
-      return format(fallbackData);
-    }
-
-    return value;
   };
-
-export const Slug: Field = {
-  name: 'slug',
-  label: 'Slug',
-  type: 'text',
-  required: true,
-  localized: true,
-  index: true,
-  admin: {
-    position: 'sidebar'
-  },
-  hooks: {
-    beforeValidate: [formatSlug('title')]
-  }
 };

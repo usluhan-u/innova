@@ -18,7 +18,7 @@ WORKDIR /home/node/app
 COPY package*.json  ./
 
 RUN yarn workspaces focus --all --production
-COPY --from=builder /home/node/app/.next ./.next
+COPY --from=builder /home/node/app/dist ./dist
 COPY --from=builder /home/node/app/build ./build
 
 EXPOSE 3000

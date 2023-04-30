@@ -66,8 +66,20 @@ export const CallToAction = (args?: Args): Field => {
         name: 'url',
         label: 'URL',
         type: 'text',
-        required,
+        required: true,
         localized: true,
+        validate: (value, { operation }) => {
+          if (operation === 'create' || operation === 'update') {
+            const urlRegex =
+              /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/;
+
+            const isValid = urlRegex.test(value);
+
+            return isValid || 'Please enter a valid URL';
+          }
+
+          return 'Please enter a valid URL';
+        },
         admin: {
           condition: (_, siblingData) => siblingData?.type === 'custom'
         }

@@ -50,7 +50,7 @@ export const Card = ({ card }: CardProps) => (
         {card.category && (
           <>
             <Box boxSize="2" borderRadius="full" bgColor="text.secondary.100" />
-            <Text color="text.secondary.100">{card.category.label}</Text>
+            <Text color="text.secondary.100">{card.category.name}</Text>
           </>
         )}
       </Flex>

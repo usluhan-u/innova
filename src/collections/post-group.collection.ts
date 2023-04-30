@@ -1,12 +1,13 @@
 import { CollectionConfig } from 'payload/types';
 import { populateValueAfterCaseChange } from '../hooks';
+import { Slug } from '../fields';
 
-export interface CategoryType {
+export interface PostGroupType {
   name: string;
 }
 
-export const Category: CollectionConfig = {
-  slug: 'categories',
+export const PostGroup: CollectionConfig = {
+  slug: 'post-groups',
   access: {
     read: () => true
   },
@@ -24,6 +25,7 @@ export const Category: CollectionConfig = {
       hooks: {
         beforeChange: [populateValueAfterCaseChange('name')]
       }
-    }
+    },
+    Slug({ required: false, readOnly: true })
   ]
 };

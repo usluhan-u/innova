@@ -37,6 +37,7 @@ import {
   TagGroupType
 } from '../blocks';
 import { regeneratePage } from '../utils';
+import { populateValueAfterCaseChange } from '../hooks';
 
 export type PageLayout =
   | AccordionType
@@ -64,8 +65,7 @@ export type PageBlockType =
 
 export interface PageType {
   slug: string;
-  title: string;
-  fullTitle: string;
+  name: string;
   hero: HeroType;
   backgroundColor: BackgroundColorType;
   width: WidthType;
@@ -80,8 +80,7 @@ export const Page: CollectionConfig = {
     read: () => true
   },
   admin: {
-    useAsTitle: 'title',
-    defaultColumns: ['title', 'slug', 'parent', 'createdAt', 'updatedAt']
+    useAsTitle: 'name'
   },
   versions: {
     drafts: true
@@ -98,11 +97,14 @@ export const Page: CollectionConfig = {
   },
   fields: [
     {
-      label: 'Title',
-      name: 'title',
+      name: 'name',
+      label: 'Name',
       type: 'text',
       required: true,
-      localized: true
+      localized: true,
+      hooks: {
+        beforeChange: [populateValueAfterCaseChange('name')]
+      }
     },
     {
       type: 'tabs',
@@ -140,7 +142,7 @@ export const Page: CollectionConfig = {
     },
     FullTitle,
     Breadcrumbs,
-    Slug,
+    Slug(),
     ParentPage,
     Meta
   ]

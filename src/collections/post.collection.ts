@@ -18,53 +18,48 @@ import {
   WidthType
 } from '../fields';
 import { RichTextContentType } from '../components';
+import { PostGroupType } from './post-group.collection';
 import { CategoryType } from './category.collection';
-import { regeneratePage } from '../utils';
+import { populateValueAfterCaseChange } from '../hooks';
 
-export interface SuccessStoryPostType {
+export interface PostType {
   slug: string;
-  title: string;
-  fullTitle: string;
+  name: string;
   hero: HeroType;
   backgroundColor: BackgroundColorType;
   width: WidthType;
+  breadcrumbs: Breadcrumb[];
+  meta: MetaType;
   content: RichTextContentType[];
   featuredImage: UploadedMediaType;
-  breadcrumbs: Breadcrumb[];
-  category: CategoryType;
+  media: UploadedMediaType;
+  group: PostGroupType;
+  category?: CategoryType;
   publishDate: string;
-  meta: MetaType;
 }
 
-export const SuccessStoryPost: CollectionConfig = {
-  slug: 'success-story-posts',
+export const Post: CollectionConfig = {
+  slug: 'posts',
   access: {
     read: () => true
   },
   admin: {
-    useAsTitle: 'title',
-    defaultColumns: ['title', 'category', 'publishDate', '_status']
+    useAsTitle: 'name',
+    defaultColumns: ['name', 'group', 'category', 'publishDate', '_status']
   },
   versions: {
     drafts: true
   },
-  hooks: {
-    afterChange: [
-      ({ doc }) => {
-        regeneratePage({
-          collection: 'success-story-posts',
-          doc
-        });
-      }
-    ]
-  },
   fields: [
     {
-      name: 'title',
-      label: 'Title',
+      name: 'name',
+      label: 'Name',
       type: 'text',
       required: true,
-      localized: true
+      localized: true,
+      hooks: {
+        beforeChange: [populateValueAfterCaseChange('name')]
+      }
     },
     {
       type: 'tabs',
@@ -74,7 +69,7 @@ export const SuccessStoryPost: CollectionConfig = {
           fields: [Hero]
         },
         {
-          label: 'Layout',
+          label: 'Content',
           fields: [
             BackgroundColor,
             Width,
@@ -88,14 +83,24 @@ export const SuccessStoryPost: CollectionConfig = {
         }
       ]
     },
-    Slug,
+    Slug(),
     ParentPage,
+    {
+      name: 'group',
+      label: 'Post Group',
+      type: 'relationship',
+      relationTo: 'post-groups',
+      required: true,
+      localized: true,
+      admin: {
+        position: 'sidebar'
+      }
+    },
     {
       name: 'category',
       label: 'Category',
       type: 'relationship',
       relationTo: 'categories',
-      required: true,
       localized: true,
       admin: {
         position: 'sidebar'

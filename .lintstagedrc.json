@@ -1,9 +1,6 @@
 {
   "*.{ts,tsx}": [
     "eslint src/**/*.{ts,tsx} --fix",
-    "prettier --write src/**/*.{ts,tsx}",
-    "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload build",
-    "tsc --project tsconfig.server.json",
-    "next build"
+    "prettier --write src/**/*.{ts,tsx}"
   ]
 }

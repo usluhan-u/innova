@@ -5,17 +5,7 @@ import redirects from '@payloadcms/plugin-redirects';
 import nestedDocs from '@payloadcms/plugin-nested-docs';
 import seo from '@payloadcms/plugin-seo';
 import formBuilder from '@payloadcms/plugin-form-builder';
-import path from 'path';
-import {
-  AwardPost,
-  BlogPost,
-  Category,
-  Media,
-  NewsPost,
-  Page,
-  SuccessStoryPost,
-  User
-} from './collections';
+import { Category, Media, Page, Post, PostGroup, User } from './collections';
 import { Footer, Menu, NotFound, SocialMedia } from './globals';
 import { Logo } from './icons';
 import payloadConfig from './payload.config.json';
@@ -30,16 +20,7 @@ export default buildConfig({
   graphQL: {
     disable: true
   },
-  collections: [
-    Category,
-    BlogPost,
-    SuccessStoryPost,
-    NewsPost,
-    AwardPost,
-    Page,
-    Media,
-    User
-  ],
+  collections: [Category, PostGroup, Post, Page, Media, User],
   globals: [SocialMedia, Footer, Menu, NotFound],
   localization,
   i18n: {
@@ -65,50 +46,23 @@ export default buildConfig({
     formBuilder({
       formOverrides: {},
       formSubmissionOverrides: {},
-      redirectRelationships: [
-        Page.slug,
-        BlogPost.slug,
-        NewsPost.slug,
-        SuccessStoryPost.slug,
-        AwardPost.slug
-      ]
+      redirectRelationships: [Page.slug]
     }),
     redirects({
-      collections: [
-        Page.slug,
-        BlogPost.slug,
-        NewsPost.slug,
-        SuccessStoryPost.slug,
-        AwardPost.slug
-      ]
+      collections: [Post.slug, Page.slug]
     }),
     seo({
-      collections: [
-        Page.slug,
-        BlogPost.slug,
-        NewsPost.slug,
-        SuccessStoryPost.slug,
-        AwardPost.slug
-      ],
+      collections: [Post.slug, Page.slug],
       generateTitle: ({ doc }: any) => `İnnova - ${doc.title.value}`,
       generateDescription: ({ doc }: any) => doc.excerpt.value
     }),
     nestedDocs({
-      collections: [
-        Page.slug,
-        BlogPost.slug,
-        NewsPost.slug,
-        SuccessStoryPost.slug,
-        AwardPost.slug
-      ],
+      collections: [Post.slug, Page.slug],
       parentFieldSlug: 'parent',
       breadcrumbsFieldSlug: 'breadcrumbs',
       generateLabel: (_, page) => (page.title as string) || '',
       generateURL: (pages) =>
         pages.reduce((url, page) => `${url}/${page.slug}`, '')
     })
-  ],
-  typescript: {
-    outputFile: path.resolve(__dirname, 'payload-types.ts')
-  }
+  ]
 });

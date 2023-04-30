@@ -4,17 +4,19 @@ import next from 'next';
 import nextBuild from 'next/dist/build';
 import path from 'path';
 import { IncomingMessage, ServerResponse } from 'http';
-import { env } from './env';
+import dotenv from 'dotenv';
 
-const DEV = env.nodeEnv !== 'production';
-const PORT = env.port;
+dotenv.config();
+
+const DEV = process.env.NODE_ENV !== 'production';
+const PORT = parseInt(process.env.PORT || '3000', 10);
 
 const app = express();
 
 const boilerplate = async () => {
   await payload.init({
-    secret: env.payloadSecretKey,
-    mongoURL: env.db,
+    secret: process.env.PAYLOAD_SECRET_KEY || '',
+    mongoURL: process.env.MONGODB_URI || '',
     express: app,
     onInit: async () => {
       payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}.`);

@@ -3,7 +3,7 @@ import { PaginatedDocs } from 'payload/dist/mongoose/types';
 import { PageType } from '../collections';
 import NotFound from './not-found';
 import { Head, Hero, RenderBlocks } from '../components';
-import { getList, getPageBySlug } from '../api';
+import { getAll, getPageBySlug } from '../api';
 
 export interface PageProps {
   page?: PageType;
@@ -15,7 +15,7 @@ const Page = ({ page }: PageProps) => {
   return (
     <>
       <Head
-        title={page.meta?.title || page.title}
+        title={page.meta?.title || page.name}
         description={page.meta?.description}
         keywords={page.meta?.keywords}
         noIndex={page.meta?.noIndex}
@@ -37,7 +37,8 @@ export const getStaticProps: GetStaticProps = async ({
   locale,
   defaultLocale
 }) => {
-  const slug = params?.slug ? (params.slug as string[]).join('/') : 'home';
+  const slug =
+    params?.slug && Array.isArray(params.slug) ? params.slug.join('/') : 'home';
 
   const page = await getPageBySlug<PaginatedDocs<PageType>>({
     slug,
@@ -54,13 +55,18 @@ export const getStaticProps: GetStaticProps = async ({
 };
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-  const data = await getList<PaginatedDocs<PageType>>({
-    endpoint: 'pages?limit=100'
+  const data = await getAll<PaginatedDocs<PageType>>({
+    endpoint: 'pages?limit=1000'
   });
 
-  const paths = data.docs.map(({ slug }) => ({
-    params: { slug: slug.split('/') }
-  }));
+  const customPages = ['success-stories', 'awards', 'blogs', 'news'];
+  const slugs = data.docs.map(({ slug }) => slug);
+
+  const paths = slugs
+    .filter((slug) => !customPages.includes(slug))
+    .map((slug) => ({
+      params: { slug: slug.split('/') }
+    }));
 
   const localizedPaths = locales
     ? paths.flatMap((path) => locales.map((locale) => ({ ...path, locale })))

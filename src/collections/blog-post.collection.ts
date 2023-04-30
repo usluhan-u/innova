@@ -88,7 +88,7 @@ export const BlogPost: CollectionConfig = {
         }
       ]
     },
-    Slug,
+    Slug({ fieldToUse: 'title' }),
     ParentPage,
     {
       name: 'category',
