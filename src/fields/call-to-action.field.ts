@@ -28,7 +28,6 @@ export const CallToAction = (args?: Args): Field => {
         name: 'type',
         label: 'Type',
         type: 'radio',
-        defaultValue: 'page',
         required,
         options: [
           {

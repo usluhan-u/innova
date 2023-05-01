@@ -79,7 +79,8 @@ export const Page: CollectionConfig = {
     read: () => true
   },
   admin: {
-    useAsTitle: 'name'
+    useAsTitle: 'name',
+    defaultColumns: ['name', 'parent', 'publishDate', '_status']
   },
   versions: {
     drafts: true

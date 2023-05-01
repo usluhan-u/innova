@@ -18,7 +18,7 @@ export interface TagProps {
 
 export const Tag = ({ tag }: TagProps) => (
   <Card
-    w={{ base: 'full', md: 'xs' }}
+    w="full"
     overflow="hidden"
     borderWidth="1px"
     borderStyle="solid"
@@ -26,31 +26,25 @@ export const Tag = ({ tag }: TagProps) => (
     variant="outline"
   >
     <CardBody>
-      <Center>
-        <Flex flexDir="column" gap={4}>
-          <Flex align="center" gap={4}>
-            <Center bgColor="background.secondary" borderRadius="lg" p={2}>
-              <Box boxSize="48px">
-                <Image
-                  objectFit="cover"
-                  src={tag.icon.url}
-                  alt={tag.icon.alt}
-                />
-              </Box>
-            </Center>
-            <Text color="text.primary" fontWeight="medium" fontSize="2xl">
-              {tag.title}
-            </Text>
-          </Flex>
-          {tag.content && (
-            <Text color="text.primary" fontWeight="normal" fontSize="md">
-              {tag.content}
-            </Text>
-          )}
+      <Flex flexDir="column" gap={4}>
+        <Flex align="center" gap={4}>
+          <Center bgColor="background.secondary" borderRadius="lg" p={2}>
+            <Box boxSize="48px">
+              <Image objectFit="cover" src={tag.icon.url} alt={tag.icon.alt} />
+            </Box>
+          </Center>
+          <Text color="text.primary" fontWeight="medium" fontSize="2xl">
+            {tag.title}
+          </Text>
         </Flex>
-      </Center>
+        {tag.content && (
+          <Text color="text.primary" fontWeight="normal" fontSize="md">
+            {tag.content}
+          </Text>
+        )}
+      </Flex>
     </CardBody>
-    {tag.callToAction && Object.keys(tag.callToAction) && (
+    {tag.callToAction && Object.keys(tag.callToAction).length > 0 && (
       <CardFooter>
         <TextIconCallToAction
           {...tag.callToAction}

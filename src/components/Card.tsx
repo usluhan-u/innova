@@ -56,7 +56,7 @@ export const Card = ({ card }: CardProps) => (
       </Flex>
     </ChakraCardBody>
     <ChakraCardFooter justify="space-between" flexWrap="wrap">
-      {card.callToAction && Object.keys(card.callToAction) && (
+      {card.callToAction && Object.keys(card.callToAction).length > 0 && (
         <TextIconCallToAction
           {...card.callToAction}
           color="text.blue"

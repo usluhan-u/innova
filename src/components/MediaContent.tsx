@@ -31,7 +31,7 @@ export const MediaContent = ({
         <GridItem>
           <Flex flexDir="column" justify="space-between">
             <RichText content={content} />
-            {callToAction && Object.keys(callToAction) && (
+            {callToAction && Object.keys(callToAction).length > 0 && (
               <TextIconCallToAction
                 {...callToAction}
                 color="text.blue"
@@ -48,7 +48,7 @@ export const MediaContent = ({
         <GridItem>
           <Flex flexDir="column" justify="space-between" boxSize="full">
             <RichText content={content} />
-            {callToAction && Object.keys(callToAction) && (
+            {callToAction && Object.keys(callToAction).length > 0 && (
               <TextIconCallToAction
                 {...callToAction}
                 color="text.blue"

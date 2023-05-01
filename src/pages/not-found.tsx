@@ -27,7 +27,7 @@ const NotFound = ({ notFound }: NotFoundProps) => (
       </Text>
     )}
     {notFound?.callToAction &&
-      Object.keys(notFound?.callToAction).length !== 0 && (
+      Object.keys(notFound?.callToAction).length > 0 && (
         <ButtonCallToAction {...notFound?.callToAction} />
       )}
     {!notFound?.title &&

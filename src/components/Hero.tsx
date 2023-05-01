@@ -81,7 +81,7 @@ export const Hero = ({
                   gap={4}
                 >
                   {logo && <Image src={logo?.url} alt={logo?.alt} />}
-                  {callToAction && Object.keys(callToAction) && (
+                  {callToAction && Object.keys(callToAction).length > 0 && (
                     <ButtonCallToAction
                       {...callToAction}
                       rightIcon={<FiArrowRight />}
