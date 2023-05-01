@@ -36,7 +36,6 @@ import {
   TagGroup,
   TagGroupType
 } from '../blocks';
-import { regeneratePage } from '../utils';
 import { populateValueAfterCaseChange } from '../hooks';
 
 export type PageLayout =
@@ -85,16 +84,16 @@ export const Page: CollectionConfig = {
   versions: {
     drafts: true
   },
-  hooks: {
-    afterChange: [
-      ({ doc }) => {
-        regeneratePage({
-          collection: 'pages',
-          doc
-        });
-      }
-    ]
-  },
+  // hooks: {
+  //   afterChange: [
+  //     ({ doc }) => {
+  //       regeneratePage({
+  //         collection: 'pages',
+  //         doc
+  //       });
+  //     }
+  //   ]
+  // },
   fields: [
     {
       name: 'name',
