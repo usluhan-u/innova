@@ -1,26 +1,58 @@
 FROM node:18.8-alpine as base
 
-FROM base as builder
+# 1. Install dependencies
+FROM base AS builder
 
-WORKDIR /home/node/app
-COPY package*.json ./
+WORKDIR /app
+
+# Install dependencies based on the preferred package manager
+COPY package.json yarn.lock* package-lock.json* ./
+
+RUN yarn set version berry
+
+COPY .yarn ./.yarn
+COPY .yarnrc.yml ./
+
+RUN \
+  if [ -f yarn.lock ]; then yarn install; \
+  elif [ -f package-lock.json ]; then npm install; \
+  else echo "Lockfile not found."; \
+  fi
 
 COPY . .
-RUN yarn install
-RUN yarn build
 
-FROM base as runtime
+RUN \
+  if [ -f yarn.lock ]; then yarn build; \
+  elif [ -f package-lock.json ]; then npm ci; \
+  else echo "Lockfile not found."; \
+  fi
+
+FROM base AS runtime
 
 ENV NODE_ENV=production
-ENV PAYLOAD_CONFIG_PATH=build/payload.config.js
+ENV PAYLOAD_CONFIG_PATH=payload.config.js
 
-WORKDIR /home/node/app
-COPY package*.json  ./
+WORKDIR /app
 
-RUN yarn workspaces focus --all --production
-COPY --from=builder /home/node/app/dist ./dist
-COPY --from=builder /home/node/app/build ./build
+COPY package.json yarn.lock* package-lock.json* ./
+
+RUN yarn set version berry
+
+COPY .yarn ./.yarn
+COPY .yarnrc.yml ./
+
+RUN \
+  if [ -f yarn.lock ]; then yarn workspaces focus --all --production; \
+  elif [ -f package-lock.json ]; then npm install --production; \
+  else yarn build; \
+  fi
+
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/build ./build
 
 EXPOSE 3000
 
-CMD ["node", "build/server.js"]
+CMD ["node", "server.js"]

@@ -6,4 +6,4 @@ if ! [ -x "$(command -v docker-compose)" ]; then
 fi
 
 echo "### Running docker images..."
-docker-compose -f docker-compose.prod.yml up -d
+docker-compose -f docker-compose.yml up -d

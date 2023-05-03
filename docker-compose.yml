@@ -1,0 +1,40 @@
+version: '3.9'
+
+services:
+  payload:
+    container_name: payload
+    build:
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    working_dir: /app
+    depends_on:
+      - mongo
+    env_file:
+      - .env
+    command: node server.js
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - '27017:27017'
+    command:
+      - --storageEngine=wiredTiger
+    volumes:
+      - data:/data/db
+    logging:
+      driver: none
+
+  # meilisearch:
+  #   container_name: meilisearch
+  #   image: getmeili/meilisearch:latest
+  #   ports:
+  #     - 7700:7700
+
+volumes:
+  data:
+  node_modules:
