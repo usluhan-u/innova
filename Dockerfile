@@ -1,58 +1,45 @@
-FROM node:18.8-alpine as base
+FROM node:18-alpine as base
 
-# 1. Install dependencies
-FROM base AS builder
+FROM base as builder
 
 WORKDIR /app
-
-# Install dependencies based on the preferred package manager
-COPY package.json yarn.lock* package-lock.json* ./
+COPY package*.json ./
 
 RUN yarn set version berry
 
 COPY .yarn ./.yarn
 COPY .yarnrc.yml ./
-
-RUN \
-  if [ -f yarn.lock ]; then yarn install; \
-  elif [ -f package-lock.json ]; then npm install; \
-  else echo "Lockfile not found."; \
-  fi
-
 COPY . .
 
-RUN \
-  if [ -f yarn.lock ]; then yarn build; \
-  elif [ -f package-lock.json ]; then npm ci; \
-  else echo "Lockfile not found."; \
-  fi
+RUN yarn install
+RUN yarn build
 
-FROM base AS runtime
+FROM base as runtime
 
 ENV NODE_ENV=production
-ENV PAYLOAD_CONFIG_PATH=payload.config.js
+ENV PORT='3000'
+ENV MONGODB_URI='mongodb://127.0.0.1:27017/innovadb'
+ENV PAYLOAD_SECRET_KEY='dc4d364eefdb590ede0212e0'
+ENV NEXT_PUBLIC_SERVER_URL='http://127.0.0.1:3000'
+ENV PAYLOAD_PUBLIC_SERVER_URL='http://127.0.0.1:3000'
+ENV PAYLOAD_CONFIG_PATH='dist/src/payload.config.js'
+ENV NEXT_PUBLIC_MEILISEARCH_URL='http://127.0.0.1:7700'
+ENV IMAGE_DOMAIN='127.0.0.1'
 
 WORKDIR /app
-
-COPY package.json yarn.lock* package-lock.json* ./
+COPY package*.json  ./
 
 RUN yarn set version berry
 
 COPY .yarn ./.yarn
 COPY .yarnrc.yml ./
 
-RUN \
-  if [ -f yarn.lock ]; then yarn workspaces focus --all --production; \
-  elif [ -f package-lock.json ]; then npm install --production; \
-  else yarn build; \
-  fi
-
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
+RUN yarn workspaces focus --all --production
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/build ./build
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next ./.next
 
 EXPOSE 3000
 
-CMD ["node", "server.js"]
+ENTRYPOINT ["node", "dist/src/server.js"]

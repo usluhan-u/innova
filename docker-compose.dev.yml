@@ -3,9 +3,7 @@ version: '3.9'
 services:
   payload:
     container_name: payload
-    build:
-      dockerfile: Dockerfile
-    restart: unless-stopped
+    image: node:18-alpine
     ports:
       - 3000:3000
     volumes:
@@ -16,7 +14,7 @@ services:
       - mongo
     env_file:
       - .env
-    command: node server.js
+    command: sh -c "yarn install && yarn dev"
 
   mongo:
     image: mongo:latest
@@ -29,11 +27,11 @@ services:
     logging:
       driver: none
 
-  # meilisearch:
-  #   container_name: meilisearch
-  #   image: getmeili/meilisearch:latest
-  #   ports:
-  #     - 7700:7700
+  meilisearch:
+    container_name: meilisearch
+    image: getmeili/meilisearch:latest
+    ports:
+      - 7700:7700
 
 volumes:
   data:

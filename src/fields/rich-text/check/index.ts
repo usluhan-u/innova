@@ -1,11 +1,11 @@
 import { RichTextCustomElement } from 'payload/types';
-import { CheckButton } from './Button';
-import { CheckElement } from './Element';
+import { Button } from './Button';
+import { Element } from './Element';
 import { withCheck } from './plugin';
 
 export const check: RichTextCustomElement = {
   name: 'check',
-  Button: CheckButton,
-  Element: CheckElement,
+  Button,
+  Element,
   plugins: [withCheck]
 };

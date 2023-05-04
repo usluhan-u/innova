@@ -1,9 +1,11 @@
 import { GetServerSideProps } from 'next';
-import Page, { getStaticProps as sharedGetStaticProps } from './[...slug]';
+import Page, {
+  getServerSideProps as sharedGetServerSideProps
+} from './[...slug]';
 
 export default Page;
 
-export const getStaticProps: GetServerSideProps = async (context) => {
-  const func = sharedGetStaticProps.bind(this);
-  return func(context);
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const func = sharedGetServerSideProps.bind(this);
+  return func(ctx);
 };

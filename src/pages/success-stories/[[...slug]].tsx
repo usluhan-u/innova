@@ -1,4 +1,4 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { PaginatedDocs } from 'payload/dist/mongoose/types';
 import { Flex } from '@chakra-ui/react';
 import { PageType, PostType } from '../../collections';
@@ -69,7 +69,7 @@ const SuccessStories = ({ pageData, data }: SuccessStoriesProps) => {
 
 export default SuccessStories;
 
-export const getStaticProps: GetStaticProps = async ({
+export const getServerSideProps: GetServerSideProps = async ({
   locale,
   defaultLocale
 }) => {
@@ -91,24 +91,6 @@ export const getStaticProps: GetStaticProps = async ({
     props: {
       pageData: pageData.docs[0] || null,
       data: data.docs
-    },
-    revalidate: 1
-  };
-};
-
-export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-  const paths = [
-    {
-      params: { slug: [] }
     }
-  ];
-
-  const localizedPaths = locales
-    ? paths.flatMap((path) => locales.map((locale) => ({ ...path, locale })))
-    : [];
-
-  return {
-    paths: [...paths, ...localizedPaths],
-    fallback: false
   };
 };

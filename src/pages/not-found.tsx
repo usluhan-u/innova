@@ -1,5 +1,5 @@
 import { Center, Text } from '@chakra-ui/react';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { ButtonCallToAction } from '../components';
 import { NotFoundType } from '../globals';
 import { getCustomPageData } from '../api';
@@ -41,7 +41,7 @@ const NotFound = ({ notFound }: NotFoundProps) => (
 
 export default NotFound;
 
-export const getStaticProps: GetStaticProps = async ({
+export const getServerSideProps: GetServerSideProps = async ({
   locale,
   defaultLocale
 }) => {
@@ -54,7 +54,6 @@ export const getStaticProps: GetStaticProps = async ({
   return {
     props: {
       notFound: notFound || null
-    },
-    revalidate: 1
+    }
   };
 };

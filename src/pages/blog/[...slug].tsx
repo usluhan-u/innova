@@ -1,4 +1,4 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { PaginatedDocs } from 'payload/dist/mongoose/types';
 import { Flex } from '@chakra-ui/react';
 import { PostType } from '../../collections';
@@ -10,7 +10,7 @@ import {
   Hero
 } from '../../components';
 import NotFound from '../not-found';
-import { getCustomPageDataBySlug, getAll } from '../../api';
+import { getCustomPageDataBySlug } from '../../api';
 
 interface BlogProps {
   data: PostType | null;
@@ -48,7 +48,7 @@ const Blog = ({ data }: BlogProps) => {
 
 export default Blog;
 
-export const getStaticProps: GetStaticProps = async ({
+export const getServerSideProps: GetServerSideProps = async ({
   params,
   locale,
   defaultLocale
@@ -68,26 +68,6 @@ export const getStaticProps: GetStaticProps = async ({
   return {
     props: {
       data: data.docs[0] || null
-    },
-    revalidate: 1
-  };
-};
-
-export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-  const data = await getAll<PaginatedDocs<PostType>>({
-    endpoint: 'posts'
-  });
-
-  const paths = data.docs.map(({ slug }) => ({
-    params: { slug: slug.split('/') }
-  }));
-
-  const localizedPaths = locales
-    ? paths.flatMap((path) => locales.map((locale) => ({ ...path, locale })))
-    : [];
-
-  return {
-    paths: [...paths, ...localizedPaths],
-    fallback: false
+    }
   };
 };
