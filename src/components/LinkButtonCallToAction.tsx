@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button, ButtonProps, Flex } from '@chakra-ui/react';
 import { CallToAction, CallToActionProps } from './CallToAction';
 

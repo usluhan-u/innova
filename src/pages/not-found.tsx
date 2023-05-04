@@ -1,3 +1,4 @@
+import React from 'react';
 import { Center, Text } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 import { ButtonCallToAction } from '../components';

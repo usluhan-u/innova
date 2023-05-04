@@ -1,3 +1,4 @@
+import React from 'react';
 import { ChakraProps, Divider, Flex, chakra } from '@chakra-ui/react';
 import {
   FaFacebookF,

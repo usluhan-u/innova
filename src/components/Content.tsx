@@ -1,3 +1,4 @@
+import React from 'react';
 import { Flex, Grid, GridItem } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 import { ContentType } from '../blocks';

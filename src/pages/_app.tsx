@@ -3,6 +3,7 @@ import '@fontsource/inter/500.css';
 import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
 import '../styles/globals.css';
+import React from 'react';
 import type { AppContext, AppProps } from 'next/app';
 import App from 'next/app';
 import { ChakraProvider, Flex } from '@chakra-ui/react';

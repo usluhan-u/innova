@@ -1,3 +1,4 @@
+import React from 'react';
 import { AspectRatio, Flex, Image, Text } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 import { DotSliderItemType, DotSliderType } from '../blocks';

@@ -1,3 +1,4 @@
+import React from 'react';
 import { IconType } from 'react-icons';
 import { Circle, Icon } from '@chakra-ui/react';
 import { ExternalLink } from './ExternalLink';

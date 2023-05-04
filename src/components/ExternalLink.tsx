@@ -1,3 +1,4 @@
+import React from 'react';
 import NextLink from 'next/link';
 import { chakra } from '@chakra-ui/react';
 import escapeHTML from 'escape-html';

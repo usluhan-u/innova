@@ -1,3 +1,4 @@
+import React from 'react';
 import { CallToActionType } from '../fields';
 import { ExternalLink } from './ExternalLink';
 import { InternalLink } from './InternalLink';

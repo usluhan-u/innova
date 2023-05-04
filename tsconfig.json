@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "ES5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "strict": true,
@@ -15,8 +15,7 @@
     "isolatedModules": true,
     "incremental": true,
     "noEmit": true,
-    "forceConsistentCasingInFileNames": true,
-    "paths": {}
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
     "src",
@@ -26,7 +25,7 @@
     "**/*.ts",
     "**/*.tsx"
   ],
-  "exclude": ["node_modules", "dist", "build", ".next"],
+  "exclude": ["node_modules"],
   "ts-node": {
     "transpileOnly": true,
     "swc": true

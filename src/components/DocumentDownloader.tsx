@@ -1,3 +1,4 @@
+import React from 'react';
 import { Card, CardBody, Flex, Icon, Text } from '@chakra-ui/react';
 import { FiDownload } from 'react-icons/fi';
 import { DocumentDownloaderGroupItemType } from '../blocks';

@@ -1,5 +1,12 @@
 #!/bin/bash
 
+ENV_FILE_PATH=".env"
+
+if ! [ -e "$ENV_FILE_PATH" ]; then
+  echo "$ENV_FILE_PATH file does not exist. Create an .env file under corresponding path!" >&2
+  exit 1
+fi
+
 if ! [ -x "$(command -v docker)" ]; then
   echo 'Error: docker is not installed.' >&2
   exit 1

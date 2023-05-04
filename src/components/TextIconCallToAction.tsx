@@ -1,3 +1,4 @@
+import React from 'react';
 import { ChakraProps, Flex, Icon } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
 import { CallToAction, CallToActionProps } from './CallToAction';

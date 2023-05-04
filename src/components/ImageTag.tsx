@@ -1,3 +1,4 @@
+import React from 'react';
 import { Center, Card, CardBody, Image } from '@chakra-ui/react';
 import { ImageTagGroupItemType } from '../blocks';
 
