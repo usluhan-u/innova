@@ -27,10 +27,10 @@ docker rmi payload
 # echo "### Starting docker container..."
 # docker run -dp 3000:3000 --name innova payload
 
-if ! [ -x "$(command -v docker compose)" ]; then
-  echo 'Error: docker compose is not installed.' >&2
+if ! [ -x "$(command -v docker-compose)" ]; then
+  echo 'Error: docker-compose is not installed.' >&2
   exit 1
 fi
 
 # docker-compose -f docker-compose.prod.yml down
-docker compose -f docker-compose.prod.yml up --build -d
+docker-compose -f docker-compose.prod.yml up --build -d
