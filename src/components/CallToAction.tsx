@@ -1,9 +1,12 @@
 import React from 'react';
+import { ChakraProps } from '@chakra-ui/react';
 import { CallToActionType } from '../fields';
 import { ExternalLink } from './ExternalLink';
 import { InternalLink } from './InternalLink';
 
-export interface CallToActionProps extends Omit<CallToActionType, 'label'> {
+export interface CallToActionProps
+  extends Omit<CallToActionType, 'label'>,
+    ChakraProps {
   children: React.ReactNode | React.ReactNode[];
 }
 
@@ -12,16 +15,17 @@ export const CallToAction = ({
   type,
   page,
   url,
-  newTab
+  newTab,
+  ...rest
 }: CallToActionProps) => (
   <>
     {type === 'page' && page && (
-      <InternalLink slug={page.slug} newTab={newTab}>
+      <InternalLink slug={page.slug} newTab={newTab} {...rest}>
         {children}
       </InternalLink>
     )}
     {type === 'custom' && url && (
-      <ExternalLink href={url} newTab={newTab}>
+      <ExternalLink href={url} newTab={newTab} {...rest}>
         {children}
       </ExternalLink>
     )}

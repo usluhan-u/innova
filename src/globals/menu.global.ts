@@ -17,8 +17,7 @@ export interface MenuItemType {
   menuItem: {
     callToAction: CallToActionType;
   };
-  enableNavigateTo: boolean;
-  navigateTo: CallToActionType;
+  callToAction: CallToActionType;
 }
 
 export interface MenuType {
@@ -99,74 +98,9 @@ export const Menu: GlobalConfig = {
             condition: (_, siblingData) => siblingData?.type === 'multiple'
           }
         },
-        {
-          name: 'enableNavigateTo',
-          label: 'Navigate To',
-          type: 'checkbox',
-          defaultValue: false,
-          required: true,
-          admin: {
-            condition: (_, siblingData) => siblingData?.type === 'multiple'
-          }
-        },
-        {
-          name: 'navigateTo',
-          label: false,
-          type: 'group',
-          fields: [
-            {
-              name: 'label',
-              label: 'Label',
-              type: 'text',
-              required: true,
-              localized: true
-            },
-            {
-              name: 'type',
-              label: 'Type',
-              type: 'radio',
-              defaultValue: 'page',
-              required: true,
-              options: [
-                {
-                  label: 'Page',
-                  value: 'page'
-                },
-                {
-                  label: 'Custom URL',
-                  value: 'custom'
-                }
-              ],
-              admin: {
-                layout: 'horizontal'
-              }
-            },
-            {
-              name: 'page',
-              label: 'Page',
-              type: 'relationship',
-              relationTo: 'pages',
-              required: true,
-              localized: true,
-              admin: {
-                condition: (_, siblingData) => siblingData?.type === 'page'
-              }
-            },
-            {
-              name: 'url',
-              label: 'URL',
-              type: 'text',
-              required: true,
-              localized: true,
-              admin: {
-                condition: (_, siblingData) => siblingData?.type === 'custom'
-              }
-            }
-          ],
-          admin: {
-            condition: (_, siblingData) => Boolean(siblingData.enableNavigateTo)
-          }
-        },
+        CallToAction({
+          condition: (_, siblingData) => siblingData?.type === 'multiple'
+        }),
         {
           name: 'menuItem',
           label: 'Menu Item',

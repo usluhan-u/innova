@@ -18,17 +18,17 @@ export const TextIconCallToAction = ({
   icon,
   color
 }: TextIconCallToActionProps) => (
-  <Flex
-    align="center"
-    gap={2}
-    color={color}
-    // transitionProperty="all"
-    // transitionDuration="100ms"
-    // transitionTimingFunction="ease-in-out"
-    // transition="all 100ms ease-in-out"
-    // _hover={{ textDecoration: 'none', transform: 'translateX(0.15em)' }}
-  >
-    <CallToAction type={type} page={page} url={url}>
+  <Flex align="center" gap={2} color={color}>
+    <CallToAction
+      type={type}
+      page={page}
+      url={url}
+      transitionProperty="all"
+      transitionDuration="100ms"
+      transitionTimingFunction="ease-in-out"
+      transition="all 100ms ease-in-out"
+      _hover={{ textDecoration: 'none', transform: 'translateX(0.15em)' }}
+    >
       {label}
     </CallToAction>
     <Icon as={icon} />

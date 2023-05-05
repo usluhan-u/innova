@@ -33,9 +33,9 @@ export const Menu = ({ menu }: MenuProps) => {
             bgColor="transparent"
             color="text.primary"
             fontWeight="normal"
+            onMouseEnter={onOpen}
             _hover={{ bgColor: 'transparent', color: 'text.blue' }}
             _active={{ bgColor: 'transparent' }}
-            onMouseEnter={onOpen}
           >
             {menuItem.label}
           </ChakraMenuButton>
@@ -69,19 +69,20 @@ export const Menu = ({ menu }: MenuProps) => {
                   </ChakraMenuGroup>
                 ))}
               </Flex>
-              {menuItem.enableNavigateTo && menuItem.navigateTo && (
-                <Flex flexDir="column" mt={4}>
-                  <Divider borderBottomColor="black" mb={4} />
-                  <TextIconCallToAction
-                    label={menuItem.navigateTo.label}
-                    type={menuItem.navigateTo.type}
-                    page={menuItem.navigateTo.page}
-                    url={menuItem.navigateTo.url}
-                    icon={FiArrowRight}
-                    color="text.blue"
-                  />
-                </Flex>
-              )}
+              {menuItem.callToAction &&
+                Object.keys(menuItem.callToAction).length > 0 && (
+                  <Flex flexDir="column" mt={4}>
+                    <Divider borderBottomColor="black" mb={4} />
+                    <TextIconCallToAction
+                      label={menuItem.callToAction.label}
+                      type={menuItem.callToAction.type}
+                      page={menuItem.callToAction.page}
+                      url={menuItem.callToAction.url}
+                      icon={FiArrowRight}
+                      color="text.blue"
+                    />
+                  </Flex>
+                )}
             </Flex>
           </ChakraMenuList>
         </>
