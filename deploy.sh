@@ -19,7 +19,7 @@ docker stop payload
 docker rm payload
 
 # echo "### Removing docker image..."
-docker rmi payload
+docker rmi innova-payload
 
 # echo "### Building docker image..."
 # docker build -t payload .
