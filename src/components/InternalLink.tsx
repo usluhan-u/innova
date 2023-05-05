@@ -1,8 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { ChakraProps } from '@chakra-ui/react';
 
-export interface InternalLinkProps extends ChakraProps {
+export interface InternalLinkProps {
   children: React.ReactNode | React.ReactNode[];
   slug: string;
   newTab?: boolean;
