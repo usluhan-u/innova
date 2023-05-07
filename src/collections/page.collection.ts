@@ -62,15 +62,19 @@ export type PageBlockType =
   | ImageDownloaderGroupType['blockType']
   | ContentCardGroupType['blockType'];
 
+export interface PageContent {
+  backgroundColor: BackgroundColorType;
+  width: WidthType;
+  layout: PageLayout[];
+}
+
 export interface PageType {
   slug: string;
   name: string;
   hero: HeroType;
-  backgroundColor: BackgroundColorType;
-  width: WidthType;
+  content?: PageContent;
   breadcrumbs: Breadcrumb[];
   meta: MetaType;
-  layout: PageLayout[];
 }
 
 export const Page: CollectionConfig = {
@@ -114,6 +118,7 @@ export const Page: CollectionConfig = {
           fields: [Hero]
         },
         {
+          name: 'content',
           label: 'Content',
           fields: [
             BackgroundColor,

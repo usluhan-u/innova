@@ -15,12 +15,12 @@ import {
 } from '../../components';
 
 export interface BlogsProps {
-  pageData: PageType | null;
+  page: PageType | null;
   data: PostType[];
 }
 
-const Blogs = ({ pageData, data }: BlogsProps) => {
-  if (pageData === null) return <NotFound />;
+const Blogs = ({ page, data }: BlogsProps) => {
+  if (page === null) return <NotFound />;
 
   const cardGroupItems = data.map((item) => {
     const { category, featuredImage, publishDate, name, slug } = item;
@@ -36,7 +36,7 @@ const Blogs = ({ pageData, data }: BlogsProps) => {
         page: {
           ...item,
           slug: `/blog/${slug}`,
-          layout: []
+          content: undefined
         }
       }
     };
@@ -47,23 +47,25 @@ const Blogs = ({ pageData, data }: BlogsProps) => {
   return (
     <>
       <Head
-        title={pageData.meta?.title || pageData.name}
-        description={pageData.meta?.description}
-        keywords={pageData.meta?.keywords}
-        noIndex={pageData.meta?.noIndex}
+        title={page.meta?.title || page.name}
+        description={page.meta?.description}
+        keywords={page.meta?.keywords}
+        noIndex={page.meta?.noIndex}
       />
       <Hero
-        {...pageData.hero}
-        breadcrumbs={pageData.breadcrumbs}
-        activeSlug={pageData.slug}
+        {...page.hero}
+        breadcrumbs={page.breadcrumbs}
+        activeSlug={page.slug}
       />
-      <BackgroundColor bgColor={pageData.backgroundColor}>
-        <AutoPosition>
-          <Flex w={{ base: 'full', md: pageData.width }}>
-            <CardGroup items={cardGroupItems} />
-          </Flex>
-        </AutoPosition>
-      </BackgroundColor>
+      {page.content && Object.keys(page.content).length > 0 && (
+        <BackgroundColor bgColor={page.content.backgroundColor}>
+          <AutoPosition>
+            <Flex w={{ base: 'full', md: page.content.width }}>
+              <CardGroup items={cardGroupItems} />
+            </Flex>
+          </AutoPosition>
+        </BackgroundColor>
+      )}
     </>
   );
 };
@@ -74,7 +76,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   locale,
   defaultLocale
 }) => {
-  const [pageData, data] = await Promise.all([
+  const [page, data] = await Promise.all([
     getPageBySlug<PaginatedDocs<PageType>>({
       slug: 'blogs',
       locale,
@@ -90,7 +92,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   return {
     props: {
-      pageData: pageData.docs[0] || null,
+      page: page.docs[0] || null,
       data: data.docs
     }
   };

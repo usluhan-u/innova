@@ -21,7 +21,7 @@ export default buildConfig({
     disable: true
   },
   collections: [Category, PostGroup, Post, Page, Media, User],
-  globals: [SocialMedia, Footer, Menu, NotFound],
+  globals: [Menu, SocialMedia, Footer, NotFound],
   localization,
   i18n: {
     debug: false,

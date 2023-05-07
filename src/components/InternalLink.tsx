@@ -19,7 +19,14 @@ export const InternalLink = ({
     : {};
 
   return (
-    <Link href={slug} as={NextLink} scroll={false} {...newTabProps} {...rest}>
+    <Link
+      href={slug}
+      as={NextLink}
+      scroll={false}
+      _hover={{ textDecoration: 'none' }}
+      {...newTabProps}
+      {...rest}
+    >
       {children}
     </Link>
   );

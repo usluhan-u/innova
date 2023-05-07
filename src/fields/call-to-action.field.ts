@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Field } from 'payload/types';
 import { PageType } from '../collections';
+import { validateUrl } from '../utils';
 
 export interface CallToActionType {
   label: string;
@@ -69,12 +70,7 @@ export const CallToAction = (args?: Args): Field => {
         localized: true,
         validate: (value, { operation }) => {
           if (operation === 'create' || operation === 'update') {
-            const urlRegex =
-              /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/;
-
-            const isValid = urlRegex.test(value);
-
-            return isValid || 'Please enter a valid URL';
+            return validateUrl(value);
           }
 
           return 'Please enter a valid URL';
