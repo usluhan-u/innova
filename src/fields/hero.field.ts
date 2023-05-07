@@ -3,14 +3,16 @@ import { Media, UploadedMediaType } from './media.field';
 import { CallToActionGroup } from './call-to-action-group.field';
 import { CallToAction, CallToActionType } from './call-to-action.field';
 
+export interface CallToActionGroupType {
+  callToAction: CallToActionType;
+}
+
 export interface HeroType {
   type: 'home' | 'default';
   title: string;
   description?: string;
   callToAction: CallToActionType;
-  callToActionGroup: {
-    callToAction: CallToActionType;
-  }[];
+  callToActionGroup?: CallToActionGroupType[];
   backgroundImage: UploadedMediaType;
   logo?: UploadedMediaType;
 }

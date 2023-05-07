@@ -13,7 +13,7 @@ import { Breadcrumb } from '@payloadcms/plugin-nested-docs/dist/types';
 import { v4 as uuidv4 } from 'uuid';
 import { FiArrowRight } from 'react-icons/fi';
 import { useRouter } from 'next/router';
-import { HeroType } from '../fields';
+import { CallToActionGroupType, HeroType } from '../fields';
 import { BackgroundImage } from './BackgroundImage';
 import { ButtonCallToAction } from './ButtonCallToAction';
 import { LinkButtonCallToAction } from './LinkButtonCallToAction';
@@ -23,6 +23,63 @@ export interface HeroProps extends HeroType {
   breadcrumbs?: Breadcrumb[];
   activeSlug: string;
 }
+
+interface CallToActionGroupDesktopViewProps {
+  activeSlug: string;
+  callToActionGroup?: CallToActionGroupType[];
+}
+
+const CallToActionGroupDesktopView = ({
+  callToActionGroup,
+  activeSlug
+}: CallToActionGroupDesktopViewProps) => (
+  <Flex gap={8}>
+    {callToActionGroup?.map((item) => (
+      <LinkButtonCallToAction
+        key={uuidv4()}
+        {...item.callToAction}
+        active={
+          item.callToAction.page?.slug === activeSlug ||
+          item.callToAction.url === activeSlug
+        }
+      />
+    ))}
+  </Flex>
+);
+
+interface CallToActionGroupMobileViewProps
+  extends CallToActionGroupDesktopViewProps {}
+
+const CallToActionGroupMobileView = ({
+  activeSlug,
+  callToActionGroup
+}: CallToActionGroupMobileViewProps) => {
+  const router = useRouter();
+
+  return (
+    <Select
+      variant="filled"
+      value={activeSlug}
+      color="text.primary"
+      bgColor="background.gray"
+      borderRadius="3xl"
+      border="none"
+      py={4}
+      onChange={(e) => router.push(e.target.value)}
+      _focus={{ bgColor: 'background.gray' }}
+    >
+      {callToActionGroup?.map((item) => (
+        <option
+          key={uuidv4()}
+          value={item.callToAction.page?.slug || item.callToAction.url}
+          aria-label={item.callToAction.label}
+        >
+          {item.callToAction.label}
+        </option>
+      ))}
+    </Select>
+  );
+};
 
 export const Hero = ({
   backgroundImage,
@@ -36,7 +93,6 @@ export const Hero = ({
   type
 }: HeroProps) => {
   const [isLargerThanMd] = useMediaQuery('(min-width: 768px)');
-  const router = useRouter();
 
   return (
     <>
@@ -107,49 +163,22 @@ export const Hero = ({
                 )}
               </Flex>
               <Flex>
-                {callToActionGroup.length > 0 && (
-                  <>
-                    {isLargerThanMd ? (
-                      <Flex gap={8}>
-                        {callToActionGroup?.map((item) => (
-                          <LinkButtonCallToAction
-                            key={uuidv4()}
-                            {...item.callToAction}
-                            active={
-                              item.callToAction.page?.slug === activeSlug ||
-                              item.callToAction.url === activeSlug
-                            }
-                          />
-                        ))}
-                      </Flex>
-                    ) : (
-                      <Select
-                        variant="filled"
-                        value={activeSlug}
-                        color="text.primary"
-                        bgColor="background.gray"
-                        borderRadius="3xl"
-                        border="none"
-                        py={4}
-                        onChange={(e) => router.push(e.target.value)}
-                        _focus={{ bgColor: 'background.gray' }}
-                      >
-                        {callToActionGroup?.map((item) => (
-                          <option
-                            key={uuidv4()}
-                            value={
-                              item.callToAction.page?.slug ||
-                              item.callToAction.url
-                            }
-                            aria-label={item.callToAction.label}
-                          >
-                            {item.callToAction.label}
-                          </option>
-                        ))}
-                      </Select>
-                    )}
-                  </>
-                )}
+                {callToActionGroup &&
+                  Object.keys(callToActionGroup).length > 0 && (
+                    <>
+                      {isLargerThanMd ? (
+                        <CallToActionGroupDesktopView
+                          callToActionGroup={callToActionGroup}
+                          activeSlug={activeSlug}
+                        />
+                      ) : (
+                        <CallToActionGroupMobileView
+                          callToActionGroup={callToActionGroup}
+                          activeSlug={activeSlug}
+                        />
+                      )}
+                    </>
+                  )}
               </Flex>
             </Flex>
           </Container>
