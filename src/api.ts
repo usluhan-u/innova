@@ -1,13 +1,4 @@
-/* eslint-disable no-console */
-import getConfig from 'next/config';
-
-const { publicRuntimeConfig } = getConfig();
-const { SERVER_URL } = publicRuntimeConfig;
-
-console.log(process.env.PAYLOAD_PUBLIC_SERVER_URL);
-console.log(SERVER_URL);
-
-const BASE_URL = `${SERVER_URL}/api`;
+const BASE_URL = `${process.env.PAYLOAD_PUBLIC_SERVER_URL}/api`;
 
 export const getCustomPageDataBySlug = async <T>({
   endpoint,
