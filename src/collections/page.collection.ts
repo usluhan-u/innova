@@ -8,11 +8,7 @@ import {
   MetaType,
   Slug,
   ParentPage,
-  Breadcrumbs,
-  BackgroundColor,
-  Width,
-  BackgroundColorType,
-  WidthType
+  Breadcrumbs
 } from '../fields';
 import {
   Accordion,
@@ -63,8 +59,6 @@ export type PageBlockType =
   | ContentCardGroupType['blockType'];
 
 export interface PageContent {
-  backgroundColor: BackgroundColorType;
-  width: WidthType;
   layout: PageLayout[];
 }
 
@@ -121,8 +115,6 @@ export const Page: CollectionConfig = {
           name: 'content',
           label: 'Content',
           fields: [
-            BackgroundColor,
-            Width,
             {
               name: 'layout',
               label: 'Layout',

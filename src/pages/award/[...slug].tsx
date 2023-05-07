@@ -1,15 +1,8 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import { PaginatedDocs } from 'payload/dist/mongoose/types';
-import { Flex } from '@chakra-ui/react';
 import { PostType } from '../../collections';
-import {
-  AutoPosition,
-  BackgroundColor,
-  Content,
-  Head,
-  Hero
-} from '../../components';
+import { Content, Head, Hero } from '../../components';
 import NotFound from '../not-found';
 import { getCustomPageDataBySlug } from '../../api';
 
@@ -33,16 +26,12 @@ const Award = ({ data }: AwardProps) => {
         breadcrumbs={data.breadcrumbs}
         activeSlug={data.slug}
       />
-      <BackgroundColor bgColor={data.backgroundColor}>
-        <AutoPosition>
-          <Flex w={{ base: 'full', md: data.width }}>
-            <Content
-              blockType="content"
-              columns={[{ content: data.content, textAlign: 'left' }]}
-            />
-          </Flex>
-        </AutoPosition>
-      </BackgroundColor>
+      <Content
+        blockType="content"
+        columns={[{ content: data.content, textAlign: 'left' }]}
+        backgroundColor={data.backgroundColor}
+        width={data.width}
+      />
     </>
   );
 };

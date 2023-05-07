@@ -37,3 +37,4 @@ export * from './ImageDownloaderGroup';
 export * from './ImageDownloader';
 export * from './ContentCard';
 export * from './ContentCardGroup';
+export * from './Template';

@@ -1,16 +1,9 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import { PaginatedDocs } from 'payload/dist/mongoose/types';
-import { Flex } from '@chakra-ui/react';
 import { PageType } from '../collections';
 import NotFound from './not-found';
-import {
-  AutoPosition,
-  BackgroundColor,
-  Head,
-  Hero,
-  RenderBlocks
-} from '../components';
+import { Head, Hero, RenderBlocks } from '../components';
 import { getPageBySlug } from '../api';
 
 export interface PageProps {
@@ -34,13 +27,7 @@ const Page = ({ page }: PageProps) => {
         activeSlug={page.slug}
       />
       {page.content && Object.keys(page.content).length > 0 && (
-        <BackgroundColor bgColor={page.content.backgroundColor}>
-          <AutoPosition>
-            <Flex flexDir="column" w={{ base: 'full', md: page.content.width }}>
-              <RenderBlocks layout={page.content.layout} />
-            </Flex>
-          </AutoPosition>
-        </BackgroundColor>
+        <RenderBlocks layout={page.content.layout} />
       )}
     </>
   );

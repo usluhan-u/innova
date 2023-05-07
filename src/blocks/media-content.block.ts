@@ -1,14 +1,20 @@
 import { Block } from 'payload/types';
 import {
+  BackgroundColor,
+  BackgroundColorType,
   CallToAction,
   CallToActionType,
   RichText,
-  UploadedMediaType
+  UploadedMediaType,
+  Width,
+  WidthType
 } from '../fields';
 import { RichTextContentType } from '../components';
 
 export interface MediaContentType {
   blockType: 'mediaContent';
+  backgroundColor: BackgroundColorType;
+  width: WidthType;
   contentPosition: 'left' | 'right';
   content: RichTextContentType[];
   callToAction: CallToActionType;
@@ -22,6 +28,8 @@ export const MediaContent: Block = {
     plural: 'Media + Contents'
   },
   fields: [
+    BackgroundColor,
+    Width,
     {
       name: 'contentPosition',
       label: 'Content Position',

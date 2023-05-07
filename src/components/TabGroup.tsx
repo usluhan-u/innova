@@ -9,10 +9,9 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 import React from 'react';
 import { TabGroupType } from '../blocks';
-import { BackgroundColor } from './BackgroundColor';
-import { AutoPosition } from './AutoPosition';
 import { RenderBlocks } from './RenderBlocks';
 import { Dropdown } from './Dropdown';
+import { Template } from './Template';
 
 export interface TabGroupProps extends TabGroupType {}
 
@@ -37,54 +36,50 @@ export const TabGroup = ({
   ) => setSelectedDropdownValue(Number(event.target.value));
 
   return (
-    <BackgroundColor bgColor={backgroundColor}>
-      <AutoPosition>
-        {isLargerThanMd ? (
-          <Tabs align={alignment} orientation={orientation} w={width}>
-            <TabList
-              borderInlineStart={
-                orientation === 'vertical' ? 'none' : 'inherit'
-              }
-              borderBottom={orientation === 'vertical' ? 'none' : '2px solid'}
-              borderInlineEnd={orientation === 'vertical' ? 'none' : 'inherit'}
-              borderRight={orientation === 'vertical' ? '2px solid' : 'none'}
-              borderColor="inherit"
-            >
-              {items.map((item) => (
-                <Tab
-                  key={uuidv4()}
-                  color="text.secondary.100"
-                  fontWeight="medium"
-                  fontSize="sm"
-                  _selected={{
-                    borderInlineStart: 'none',
-                    borderInlineEnd: 'inherit',
-                    color: 'text.primary',
-                    borderColor: 'background.blue'
-                  }}
-                >
-                  {item.label}
-                </Tab>
-              ))}
-            </TabList>
-            <TabPanels>
-              {items.map((item) => (
-                <TabPanel key={uuidv4()}>
-                  <RenderBlocks layout={item.layout} />
-                </TabPanel>
-              ))}
-            </TabPanels>
-          </Tabs>
-        ) : (
-          <Dropdown
-            options={getOptions()}
-            value={selectedDropdownValue.toString()}
-            onChange={handleDropdownOnChange}
+    <Template backgroundColor={backgroundColor} width={width}>
+      {isLargerThanMd ? (
+        <Tabs align={alignment} orientation={orientation}>
+          <TabList
+            borderInlineStart={orientation === 'vertical' ? 'none' : 'inherit'}
+            borderBottom={orientation === 'vertical' ? 'none' : '2px solid'}
+            borderInlineEnd={orientation === 'vertical' ? 'none' : 'inherit'}
+            borderRight={orientation === 'vertical' ? '2px solid' : 'none'}
+            borderColor="inherit"
           >
-            <RenderBlocks layout={items[selectedDropdownValue].layout} />
-          </Dropdown>
-        )}
-      </AutoPosition>
-    </BackgroundColor>
+            {items.map((item) => (
+              <Tab
+                key={uuidv4()}
+                color="text.secondary.100"
+                fontWeight="medium"
+                fontSize="sm"
+                _selected={{
+                  borderInlineStart: 'none',
+                  borderInlineEnd: 'inherit',
+                  color: 'text.primary',
+                  borderColor: 'background.blue'
+                }}
+              >
+                {item.label}
+              </Tab>
+            ))}
+          </TabList>
+          <TabPanels>
+            {items.map((item) => (
+              <TabPanel key={uuidv4()}>
+                <RenderBlocks layout={item.layout} />
+              </TabPanel>
+            ))}
+          </TabPanels>
+        </Tabs>
+      ) : (
+        <Dropdown
+          options={getOptions()}
+          value={selectedDropdownValue.toString()}
+          onChange={handleDropdownOnChange}
+        >
+          <RenderBlocks layout={items[selectedDropdownValue].layout} />
+        </Dropdown>
+      )}
+    </Template>
   );
 };
