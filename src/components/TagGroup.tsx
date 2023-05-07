@@ -11,6 +11,7 @@ export const TagGroup = ({ backgroundColor, width, items }: TagGroupProps) => (
   <Template backgroundColor={backgroundColor} width={width}>
     <Grid
       templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(5, 1fr)' }}
+      w="full"
       gap={6}
     >
       {items.map((item) => (

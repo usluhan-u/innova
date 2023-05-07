@@ -14,7 +14,8 @@ export const ContentCardGroup = ({
 }: ContentCardGroupProps) => (
   <Template backgroundColor={backgroundColor} width={width}>
     <Grid
-      templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(3, 1fr)' }}
+      templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(4, 1fr)' }}
+      w="full"
       gap={4}
     >
       {items.map((item) => (

@@ -14,15 +14,13 @@ export const Content = ({ backgroundColor, width, columns }: ContentProps) => (
         base: 'repeat(1, 1fr)',
         md: `repeat(${columns.length}, 1fr)`
       }}
+      w="full"
       gap={6}
     >
       {columns.map((column) => (
         <GridItem key={uuidv4()}>
           <Flex justify="center">
-            <Flex
-              textAlign={{ base: 'justify', md: column.textAlign }}
-              w="full"
-            >
+            <Flex textAlign={column.textAlign} w="full">
               <RichText content={column.content} />
             </Flex>
           </Flex>
