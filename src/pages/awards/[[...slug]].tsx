@@ -1,18 +1,10 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import { PaginatedDocs } from 'payload/dist/mongoose/types';
-import { Flex } from '@chakra-ui/react';
 import { PageType, PostType } from '../../collections';
 import { getCustomPageDataByCondition, getPageBySlug } from '../../api';
 import NotFound from '../not-found';
-import {
-  AutoPosition,
-  BackgroundColor,
-  CardGroup,
-  CardItem,
-  Head,
-  Hero
-} from '../../components';
+import { CardGroup, CardItem, Head, Hero, Template } from '../../components';
 
 export interface AwardsProps {
   page: PageType | null;
@@ -58,13 +50,9 @@ const Awards = ({ page, data }: AwardsProps) => {
         activeSlug={page.slug}
       />
       {page.content && Object.keys(page.content).length > 0 && (
-        <BackgroundColor bgColor={page.content.backgroundColor}>
-          <AutoPosition>
-            <Flex w={{ base: 'full', md: page.content.width }}>
-              <CardGroup items={cardGroupItems} />
-            </Flex>
-          </AutoPosition>
-        </BackgroundColor>
+        <Template backgroundColor="gray" width="100%">
+          <CardGroup items={cardGroupItems} />
+        </Template>
       )}
     </>
   );
