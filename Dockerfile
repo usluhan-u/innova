@@ -14,12 +14,7 @@ FROM base AS build
 
 WORKDIR /app
 
-COPY package*.json yarn.lock* ./
-COPY .yarn ./.yarn
-COPY .yarnrc.yml ./
-
-RUN yarn install
-
+COPY --from=base /app/node_modules ./node_modules
 COPY . .
 
 RUN yarn build
@@ -28,17 +23,6 @@ RUN yarn build
 FROM node:19-alpine AS production
 
 WORKDIR /app
-
-ENV NODE_ENV=production
-ENV PORT='3000'
-ENV MONGODB_URI='mongodb://mongo:27017/innovadb'
-ENV PAYLOAD_SECRET_KEY='dc4d364eefdb590ede0212e0'
-ENV NEXT_PUBLIC_SERVER_URL='http://127.0.0.1:3000'
-ENV PAYLOAD_PUBLIC_SERVER_URL='http://127.0.0.1:3000'
-ENV PAYLOAD_CONFIG_PATH='dist/src/payload.config.js'
-ENV NEXT_PUBLIC_MEILISEARCH_URL='http://127.0.0.1:7700'
-ENV IMAGE_DOMAIN='127.0.0.1'
-ENV NEXT_SHARP_PATH='/app/node_modules/sharp'
 
 COPY package*.json yarn.lock* ./
 COPY .yarn ./.yarn
