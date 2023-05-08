@@ -8,25 +8,26 @@ import formBuilder from '@payloadcms/plugin-form-builder';
 import { Category, Media, Page, Post, PostGroup, User } from './collections';
 import { Footer, Menu, NotFound, SocialMedia } from './globals';
 import { Logo } from './icons';
-import payloadConfig from './payload.config.json';
 
 dotenv.config();
 
-const { localization, cors } = payloadConfig;
-
 export default buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
-  cors,
+  cors: process.env.CORS_ORIGIN?.split('') || '*',
   graphQL: {
     disable: true
   },
   collections: [Category, PostGroup, Post, Page, Media, User],
   globals: [Menu, SocialMedia, Footer, NotFound],
-  localization,
+  localization: {
+    locales: ['en', 'tr'],
+    defaultLocale: 'tr',
+    fallback: true
+  },
   i18n: {
     debug: false,
-    supportedLngs: localization.locales,
-    fallbackLng: localization.defaultLocale
+    supportedLngs: ['en', 'tr'],
+    fallbackLng: 'tr'
   },
   admin: {
     user: User.slug,
