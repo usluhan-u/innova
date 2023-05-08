@@ -13,6 +13,7 @@ const DEV = process.env.NODE_ENV !== 'production';
 const PORT = parseInt(process.env.PORT || '3000', 10);
 
 const app = express();
+app.use(cors());
 
 const boilerplate = async () => {
   await payload.init({
@@ -24,8 +25,6 @@ const boilerplate = async () => {
       payload.logger.info(`Payload API URL: ${payload.getAPIURL()}.`);
     }
   });
-
-  app.use(cors());
 
   if (!process.env.NEXT_BUILD) {
     const nextApp = next({ dev: DEV });
