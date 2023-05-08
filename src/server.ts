@@ -5,7 +5,6 @@ import nextBuild from 'next/dist/build';
 import path from 'path';
 import { IncomingMessage, ServerResponse } from 'http';
 import dotenv from 'dotenv';
-import cors from 'cors';
 
 dotenv.config();
 
@@ -13,7 +12,6 @@ const DEV = process.env.NODE_ENV !== 'production';
 const PORT = parseInt(process.env.PORT || '3000', 10);
 
 const app = express();
-app.use(cors());
 
 const boilerplate = async () => {
   await payload.init({

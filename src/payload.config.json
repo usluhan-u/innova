@@ -8,6 +8,7 @@
     "fallback": true
   },
   "cors": [
-    "http://localhost:3000"
+    "http://localhost:3000",
+    "https://yenisite.innova.com.tr"
   ]
 }
