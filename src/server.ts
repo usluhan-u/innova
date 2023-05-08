@@ -5,6 +5,7 @@ import nextBuild from 'next/dist/build';
 import path from 'path';
 import { IncomingMessage, ServerResponse } from 'http';
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 dotenv.config();
 
@@ -23,6 +24,8 @@ const boilerplate = async () => {
       payload.logger.info(`Payload API URL: ${payload.getAPIURL()}.`);
     }
   });
+
+  app.use(cors());
 
   if (!process.env.NEXT_BUILD) {
     const nextApp = next({ dev: DEV });
