@@ -19,8 +19,8 @@ const boilerplate = async () => {
     mongoURL: process.env.MONGODB_URI || '',
     express: app,
     onInit: async () => {
-      payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}.`);
-      payload.logger.info(`Payload API URL: ${payload.getAPIURL()}.`);
+      payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`);
+      payload.logger.info(`Payload API URL: ${payload.getAPIURL()}`);
     }
   });
 

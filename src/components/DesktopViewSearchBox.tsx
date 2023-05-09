@@ -15,13 +15,20 @@ interface HitProps {
   hit: unknown;
 }
 
+export interface DesktopViewSearchBoxProps {
+  expanded: boolean;
+  setExpanded: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 const Hit = ({ hit }: HitProps) => <Highlight hit={hit} />;
 
-export const SearchBox = () => {
-  const [expanded, setExpanded] = React.useState(false);
-
+export const DesktopViewSearchBox = ({
+  expanded,
+  setExpanded
+}: DesktopViewSearchBoxProps) => {
   const meiliSearchClient = instantMeiliSearch(
-    process.env.NEXT_PUBLIC_MEILISEARCH_URL || 'http://localhost:7700'
+    process.env.NEXT_PUBLIC_MEILISEARCH_URL || 'http://localhost:7700',
+    process.env.NEXT_PUBLIC_MEILISEARCH_MASTER_KEY || ''
   );
 
   return (

@@ -4,29 +4,30 @@ import {
   Flex,
   Icon,
   IconButton,
+  IconButtonProps,
   Modal,
   ModalBody,
   ModalContent,
   ModalHeader,
   ModalOverlay,
+  VStack,
   useDisclosure,
   useMediaQuery
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { FiMenu, FiX } from 'react-icons/fi';
 import { MenuType } from '../globals';
-import { Menu } from './Menu';
+import { DesktopViewMenu } from './DesktopViewMenu';
 import { InternalLink } from './InternalLink';
-import { Chat, EN, Logo, TR } from '../icons';
+import { Chat, Logo } from '../icons';
 import { LanguageSelector } from './LanguageSelector';
 import { Container } from './Container';
+import { DesktopViewSearchBox } from './DesktopViewSearchBox';
+import { MobileViewSearchBox } from './MobileViewSearchBox';
+import { MobileViewMenu } from './MobileViewMenu';
 
 export interface HeaderProps {
   menu: MenuType;
-}
-
-interface HamburgerMenuProps {
-  activeLocale?: string;
 }
 
 interface DesktopMenuProps {
@@ -36,50 +37,67 @@ interface DesktopMenuProps {
   activeLocale?: string;
 }
 
-interface LocaleFlagProps {
-  locale?: string;
-}
+interface HamburgerMenuProps extends DesktopMenuProps {}
 
-const LocaleFlag = ({ locale }: LocaleFlagProps) => {
-  switch (locale) {
-    case 'en':
-      return <EN width={16} height={16} />;
-    case 'tr':
-      return <TR width={16} height={16} />;
-    default:
-      return null;
-  }
-};
+interface HamburgerMenuButtonProps extends Omit<IconButtonProps, 'variant'> {}
 
 const DesktopMenu = ({
   menu,
   availableLocales,
   asPath,
   activeLocale
-}: DesktopMenuProps) => (
-  <Flex align="center" boxSize="full">
-    <Flex align="center" justify="space-between" boxSize="full" gap={4}>
-      <Flex align="center" boxSize="full">
-        <Menu menu={menu} />
-        {/* <SearchBox /> */}
+}: DesktopMenuProps) => {
+  const [expanded, setExpanded] = React.useState(false);
+
+  return (
+    <Flex align="center" boxSize="full">
+      <Flex align="center" justify="space-between" boxSize="full" gap={4}>
+        <Flex align="center" boxSize="full">
+          {!expanded && <DesktopViewMenu menu={menu} />}
+          <DesktopViewSearchBox expanded={expanded} setExpanded={setExpanded} />
+        </Flex>
+        <LanguageSelector
+          activeLocale={activeLocale}
+          asPath={asPath}
+          availableLocales={availableLocales}
+        />
       </Flex>
-      <LanguageSelector
-        activeLocale={activeLocale}
-        asPath={asPath}
-        availableLocales={availableLocales}
-      />
     </Flex>
-  </Flex>
+  );
+};
+
+const HamburgerMenuButton = ({
+  'aria-label': ariaLabel,
+  size,
+  icon,
+  h,
+  minW,
+  onClick
+}: HamburgerMenuButtonProps) => (
+  <IconButton
+    aria-label={ariaLabel}
+    variant="variant"
+    size={size}
+    icon={icon}
+    h={h}
+    minW={minW}
+    onClick={onClick}
+  />
 );
 
-const HamburgerMenu = ({ activeLocale }: HamburgerMenuProps) => {
+const HamburgerMenu = ({
+  activeLocale,
+  asPath,
+  availableLocales,
+  menu
+}: HamburgerMenuProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [selected, setSelected] = React.useState<'chat' | 'menu'>('menu');
 
   return (
     <>
-      <IconButton
+      <HamburgerMenuButton
         aria-label="Hamburger Menu"
-        variant="unstyled"
         size="lg"
         icon={<Icon as={FiMenu} />}
         onClick={onOpen}
@@ -92,44 +110,42 @@ const HamburgerMenu = ({ activeLocale }: HamburgerMenuProps) => {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader p={0} border="1px solid blue">
+          <ModalHeader p={0}>
             <Container>
               <Flex h={16} align="center" justify="flex-end" gap={4}>
-                <IconButton
-                  aria-label="Language"
-                  variant="unstyled"
+                <LanguageSelector
+                  activeLocale={activeLocale}
+                  asPath={asPath}
+                  availableLocales={availableLocales}
                   size="md"
-                  icon={<LocaleFlag locale={activeLocale} />}
                   h="6"
                   minW="4"
-                  // onClick={() => console.log('clicked')}
+                  w="4"
                 />
-                <IconButton
+                <HamburgerMenuButton
                   aria-label="Chat"
-                  variant="unstyled"
                   size="md"
                   icon={<Icon as={Chat} />}
                   h="6"
                   minW="4"
-                  // onClick={() => console.log('clicked')}
+                  onClick={() => setSelected('chat')}
                 />
-                <IconButton
+                <HamburgerMenuButton
+                  name="menu"
                   aria-label="Hamburger Menu"
-                  variant="unstyled"
                   size="md"
                   icon={<Icon as={FiMenu} />}
                   h="6"
                   minW="4"
-                  // onClick={() => console.log('clicked')}
+                  onClick={() => setSelected('menu')}
                 />
                 <Divider
                   orientation="vertical"
                   h="5"
                   borderColor="border.secondary"
                 />
-                <IconButton
+                <HamburgerMenuButton
                   aria-label="Close Button"
-                  variant="unstyled"
                   size="md"
                   icon={<Icon as={FiX} />}
                   h="6"
@@ -140,7 +156,13 @@ const HamburgerMenu = ({ activeLocale }: HamburgerMenuProps) => {
             </Container>
           </ModalHeader>
           <ModalBody>
-            <p>Body</p>
+            {selected === 'chat' && <div>Chat</div>}
+            {selected === 'menu' && (
+              <VStack>
+                <MobileViewSearchBox />
+                <MobileViewMenu menu={menu} />
+              </VStack>
+            )}
           </ModalBody>
         </ModalContent>
       </Modal>
@@ -169,7 +191,12 @@ export const Header = ({ menu }: HeaderProps) => {
               activeLocale={activeLocale}
             />
           ) : (
-            <HamburgerMenu activeLocale={activeLocale} />
+            <HamburgerMenu
+              menu={menu}
+              activeLocale={activeLocale}
+              asPath={asPath}
+              availableLocales={availableLocales}
+            />
           )}
         </Flex>
       </Container>

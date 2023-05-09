@@ -4,14 +4,16 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  IconButton
+  IconButton,
+  IconButtonProps
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from 'next/router';
 import { EN, TR } from '../icons';
 
-export interface LanguageSelectorProps {
+export interface LanguageSelectorProps
+  extends Omit<IconButtonProps, 'type' | 'aria-label'> {
   asPath: string;
   availableLocales?: string[];
   activeLocale?: string;
@@ -37,7 +39,8 @@ export const LanguageSelector = ({
   asPath,
   availableLocales,
   activeLocale,
-  type = 'button'
+  type = 'button',
+  ...rest
 }: LanguageSelectorProps) => {
   const router = useRouter();
 
@@ -61,6 +64,7 @@ export const LanguageSelector = ({
           }
           _hover={{ borderColor: 'transparent' }}
           _active={{ borderColor: 'transparent' }}
+          {...rest}
         />
       )}
       {type === 'menu' && (

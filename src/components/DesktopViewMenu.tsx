@@ -16,7 +16,7 @@ import { MenuItemType, MenuType } from '../globals';
 import { CallToAction } from './CallToAction';
 import { TextIconCallToAction } from './TextIconCallToAction';
 
-export interface MenuProps {
+export interface DesktopViewMenuProps {
   menu: MenuType;
 }
 
@@ -104,7 +104,7 @@ const NavMenu = ({ menuItem }: NavMenuProps) => {
   );
 };
 
-export const Menu = ({ menu }: MenuProps) => (
+export const DesktopViewMenu = ({ menu }: DesktopViewMenuProps) => (
   <Flex w="full" align="center" gap={8}>
     {menu.menuItems?.map((menuItem) => (
       <NavMenu key={uuidv4()} menuItem={menuItem} />
