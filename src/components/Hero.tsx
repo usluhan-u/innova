@@ -18,6 +18,7 @@ import { BackgroundImage } from './BackgroundImage';
 import { ButtonCallToAction } from './ButtonCallToAction';
 import { LinkButtonCallToAction } from './LinkButtonCallToAction';
 import { Container } from './Container';
+import { DotSlider } from './DotSlider';
 
 export interface HeroProps extends HeroType {
   breadcrumbs?: Breadcrumb[];
@@ -61,12 +62,12 @@ const CallToActionGroupMobileView = ({
       variant="filled"
       value={activeSlug}
       color="text.primary"
-      bgColor="background.gray"
+      bgColor="background.gray.primary"
       borderRadius="3xl"
       border="none"
       py={4}
       onChange={(e) => router.push(e.target.value)}
-      _focus={{ bgColor: 'background.gray' }}
+      _focus={{ bgColor: 'background.gray.primary' }}
     >
       {callToActionGroup?.map((item) => (
         <option
@@ -90,7 +91,8 @@ export const Hero = ({
   callToAction,
   callToActionGroup,
   activeSlug,
-  type
+  type,
+  slider
 }: HeroProps) => {
   const [isLargerThanMd] = useMediaQuery('(min-width: 768px)');
 
@@ -184,7 +186,7 @@ export const Hero = ({
           </Container>
         </BackgroundImage>
       )}
-      {type === 'home' && <p>Home</p>}
+      {type === 'home' && <DotSlider blockType="dotSlider" slider={slider} />}
     </>
   );
 };

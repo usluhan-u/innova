@@ -2,6 +2,7 @@ import { Field } from 'payload/types';
 import { Media, UploadedMediaType } from './media.field';
 import { CallToActionGroup } from './call-to-action-group.field';
 import { CallToAction, CallToActionType } from './call-to-action.field';
+import { Slider, SliderType } from './slider.field';
 
 export interface CallToActionGroupType {
   callToAction: CallToActionType;
@@ -9,6 +10,7 @@ export interface CallToActionGroupType {
 
 export interface HeroType {
   type: 'home' | 'default';
+  slider: SliderType;
   title: string;
   description?: string;
   callToAction: CallToActionType;
@@ -31,15 +33,19 @@ export const Hero: Field = {
       localized: true,
       options: [
         {
-          label: 'Home',
-          value: 'home'
-        },
-        {
           label: 'Default',
           value: 'default'
+        },
+        {
+          label: 'Home',
+          value: 'home'
         }
       ]
     },
+    Slider({
+      label: false,
+      condition: (_, siblingData) => siblingData?.type === 'home'
+    }),
     {
       name: 'title',
       label: 'Title',

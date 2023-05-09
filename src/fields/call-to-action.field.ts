@@ -21,8 +21,8 @@ export const CallToAction = (args?: Args): Field => {
   const { label, condition, required } = args || {};
 
   return {
-    label: typeof label === 'boolean' ? label : label || 'Call To Action',
     name: 'callToAction',
+    label: typeof label === 'boolean' ? label : label || 'Call To Action',
     type: 'group',
     fields: [
       {

@@ -11,3 +11,5 @@ export * from './media.field';
 export * from './block-fields.field';
 export * from './call-to-action-group.field';
 export * from './rich-text';
+export * from './slider.field';
+export * from './slide.field';
