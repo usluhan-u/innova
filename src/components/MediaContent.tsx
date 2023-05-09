@@ -1,6 +1,6 @@
+import React from 'react';
 import { Flex, Grid, GridItem, Image } from '@chakra-ui/react';
 import { FiArrowRight } from 'react-icons/fi';
-import React from 'react';
 import { MediaContentType } from '../blocks';
 import { RichText } from './RichText';
 import { TextIconCallToAction } from './TextIconCallToAction';

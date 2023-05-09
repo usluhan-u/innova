@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Tab,
   TabList,
@@ -7,7 +8,6 @@ import {
   useMediaQuery
 } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
-import React from 'react';
 import { TabGroupType } from '../blocks';
 import { RenderBlocks } from './RenderBlocks';
 import { Dropdown } from './Dropdown';

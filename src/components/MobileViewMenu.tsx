@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Button,
   useDisclosure,
@@ -6,7 +7,6 @@ import {
   SlideFade
 } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
-import React from 'react';
 import { RxCaretRight } from 'react-icons/rx';
 import { MenuType } from '../globals';
 

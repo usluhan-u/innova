@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { v4 as uuidv4 } from 'uuid';
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { PageBlockType, PageLayout } from '../collections';
 import { Accordion } from './Accordion';
 import { ImageTagGroup } from './ImageTagGroup';

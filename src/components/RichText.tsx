@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import escapeHTML from 'escape-html';
 import React from 'react';
+import escapeHTML from 'escape-html';
 import { v4 as uuidv4 } from 'uuid';
 import { Text as SlateText } from 'slate';
 import { Heading, Icon, Image, Text, chakra } from '@chakra-ui/react';

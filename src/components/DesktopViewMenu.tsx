@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Flex,
   Menu as ChakraMenu,
@@ -10,7 +11,6 @@ import {
   useDisclosure
 } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
-import React from 'react';
 import { FiArrowRight, FiChevronDown } from 'react-icons/fi';
 import { MenuItemType, MenuType } from '../globals';
 import { CallToAction } from './CallToAction';

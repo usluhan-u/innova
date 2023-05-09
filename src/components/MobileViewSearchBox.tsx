@@ -1,8 +1,8 @@
+import React from 'react';
 import { instantMeiliSearch } from '@meilisearch/instant-meilisearch';
 import { InstantSearch, Hits, Highlight } from 'react-instantsearch-dom';
 import { Icon, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
 import { FiSearch } from 'react-icons/fi';
-import React from 'react';
 
 interface HitProps {
   hit: unknown;

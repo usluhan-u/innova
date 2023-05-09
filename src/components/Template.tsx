@@ -1,5 +1,5 @@
-import { Flex } from '@chakra-ui/react';
 import React from 'react';
+import { Flex } from '@chakra-ui/react';
 import { BackgroundColorType, WidthType } from '../fields';
 import { AutoPosition } from './AutoPosition';
 import { BackgroundColor } from './BackgroundColor';
