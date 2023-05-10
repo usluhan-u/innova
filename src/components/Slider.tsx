@@ -1,9 +1,6 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import ReactSlick, { Settings } from 'react-slick';
-
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import { chakra } from '@chakra-ui/react';
 
 export interface SliderProps {

@@ -12,6 +12,7 @@ import { DotSlider } from './DotSlider';
 import { DocumentDownloaderGroup } from './DocumentDownloaderGroup';
 import { ImageDownloaderGroup } from './ImageDownloaderGroup';
 import { ContentCardGroup } from './ContentCardGroup';
+import { ArrowSlider } from './ArrowSlider';
 
 export interface RenderBlocksProps {
   layout: PageLayout[];
@@ -27,7 +28,8 @@ const COMPONENTS: Record<PageBlockType, React.FC<any>> = {
   dotSlider: DotSlider,
   documentDownloaderGroup: DocumentDownloaderGroup,
   imageDownloaderGroup: ImageDownloaderGroup,
-  contentCardGroup: ContentCardGroup
+  contentCardGroup: ContentCardGroup,
+  arrowSlider: ArrowSlider
 };
 
 export const RenderBlocks = ({ layout }: RenderBlocksProps) => (

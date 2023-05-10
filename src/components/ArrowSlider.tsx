@@ -1,19 +1,13 @@
 import React from 'react';
-import {
-  Box,
-  Flex,
-  Image,
-  Text,
-  UnorderedList,
-  VStack
-} from '@chakra-ui/react';
+import { Box, Flex, Icon, Image, Text, VStack } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
-import { DotSliderType } from '../blocks';
+import { RxCaretLeft, RxCaretRight } from 'react-icons/rx';
+import { ArrowSliderType } from '../blocks';
 import { Slider } from './Slider';
 import { ButtonCallToAction } from './ButtonCallToAction';
 import { SlideType } from '../fields';
 
-export interface DotSliderProps extends DotSliderType {}
+export interface ArrowSliderProps extends ArrowSliderType {}
 
 const Slide = ({
   backgroundImage,
@@ -24,7 +18,7 @@ const Slide = ({
   <Flex pos="relative">
     <Image
       w="full"
-      h="4xl"
+      h="md"
       objectFit="fill"
       src={backgroundImage.url}
       alt={backgroundImage.alt}
@@ -35,8 +29,8 @@ const Slide = ({
       w="lg"
       color="text.light"
       transform={{
-        base: 'translate(2rem, 10rem)',
-        md: 'translate(15rem, 20rem)'
+        base: 'translate(2rem, 17rem)',
+        md: 'translate(5rem, 15rem)'
       }}
     >
       {title && (
@@ -60,38 +54,19 @@ const Slide = ({
   </Flex>
 );
 
-const AppendDots = (dots: React.ReactNode) => (
-  <Box
-    pos="absolute"
-    w="fit-content"
-    transform={{
-      base: 'translate(2rem, -5rem)',
-      md: 'translate(15rem, -10rem)'
-    }}
-    sx={{
-      '&': {
-        '& li.slick-active': {
-          '& div': {
-            bgColor: 'background.primary'
-          }
-        }
-      }
-    }}
-  >
-    <UnorderedList>{dots}</UnorderedList>
+const NextArrow = () => (
+  <Box display="block">
+    <Icon as={RxCaretRight} color="red" />
   </Box>
 );
 
-const CustomPaging = () => (
-  <Box
-    color="text.light"
-    boxSize="3"
-    bgColor="background.gray.secondary"
-    borderRadius="full"
-  />
+const PrevArrow = () => (
+  <Box display="block">
+    <Icon as={RxCaretLeft} color="text.light" />
+  </Box>
 );
 
-export const DotSlider = ({ slider }: DotSliderProps) => {
+export const ArrowSlider = ({ slider }: ArrowSliderProps) => {
   const slides = slider.slides.map(({ slide }) => (
     <Slide {...slide} key={uuidv4()} />
   ));
@@ -99,15 +74,22 @@ export const DotSlider = ({ slider }: DotSliderProps) => {
   return (
     <Slider
       settings={{
-        dots: true,
-        arrows: false,
         infinite: true,
         autoplay: true,
         speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        appendDots: AppendDots,
-        customPaging: CustomPaging
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        responsive: [
+          {
+            breakpoint: 768,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          }
+        ],
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow />
       }}
       slides={slides}
     />

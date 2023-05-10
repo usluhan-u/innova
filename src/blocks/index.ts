@@ -8,3 +8,4 @@ export * from './dot-slider.block';
 export * from './document-downloader-group.block';
 export * from './image-downloader-group.block';
 export * from './content-card-group.block';
+export * from './arrow-slider.block';

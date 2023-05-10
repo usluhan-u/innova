@@ -38,3 +38,4 @@ export * from './ContentCard';
 export * from './ContentCardGroup';
 export * from './Template';
 export * from './MobileViewSearchBox';
+export * from './ArrowSlider';
