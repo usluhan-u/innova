@@ -7,7 +7,7 @@ COPY package*.json yarn.lock* ./
 COPY .yarn ./.yarn
 COPY .yarnrc.yml ./
 
-RUN yarn install --immutable --immutable-cache
+RUN yarn install --immutable
 
 # [BUILD] LAYER
 FROM base AS build
