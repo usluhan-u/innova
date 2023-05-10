@@ -8,7 +8,7 @@ COPY .yarn ./.yarn
 COPY .yarnrc.yml ./
 
 RUN yarn install --immutable
-RUN yarn install react-slick
+RUN yarn add react-slick
 
 # [BUILD] LAYER
 FROM base AS build
