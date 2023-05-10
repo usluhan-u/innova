@@ -14,7 +14,14 @@ FROM base AS build
 
 WORKDIR /app
 
-COPY --from=base /app/node_modules ./node_modules
+# COPY --from=base /app/node_modules ./node_modules
+
+COPY package*.json yarn.lock* ./
+COPY .yarn ./.yarn
+COPY .yarnrc.yml ./
+
+RUN yarn install
+
 COPY . .
 
 RUN yarn build

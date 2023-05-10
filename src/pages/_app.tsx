@@ -11,7 +11,6 @@ import { theme } from '../theme';
 import { FooterType, MenuType, SocialMediaType } from '../globals';
 import { Footer, Header } from '../components';
 import { getCustomPageData } from '../api';
-import 'react-slick';
 
 interface MyAppProps extends AppProps {
   socialMedia: SocialMediaType;
