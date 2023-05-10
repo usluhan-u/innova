@@ -7,15 +7,14 @@ COPY package*.json yarn.lock* ./
 COPY .yarn ./.yarn
 COPY .yarnrc.yml ./
 
-RUN yarn install
+RUN yarn install --immutable --immutable-cache
 
 # [BUILD] LAYER
 FROM base AS build
 
 WORKDIR /app
 
-# COPY --from=base /app/node_modules ./node_modules
-
+COPY --from=base /app/node_modules ./node_modules
 COPY . .
 
 RUN yarn build
@@ -25,11 +24,11 @@ FROM node:19-alpine AS production
 
 WORKDIR /app
 
-# COPY package*.json yarn.lock* ./
-# COPY .yarn ./.yarn
-# COPY .yarnrc.yml ./
+COPY package*.json yarn.lock* ./
+COPY .yarn ./.yarn
+COPY .yarnrc.yml ./
 
-# RUN yarn workspaces focus --all --production
+RUN yarn workspaces focus --all --production
 
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/build ./build
