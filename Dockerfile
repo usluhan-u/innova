@@ -1,46 +1,46 @@
 # [BASE] LAYER
 FROM node:19-alpine AS base
 
-WORKDIR /usr/app
+WORKDIR /app
 
-RUN npm install -g npm
+COPY package*.json yarn.lock* ./
+COPY .yarn ./.yarn
+COPY .yarnrc.yml ./
 
-# COPY package*.json yarn.lock* ./
-# COPY .yarn ./.yarn
-# COPY .yarnrc.yml ./
-COPY package*.json ./
-
-# RUN yarn install --immutable
-RUN npm install --legacy-peer-deps
+RUN yarn install --immutable
 
 # [BUILD] LAYER
 FROM base AS build
 
-WORKDIR /usr/app
+WORKDIR /app
 
-COPY --from=base /usr/app/node_modules ./node_modules
+# COPY --from=base /app/node_modules ./node_modules
+COPY package*.json yarn.lock* ./
+COPY .yarn ./.yarn
+COPY .yarnrc.yml ./
+
+RUN yarn install --immutable
+
 COPY . .
 
-RUN npm run build
+RUN yarn build
 
 # [PRODUCTION] LAYER
 FROM node:19-alpine AS production
 
-WORKDIR /usr/app
+WORKDIR /app
 
-# COPY package*.json yarn.lock* ./
-# COPY .yarn ./.yarn
-# COPY .yarnrc.yml ./
-COPY package*.json ./
+COPY package*.json yarn.lock* ./
+COPY .yarn ./.yarn
+COPY .yarnrc.yml ./
 
 # RUN yarn workspaces focus --all --production
+RUN yarn install --immutable
 
-RUN npm ci --only=production
-
-COPY --from=build /usr/app/dist ./dist
-COPY --from=build /usr/app/build ./build
-COPY --from=build /usr/app/public ./public
-COPY --from=build /usr/app/.next ./.next
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/build ./build
+COPY --from=build /app/public ./public
+COPY --from=build /app/.next ./.next
 
 EXPOSE 3000
 
