@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Box,
-  Flex,
-  Image,
-  Text,
-  UnorderedList,
-  VStack
-} from '@chakra-ui/react';
+import { Flex, Image, Text, VStack } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 import { DotSliderType } from '../blocks';
 import { Slider } from './Slider';
@@ -21,11 +14,10 @@ const Slide = ({
   description,
   title
 }: SlideType) => (
-  <Flex pos="relative">
+  <Flex pos="relative" boxSize="full">
     <Image
-      w="full"
-      h="4xl"
-      objectFit="fill"
+      boxSize="full"
+      objectFit="cover"
       src={backgroundImage.url}
       alt={backgroundImage.alt}
     />
@@ -34,10 +26,9 @@ const Slide = ({
       pos="absolute"
       w="lg"
       color="text.light"
-      transform={{
-        base: 'translate(2rem, 10rem)',
-        md: 'translate(15rem, 20rem)'
-      }}
+      top="30%"
+      left="10%"
+      transform="translateY(-30%)"
     >
       {title && (
         <Text fontWeight="medium" fontSize="4xl">
@@ -60,56 +51,10 @@ const Slide = ({
   </Flex>
 );
 
-const AppendDots = (dots: React.ReactNode) => (
-  <Box
-    pos="absolute"
-    w="fit-content"
-    transform={{
-      base: 'translate(2rem, -5rem)',
-      md: 'translate(15rem, -10rem)'
-    }}
-    sx={{
-      '&': {
-        '& li.slick-active': {
-          '& div': {
-            bgColor: 'background.primary'
-          }
-        }
-      }
-    }}
-  >
-    <UnorderedList>{dots}</UnorderedList>
-  </Box>
-);
-
-const CustomPaging = () => (
-  <Box
-    color="text.light"
-    boxSize="3"
-    bgColor="background.gray.secondary"
-    borderRadius="full"
-  />
-);
-
 export const DotSlider = ({ slider }: DotSliderProps) => {
   const slides = slider.slides.map(({ slide }) => (
     <Slide {...slide} key={uuidv4()} />
   ));
 
-  return (
-    <Slider
-      settings={{
-        dots: true,
-        arrows: false,
-        infinite: true,
-        autoplay: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        appendDots: AppendDots,
-        customPaging: CustomPaging
-      }}
-      slides={slides}
-    />
-  );
+  return <Slider settings={{ dots: true }} slides={slides} height="7xl" />;
 };

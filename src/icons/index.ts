@@ -6,3 +6,5 @@ export * from './LogoIcon';
 export * from './Pdf';
 export * from './Chat';
 export * from './Video';
+export * from './ArrowLeft';
+export * from './ArrowRight';

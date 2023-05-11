@@ -1,7 +1,6 @@
 import React from 'react';
-import { Box, Flex, Icon, Image, Text, VStack } from '@chakra-ui/react';
+import { Flex, Image, Text, VStack } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
-import { RxCaretLeft, RxCaretRight } from 'react-icons/rx';
 import { ArrowSliderType } from '../blocks';
 import { Slider } from './Slider';
 import { ButtonCallToAction } from './ButtonCallToAction';
@@ -15,11 +14,10 @@ const Slide = ({
   description,
   title
 }: SlideType) => (
-  <Flex pos="relative">
+  <Flex pos="relative" boxSize="full">
     <Image
-      w="full"
-      h="md"
-      objectFit="fill"
+      boxSize="full"
+      objectFit="cover"
       src={backgroundImage.url}
       alt={backgroundImage.alt}
     />
@@ -54,18 +52,6 @@ const Slide = ({
   </Flex>
 );
 
-const NextArrow = () => (
-  <Box display="block">
-    <Icon as={RxCaretRight} color="red" />
-  </Box>
-);
-
-const PrevArrow = () => (
-  <Box display="block">
-    <Icon as={RxCaretLeft} color="text.light" />
-  </Box>
-);
-
 export const ArrowSlider = ({ slider }: ArrowSliderProps) => {
   const slides = slider.slides.map(({ slide }) => (
     <Slide {...slide} key={uuidv4()} />
@@ -73,25 +59,9 @@ export const ArrowSlider = ({ slider }: ArrowSliderProps) => {
 
   return (
     <Slider
-      settings={{
-        infinite: true,
-        autoplay: true,
-        speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 3,
-        responsive: [
-          {
-            breakpoint: 768,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1
-            }
-          }
-        ],
-        nextArrow: <NextArrow />,
-        prevArrow: <PrevArrow />
-      }}
+      settings={{ arrows: true, slidesToShow: 3 }}
       slides={slides}
+      height="md"
     />
   );
 };
