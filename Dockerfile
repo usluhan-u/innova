@@ -3,6 +3,8 @@ FROM node:19-alpine AS base
 
 WORKDIR /app
 
+RUN yarn cache clean
+
 COPY package*.json yarn.lock* ./
 COPY .yarn ./.yarn
 COPY .yarnrc.yml ./
@@ -13,6 +15,8 @@ RUN yarn install --immutable
 FROM base AS build
 
 WORKDIR /app
+
+RUN yarn cache clean
 
 # COPY --from=base /app/node_modules ./node_modules
 COPY package*.json yarn.lock* ./
@@ -29,6 +33,8 @@ RUN yarn build
 FROM node:19-alpine AS production
 
 WORKDIR /app
+
+RUN yarn cache clean
 
 COPY package*.json yarn.lock* ./
 COPY .yarn ./.yarn
