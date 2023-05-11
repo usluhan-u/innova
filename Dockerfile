@@ -1,7 +1,7 @@
 # [BASE] LAYER
 FROM node:19-alpine AS base
 
-WORKDIR /app
+WORKDIR /usr/app
 
 # COPY package*.json yarn.lock* ./
 # COPY .yarn ./.yarn
@@ -14,9 +14,9 @@ RUN npm install
 # [BUILD] LAYER
 FROM base AS build
 
-WORKDIR /app
+WORKDIR /usr/app
 
-COPY --from=base /app/node_modules ./node_modules
+COPY --from=base /usr/app/node_modules ./node_modules
 COPY . .
 
 RUN npm run build
@@ -24,7 +24,7 @@ RUN npm run build
 # [PRODUCTION] LAYER
 FROM node:19-alpine AS production
 
-WORKDIR /app
+WORKDIR /usr/app
 
 # COPY package*.json yarn.lock* ./
 # COPY .yarn ./.yarn
@@ -35,10 +35,10 @@ COPY package*.json ./
 
 RUN npm ci --only=production
 
-COPY --from=build /app/dist ./dist
-COPY --from=build /app/build ./build
-COPY --from=build /app/public ./public
-COPY --from=build /app/.next ./.next
+COPY --from=build /usr/app/dist ./dist
+COPY --from=build /usr/app/build ./build
+COPY --from=build /usr/app/public ./public
+COPY --from=build /usr/app/.next ./.next
 
 EXPOSE 3000
 
