@@ -3,6 +3,8 @@ FROM node:19-alpine AS base
 
 WORKDIR /usr/app
 
+RUN npm install -g npm
+
 # COPY package*.json yarn.lock* ./
 # COPY .yarn ./.yarn
 # COPY .yarnrc.yml ./
