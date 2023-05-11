@@ -11,7 +11,7 @@ RUN npm install -g npm
 COPY package*.json ./
 
 # RUN yarn install --immutable
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 # [BUILD] LAYER
 FROM base AS build
