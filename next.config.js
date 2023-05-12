@@ -6,7 +6,6 @@ require('dotenv').config();
  */
 const nextConfig = {
   reactStrictMode: true,
-  output: 'standalone',
   publicRuntimeConfig: {
     SERVER_URL: process.env.PAYLOAD_PUBLIC_SERVER_URL
   },
