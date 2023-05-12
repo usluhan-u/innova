@@ -33,4 +33,4 @@ if ! [ -x "$(command -v docker-compose)" ]; then
 fi
 
 # docker-compose -f docker-compose.prod.yml down
-docker-compose -f docker-compose.prod.yml up --build --no-cache -d
+docker-compose -f docker-compose.prod.yml up --build -d
