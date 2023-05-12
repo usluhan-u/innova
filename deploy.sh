@@ -1,5 +1,9 @@
 #!/bin/bash
 
+git pull
+
+echo "Project source code pulled from git repository!"
+
 ENV_FILE_PATH=".env"
 
 if ! [ -e "$ENV_FILE_PATH" ]; then
@@ -27,10 +31,20 @@ docker rmi innova_payload
 # echo "### Starting docker container..."
 # docker run -dp 3000:3000 --name innova payload
 
-if ! [ -x "$(command -v docker-compose)" ]; then
-  echo 'Error: docker-compose is not installed.' >&2
+# check if compose v2 is available
+if docker compose > /dev/null 2>&1; then
+  COMPOSE_COMMAND="docker compose"
+elif docker-compose > /dev/null 2>&1; then
+  COMPOSE_COMMAND="docker-compose"
+else
+  echo "docker compose or docker-compose is required"
   exit 1
 fi
 
+# if ! [ -x "$(command -v docker-compose)" ]; then
+#   echo 'Error: docker-compose is not installed.' >&2
+#   exit 1
+# fi
+
 # docker-compose -f docker-compose.prod.yml down
-docker-compose -f docker-compose.prod.yml up --build -d
+$COMPOSE_COMMAND -f docker-compose.prod.yml up --build -d
