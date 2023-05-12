@@ -23,19 +23,17 @@ FROM node:19-alpine AS production
 
 WORKDIR /app
 
-COPY --from=build /app .
+COPY package*.json yarn.lock* ./
+COPY .yarn ./.yarn
+COPY .yarnrc.yml ./
 
-# COPY package*.json yarn.lock* ./
-# COPY .yarn ./.yarn
-# COPY .yarnrc.yml ./
+RUN yarn workspaces focus --all --production
 
-# RUN yarn workspaces focus --all --production
-
-# COPY --from=build /app/dist ./dist
-# COPY --from=build /app/build ./build
-# COPY --from=build /app/public ./public
-# COPY --from=build /app/.next ./.next
+COPY --from=build /app/dist ./
+COPY --from=build /app/build ./build
+COPY --from=build /app/public ./public
+COPY --from=build /app/.next ./.next
 
 EXPOSE 3000
 
-CMD ["node", "dist/src/server.js"]
+CMD ["node", "src/server.js"]

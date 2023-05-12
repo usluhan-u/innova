@@ -57,7 +57,7 @@ const SliderTrack = chakra(FacelessUiSliderTrack);
 const Slide = chakra(FacelessUiSlide);
 
 export const Slider = ({ height, slides, settings }: SliderProps) => (
-  <Flex pos="relative" h={height} border="2px solid red">
+  <Flex pos="relative" h={height}>
     <SliderProvider slidesToShow={settings?.slidesToShow || 1} autoPlay>
       <Arrows display={settings?.arrows ? 'flex' : 'none'} />
       <SliderTrack
