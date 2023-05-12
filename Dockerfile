@@ -18,7 +18,7 @@ WORKDIR /app
 COPY --from=base /app/node_modules ./node_modules
 COPY . .
 
-RUN yarn build
+RUN yarn run build
 
 # [PRODUCTION] LAYER
 FROM node:18-alpine AS production
