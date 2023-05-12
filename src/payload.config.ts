@@ -13,7 +13,7 @@ dotenv.config();
 
 export default buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
-  cors: process.env.CORS_ORIGIN?.split('') || '*',
+  cors: '*',
   graphQL: {
     disable: true
   },
