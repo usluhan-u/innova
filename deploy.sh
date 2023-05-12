@@ -1,9 +1,5 @@
 #!/bin/bash
 
-git pull
-
-echo "Project source code pulled from git repository!"
-
 ENV_FILE_PATH=".env"
 
 if ! [ -e "$ENV_FILE_PATH" ]; then
