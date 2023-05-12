@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Flex, FlexProps, IconButton, chakra } from '@chakra-ui/react';
