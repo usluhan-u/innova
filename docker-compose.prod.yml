@@ -10,6 +10,8 @@ services:
       - 3000:3000
     networks:
       - payload-network
+    volumes:
+      - media:/app/media
     working_dir: /app
     restart: always
     depends_on:
@@ -40,6 +42,7 @@ services:
 
 volumes:
   data:
+  media:
 
 networks:
   payload-network:
