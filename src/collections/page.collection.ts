@@ -23,6 +23,8 @@ import {
   DocumentDownloaderGroupType,
   DotSlider,
   DotSliderType,
+  Form,
+  FormType,
   ImageDownloaderGroup,
   ImageDownloaderGroupType,
   ImageTagGroup,
@@ -47,7 +49,8 @@ export type PageLayout =
   | DocumentDownloaderGroupType
   | ImageDownloaderGroupType
   | ContentCardGroupType
-  | ArrowSliderType;
+  | ArrowSliderType
+  | FormType;
 
 export type PageBlockType =
   | AccordionType['blockType']
@@ -60,7 +63,8 @@ export type PageBlockType =
   | DocumentDownloaderGroupType['blockType']
   | ImageDownloaderGroupType['blockType']
   | ContentCardGroupType['blockType']
-  | ArrowSliderType['blockType'];
+  | ArrowSliderType['blockType']
+  | FormType['blockType'];
 
 export interface PageContent {
   layout: PageLayout[];
@@ -123,7 +127,6 @@ export const Page: CollectionConfig = {
               name: 'layout',
               label: 'Layout',
               type: 'blocks',
-              // minRows: 1,
               blocks: [
                 Accordion,
                 ImageTagGroup,
@@ -135,7 +138,8 @@ export const Page: CollectionConfig = {
                 DocumentDownloaderGroup,
                 ImageDownloaderGroup,
                 ContentCardGroup,
-                ArrowSlider
+                ArrowSlider,
+                Form
               ]
             }
           ]

@@ -40,3 +40,4 @@ export * from './Template';
 export * from './MobileViewSearchBox';
 export * from './ArrowSlider';
 export * from './Slider';
+export * from './Form';

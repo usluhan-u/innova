@@ -11,7 +11,7 @@ export const populateFullTitle: FieldHook = async ({ data, originalDoc }) =>
 export const populateValueAfterCaseChange =
   (value: string): FieldHook =>
   ({ data, originalDoc }) =>
-    convertToPascalCase(data?.[value] || originalDoc?.[value]);
+    convertToPascalCase(data?.[value] || originalDoc?.[value] || '');
 
 export const populateSlug =
   (fallback: string): FieldHook =>

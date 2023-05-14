@@ -8,6 +8,7 @@ import formBuilder from '@payloadcms/plugin-form-builder';
 import { Category, Media, Page, Post, PostGroup, User } from './collections';
 import { Footer, Menu, NotFound, SocialMedia } from './globals';
 import { Logo } from './icons';
+import { RichText } from './fields';
 
 dotenv.config();
 
@@ -45,7 +46,42 @@ export default buildConfig({
   },
   plugins: [
     formBuilder({
-      formOverrides: {},
+      formOverrides: {
+        fields: [
+          RichText({
+            name: 'leader',
+            label: 'Leader Text',
+            required: true
+          }),
+          {
+            name: 'type',
+            label: 'Type',
+            type: 'radio',
+            required: true,
+            defaultValue: 'default',
+            options: [
+              {
+                label: 'Default',
+                value: 'default'
+              },
+              {
+                label: 'Float',
+                value: 'float'
+              }
+            ]
+          },
+          {
+            name: 'floatButtonLabel',
+            label: 'Float Button',
+            type: 'text',
+            required: true,
+            localized: true,
+            admin: {
+              condition: (_, siblingData) => siblingData.type === 'float'
+            }
+          }
+        ]
+      },
       formSubmissionOverrides: {},
       redirectRelationships: [Page.slug]
     }),
