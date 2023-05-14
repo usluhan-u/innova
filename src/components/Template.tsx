@@ -1,8 +1,8 @@
 import React from 'react';
-import { Flex } from '@chakra-ui/react';
 import { BackgroundColorType, WidthType } from '../fields';
 import { AutoPosition } from './AutoPosition';
 import { BackgroundColor } from './BackgroundColor';
+import { Width } from './Width';
 
 export interface TemplateProps {
   backgroundColor: BackgroundColorType;
@@ -17,7 +17,7 @@ export const Template = ({
 }: TemplateProps) => (
   <BackgroundColor bgColor={backgroundColor}>
     <AutoPosition>
-      <Flex w={{ base: 'full', md: width }}>{children}</Flex>
+      <Width value={width}>{children}</Width>
     </AutoPosition>
   </BackgroundColor>
 );

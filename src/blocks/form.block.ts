@@ -1,6 +1,11 @@
 import { Block } from 'payload/types';
 import { Form as FormBuilder } from '@payloadcms/plugin-form-builder/types';
-import { BackgroundColor, BackgroundColorType } from '../fields';
+import {
+  BackgroundColor,
+  BackgroundColorType,
+  Width,
+  WidthType
+} from '../fields';
 import { RichTextContentType } from '../components';
 
 interface ExtendedFormBuilder extends FormBuilder {
@@ -12,6 +17,7 @@ interface ExtendedFormBuilder extends FormBuilder {
 export interface FormType {
   blockType: 'form';
   backgroundColor: BackgroundColorType;
+  width: WidthType;
   form: ExtendedFormBuilder;
 }
 
@@ -23,6 +29,7 @@ export const Form: Block = {
   },
   fields: [
     BackgroundColor,
+    Width,
     {
       name: 'form',
       type: 'relationship',

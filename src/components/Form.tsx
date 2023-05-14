@@ -23,6 +23,7 @@ import { FormFieldBlock } from '@payloadcms/plugin-form-builder/types';
 import { FormType } from '../blocks';
 import { RichText, RichTextProps } from './RichText';
 import { BackgroundColor } from './BackgroundColor';
+import { Width } from './Width';
 
 interface FormProps extends Omit<FormType, 'blockType'> {}
 
@@ -45,50 +46,58 @@ const Field = ({ blockType, ...restOfField }: FormFieldBlock) => {
   return null;
 };
 
-const FormContent = ({ backgroundColor, form }: FormProps) => (
+const FormContent = ({ backgroundColor, width, form }: FormProps) => (
   <BackgroundColor bgColor={backgroundColor}>
-    <VStack align="stretch" w="full">
-      <Center>
-        <RichText content={form.leader} />
-      </Center>
-      {form.type === 'default' && form.fields.length === 1 ? (
-        <InputGroup size="md">
-          <Field {...form.fields[0]} />
-          <InputRightElement w="6rem">
-            <Button
-              size="sm"
-              color="text.light"
-              bgColor="background.blue"
-              width="fit-content"
-              _hover={{ bgColor: 'background.blue' }}
-            >
-              {form.submitButtonLabel}
-            </Button>
-          </InputRightElement>
-        </InputGroup>
-      ) : (
-        <>
-          {form.fields.map((field) => (
-            <Field key={uuidv4()} {...field} />
-          ))}
-          <Button
-            color="text.light"
-            bgColor="background.blue"
-            width="fit-content"
-            _hover={{ bgColor: 'background.blue' }}
-          >
-            {form.submitButtonLabel}
-          </Button>
-        </>
-      )}
-    </VStack>
+    <Center w="full">
+      <Width value={width}>
+        <VStack align="stretch" w="full">
+          <Center textAlign="center">
+            <RichText content={form.leader} />
+          </Center>
+          {form.type === 'default' && form.fields.length === 1 ? (
+            <InputGroup size="md">
+              <Field {...form.fields[0]} />
+              <InputRightElement w="6rem">
+                <Button
+                  size="sm"
+                  color="text.light"
+                  bgColor="background.blue"
+                  width="fit-content"
+                  _hover={{ bgColor: 'background.blue' }}
+                >
+                  {form.submitButtonLabel}
+                </Button>
+              </InputRightElement>
+            </InputGroup>
+          ) : (
+            <>
+              {form.fields.map((field) => (
+                <Field key={uuidv4()} {...field} />
+              ))}
+              <Button
+                color="text.light"
+                bgColor="background.blue"
+                width="fit-content"
+                _hover={{ bgColor: 'background.blue' }}
+              >
+                {form.submitButtonLabel}
+              </Button>
+            </>
+          )}
+        </VStack>
+      </Width>
+    </Center>
   </BackgroundColor>
 );
 
-export const Form = ({ backgroundColor, form }: FormProps) => (
+export const Form = ({ backgroundColor, width, form }: FormProps) => (
   <>
     {form.type === 'default' && (
-      <FormContent backgroundColor={backgroundColor} form={form} />
+      <FormContent
+        backgroundColor={backgroundColor}
+        width={width}
+        form={form}
+      />
     )}
     {form.type === 'float' && (
       <Popover placement="top-start">
@@ -111,7 +120,11 @@ export const Form = ({ backgroundColor, form }: FormProps) => (
             <PopoverHeader borderBottom="none" />
             <PopoverCloseButton />
             <PopoverBody>
-              <FormContent backgroundColor={backgroundColor} form={form} />
+              <FormContent
+                backgroundColor={backgroundColor}
+                form={form}
+                width="100%"
+              />
             </PopoverBody>
             <PopoverFooter borderTop="none" />
           </PopoverContent>
