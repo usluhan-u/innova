@@ -42,6 +42,8 @@
     "react/no-unused-prop-types": "off",
     "@typescript-eslint/no-empty-interface": "off",
     "import/no-extraneous-dependencies": "off",
+    "react/react-in-jsx-scope": "error",
+    "react/jsx-uses-react": "error",
     "react/function-component-definition": [
       "error",
       {
