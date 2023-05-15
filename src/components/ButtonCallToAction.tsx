@@ -27,6 +27,7 @@ export const ButtonCallToAction = ({
         fontWeight="normal"
         leftIcon={leftIcon}
         rightIcon={rightIcon}
+        size="sm"
         _hover={{ color, bgColor }}
       >
         {label}

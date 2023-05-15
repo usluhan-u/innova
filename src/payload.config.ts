@@ -97,7 +97,7 @@ export default buildConfig({
       collections: [Post.slug, Page.slug],
       parentFieldSlug: 'parent',
       breadcrumbsFieldSlug: 'breadcrumbs',
-      generateLabel: (_, page) => (page.title as string) || '',
+      generateLabel: (_, page) => (page.name as string) || '',
       generateURL: (pages) =>
         pages.reduce((url, page) => `${url}/${page.slug}`, '')
     })
