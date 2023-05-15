@@ -10,7 +10,7 @@ export interface CallToActionGroupType {
 
 export interface HeroType {
   type: 'home' | 'default';
-  slider: SliderType;
+  slider?: SliderType;
   title: string;
   description?: string;
   callToAction: CallToActionType;

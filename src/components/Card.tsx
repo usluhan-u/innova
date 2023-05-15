@@ -20,14 +20,6 @@ export interface CardItem {
   category?: CategoryType;
   image: UploadedMediaType;
   callToAction?: CallToActionType;
-  // callToAction?: {
-  //   label: string;
-  //   type: 'page' | 'custom';
-  //   page?: {
-  //     slug: string;
-  //   };
-  //   url?: string;
-  // };
 }
 
 export interface CardProps {

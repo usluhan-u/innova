@@ -44,11 +44,13 @@ const Blogs = ({ page, data }: BlogsProps) => {
         keywords={page.meta?.keywords}
         noIndex={page.meta?.noIndex}
       />
-      <Hero
-        {...page.hero}
-        breadcrumbs={page.breadcrumbs}
-        activeSlug={page.slug}
-      />
+      {page.hero && (
+        <Hero
+          {...page.hero}
+          breadcrumbs={page.breadcrumbs}
+          activeSlug={page.slug}
+        />
+      )}
       {page.content && Object.keys(page.content).length > 0 && (
         <Template backgroundColor="gray" width="100%">
           <CardGroup items={cardGroupItems} />

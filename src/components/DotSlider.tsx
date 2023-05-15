@@ -56,5 +56,5 @@ export const DotSlider = ({ slider }: DotSliderProps) => {
     <Slide {...slide} key={uuidv4()} />
   ));
 
-  return <Slider settings={{ dots: true }} slides={slides} height="7xl" />;
+  return <Slider settings={{ dots: true }} slides={slides} height="90vh" />;
 };

@@ -73,7 +73,7 @@ export interface PageContent {
 export interface PageType {
   slug: string;
   name: string;
-  hero: HeroType;
+  hero?: HeroType;
   content?: PageContent;
   breadcrumbs: Breadcrumb[];
   meta: MetaType;

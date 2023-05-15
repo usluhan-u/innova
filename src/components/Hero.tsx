@@ -186,7 +186,9 @@ export const Hero = ({
           </Container>
         </BackgroundImage>
       )}
-      {type === 'home' && <DotSlider blockType="dotSlider" slider={slider} />}
+      {type === 'home' && slider && (
+        <DotSlider blockType="dotSlider" slider={slider} />
+      )}
     </>
   );
 };
