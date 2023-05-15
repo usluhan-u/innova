@@ -3,7 +3,7 @@ import React from 'react';
 import escapeHTML from 'escape-html';
 import { v4 as uuidv4 } from 'uuid';
 import { Text as SlateText } from 'slate';
-import { Heading, Icon, Image, Text, chakra } from '@chakra-ui/react';
+import { Icon, Image, Text, chakra } from '@chakra-ui/react';
 import { FiCheck, FiCheckCircle } from 'react-icons/fi';
 import { UploadedMediaType } from '../fields';
 
@@ -95,39 +95,39 @@ const serialize = (
     switch ((node as RichTextContentType).type) {
       case 'h1':
         return (
-          <Heading key={uuidv4()} as="h1">
+          <h1 key={uuidv4()}>
             {serialize((node as RichTextContentType).children!)}
-          </Heading>
+          </h1>
         );
       case 'h2':
         return (
-          <Heading key={uuidv4()} as="h2">
+          <h2 key={uuidv4()}>
             {serialize((node as RichTextContentType).children!)}
-          </Heading>
+          </h2>
         );
       case 'h3':
         return (
-          <Heading key={uuidv4()} as="h3">
+          <h3 key={uuidv4()}>
             {serialize((node as RichTextContentType).children!)}
-          </Heading>
+          </h3>
         );
       case 'h4':
         return (
-          <Heading key={uuidv4()} as="h4">
+          <h4 key={uuidv4()}>
             {serialize((node as RichTextContentType).children!)}
-          </Heading>
+          </h4>
         );
       case 'h5':
         return (
-          <Heading key={uuidv4()} as="h5">
+          <h5 key={uuidv4()}>
             {serialize((node as RichTextContentType).children!)}
-          </Heading>
+          </h5>
         );
       case 'h6':
         return (
-          <Heading key={uuidv4()} as="h6">
+          <h6 key={uuidv4()}>
             {serialize((node as RichTextContentType).children!)}
-          </Heading>
+          </h6>
         );
       case 'quote':
         return (

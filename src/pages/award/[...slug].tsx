@@ -28,7 +28,7 @@ const Award = ({ data }: AwardProps) => {
       />
       <Content
         blockType="content"
-        columns={[{ content: data.content, textAlign: 'left' }]}
+        columns={[{ content: data.content, align: 'left' }]}
         backgroundColor={data.backgroundColor}
         width={data.width}
       />

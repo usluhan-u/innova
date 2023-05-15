@@ -31,5 +31,33 @@ export const theme = extendTheme({
       primary: '#E3E3E3',
       secondary: '#BDCAD3'
     }
+  },
+  styles: {
+    global: {
+      h1: {
+        fontSize: '4xl',
+        fontWeight: 'bold'
+      },
+      h2: {
+        fontSize: '3xl',
+        fontWeight: 'bold'
+      },
+      h3: {
+        fontSize: '2xl',
+        fontWeight: 'bold'
+      },
+      h4: {
+        fontSize: 'xl',
+        fontWeight: 'bold'
+      },
+      h5: {
+        fontSize: 'lg',
+        fontWeight: 'bold'
+      },
+      h6: {
+        fontSize: 'md',
+        fontWeight: 'bold'
+      }
+    }
   }
 });

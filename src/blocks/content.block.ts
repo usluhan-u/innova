@@ -11,7 +11,7 @@ import {
 export type ContentColumnTextAlignType = 'left' | 'center' | 'right';
 
 export interface ContentColumnType {
-  textAlign: ContentColumnTextAlignType;
+  align: ContentColumnTextAlignType;
   content: RichTextContentType[];
 }
 
@@ -41,8 +41,8 @@ export const Content: Block = {
       },
       fields: [
         {
-          name: 'textAlign',
-          label: 'Text Align',
+          name: 'align',
+          label: 'Align',
           type: 'radio',
           defaultValue: 'left',
           required: true,
