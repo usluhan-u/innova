@@ -5,7 +5,7 @@ import { PageType } from '../collections';
 import NotFound from './not-found';
 import { Head, Hero, RenderBlocks } from '../components';
 import { getPageBySlug } from '../api';
-import { FlippableCard } from '../components/FlippableCard';
+// import { FlippableCard } from '../components/FlippableCard';
 
 export interface PageProps {
   page?: PageType;
@@ -32,7 +32,7 @@ const Page = ({ page }: PageProps) => {
       {page.content && Object.keys(page.content).length > 0 && (
         <RenderBlocks layout={page.content.layout} />
       )}
-      <FlippableCard
+      {/* <FlippableCard
         category={{ name: 'Telekomünikasyon' }}
         featuredImage={{
           url: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80',
@@ -55,7 +55,7 @@ const Page = ({ page }: PageProps) => {
             name: 'Telekomünikasyon'
           }
         }}
-      />
+      /> */}
     </>
   );
 };
