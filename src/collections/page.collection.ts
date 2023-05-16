@@ -23,6 +23,10 @@ import {
   DocumentDownloaderGroupType,
   DotSlider,
   DotSliderType,
+  FlippableCard,
+  FlippableCardGroup,
+  FlippableCardGroupType,
+  FlippableCardType,
   Form,
   FormType,
   ImageDownloaderGroup,
@@ -50,7 +54,9 @@ export type PageLayout =
   | ImageDownloaderGroupType
   | ContentCardGroupType
   | ArrowSliderType
-  | FormType;
+  | FormType
+  | FlippableCardType
+  | FlippableCardGroupType;
 
 export type PageBlockType =
   | AccordionType['blockType']
@@ -64,7 +70,9 @@ export type PageBlockType =
   | ImageDownloaderGroupType['blockType']
   | ContentCardGroupType['blockType']
   | ArrowSliderType['blockType']
-  | FormType['blockType'];
+  | FormType['blockType']
+  | FlippableCardType['blockType']
+  | FlippableCardGroupType['blockType'];
 
 export interface PageContent {
   layout: PageLayout[];
@@ -139,7 +147,9 @@ export const Page: CollectionConfig = {
                 ImageDownloaderGroup,
                 ContentCardGroup,
                 ArrowSlider,
-                Form
+                Form,
+                FlippableCard,
+                FlippableCardGroup
               ]
             }
           ]

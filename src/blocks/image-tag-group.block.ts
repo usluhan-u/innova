@@ -22,7 +22,7 @@ export const ImageTagGroup: Block = {
   slug: 'imageTagGroup',
   labels: {
     singular: 'Image Tag Group',
-    plural: 'Image Tag Groups'
+    plural: 'Image Tag Group'
   },
   fields: [
     BackgroundColor,

@@ -10,3 +10,5 @@ export * from './image-downloader-group.block';
 export * from './content-card-group.block';
 export * from './arrow-slider.block';
 export * from './form.block';
+export * from './flippable-card.block';
+export * from './flippable-card-group.block';
