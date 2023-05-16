@@ -1,10 +1,10 @@
-/* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const withCheck = (incomingEditor: any) => {
-  const { shouldBreakOutOnEnter } = incomingEditor;
+  const editor = incomingEditor;
+  const { isBlock } = editor;
 
-  incomingEditor.shouldBreakOutOnEnter = (element: any) =>
-    element.type === 'check' ? true : shouldBreakOutOnEnter(element);
+  editor.isBlock = (element: any) =>
+    element.type === 'check' ? true : isBlock(element);
 
   return incomingEditor;
 };

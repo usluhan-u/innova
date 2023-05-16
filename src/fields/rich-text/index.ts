@@ -6,7 +6,7 @@ import {
 } from 'payload/dist/fields/config/types';
 import { RichTextField } from 'payload/types';
 import { deepMerge } from '../../utils';
-// import { check } from './check';
+import { check } from './check';
 // import { checkCircle } from './check-circle';
 
 const leaves: RichTextLeaf[] = [
@@ -29,8 +29,8 @@ const elements: RichTextElement[] = [
   'ol',
   'link',
   'upload',
-  'indent'
-  // check,
+  'indent',
+  check
   // checkCircle
   // video
 ];

@@ -30,6 +30,11 @@ export default buildConfig({
     supportedLngs: ['en', 'tr'],
     fallbackLng: 'tr'
   },
+  upload: {
+    limits: {
+      fileSize: 20000000
+    }
+  },
   admin: {
     user: User.slug,
     meta: {
