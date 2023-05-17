@@ -5,6 +5,7 @@ import nextBuild from 'next/dist/build';
 import path from 'path';
 import { IncomingMessage, ServerResponse } from 'http';
 import dotenv from 'dotenv';
+import { seed } from './seed';
 
 dotenv.config();
 
@@ -23,6 +24,12 @@ const boilerplate = async () => {
       payload.logger.info(`Payload API URL: ${payload.getAPIURL()}`);
     }
   });
+
+  if (process.env.DB_SEED === 'true') {
+    payload.logger.info('Seeding database...');
+    await seed(payload);
+    payload.logger.info('Database seeded!');
+  }
 
   if (!process.env.NEXT_BUILD) {
     const nextApp = next({ dev: DEV });
