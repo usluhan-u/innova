@@ -19,10 +19,8 @@ export const Content = ({ backgroundColor, width, columns }: ContentProps) => (
     >
       {columns.map((column) => (
         <GridItem key={uuidv4()}>
-          <Flex justify="center">
-            <Flex justify={column.align} w="full">
-              <RichText content={column.content} />
-            </Flex>
+          <Flex w="full" justify="center" textAlign={column.align}>
+            <RichText content={column.content} />
           </Flex>
         </GridItem>
       ))}
