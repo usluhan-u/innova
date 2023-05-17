@@ -5,6 +5,13 @@ export const theme = extendTheme({
     heading: `'Inter', sans-serif`,
     body: `'Inter', sans-serif`
   },
+  components: {
+    Text: {
+      baseStyle: {
+        color: 'text.primary'
+      }
+    }
+  },
   colors: {
     background: {
       primary: '#FFFFFF',

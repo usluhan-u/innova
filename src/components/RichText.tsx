@@ -107,39 +107,39 @@ const serialize = (
     switch ((node as RichTextContentType).type) {
       case 'h1':
         return (
-          <h1 key={uuidv4()}>
+          <chakra.h1 key={uuidv4()}>
             {serialize((node as RichTextContentType).children!)}
-          </h1>
+          </chakra.h1>
         );
       case 'h2':
         return (
-          <h2 key={uuidv4()}>
+          <chakra.h2 key={uuidv4()}>
             {serialize((node as RichTextContentType).children!)}
-          </h2>
+          </chakra.h2>
         );
       case 'h3':
         return (
-          <h3 key={uuidv4()}>
+          <chakra.h3 key={uuidv4()}>
             {serialize((node as RichTextContentType).children!)}
-          </h3>
+          </chakra.h3>
         );
       case 'h4':
         return (
-          <h4 key={uuidv4()}>
+          <chakra.h4 key={uuidv4()}>
             {serialize((node as RichTextContentType).children!)}
-          </h4>
+          </chakra.h4>
         );
       case 'h5':
         return (
-          <h5 key={uuidv4()}>
+          <chakra.h5 key={uuidv4()}>
             {serialize((node as RichTextContentType).children!)}
-          </h5>
+          </chakra.h5>
         );
       case 'h6':
         return (
-          <h6 key={uuidv4()}>
+          <chakra.h6 key={uuidv4()}>
             {serialize((node as RichTextContentType).children!)}
-          </h6>
+          </chakra.h6>
         );
       case 'quote':
         return (
