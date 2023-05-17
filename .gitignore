@@ -177,5 +177,6 @@ dist
 # Misc
 media/*
 docker/*
+lottie/*
 
 # End of https://www.toptal.com/developers/gitignore/api/node,visualstudiocode

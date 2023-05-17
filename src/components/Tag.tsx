@@ -10,12 +10,26 @@ import {
   Center
 } from '@chakra-ui/react';
 import { FiArrowRight } from 'react-icons/fi';
+import { Player } from '@lottiefiles/react-lottie-player';
 import { TagGroupItemType } from '../blocks';
 import { TextIconCallToAction } from './TextIconCallToAction';
 
 export interface TagProps {
   tag: TagGroupItemType;
 }
+
+interface LottieAnimationProps {
+  src: string;
+}
+
+const LottieAnimation = ({ src }: LottieAnimationProps) => (
+  <Player
+    loop
+    autoplay
+    src={src}
+    style={{ width: '100%', height: '100%', backgroundColor: 'transparent' }}
+  />
+);
 
 export const Tag = ({ tag }: TagProps) => (
   <Card
@@ -31,7 +45,16 @@ export const Tag = ({ tag }: TagProps) => (
         <Flex align="center" gap={4}>
           <Center bgColor="background.secondary" borderRadius="lg" p={2}>
             <Box boxSize="48px">
-              <Image objectFit="cover" src={tag.icon.url} alt={tag.icon.alt} />
+              {tag.imageType === 'icon' && tag.icon && (
+                <Image
+                  objectFit="cover"
+                  src={tag.icon.url}
+                  alt={tag.icon.alt}
+                />
+              )}
+              {tag.imageType === 'lottie' && tag.lottie && (
+                <LottieAnimation src={tag.lottie.url} />
+              )}
             </Box>
           </Center>
           <Text color="text.primary" fontWeight="medium" fontSize="2xl">

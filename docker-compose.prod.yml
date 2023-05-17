@@ -12,6 +12,7 @@ services:
       - payload-network
     volumes:
       - media:/app/media
+      - lottie:/app/lottie
     working_dir: /app
     restart: always
     depends_on:
@@ -43,6 +44,7 @@ services:
 volumes:
   data:
   media:
+  lottie:
 
 networks:
   payload-network:

@@ -2385,6 +2385,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@lottiefiles/react-lottie-player@npm:^3.5.3":
+  version: 3.5.3
+  resolution: "@lottiefiles/react-lottie-player@npm:3.5.3"
+  dependencies:
+    lottie-web: ^5.10.2
+  peerDependencies:
+    react: 16 - 18
+  checksum: 083521730d8a75a70c82446df859d08d5e3614b937afa419249d047d9cbffb61fba24733e1a736593e734530d99aa715a38fcbbebbcca5a72ff4719145931da1
+  languageName: node
+  linkType: hard
+
 "@meilisearch/instant-meilisearch@npm:^0.12.0":
   version: 0.12.0
   resolution: "@meilisearch/instant-meilisearch@npm:0.12.0"
@@ -7624,6 +7635,7 @@ __metadata:
     "@emotion/styled": ^11.10.6
     "@faceless-ui/slider": ^1.1.17
     "@fontsource/inter": ^4.5.15
+    "@lottiefiles/react-lottie-player": ^3.5.3
     "@meilisearch/instant-meilisearch": ^0.12.0
     "@payloadcms/plugin-form-builder": ^1.0.13
     "@payloadcms/plugin-nested-docs": ^1.0.4
@@ -8626,6 +8638,13 @@ __metadata:
   bin:
     loose-envify: cli.js
   checksum: 6517e24e0cad87ec9888f500c5b5947032cdfe6ef65e1c1936a0c48a524b81e65542c9c3edc91c97d5bddc806ee2a985dbc79be89215d613b1de5db6d1cfe6f4
+  languageName: node
+  linkType: hard
+
+"lottie-web@npm:^5.10.2":
+  version: 5.11.0
+  resolution: "lottie-web@npm:5.11.0"
+  checksum: 4f9c86c7cf0280ccb4380b826213719122a227f50e27e5d6943dff2f05dfe4e569bd8a358a0cb9c96cbdf62f9d70b883b5cb5ec50ecb7a1eed794c5ce5a1e38a
   languageName: node
   linkType: hard
 

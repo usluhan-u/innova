@@ -4,6 +4,7 @@ import {
   BackgroundColorType,
   CallToAction,
   CallToActionType,
+  UploadedLottieType,
   UploadedMediaType,
   Width,
   WidthType
@@ -13,7 +14,9 @@ export interface TagGroupItemType {
   title: string;
   content?: string;
   callToAction: CallToActionType;
-  icon: UploadedMediaType;
+  imageType: 'icon' | 'lottie';
+  icon?: UploadedMediaType;
+  lottie?: UploadedLottieType;
 }
 
 export interface TagGroupType {
@@ -55,12 +58,42 @@ export const TagGroup: Block = {
           localized: true
         },
         {
+          name: 'imageType',
+          label: 'Image Type',
+          type: 'radio',
+          defaultValue: 'icon',
+          options: [
+            {
+              label: 'Icon',
+              value: 'icon'
+            },
+            {
+              label: 'Lottie',
+              value: 'lottie'
+            }
+          ]
+        },
+        {
           name: 'icon',
           label: 'Icon',
           type: 'upload',
           relationTo: 'medias',
           required: true,
-          localized: true
+          localized: true,
+          admin: {
+            condition: (_, siblingData) => siblingData.imageType === 'icon'
+          }
+        },
+        {
+          name: 'lottie',
+          label: 'Lottie',
+          type: 'upload',
+          relationTo: 'lotties',
+          required: true,
+          localized: true,
+          admin: {
+            condition: (_, siblingData) => siblingData.imageType === 'lottie'
+          }
         },
         CallToAction()
       ]

@@ -13,3 +13,4 @@ export * from './call-to-action-group.field';
 export * from './rich-text';
 export * from './slider.field';
 export * from './slide.field';
+export * from './lottie.field';

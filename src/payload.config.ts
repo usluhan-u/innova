@@ -5,7 +5,15 @@ import redirects from '@payloadcms/plugin-redirects';
 import nestedDocs from '@payloadcms/plugin-nested-docs';
 import seo from '@payloadcms/plugin-seo';
 import formBuilder from '@payloadcms/plugin-form-builder';
-import { Category, Media, Page, Post, PostGroup, User } from './collections';
+import {
+  Category,
+  Lottie,
+  Media,
+  Page,
+  Post,
+  PostGroup,
+  User
+} from './collections';
 import { Footer, Menu, NotFound, SocialMedia } from './globals';
 import { Logo } from './icons';
 import { RichText } from './fields';
@@ -18,7 +26,7 @@ export default buildConfig({
   graphQL: {
     disable: true
   },
-  collections: [Category, PostGroup, Post, Page, Media, User],
+  collections: [Category, PostGroup, Post, Page, Media, Lottie, User],
   globals: [Menu, SocialMedia, Footer, NotFound],
   localization: {
     locales: ['en', 'tr'],
