@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { chakra } from '@chakra-ui/react';
 import React from 'react';
 
 export const Element = ({
@@ -8,13 +9,11 @@ export const Element = ({
   attributes: any;
   children: any;
 }) => (
-  <ul
+  <chakra.ul
     {...attributes}
-    style={{
-      listStyleImage: "url('/images/check-circle.svg')",
-      '[dataSlateNode="element"]': { margin: '0.625rem 0' }
-    }}
+    listStyleImage="url('/images/check-circle.svg')"
+    sx={{ '[dataSlateNode="element"]': { margin: '0.625rem 0' } }}
   >
     {children}
-  </ul>
+  </chakra.ul>
 );

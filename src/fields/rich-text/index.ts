@@ -7,7 +7,7 @@ import {
 import { RichTextField } from 'payload/types';
 import { deepMerge } from '../../utils';
 import { check } from './check';
-// import { checkCircle } from './check-circle';
+import { checkCircle } from './check-circle';
 
 const leaves: RichTextLeaf[] = [
   'bold',
@@ -30,9 +30,8 @@ const elements: RichTextElement[] = [
   'link',
   'upload',
   'indent',
-  check
-  // checkCircle
-  // video
+  check,
+  checkCircle
 ];
 
 interface Args {

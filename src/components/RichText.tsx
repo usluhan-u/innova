@@ -1,10 +1,21 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React from 'react';
 import escapeHTML from 'escape-html';
 import { v4 as uuidv4 } from 'uuid';
 import { Text as SlateText } from 'slate';
-import { Icon, Image, Text, chakra } from '@chakra-ui/react';
+import {
+  Image,
+  List,
+  ListIcon,
+  ListItem,
+  OrderedList,
+  Text,
+  UnorderedList,
+  chakra
+} from '@chakra-ui/react';
 import { FiCheck, FiCheckCircle } from 'react-icons/fi';
+import { IconType } from 'react-icons';
 import { UploadedMediaType } from '../fields';
 
 export interface RichTextContentType {
@@ -26,7 +37,8 @@ export interface RichTextProps {
 }
 
 const serialize = (
-  nodes: RichTextContentType[]
+  nodes: RichTextContentType[],
+  customIcon?: IconType
 ): (React.ReactElement | null)[] =>
   nodes.map((node) => {
     if (!node) {
@@ -137,21 +149,28 @@ const serialize = (
         );
       case 'ul':
         return (
-          <ul key={uuidv4()}>
+          <UnorderedList key={uuidv4()}>
             {serialize((node as RichTextContentType).children!)}
-          </ul>
+          </UnorderedList>
         );
       case 'ol':
         return (
-          <ol key={uuidv4()}>
+          <OrderedList key={uuidv4()}>
             {serialize((node as RichTextContentType).children!)}
-          </ol>
+          </OrderedList>
         );
       case 'li':
         return (
-          <li key={uuidv4()}>
+          <ListItem key={uuidv4()}>
+            {customIcon && (
+              <ListIcon
+                as={customIcon}
+                color="background.blue"
+                fontSize="2xl"
+              />
+            )}
             {serialize((node as RichTextContentType).children!)}
-          </li>
+          </ListItem>
         );
       case 'link':
         return (
@@ -176,21 +195,15 @@ const serialize = (
         );
       case 'check':
         return (
-          <Icon
-            key={uuidv4()}
-            as={FiCheck}
-            fontSize="1.5rem"
-            color="background.blue"
-          />
+          <List key={uuidv4()} spacing={3}>
+            {serialize((node as RichTextContentType).children!, FiCheck)}
+          </List>
         );
       case 'check-circle':
         return (
-          <Icon
-            key={uuidv4()}
-            as={FiCheckCircle}
-            fontSize="1.5rem"
-            color="background.blue"
-          />
+          <List key={uuidv4()} spacing={3}>
+            {serialize((node as RichTextContentType).children!, FiCheckCircle)}
+          </List>
         );
       default:
         return (
@@ -207,6 +220,9 @@ export const RichText = ({ content }: RichTextProps) => (
       '&': {
         '& *': {
           my: '16px'
+        },
+        '& svg': {
+          my: 0
         },
         '& a': {
           color: 'text.blue'
