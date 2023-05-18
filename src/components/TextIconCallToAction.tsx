@@ -23,9 +23,6 @@ export const TextIconCallToAction = ({
       type={type}
       page={page}
       url={url}
-      transitionProperty="all"
-      transitionDuration="100ms"
-      transitionTimingFunction="ease-in-out"
       transition="all 100ms ease-in-out"
       _hover={{ textDecoration: 'none', transform: 'translateX(0.15em)' }}
     >

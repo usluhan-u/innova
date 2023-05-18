@@ -50,12 +50,13 @@ const serialize = (
         <Text
           dangerouslySetInnerHTML={{ __html: escapeHTML(node.text) }}
           as="span"
+          color="text.primary"
         />
       );
 
       if (node.bold) {
         text = (
-          <Text key={uuidv4()} as="b">
+          <Text key={uuidv4()} as="b" color="text.primary">
             {text}
           </Text>
         );
@@ -63,7 +64,7 @@ const serialize = (
 
       if (node.code) {
         text = (
-          <Text key={uuidv4()} as="code">
+          <Text key={uuidv4()} as="code" color="text.primary">
             {text}
           </Text>
         );
@@ -71,7 +72,7 @@ const serialize = (
 
       if (node.italic) {
         text = (
-          <Text key={uuidv4()} as="i">
+          <Text key={uuidv4()} as="i" color="text.primary">
             {text}
           </Text>
         );
@@ -79,7 +80,7 @@ const serialize = (
 
       if (node.underline) {
         text = (
-          <Text key={uuidv4()} as="u">
+          <Text key={uuidv4()} as="u" color="text.primary">
             {text}
           </Text>
         );
@@ -87,14 +88,14 @@ const serialize = (
 
       if (node.strikethrough) {
         text = (
-          <Text key={uuidv4()} as="s">
+          <Text key={uuidv4()} as="s" color="text.primary">
             {text}
           </Text>
         );
       }
 
       return (
-        <Text key={uuidv4()} as="span" my="0">
+        <Text key={uuidv4()} as="span" my="0" color="text.primary">
           {text}
         </Text>
       );
@@ -107,55 +108,55 @@ const serialize = (
     switch ((node as RichTextContentType).type) {
       case 'h1':
         return (
-          <chakra.h1 key={uuidv4()}>
+          <chakra.h1 key={uuidv4()} color="text.primary">
             {serialize((node as RichTextContentType).children!)}
           </chakra.h1>
         );
       case 'h2':
         return (
-          <chakra.h2 key={uuidv4()}>
+          <chakra.h2 key={uuidv4()} color="text.primary">
             {serialize((node as RichTextContentType).children!)}
           </chakra.h2>
         );
       case 'h3':
         return (
-          <chakra.h3 key={uuidv4()}>
+          <chakra.h3 key={uuidv4()} color="text.primary">
             {serialize((node as RichTextContentType).children!)}
           </chakra.h3>
         );
       case 'h4':
         return (
-          <chakra.h4 key={uuidv4()}>
+          <chakra.h4 key={uuidv4()} color="text.primary">
             {serialize((node as RichTextContentType).children!)}
           </chakra.h4>
         );
       case 'h5':
         return (
-          <chakra.h5 key={uuidv4()}>
+          <chakra.h5 key={uuidv4()} color="text.primary">
             {serialize((node as RichTextContentType).children!)}
           </chakra.h5>
         );
       case 'h6':
         return (
-          <chakra.h6 key={uuidv4()}>
+          <chakra.h6 key={uuidv4()} color="text.primary">
             {serialize((node as RichTextContentType).children!)}
           </chakra.h6>
         );
       case 'quote':
         return (
-          <blockquote key={uuidv4()}>
+          <blockquote key={uuidv4()} color="text.primary">
             {serialize((node as RichTextContentType).children!)}
           </blockquote>
         );
       case 'ul':
         return (
-          <UnorderedList key={uuidv4()}>
+          <UnorderedList key={uuidv4()} color="text.primary">
             {serialize((node as RichTextContentType).children!)}
           </UnorderedList>
         );
       case 'ol':
         return (
-          <OrderedList key={uuidv4()}>
+          <OrderedList key={uuidv4()} color="text.primary">
             {serialize((node as RichTextContentType).children!)}
           </OrderedList>
         );
@@ -207,7 +208,7 @@ const serialize = (
         );
       default:
         return (
-          <Text key={uuidv4()} as="p">
+          <Text key={uuidv4()} as="p" color="text.primary">
             {serialize((node as RichTextContentType).children!)}
           </Text>
         );
