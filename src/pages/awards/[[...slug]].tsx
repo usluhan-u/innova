@@ -52,7 +52,7 @@ const Awards = ({ page, data }: AwardsProps) => {
         />
       )}
       {page.content && Object.keys(page.content).length > 0 && (
-        <Template backgroundColor="gray" width="100%">
+        <Template backgroundColor="background.secondary" width="100%">
           <CardGroup items={cardGroupItems} />
         </Template>
       )}

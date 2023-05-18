@@ -18,7 +18,7 @@ import { BackgroundImage } from './BackgroundImage';
 import { ButtonCallToAction } from './ButtonCallToAction';
 import { LinkButtonCallToAction } from './LinkButtonCallToAction';
 import { DotSlider } from './DotSlider';
-import { AutoPosition } from './AutoPosition';
+import { Container } from './Container';
 
 export interface HeroProps extends HeroType {
   breadcrumbs?: Breadcrumb[];
@@ -100,10 +100,11 @@ export const Hero = ({
     <>
       {type === 'default' && (
         <BackgroundImage url={backgroundImage.url}>
-          <AutoPosition>
+          <Container>
             <Flex
               w="full"
               minH="2xs"
+              mt={8}
               flexDir="column"
               color="text.light"
               justify="space-between"
@@ -183,7 +184,7 @@ export const Hero = ({
                   )}
               </Flex>
             </Flex>
-          </AutoPosition>
+          </Container>
         </BackgroundImage>
       )}
       {type === 'home' && slider && (
