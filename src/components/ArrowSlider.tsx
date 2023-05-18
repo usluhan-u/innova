@@ -9,18 +9,25 @@ import { SlideType } from '../fields';
 export interface ArrowSliderProps extends ArrowSliderType {}
 
 const Slide = ({
-  backgroundImage,
+  backgroundMedia,
   callToAction,
   description,
   title
 }: SlideType) => (
-  <Flex pos="relative" boxSize="full">
-    <Image
-      boxSize="full"
-      objectFit="cover"
-      src={backgroundImage.url}
-      alt={backgroundImage.alt}
-    />
+  <Flex pos="relative" boxSize="full" overflow="hidden">
+    {backgroundMedia.mimeType.startsWith('image') && (
+      <Image
+        boxSize="full"
+        objectFit="cover"
+        src={backgroundMedia.url}
+        alt={backgroundMedia.alt}
+        transition="transform 0.5s ease-in-out"
+        _hover={{
+          filter: 'blur(4px)',
+          transform: 'scale(1.2)'
+        }}
+      />
+    )}
     <VStack
       align="flex-start"
       pos="absolute"

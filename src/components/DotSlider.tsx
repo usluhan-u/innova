@@ -1,26 +1,59 @@
 import React from 'react';
-import { Flex, Image, Text, VStack } from '@chakra-ui/react';
+import { Box, Flex, Image, Text, VStack, chakra } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
+import dynamic from 'next/dynamic';
 import { DotSliderType } from '../blocks';
 import { Slider } from './Slider';
 import { ButtonCallToAction } from './ButtonCallToAction';
 import { SlideType } from '../fields';
 
+const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false });
+
 export interface DotSliderProps extends DotSliderType {}
 
+const VideoPlayer = chakra(ReactPlayer);
+
 const Slide = ({
-  backgroundImage,
+  backgroundMedia,
   callToAction,
   description,
   title
 }: SlideType) => (
-  <Flex pos="relative" boxSize="full">
-    <Image
-      boxSize="full"
-      objectFit="cover"
-      src={backgroundImage.url}
-      alt={backgroundImage.alt}
-    />
+  <Flex pos="relative" boxSize="full" overflow="hidden">
+    {backgroundMedia.mimeType.startsWith('image') && (
+      <Image
+        boxSize="full"
+        objectFit="cover"
+        src={backgroundMedia.url}
+        alt={backgroundMedia.alt}
+        transform="scale(1.2)"
+        transition="all 1s"
+      />
+    )}
+    {backgroundMedia.mimeType.startsWith('video') && (
+      <Box boxSize="full" pos="relative">
+        <VideoPlayer
+          width="100%"
+          height="100%"
+          pos="absolute"
+          url={backgroundMedia.url}
+          volume={0}
+          muted
+          playing
+          loop
+          sx={{
+            '&': {
+              width: '100% !important',
+              height: '100% !important',
+
+              '& > video': {
+                objectFit: 'cover'
+              }
+            }
+          }}
+        />
+      </Box>
+    )}
     <VStack
       align="flex-start"
       pos="absolute"

@@ -5,8 +5,8 @@ import { UploadedMediaType } from './media.field';
 
 export interface SlideType {
   title?: string;
-  description: string;
-  backgroundImage: UploadedMediaType;
+  description?: string;
+  backgroundMedia: UploadedMediaType;
   callToAction: CallToActionType;
 }
 
@@ -33,12 +33,11 @@ export const Slide = (args?: Args): Field => {
         name: 'description',
         label: 'Description',
         type: 'textarea',
-        required: true,
         localized: true
       },
       {
-        name: 'backgroundImage',
-        label: 'Background Image',
+        name: 'backgroundMedia',
+        label: 'Background Media',
         type: 'upload',
         relationTo: 'medias',
         required: true,
