@@ -101,6 +101,7 @@ export const Post: CollectionConfig = {
       label: 'Category',
       type: 'relationship',
       relationTo: 'categories',
+      required: true,
       localized: true,
       admin: {
         position: 'sidebar'
