@@ -5,8 +5,11 @@ import { WidthType } from '../fields';
 interface WidthProps {
   children: React.ReactNode | React.ReactNode[];
   value: WidthType;
+  max?: string;
 }
 
-export const Width = ({ children, value }: WidthProps) => (
-  <Flex w={{ base: 'full', md: value }}>{children}</Flex>
+export const Width = ({ children, value, max }: WidthProps) => (
+  <Flex w={{ base: 'full', md: value }} maxW={max}>
+    {children}
+  </Flex>
 );

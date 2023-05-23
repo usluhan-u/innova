@@ -5,10 +5,17 @@ import { ContentType } from '../blocks';
 import { RichText } from './RichText';
 import { Template } from './Template';
 
-export interface ContentProps extends ContentType {}
+export interface ContentProps extends ContentType {
+  maxWidth?: string;
+}
 
-export const Content = ({ backgroundColor, width, columns }: ContentProps) => (
-  <Template backgroundColor={backgroundColor} width={width}>
+export const Content = ({
+  backgroundColor,
+  width,
+  columns,
+  maxWidth
+}: ContentProps) => (
+  <Template backgroundColor={backgroundColor} width={width} maxWidth={maxWidth}>
     <Grid
       templateColumns={{
         base: 'repeat(1, 1fr)',

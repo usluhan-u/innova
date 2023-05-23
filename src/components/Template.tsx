@@ -8,16 +8,20 @@ export interface TemplateProps {
   backgroundColor: BackgroundColorType;
   width: WidthType;
   children: React.ReactNode | React.ReactNode[];
+  maxWidth?: string;
 }
 
 export const Template = ({
   backgroundColor,
   width,
-  children
+  children,
+  maxWidth
 }: TemplateProps) => (
   <BackgroundColor bgColor={backgroundColor}>
     <AutoPosition>
-      <Width value={width}>{children}</Width>
+      <Width value={width} max={maxWidth}>
+        {children}
+      </Width>
     </AutoPosition>
   </BackgroundColor>
 );
