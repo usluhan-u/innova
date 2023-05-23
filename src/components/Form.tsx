@@ -49,7 +49,7 @@ const Field = ({ blockType, ...restOfField }: FormFieldBlock) => {
 
 const FormContent = ({ backgroundColor, width, form }: FormProps) => (
   <BackgroundColor bgColor={backgroundColor}>
-    <Center w="full">
+    <Center w="full" my={16}>
       <Width value={width}>
         <VStack align="stretch" w="full">
           <Center textAlign="center">

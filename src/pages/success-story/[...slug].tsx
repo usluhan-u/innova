@@ -1,8 +1,9 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import { PaginatedDocs } from 'payload/dist/mongoose/types';
+import { Image } from '@chakra-ui/react';
 import { PostType } from '../../collections';
-import { Content, Head, Hero } from '../../components';
+import { Content, Head, Hero, Template } from '../../components';
 import NotFound from '../not-found';
 import { getCustomPageDataBySlug } from '../../api';
 
@@ -26,6 +27,22 @@ const SuccessStory = ({ data }: SuccessStoryProps) => {
         breadcrumbs={data.breadcrumbs}
         activeSlug={data.slug}
       />
+      {data.featuredImage && (
+        <Template
+          backgroundColor={data.backgroundColor}
+          width={data.width}
+          maxWidth="890px"
+        >
+          <Image
+            objectFit="cover"
+            src={data.featuredImage.url}
+            alt={data.featuredImage.alt}
+            h="lg"
+            w="full"
+            borderRadius="lg"
+          />
+        </Template>
+      )}
       <Content
         blockType="content"
         columns={[{ content: data.content, align: 'left' }]}

@@ -4,7 +4,14 @@ import { PaginatedDocs } from 'payload/dist/mongoose/types';
 import { PageType, PostType } from '../../collections';
 import { getCustomPageDataByCondition, getPageBySlug } from '../../api';
 import NotFound from '../not-found';
-import { CardGroup, CardItem, Head, Hero, Template } from '../../components';
+import {
+  CardGroup,
+  CardItem,
+  Head,
+  Hero,
+  RenderBlocks,
+  Template
+} from '../../components';
 
 export interface AwardsProps {
   page: PageType | null;
@@ -51,10 +58,13 @@ const Awards = ({ page, data }: AwardsProps) => {
           activeSlug={page.slug}
         />
       )}
-      {page.content && Object.keys(page.content).length > 0 && (
+      {data.length > 0 && (
         <Template backgroundColor="background.secondary" width="100%">
           <CardGroup items={cardGroupItems} />
         </Template>
+      )}
+      {page.content && Object.keys(page.content).length > 0 && (
+        <RenderBlocks layout={page.content.layout} />
       )}
     </>
   );
