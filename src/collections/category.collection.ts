@@ -4,6 +4,7 @@ import { Slug } from '../fields';
 
 export interface CategoryType {
   name: string;
+  slug: string;
 }
 
 export const Category: CollectionConfig = {

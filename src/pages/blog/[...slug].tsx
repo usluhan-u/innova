@@ -1,18 +1,51 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import { PaginatedDocs } from 'payload/dist/mongoose/types';
-import { Image } from '@chakra-ui/react';
+import { Flex, Image, Text } from '@chakra-ui/react';
 import { PostType } from '../../collections';
-import { Content, Head, Hero, Template } from '../../components';
+import {
+  CardGroup,
+  CardItem,
+  Content,
+  Head,
+  Hero,
+  Template
+} from '../../components';
 import NotFound from '../not-found';
-import { getCustomPageDataBySlug } from '../../api';
+import {
+  getCustomPageDataByCondition,
+  getCustomPageDataBySlug
+} from '../../api';
 
 interface BlogProps {
   data: PostType | null;
+  relatedData: PostType[];
 }
 
-const Blog = ({ data }: BlogProps) => {
+const Blog = ({ data, relatedData }: BlogProps) => {
   if (data === null) return <NotFound />;
+
+  const cardGroupItems = relatedData.map((item) => {
+    const { category, featuredImage, publishDate, name, slug } = item;
+
+    const cardItem: CardItem = {
+      date: publishDate,
+      image: featuredImage,
+      title: name,
+      category,
+      callToAction: {
+        label: 'Read More',
+        type: 'page',
+        page: {
+          ...item,
+          slug: `/blog/${slug}`,
+          content: undefined
+        }
+      }
+    };
+
+    return cardItem;
+  });
 
   return (
     <>
@@ -50,6 +83,16 @@ const Blog = ({ data }: BlogProps) => {
         width={data.width}
         maxWidth="890px"
       />
+      {relatedData.length > 0 && (
+        <Template backgroundColor="background.secondary" width="100%">
+          <Flex w="full" direction="column" gap={7}>
+            <Text color="text.primary" fontSize="xl" fontWeight="semibold">
+              İlgili Postlar
+            </Text>
+            <CardGroup items={cardGroupItems} />
+          </Flex>
+        </Template>
+      )}
     </>
   );
 };
@@ -73,9 +116,25 @@ export const getServerSideProps: GetServerSideProps = async ({
     defaultLocale
   });
 
+  let relatedData;
+
+  if (data.totalDocs > 0) {
+    const condition = slug
+      ? `[group.slug][equals]=blog&where[category.slug][equals]=${data.docs[0].category?.slug}`
+      : `[group.slug][equals]=blog`;
+
+    relatedData = await getCustomPageDataByCondition<PaginatedDocs<PostType>>({
+      endpoint: 'posts',
+      condition,
+      locale,
+      defaultLocale
+    });
+  }
+
   return {
     props: {
-      data: data.docs[0] || null
+      data: data.docs[0] || null,
+      relatedData: relatedData?.docs || []
     }
   };
 };
