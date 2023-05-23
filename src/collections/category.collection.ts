@@ -1,5 +1,6 @@
 import { CollectionConfig } from 'payload/types';
 import { populateValueAfterCaseChange } from '../hooks';
+import { Slug } from '../fields';
 
 export interface CategoryType {
   name: string;
@@ -24,6 +25,7 @@ export const Category: CollectionConfig = {
       hooks: {
         beforeChange: [populateValueAfterCaseChange('name')]
       }
-    }
+    },
+    Slug()
   ]
 };

@@ -73,18 +73,28 @@ const SuccessStories = ({ page, data }: SuccessStoriesProps) => {
 export default SuccessStories;
 
 export const getServerSideProps: GetServerSideProps = async ({
+  params,
   locale,
   defaultLocale
 }) => {
+  const slug =
+    params?.slug && Array.isArray(params.slug)
+      ? params.slug.join('/')
+      : undefined;
+
+  const condition = slug
+    ? `[group.slug][equals]=success-story&where[category.slug][equals]=${slug}`
+    : `[group.slug][equals]=success-story`;
+
   const [page, data] = await Promise.all([
     getPageBySlug<PaginatedDocs<PageType>>({
-      slug: 'success-stories',
+      slug: slug || 'success-stories',
       locale,
       defaultLocale
     }),
     getCustomPageDataByCondition<PaginatedDocs<PostType>>({
       endpoint: 'posts',
-      condition: `[group.slug][equals]=success-story`,
+      condition,
       locale,
       defaultLocale
     })

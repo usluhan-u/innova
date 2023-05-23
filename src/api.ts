@@ -12,7 +12,7 @@ export const getCustomPageDataBySlug = async <T>({
   defaultLocale?: string;
 }) => {
   const query = await fetch(
-    `${BASE_URL}/${endpoint}?where[slug][equals]=${slug}&locale=${locale}&fallbackLocale=${defaultLocale}`
+    `${BASE_URL}/${endpoint}?locale=${locale}&fallbackLocale=${defaultLocale}&where[slug][equals]=${slug}`
   );
 
   const data: T = await query.json();
@@ -66,34 +66,10 @@ export const getCustomPageDataByCondition = async <T>({
   defaultLocale?: string;
 }) => {
   const query = await fetch(
-    `${BASE_URL}/${endpoint}?where${condition}&locale=${locale}&fallbackLocale=${defaultLocale}`
+    `${BASE_URL}/${endpoint}?locale=${locale}&fallbackLocale=${defaultLocale}&where${condition}`
   );
 
   const data: T = await query.json();
 
   return data;
 };
-
-// export const getAll = async <T>({
-//   endpoint,
-//   condition,
-//   locale,
-//   defaultLocale
-// }: {
-//   endpoint: string;
-//   condition?: string;
-//   locale?: string;
-//   defaultLocale?: string;
-// }) => {
-//   let endpoint = `${BASE_URL}/${endpoint}?locale=${locale}&fallbackLocale=${defaultLocale}`;
-
-//   if (condition) {
-//     endpoint = `${endpoint}&where${condition}`;
-//   }
-
-//   const query = await fetch(`${BASE_URL}/${endpoint}`);
-
-//   const data: T = await query.json();
-
-//   return data;
-// };

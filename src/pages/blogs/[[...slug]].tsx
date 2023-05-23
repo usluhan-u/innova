@@ -73,18 +73,28 @@ const Blogs = ({ page, data }: BlogsProps) => {
 export default Blogs;
 
 export const getServerSideProps: GetServerSideProps = async ({
+  params,
   locale,
   defaultLocale
 }) => {
+  const slug =
+    params?.slug && Array.isArray(params.slug)
+      ? params.slug.join('/')
+      : undefined;
+
+  const condition = slug
+    ? `[group.slug][equals]=blog&where[category.slug][equals]=${slug}`
+    : `[group.slug][equals]=blog`;
+
   const [page, data] = await Promise.all([
     getPageBySlug<PaginatedDocs<PageType>>({
-      slug: 'blogs',
+      slug: slug || 'blogs',
       locale,
       defaultLocale
     }),
     getCustomPageDataByCondition<PaginatedDocs<PostType>>({
       endpoint: 'posts',
-      condition: `[group.slug][equals]=blog`,
+      condition,
       locale,
       defaultLocale
     })

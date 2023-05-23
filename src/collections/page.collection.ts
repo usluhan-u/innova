@@ -99,16 +99,6 @@ export const Page: CollectionConfig = {
   versions: {
     drafts: true
   },
-  // hooks: {
-  //   afterChange: [
-  //     ({ doc }) => {
-  //       regeneratePage({
-  //         collection: 'pages',
-  //         doc
-  //       });
-  //     }
-  //   ]
-  // },
   fields: [
     {
       name: 'name',
