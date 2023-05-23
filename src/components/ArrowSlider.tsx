@@ -9,18 +9,18 @@ import { SlideType } from '../fields';
 export interface ArrowSliderProps extends ArrowSliderType {}
 
 const Slide = ({
-  backgroundMedia,
+  backgroundImage,
   callToAction,
   description,
   title
 }: SlideType) => (
   <Flex pos="relative" boxSize="full" overflow="hidden">
-    {backgroundMedia.mimeType.startsWith('image') && (
+    {backgroundImage.mimeType?.startsWith('image') && (
       <Image
         boxSize="full"
         objectFit="cover"
-        src={backgroundMedia.url}
-        alt={backgroundMedia.alt}
+        src={backgroundImage.url}
+        alt={backgroundImage.alt}
         transition="transform 0.5s ease-in-out"
         _hover={{
           filter: 'blur(4px)',

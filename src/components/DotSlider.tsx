@@ -14,29 +14,29 @@ export interface DotSliderProps extends DotSliderType {}
 const VideoPlayer = chakra(ReactPlayer);
 
 const Slide = ({
-  backgroundMedia,
+  backgroundImage,
   callToAction,
   description,
   title
 }: SlideType) => (
   <Flex pos="relative" boxSize="full" overflow="hidden">
-    {backgroundMedia.mimeType.startsWith('image') && (
+    {backgroundImage.mimeType.startsWith('image') && (
       <Image
         boxSize="full"
         objectFit="cover"
-        src={backgroundMedia.url}
-        alt={backgroundMedia.alt}
+        src={backgroundImage.url}
+        alt={backgroundImage.alt}
         transform="scale(1.2)"
         transition="all 1s"
       />
     )}
-    {backgroundMedia.mimeType.startsWith('video') && (
+    {backgroundImage.mimeType.startsWith('video') && (
       <Box boxSize="full" pos="relative">
         <VideoPlayer
           width="100%"
           height="100%"
           pos="absolute"
-          url={backgroundMedia.url}
+          url={backgroundImage.url}
           volume={0}
           muted
           playing

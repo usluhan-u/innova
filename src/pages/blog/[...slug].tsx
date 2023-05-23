@@ -55,6 +55,10 @@ export const getServerSideProps: GetServerSideProps = async ({
     defaultLocale
   });
 
+  // if (data.totalDocs > 0) {
+  //   const a = await ge;
+  // }
+
   return {
     props: {
       data: data.docs[0] || null
