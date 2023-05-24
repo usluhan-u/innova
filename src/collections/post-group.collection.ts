@@ -12,7 +12,8 @@ export const PostGroup: CollectionConfig = {
     read: () => true
   },
   admin: {
-    useAsTitle: 'name'
+    useAsTitle: 'name',
+    hidden: true
   },
   fields: [
     {
