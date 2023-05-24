@@ -24,6 +24,9 @@ export const PostGroup: CollectionConfig = {
       unique: true,
       hooks: {
         beforeChange: [populateValueAfterCaseChange('name')]
+      },
+      admin: {
+        readOnly: true
       }
     },
     Slug({ required: false, readOnly: true })
