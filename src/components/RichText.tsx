@@ -108,37 +108,37 @@ const serialize = (
     switch ((node as RichTextContentType).type) {
       case 'h1':
         return (
-          <chakra.h1 key={uuidv4()} color="text.primary">
+          <chakra.h1 key={uuidv4()} color="text.primary" fontWeight="bold">
             {serialize((node as RichTextContentType).children!)}
           </chakra.h1>
         );
       case 'h2':
         return (
-          <chakra.h2 key={uuidv4()} color="text.primary">
+          <chakra.h2 key={uuidv4()} color="text.primary" fontWeight="medium">
             {serialize((node as RichTextContentType).children!)}
           </chakra.h2>
         );
       case 'h3':
         return (
-          <chakra.h3 key={uuidv4()} color="text.primary">
+          <chakra.h3 key={uuidv4()} color="text.primary" fontWeight="medium">
             {serialize((node as RichTextContentType).children!)}
           </chakra.h3>
         );
       case 'h4':
         return (
-          <chakra.h4 key={uuidv4()} color="text.primary">
+          <chakra.h4 key={uuidv4()} color="text.primary" fontWeight="medium">
             {serialize((node as RichTextContentType).children!)}
           </chakra.h4>
         );
       case 'h5':
         return (
-          <chakra.h5 key={uuidv4()} color="text.primary">
+          <chakra.h5 key={uuidv4()} color="text.primary" fontWeight="medium">
             {serialize((node as RichTextContentType).children!)}
           </chakra.h5>
         );
       case 'h6':
         return (
-          <chakra.h6 key={uuidv4()} color="text.primary">
+          <chakra.h6 key={uuidv4()} color="text.primary" fontWeight="medium">
             {serialize((node as RichTextContentType).children!)}
           </chakra.h6>
         );

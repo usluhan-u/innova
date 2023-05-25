@@ -50,6 +50,7 @@ export const Tag = ({ tag }: TagProps) => (
                   objectFit="cover"
                   src={tag.icon.url}
                   alt={tag.icon.alt}
+                  boxSize="full"
                 />
               )}
               {tag.imageType === 'lottie' && tag.lottie && (
@@ -57,7 +58,7 @@ export const Tag = ({ tag }: TagProps) => (
               )}
             </Box>
           </Center>
-          <Text color="text.primary" fontWeight="medium" fontSize="2xl">
+          <Text color="text.primary" fontWeight="medium" fontSize="md">
             {tag.title}
           </Text>
         </Flex>
