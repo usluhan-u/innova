@@ -4,6 +4,6 @@
     "module": "CommonJS",
     "outDir": "dist",
     "noEmit": false,
-    "jsx": "react"
+    "jsx": "react-jsx"
   }
 }

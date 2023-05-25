@@ -21,7 +21,7 @@ export const MediaContent = ({
       templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
       alignItems={{ base: 'normal', md: 'center' }}
       w="full"
-      gap={8}
+      gap={10}
     >
       {contentPosition === 'right' && (
         <>

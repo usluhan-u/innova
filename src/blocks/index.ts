@@ -12,3 +12,4 @@ export * from './arrow-slider.block';
 export * from './form.block';
 export * from './flippable-card.block';
 export * from './flippable-card-group.block';
+export * from './media.block';

@@ -16,6 +16,7 @@ import { ArrowSlider } from './ArrowSlider';
 import { Form } from './Form';
 import { FlippableCard } from './FlippableCard';
 import { FlippableCardGroup } from './FlippableCardGroup';
+import { Media } from './Media';
 
 export interface RenderBlocksProps {
   layout: PageLayout[];
@@ -35,7 +36,8 @@ const COMPONENTS: Record<PageBlockType, React.FC<any>> = {
   arrowSlider: ArrowSlider,
   form: Form,
   flippableCard: FlippableCard,
-  flippableCardGroup: FlippableCardGroup
+  flippableCardGroup: FlippableCardGroup,
+  media: Media
 };
 
 export const RenderBlocks = ({ layout }: RenderBlocksProps) => (

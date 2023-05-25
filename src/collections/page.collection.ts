@@ -33,6 +33,8 @@ import {
   ImageDownloaderGroupType,
   ImageTagGroup,
   ImageTagGroupType,
+  Media,
+  MediaBlockType,
   MediaContent,
   MediaContentType,
   TabGroup,
@@ -56,7 +58,8 @@ export type PageLayout =
   | ArrowSliderType
   | FormType
   | FlippableCardType
-  | FlippableCardGroupType;
+  | FlippableCardGroupType
+  | MediaBlockType;
 
 export type PageBlockType =
   | AccordionType['blockType']
@@ -72,7 +75,8 @@ export type PageBlockType =
   | ArrowSliderType['blockType']
   | FormType['blockType']
   | FlippableCardType['blockType']
-  | FlippableCardGroupType['blockType'];
+  | FlippableCardGroupType['blockType']
+  | MediaBlockType['blockType'];
 
 export interface PageContent {
   layout: PageLayout[];
@@ -139,7 +143,8 @@ export const Page: CollectionConfig = {
                 ArrowSlider,
                 Form,
                 FlippableCard,
-                FlippableCardGroup
+                FlippableCardGroup,
+                Media
               ]
             }
           ]

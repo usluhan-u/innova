@@ -47,7 +47,7 @@ const NavMenu = ({ menuItem }: NavMenuProps) => {
             </ChakraMenuButton>
             <ChakraMenuList onMouseEnter={onOpen} onMouseLeave={onClose}>
               <Flex flexDir="column" m={6}>
-                <Flex justify="space-between" gap={8}>
+                <Flex justify="space-between">
                   {menuItem.menuItemGroups?.map((menuItemGroup) => (
                     <ChakraMenuGroup
                       key={uuidv4()}

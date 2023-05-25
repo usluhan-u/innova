@@ -44,3 +44,4 @@ export * from './Form';
 export * from './Width';
 export * from './FlippableCard';
 export * from './FlippableCardGroup';
+export * from './Media';
