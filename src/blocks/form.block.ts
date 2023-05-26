@@ -8,7 +8,7 @@ import {
 } from '../fields';
 import { RichTextContentType } from '../components';
 
-interface ExtendedFormBuilder extends FormBuilder {
+export interface ExtendedFormBuilder extends FormBuilder {
   leader: RichTextContentType[];
   type: 'default' | 'float';
   floatButtonLabel?: string;

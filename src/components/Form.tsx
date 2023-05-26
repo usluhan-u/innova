@@ -4,6 +4,7 @@ import {
   Button,
   Center,
   Checkbox,
+  Icon,
   Input,
   InputGroup,
   InputRightElement,
@@ -20,21 +21,43 @@ import {
   VStack
 } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
-import { FormFieldBlock } from '@payloadcms/plugin-form-builder/types';
+import {
+  FormFieldBlock,
+  SelectFieldOption
+} from '@payloadcms/plugin-form-builder/types';
 import { FormType } from '../blocks';
-import { RichText, RichTextProps } from './RichText';
+import { RichText, RichTextContentType } from './RichText';
 import { BackgroundColor } from './BackgroundColor';
 import { Width } from './Width';
+import { Chat } from '../icons';
 
 interface FormProps extends Omit<FormType, 'blockType'> {}
 
 const fields: Record<string, React.FC<any>> = {
-  text: ({ label }) => <Input placeholder={label} />,
-  textarea: ({ label }) => <Textarea placeholder={label} />,
-  select: Select,
-  checkbox: ({ label }) => <Checkbox>{label}</Checkbox>,
-  email: ({ label }) => <Input type="email" placeholder={label} />,
-  message: (props: RichTextProps) => <RichText content={props.content} />
+  text: ({ label }: { label: string }) => <Input placeholder={label} />,
+  textarea: ({ label }: { label: string }) => <Textarea placeholder={label} />,
+  select: ({
+    label,
+    options
+  }: {
+    label: string;
+    options: SelectFieldOption[];
+  }) => (
+    <Select placeholder={label} w="full">
+      {options.map((option) => (
+        <option key={uuidv4()} value={option.value}>
+          {option.label}
+        </option>
+      ))}
+    </Select>
+  ),
+  checkbox: ({ label }: { label: string }) => <Checkbox>{label}</Checkbox>,
+  email: ({ label }: { label: string }) => (
+    <Input type="email" placeholder={label} />
+  ),
+  message: ({ message }: { message: RichTextContentType[] }) => (
+    <RichText content={message} />
+  )
 };
 
 const Field = ({ blockType, ...restOfField }: FormFieldBlock) => {
@@ -49,7 +72,7 @@ const Field = ({ blockType, ...restOfField }: FormFieldBlock) => {
 
 const FormContent = ({ backgroundColor, width, form }: FormProps) => (
   <BackgroundColor bgColor={backgroundColor}>
-    <Center w="full" my={16}>
+    <Center w="full">
       <Width value={width}>
         <VStack align="stretch" w="full">
           <Center textAlign="center">
@@ -111,6 +134,7 @@ export const Form = ({ backgroundColor, width, form }: FormProps) => (
             zIndex="overlay"
             left="calc(100vw - 10rem)"
             top="calc(100vh - 5rem)"
+            rightIcon={<Icon as={Chat} />}
             _hover={{ bgColor: 'background.blue' }}
           >
             {form.floatButtonLabel}
@@ -124,7 +148,7 @@ export const Form = ({ backgroundColor, width, form }: FormProps) => (
               <FormContent
                 backgroundColor={backgroundColor}
                 form={form}
-                width="100%"
+                width="90%"
               />
             </PopoverBody>
             <PopoverFooter borderTop="none" />

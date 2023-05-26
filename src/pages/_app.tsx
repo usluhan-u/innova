@@ -6,16 +6,19 @@ import '../styles/globals.css';
 import React from 'react';
 import type { AppContext, AppProps } from 'next/app';
 import App from 'next/app';
-import { ChakraProvider, Flex } from '@chakra-ui/react';
+import { ChakraProvider, Flex, useMediaQuery } from '@chakra-ui/react';
+import { PaginatedDocs } from 'payload/dist/mongoose/types';
 import { theme } from '../theme';
 import { FooterType, MenuType, SocialMediaType } from '../globals';
-import { Footer, Header } from '../components';
-import { getCustomPageData } from '../api';
+import { Footer, Form, Header } from '../components';
+import { getCustomPageData, getCustomPageDataByCondition } from '../api';
+import { ExtendedFormBuilder } from '../blocks';
 
 interface MyAppProps extends AppProps {
   socialMedia: SocialMediaType;
   footer: FooterType;
   menu: MenuType;
+  floatForm: ExtendedFormBuilder | null;
 }
 
 const MyApp = ({
@@ -23,23 +26,35 @@ const MyApp = ({
   pageProps,
   socialMedia,
   footer,
-  menu
-}: MyAppProps) => (
-  <ChakraProvider theme={theme}>
-    <Flex minH="100vh" flexDir="column">
-      <Header menu={menu} />
-      <Component {...pageProps} flexGrow={1} />
-      <Footer socialMedia={socialMedia} footer={footer} marginTop="auto" />
-    </Flex>
-  </ChakraProvider>
-);
+  menu,
+  floatForm
+}: MyAppProps) => {
+  const [isLargerThanMd] = useMediaQuery('(min-width: 768px)');
+
+  return (
+    <ChakraProvider theme={theme}>
+      <Flex minH="100vh" flexDir="column">
+        <Header menu={menu} />
+        <Component {...pageProps} flexGrow={1} />
+        <Footer socialMedia={socialMedia} footer={footer} marginTop="auto" />
+        {floatForm && isLargerThanMd && (
+          <Form
+            backgroundColor="background.primary"
+            width="100%"
+            form={floatForm}
+          />
+        )}
+      </Flex>
+    </ChakraProvider>
+  );
+};
 
 export default MyApp;
 
 MyApp.getInitialProps = async (appContext: AppContext) => {
   const appProps = await App.getInitialProps(appContext);
 
-  const [socialMedia, footer, menu] = await Promise.all([
+  const [socialMedia, footer, menu, floatForm] = await Promise.all([
     getCustomPageData<SocialMediaType>({
       endpoint: 'globals/social-media',
       locale: appContext.ctx.locale,
@@ -54,6 +69,12 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
       endpoint: 'globals/menu',
       locale: appContext.ctx.locale,
       defaultLocale: appContext.ctx.defaultLocale
+    }),
+    getCustomPageDataByCondition<PaginatedDocs<ExtendedFormBuilder>>({
+      endpoint: 'forms',
+      condition: '[type][equals]=float',
+      locale: appContext.ctx.locale,
+      defaultLocale: appContext.ctx.defaultLocale
     })
   ]);
 
@@ -61,6 +82,7 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
     ...appProps,
     socialMedia,
     footer,
-    menu
+    menu,
+    floatForm: floatForm.totalDocs > 0 ? floatForm.docs[0] : null
   };
 };

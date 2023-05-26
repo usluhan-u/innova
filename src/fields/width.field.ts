@@ -1,6 +1,13 @@
 import { Field } from 'payload/types';
 
-export type WidthType = '25%' | '33.33%' | '50%' | '66.66%' | '75%' | '100%';
+export type WidthType =
+  | '25%'
+  | '33.33%'
+  | '50%'
+  | '66.66%'
+  | '75%'
+  | '90%'
+  | '100%';
 
 export const Width: Field = {
   name: 'width',
