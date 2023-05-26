@@ -85,9 +85,9 @@ const FormContent = ({ backgroundColor, width, form }: FormProps) => (
                 <Button
                   size="sm"
                   color="text.light"
-                  bgColor="background.blue"
+                  bgColor="background.blue.100"
                   width="fit-content"
-                  _hover={{ bgColor: 'background.blue' }}
+                  _hover={{ bgColor: 'background.blue.100' }}
                 >
                   {form.submitButtonLabel}
                 </Button>
@@ -102,7 +102,7 @@ const FormContent = ({ backgroundColor, width, form }: FormProps) => (
                 color="text.light"
                 bgColor="background.blue"
                 width="fit-content"
-                _hover={{ bgColor: 'background.blue' }}
+                _hover={{ bgColor: 'background.blue.100' }}
               >
                 {form.submitButtonLabel}
               </Button>
@@ -129,13 +129,13 @@ export const Form = ({ backgroundColor, width, form }: FormProps) => (
           <Button
             pos="fixed"
             color="text.light"
-            bgColor="background.blue"
+            bgColor="background.blue.100"
             borderRadius="3xl"
             zIndex="overlay"
             left="calc(100vw - 7.5rem)"
             top="calc(100vh - 7.5rem)"
             rightIcon={<Icon as={Chat} />}
-            _hover={{ bgColor: 'background.blue' }}
+            _hover={{ bgColor: 'background.blue.100' }}
           >
             {form.floatButtonLabel}
           </Button>

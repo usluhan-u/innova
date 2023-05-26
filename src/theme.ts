@@ -9,7 +9,10 @@ export const theme = extendTheme({
     background: {
       primary: '#FFFFFF',
       secondary: '#F4F6F8',
-      blue: '#005A9B',
+      blue: {
+        100: '#005A9B',
+        200: '#1B425E'
+      },
       dark: '#092232',
       light: '#FFFFFF',
       gray: {

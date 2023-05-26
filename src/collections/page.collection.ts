@@ -37,6 +37,8 @@ import {
   MediaBlockType,
   MediaContent,
   MediaContentType,
+  PageRouter,
+  PageRouterType,
   TabGroup,
   TabGroupType,
   TagGroup,
@@ -59,7 +61,8 @@ export type PageLayout =
   | FormType
   | FlippableCardType
   | FlippableCardGroupType
-  | MediaBlockType;
+  | MediaBlockType
+  | PageRouterType;
 
 export type PageBlockType =
   | AccordionType['blockType']
@@ -76,7 +79,8 @@ export type PageBlockType =
   | FormType['blockType']
   | FlippableCardType['blockType']
   | FlippableCardGroupType['blockType']
-  | MediaBlockType['blockType'];
+  | MediaBlockType['blockType']
+  | PageRouterType['blockType'];
 
 export interface PageContent {
   layout: PageLayout[];
@@ -144,7 +148,8 @@ export const Page: CollectionConfig = {
                 Form,
                 FlippableCard,
                 FlippableCardGroup,
-                Media
+                Media,
+                PageRouter
               ]
             }
           ]

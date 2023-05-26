@@ -13,3 +13,4 @@ export * from './form.block';
 export * from './flippable-card.block';
 export * from './flippable-card-group.block';
 export * from './media.block';
+export * from './page-router.block';

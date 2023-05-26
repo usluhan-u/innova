@@ -45,3 +45,4 @@ export * from './Width';
 export * from './FlippableCard';
 export * from './FlippableCardGroup';
 export * from './Media';
+export * from './PageRouter';

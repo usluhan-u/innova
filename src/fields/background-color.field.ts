@@ -1,6 +1,9 @@
 import { Field } from 'payload/types';
 
-export type BackgroundColorType = 'background.primary' | 'background.secondary';
+export type BackgroundColorType =
+  | 'background.primary'
+  | 'background.secondary'
+  | 'background.blue.200';
 
 export const BackgroundColor: Field = {
   name: 'backgroundColor',
@@ -17,6 +20,10 @@ export const BackgroundColor: Field = {
     {
       label: 'Gray',
       value: 'background.secondary'
+    },
+    {
+      label: 'Blue',
+      value: 'background.blue.200'
     }
   ]
 };
