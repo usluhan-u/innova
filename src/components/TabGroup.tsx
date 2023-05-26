@@ -38,7 +38,7 @@ export const TabGroup = ({
   return (
     <Template backgroundColor={backgroundColor} width={width}>
       {isLargerThanMd ? (
-        <Tabs align={alignment} orientation={orientation}>
+        <Tabs align={alignment} orientation={orientation} isFitted>
           <TabList
             borderInlineStart={orientation === 'vertical' ? 'none' : 'inherit'}
             borderBottom={orientation === 'vertical' ? 'none' : '2px solid'}
