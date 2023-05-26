@@ -31,7 +31,7 @@ export const MediaContent = ({
               src={image.url}
               alt={image.alt}
               w="full"
-              h={{ base: 'full', md: 'sm' }}
+              h={{ base: 'full', md: 'xs' }}
               borderRadius="lg"
             />
           </GridItem>
