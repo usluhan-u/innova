@@ -132,8 +132,8 @@ export const Form = ({ backgroundColor, width, form }: FormProps) => (
             bgColor="background.blue.100"
             borderRadius="3xl"
             zIndex="overlay"
-            left="calc(100vw - 7.5rem)"
-            top="calc(100vh - 7.5rem)"
+            left="calc(100vw - 12rem)"
+            top="calc(100vh - 17rem)"
             rightIcon={<Icon as={Chat} />}
             _hover={{ bgColor: 'background.blue.100' }}
           >
