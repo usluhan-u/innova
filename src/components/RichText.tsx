@@ -33,6 +33,7 @@ export interface RichTextContentType {
 }
 
 export interface RichTextProps {
+  color?: string;
   content: RichTextContentType[];
 }
 
@@ -215,12 +216,13 @@ const serialize = (
     }
   });
 
-export const RichText = ({ content }: RichTextProps) => (
+export const RichText = ({ content, color }: RichTextProps) => (
   <chakra.div
     sx={{
       '&': {
         '& *': {
-          my: '16px'
+          my: '16px',
+          color
         },
         '& svg': {
           my: 0
