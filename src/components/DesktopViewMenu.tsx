@@ -85,6 +85,8 @@ const NavMenu = ({ menuItem }: NavMenuProps) => (
                       url={menuItem.callToAction.url}
                       icon={FiArrowRight}
                       color="text.blue"
+                      fontSize="sm"
+                      fontWeight="medium"
                     />
                   </Flex>
                 )}
