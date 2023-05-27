@@ -5,6 +5,7 @@ import nextBuild from 'next/dist/build';
 import path from 'path';
 import { IncomingMessage, ServerResponse } from 'http';
 import dotenv from 'dotenv';
+import nodemailer from 'nodemailer';
 import { seed } from './seed';
 
 dotenv.config();
@@ -15,10 +16,20 @@ const PORT = parseInt(process.env.PORT || '3000', 10);
 const app = express();
 
 const boilerplate = async () => {
+  const transport = nodemailer.createTransport({
+    host: process.env.EMAIL_HOST,
+    port: parseInt(process.env.EMAIL_PORT || '587', 10)
+  });
+
   await payload.init({
     secret: process.env.PAYLOAD_SECRET_KEY || '',
     mongoURL: process.env.MONGODB_URI || '',
     express: app,
+    email: {
+      fromName: 'Innova',
+      fromAddress: process.env.EMAIL_SENDER || '',
+      transport
+    },
     onInit: async () => {
       payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`);
       payload.logger.info(`Payload API URL: ${payload.getAPIURL()}`);

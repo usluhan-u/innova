@@ -3008,6 +3008,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/nodemailer@npm:^6.4.8":
+  version: 6.4.8
+  resolution: "@types/nodemailer@npm:6.4.8"
+  dependencies:
+    "@types/node": "*"
+  checksum: 3cc9b6a0e54f25a1b36124df413964ff5a69e8dc4558c5dfc06818917313a50f4dbfe31fc9190e4270d07a0f8678474da24a2eae42f907933ea81d983b4772d4
+  languageName: node
+  linkType: hard
+
 "@types/normalize-package-data@npm:^2.4.0":
   version: 2.4.1
   resolution: "@types/normalize-package-data@npm:2.4.1"
@@ -7588,6 +7597,7 @@ __metadata:
     "@types/escape-html": ^1.0.2
     "@types/express": ^4.17.17
     "@types/node": ^18.16.1
+    "@types/nodemailer": ^6.4.8
     "@types/qs": ^6.9.7
     "@types/react": ^18.2.0
     "@types/react-dom": ^18.2.1
@@ -7616,6 +7626,7 @@ __metadata:
     husky: ^8.0.3
     lint-staged: ^13.2.2
     next: ^13.3.1
+    nodemailer: ^6.9.2
     nodemon: ^2.0.22
     payload: ^1.7.2
     prettier: ^2.8.8
@@ -7623,6 +7634,7 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     react-helmet: ^6.1.0
+    react-hook-form: ^7.44.1
     react-icons: ^4.8.0
     react-instantsearch-dom: ^6.39.1
     react-player: ^2.12.0
@@ -9357,6 +9369,13 @@ __metadata:
   version: 6.9.1
   resolution: "nodemailer@npm:6.9.1"
   checksum: b1b9670afc170b4454665abae3fc9acd7e781adb9f579d1c2cd991bf75c647ebe345593f8a057e48d7bf9e4c9a9218869f87db8fb7171c614f557000ab654572
+  languageName: node
+  linkType: hard
+
+"nodemailer@npm:^6.9.2":
+  version: 6.9.2
+  resolution: "nodemailer@npm:6.9.2"
+  checksum: 76a7ea0cff221914d3ebb666f26f30c9374f84dd80c1b95bb186873295ecf8dea887ed36a1e8d5d90930c36b30f85ceac062fc9efb7bc75821fe497be4103d25
   languageName: node
   linkType: hard
 
@@ -11309,6 +11328,15 @@ __metadata:
   peerDependencies:
     react: ">=16.3.0"
   checksum: a4998479dab7fc1c2799eddefb1870a9d881b5f71cfdf97979a9882e42f4bb50402d55335f308f461e735e01a06f46b16cc7b4e6bcb22c7a4a6f85a753c5c106
+  languageName: node
+  linkType: hard
+
+"react-hook-form@npm:^7.44.1":
+  version: 7.44.1
+  resolution: "react-hook-form@npm:7.44.1"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18
+  checksum: ad49f47471a5dc0a1b42e8dc39b753e24c4317be090fd920f854d3ebcd6d807803193a55ba78eef86851fd7453de9d46940d911396d594433c12c528bb22dca3
   languageName: node
   linkType: hard
 
