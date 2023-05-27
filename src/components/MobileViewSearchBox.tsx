@@ -18,7 +18,7 @@ export const MobileViewSearchBox = () => {
 
   return (
     <InstantSearch indexName="" searchClient={meiliSearchClient}>
-      <InputGroup w="full">
+      <InputGroup boxSize="full">
         <InputRightElement>
           <Icon as={FiSearch} />
         </InputRightElement>

@@ -57,7 +57,7 @@ const Slide = ({
     <VStack
       align="flex-start"
       pos="absolute"
-      w="lg"
+      w={{ base: 'xs', md: 'lg' }}
       color="text.light"
       top="30%"
       left="10%"

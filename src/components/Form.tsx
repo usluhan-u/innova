@@ -70,7 +70,7 @@ const Field = ({ blockType, ...restOfField }: FormFieldBlock) => {
   return null;
 };
 
-const FormContent = ({ backgroundColor, width, form }: FormProps) => (
+export const FormContent = ({ backgroundColor, width, form }: FormProps) => (
   <BackgroundColor bgColor={backgroundColor}>
     <Center w="full">
       <Width value={width}>
@@ -100,8 +100,8 @@ const FormContent = ({ backgroundColor, width, form }: FormProps) => (
               ))}
               <Button
                 color="text.light"
-                bgColor="background.blue"
-                width="fit-content"
+                bgColor="background.blue.100"
+                width={{ base: 'full', md: 'fit-content' }}
                 _hover={{ bgColor: 'background.blue.100' }}
               >
                 {form.submitButtonLabel}

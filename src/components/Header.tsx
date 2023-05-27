@@ -10,7 +10,6 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
-  VStack,
   useDisclosure,
   useMediaQuery
 } from '@chakra-ui/react';
@@ -23,11 +22,13 @@ import { Chat, Logo } from '../icons';
 import { LanguageSelector } from './LanguageSelector';
 import { Container } from './Container';
 import { DesktopViewSearchBox } from './DesktopViewSearchBox';
-import { MobileViewSearchBox } from './MobileViewSearchBox';
 import { MobileViewMenu } from './MobileViewMenu';
+import { FormContent } from './Form';
+import { ExtendedFormBuilder } from '../blocks';
 
 export interface HeaderProps {
   menu: MenuType;
+  form: ExtendedFormBuilder | null;
 }
 
 interface DesktopMenuProps {
@@ -37,7 +38,9 @@ interface DesktopMenuProps {
   activeLocale?: string;
 }
 
-interface HamburgerMenuProps extends DesktopMenuProps {}
+interface HamburgerMenuProps extends DesktopMenuProps {
+  form: ExtendedFormBuilder | null;
+}
 
 interface HamburgerMenuButtonProps extends Omit<IconButtonProps, 'variant'> {}
 
@@ -89,7 +92,8 @@ const HamburgerMenu = ({
   activeLocale,
   asPath,
   availableLocales,
-  menu
+  menu,
+  form
 }: HamburgerMenuProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selected, setSelected] = React.useState<'chat' | 'menu'>('menu');
@@ -156,12 +160,15 @@ const HamburgerMenu = ({
             </Container>
           </ModalHeader>
           <ModalBody>
-            {selected === 'chat' && <div>Chat</div>}
+            {selected === 'chat' && form && (
+              <FormContent
+                backgroundColor="background.primary"
+                width="90%"
+                form={form}
+              />
+            )}
             {selected === 'menu' && (
-              <VStack>
-                <MobileViewSearchBox />
-                <MobileViewMenu menu={menu} />
-              </VStack>
+              <MobileViewMenu menu={menu} onClose={onClose} />
             )}
           </ModalBody>
         </ModalContent>
@@ -170,7 +177,7 @@ const HamburgerMenu = ({
   );
 };
 
-export const Header = ({ menu }: HeaderProps) => {
+export const Header = ({ menu, form }: HeaderProps) => {
   const [isLargerThanMd] = useMediaQuery('(min-width: 768px)');
   const { asPath, locale: activeLocale, locales } = useRouter();
 
@@ -193,6 +200,7 @@ export const Header = ({ menu }: HeaderProps) => {
           ) : (
             <HamburgerMenu
               menu={menu}
+              form={form}
               activeLocale={activeLocale}
               asPath={asPath}
               availableLocales={availableLocales}

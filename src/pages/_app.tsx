@@ -34,7 +34,7 @@ const MyApp = ({
   return (
     <ChakraProvider theme={theme}>
       <Flex minH="100vh" flexDir="column">
-        <Header menu={menu} />
+        <Header menu={menu} form={floatForm} />
         <Component {...pageProps} flexGrow={1} />
         <Footer socialMedia={socialMedia} footer={footer} marginTop="auto" />
         {floatForm && isLargerThanMd && (

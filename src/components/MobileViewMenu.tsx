@@ -1,113 +1,116 @@
 import React from 'react';
 import {
   Button,
-  useDisclosure,
+  Center,
+  Divider,
   List,
   ListItem,
-  SlideFade
+  Text,
+  VStack
 } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 import { RxCaretRight } from 'react-icons/rx';
+import { useRouter } from 'next/router';
+import { FiArrowRight } from 'react-icons/fi';
 import { MenuType } from '../globals';
+import { MobileViewSearchBox } from './MobileViewSearchBox';
+import { CallToActionType } from '../fields';
 
 export interface MobileViewMenuProps {
   menu: MenuType;
+  onClose: () => void;
 }
 
-// interface NavMenuProps {
-//   menuItem: MenuItemType;
-// }
+interface CurrentListItem {
+  label: string;
+  callToAction?: CallToActionType;
+  finalMenuCallToAction?: CallToActionType;
+  subList?: CurrentListItem[];
+}
 
-// const NavMenu = ({ menuItem }: NavMenuProps) => {
-//   const { isOpen, onOpen, onClose } = useDisclosure();
+interface CurrentList {
+  title?: string;
+  callToAction?: CallToActionType;
+  items: CurrentListItem[];
+}
 
-//   return (
-//     <ChakraMenu isOpen={isOpen}>
-//       <>
-//         {menuItem.type === 'multiple' && (
-//           <>
-//             <ChakraMenuButton
-//               as={Button}
-//               rightIcon={<FiChevronDown />}
-//               bgColor="transparent"
-//               color="text.primary"
-//               fontWeight="normal"
-//               border="none"
-//               onMouseEnter={onOpen}
-//               _hover={{ bgColor: 'transparent', color: 'text.blue' }}
-//               _active={{ bgColor: 'transparent' }}
-//             >
-//               {menuItem.label}
-//             </ChakraMenuButton>
-//             <ChakraMenuList onMouseEnter={onOpen} onMouseLeave={onClose}>
-//               <Flex flexDir="column" m={6}>
-//                 <Flex justify="space-between" gap={8}>
-//                   {menuItem.menuItemGroups?.map((menuItemGroup) => (
-//                     <ChakraMenuGroup
-//                       key={uuidv4()}
-//                       title={menuItemGroup.label}
-//                       color="text.secondary.100"
-//                       fontWeight="medium"
-//                     >
-//                       {menuItemGroup.subMenuItems?.map((subMenuItem) => (
-//                         <ChakraMenuItem
-//                           key={uuidv4()}
-//                           color="text.primary"
-//                           fontWeight="normal"
-//                           _hover={{ bgColor: 'transparent' }}
-//                           _active={{ bgColor: 'transparent' }}
-//                         >
-//                           <CallToAction
-//                             type={subMenuItem.callToAction.type}
-//                             page={subMenuItem.callToAction.page}
-//                             url={subMenuItem.callToAction.url}
-//                           >
-//                             {subMenuItem.callToAction.label}
-//                           </CallToAction>
-//                         </ChakraMenuItem>
-//                       ))}
-//                     </ChakraMenuGroup>
-//                   ))}
-//                 </Flex>
-//                 {menuItem.callToAction &&
-//                   Object.keys(menuItem.callToAction).length > 0 && (
-//                     <Flex flexDir="column" mt={4}>
-//                       <Divider borderBottomColor="black" mb={4} />
-//                       <TextIconCallToAction
-//                         label={menuItem.callToAction.label}
-//                         type={menuItem.callToAction.type}
-//                         page={menuItem.callToAction.page}
-//                         url={menuItem.callToAction.url}
-//                         icon={FiArrowRight}
-//                         color="text.blue"
-//                       />
-//                     </Flex>
-//                   )}
-//               </Flex>
-//             </ChakraMenuList>
-//           </>
-//         )}
+interface MenuList {
+  title?: string;
+  label: string;
+  callToAction?: CallToActionType;
+  finalMenuCallToAction?: CallToActionType;
+  subList?: MenuList[];
+}
 
-//         {menuItem.type === 'single' && (
-//           <CallToAction {...menuItem.menuItem.callToAction}>
-//             {menuItem.label}
-//           </CallToAction>
-//         )}
-//       </>
-//     </ChakraMenu>
-//   );
-// };
+export const MobileViewMenu = ({ menu, onClose }: MobileViewMenuProps) => {
+  const router = useRouter();
 
-export const MobileViewMenu = ({ menu }: MobileViewMenuProps) => {
-  const { isOpen, onToggle } = useDisclosure();
+  const list: MenuList[] =
+    menu?.menuItems?.map((menuItem) => ({
+      label: menuItem.label,
+      callToAction: menuItem.callToAction,
+      subList: menuItem.menuItemGroups?.map((menuItemGroup) => ({
+        title: menuItem.label,
+        label: menuItemGroup.label,
+        subList: menuItemGroup.subMenuItems?.map((subMenuItem) => ({
+          title: menuItemGroup.label,
+          label: subMenuItem.callToAction.label,
+          finalMenuCallToAction: subMenuItem.callToAction
+        }))
+      }))
+    })) ?? [];
+
+  const [currentList, setCurrentList] = React.useState<CurrentList>(() => {
+    const items = list.map((item) => ({
+      label: item.label,
+      subList: item.subList,
+      callToAction: item.callToAction
+    }));
+
+    return {
+      items
+    };
+  });
+
+  const handleRouterPush = (callToAction: CallToActionType) => {
+    onClose();
+    router.push(
+      callToAction.page?.slug || callToAction.url || router.asPath,
+      callToAction.page?.slug || callToAction.url || router.asPath
+    );
+  };
+
+  const handleOnClick =
+    (listItem: CurrentListItem) => (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+
+      if (listItem.subList) {
+        setCurrentList({
+          title: listItem.label,
+          items: listItem.subList,
+          callToAction: listItem.callToAction
+        });
+      } else if (listItem.finalMenuCallToAction) {
+        handleRouterPush(listItem.finalMenuCallToAction);
+      }
+    };
 
   return (
-    <>
-      <List spacing={3} w="full">
-        {menu.menuItems?.map((menuItem) => (
+    <VStack boxSize="full">
+      <Center w="full" h="10">
+        {currentList?.title ? (
+          <Text color="text.secondary.100" fontSize="sm">
+            {currentList.title}
+          </Text>
+        ) : (
+          <MobileViewSearchBox />
+        )}
+      </Center>
+      <List spacing={2} w="full">
+        {currentList?.items.map((item) => (
           <ListItem key={uuidv4()}>
             <Button
-              rightIcon={<RxCaretRight />}
+              rightIcon={item.subList ? <RxCaretRight /> : undefined}
               w="full"
               variant="variant"
               fontWeight="normal"
@@ -115,15 +118,36 @@ export const MobileViewMenu = ({ menu }: MobileViewMenuProps) => {
               pos="relative"
               zIndex={2}
               px={0}
-              onClick={onToggle}
+              fontSize="sm"
+              onClick={handleOnClick(item)}
             >
-              {menuItem.label}
+              {item.label}
             </Button>
-            {/* <NavMenu menuItem={menuItem} /> */}
           </ListItem>
         ))}
       </List>
-      <SlideFade in={isOpen}>SlideFade</SlideFade>
-    </>
+      {currentList.callToAction &&
+        Object.keys(currentList.callToAction).length > 0 && (
+          <VStack mt={4} w="full" align="flex-start">
+            <Divider borderBottomColor="black" mb={2} />
+            <Button
+              rightIcon={<FiArrowRight />}
+              variant="link"
+              color="text.blue"
+              fontSize="sm"
+              fontWeight="medium"
+              mt={0}
+              textDecoration="none"
+              _focus={{ bgColor: 'transparent', textDecor: 'none' }}
+              _active={{ bgColor: 'transparent', textDecor: 'none' }}
+              onClick={() =>
+                handleRouterPush(currentList.callToAction as CallToActionType)
+              }
+            >
+              {currentList.callToAction.label}
+            </Button>
+          </VStack>
+        )}
+    </VStack>
   );
 };
