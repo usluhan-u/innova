@@ -23,6 +23,7 @@ export interface TagGroupType {
   blockType: 'tagGroup';
   backgroundColor: BackgroundColorType;
   width: WidthType;
+  displayLayout?: 'grid' | 'flex';
   items: TagGroupItemType[];
 }
 
@@ -35,6 +36,24 @@ export const TagGroup: Block = {
   fields: [
     BackgroundColor,
     Width,
+    {
+      name: 'displayLayout',
+      label: 'Display Layout',
+      type: 'radio',
+      defaultValue: 'grid',
+      required: true,
+      localized: true,
+      options: [
+        {
+          label: 'Grid',
+          value: 'grid'
+        },
+        {
+          label: 'Flex',
+          value: 'flex'
+        }
+      ]
+    },
     {
       name: 'items',
       labels: {

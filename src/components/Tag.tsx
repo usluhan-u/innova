@@ -7,14 +7,15 @@ import {
   Box,
   Text,
   Flex,
-  Center
+  Center,
+  ChakraProps
 } from '@chakra-ui/react';
 import { FiArrowRight } from 'react-icons/fi';
 import { Player } from '@lottiefiles/react-lottie-player';
 import { TagGroupItemType } from '../blocks';
 import { TextIconCallToAction } from './TextIconCallToAction';
 
-export interface TagProps {
+export interface TagProps extends ChakraProps {
   tag: TagGroupItemType;
 }
 
@@ -31,7 +32,7 @@ const LottieAnimation = ({ src }: LottieAnimationProps) => (
   />
 );
 
-export const Tag = ({ tag }: TagProps) => (
+export const Tag = ({ tag, ...rest }: TagProps) => (
   <Card
     w="full"
     overflow="hidden"
@@ -39,6 +40,7 @@ export const Tag = ({ tag }: TagProps) => (
     borderStyle="solid"
     borderColor="border.primary"
     variant="outline"
+    {...rest}
   >
     <CardBody>
       <Flex flexDir="column" gap={4}>
