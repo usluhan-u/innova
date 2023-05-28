@@ -35,10 +35,10 @@ export const TagGroup = ({
         gap={{ base: 3, md: 6 }}
       >
         {items.map((item, index) => (
-          <>
-            <Tag key={uuidv4()} tag={item} />
+          <React.Fragment key={uuidv4()}>
+            <Tag tag={item} />
             <>{index < items.length - 1 && <Spacer />}</>
-          </>
+          </React.Fragment>
         ))}
       </Flex>
     )}
