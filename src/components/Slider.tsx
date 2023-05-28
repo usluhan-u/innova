@@ -38,13 +38,13 @@ const Arrows = ({ display }: { display: string }) => {
       <IconButton
         variant="variant"
         aria-label="Previous slide"
-        icon={<ArrowLeft boxSize="8" />}
+        icon={<ArrowLeft boxSize="6" />}
         onClick={goToPrevSlide}
       />
       <IconButton
         variant="variant"
         aria-label="Next slide"
-        icon={<ArrowRight boxSize="8" />}
+        icon={<ArrowRight boxSize="6" />}
         onClick={goToNextSlide}
       />
     </Flex>
@@ -93,9 +93,9 @@ export const Slider = ({ height, slides, settings }: SliderProps) => (
         sx={{
           '&': {
             pos: 'absolute',
-            top: { base: '95%', md: '80%' },
+            top: { base: '95%', md: '90%' },
             left: '10%',
-            transform: { base: 'translateY(-95%)', md: 'translateY(-80%)' },
+            transform: { base: 'translateY(-100%)', md: 'translateY(-80%)' },
             display: settings?.dots ? 'flex' : 'none',
             '& .dot': {
               border: 'none',

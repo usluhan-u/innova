@@ -57,19 +57,19 @@ const Slide = ({
     <VStack
       align="flex-start"
       pos="absolute"
-      w={{ base: 'xs', md: 'lg' }}
+      w={{ base: 'xs', md: 'xl' }}
       color="text.light"
       top="30%"
       left="10%"
-      transform="translateY(-30%)"
+      transform="translateY(-15%)"
     >
       {title && (
-        <Text fontWeight="medium" fontSize="4xl">
+        <Text fontWeight="bold" fontSize="5xl">
           {title}
         </Text>
       )}
       {description && (
-        <Text fontWeight="normal" fontSize="lg">
+        <Text fontWeight="medium" fontSize="xl">
           {description}
         </Text>
       )}
