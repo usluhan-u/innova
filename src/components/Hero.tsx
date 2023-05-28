@@ -13,12 +13,14 @@ import { Breadcrumb } from '@payloadcms/plugin-nested-docs/dist/types';
 import { v4 as uuidv4 } from 'uuid';
 import { FiArrowRight } from 'react-icons/fi';
 import { useRouter } from 'next/router';
+import { renderToStaticMarkup } from 'react-dom/server';
 import { CallToActionGroupType, HeroType } from '../fields';
 import { BackgroundImage } from './BackgroundImage';
 import { ButtonCallToAction } from './ButtonCallToAction';
 import { LinkButtonCallToAction } from './LinkButtonCallToAction';
 import { DotSlider } from './DotSlider';
 import { Container } from './Container';
+import { HeroBackground } from '../icons';
 
 export interface HeroProps extends HeroType {
   breadcrumbs?: Breadcrumb[];
@@ -83,7 +85,6 @@ const CallToActionGroupMobileView = ({
 };
 
 export const Hero = ({
-  backgroundImage,
   description: subtitle,
   title,
   logo,
@@ -95,11 +96,14 @@ export const Hero = ({
   slider
 }: HeroProps) => {
   const [isLargerThanMd] = useMediaQuery('(min-width: 768px)');
+  const svgString = encodeURIComponent(
+    renderToStaticMarkup(<HeroBackground />)
+  );
 
   return (
     <>
       {type === 'default' && (
-        <BackgroundImage url={backgroundImage.url}>
+        <BackgroundImage url={`data:image/svg+xml,${svgString}`}>
           <Container>
             <Flex
               w="full"

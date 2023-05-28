@@ -9,10 +9,10 @@ export interface BackgroundImageProps {
 export const BackgroundImage = ({ url, children }: BackgroundImageProps) => (
   <Flex
     w="full"
-    bgImage={`url(${url})`}
     bgPos="center"
     bgRepeat="no-repeat"
     bgSize="cover"
+    style={{ backgroundImage: `url("${url}")` }}
   >
     {children}
   </Flex>

@@ -8,3 +8,4 @@ export * from './Chat';
 export * from './Video';
 export * from './ArrowLeft';
 export * from './ArrowRight';
+export * from './HeroBackground';

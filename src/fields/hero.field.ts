@@ -15,7 +15,6 @@ export interface HeroType {
   description?: string;
   callToAction: CallToActionType;
   callToActionGroup?: CallToActionGroupType[];
-  backgroundImage: UploadedMediaType;
   logo?: UploadedMediaType;
 }
 
@@ -69,12 +68,6 @@ export const Hero: Field = {
       condition: (_, siblingData) => siblingData?.type === 'default'
     }),
     CallToActionGroup({
-      condition: (_, siblingData) => siblingData?.type === 'default'
-    }),
-    Media({
-      name: 'backgroundImage',
-      label: 'Background Image',
-      required: true,
       condition: (_, siblingData) => siblingData?.type === 'default'
     }),
     Media({
