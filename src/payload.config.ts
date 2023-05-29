@@ -7,11 +7,13 @@ import seo from '@payloadcms/plugin-seo';
 import formBuilder from '@payloadcms/plugin-form-builder';
 import {
   Category,
+  EnBlog,
   Lottie,
   Media,
   Page,
   Post,
   PostGroup,
+  TrBlog,
   User
 } from './collections';
 import { Footer, Menu, NotFound, SocialMedia } from './globals';
@@ -26,7 +28,17 @@ export default buildConfig({
   graphQL: {
     disable: true
   },
-  collections: [Category, PostGroup, Post, Page, Media, Lottie, User],
+  collections: [
+    Category,
+    PostGroup,
+    Post,
+    EnBlog,
+    TrBlog,
+    Page,
+    Media,
+    Lottie,
+    User
+  ],
   globals: [Menu, SocialMedia, Footer, NotFound],
   localization: {
     locales: ['en', 'tr'],
@@ -99,15 +111,15 @@ export default buildConfig({
       redirectRelationships: [Page.slug]
     }),
     redirects({
-      collections: [Post.slug, Page.slug]
+      collections: [Post.slug, EnBlog.slug, TrBlog.slug, Page.slug]
     }),
     seo({
-      collections: [Post.slug, Page.slug],
+      collections: [Post.slug, EnBlog.slug, TrBlog.slug, Page.slug],
       generateTitle: ({ doc }: any) => `İnnova - ${doc.title.value}`,
       generateDescription: ({ doc }: any) => doc.excerpt.value
     }),
     nestedDocs({
-      collections: [Post.slug, Page.slug],
+      collections: [Post.slug, EnBlog.slug, TrBlog.slug, Page.slug],
       parentFieldSlug: 'parent',
       breadcrumbsFieldSlug: 'breadcrumbs',
       generateLabel: (_, page) => (page.name as string) || '',

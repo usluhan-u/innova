@@ -15,11 +15,18 @@ interface Args {
   name?: string;
   label?: string | false;
   required: boolean;
+  localized?: boolean;
   condition?: (data: any, siblingData: any) => boolean;
 }
 
 export const Media = (args?: Args): Field => {
-  const { name = 'media', required, label, condition } = args || {};
+  const {
+    name = 'media',
+    required,
+    label,
+    localized = true,
+    condition
+  } = args || {};
 
   return {
     name,
@@ -27,7 +34,7 @@ export const Media = (args?: Args): Field => {
     type: 'upload',
     relationTo: 'medias',
     required,
-    localized: true,
+    localized,
     admin: {
       condition
     }

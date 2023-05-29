@@ -93,7 +93,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       defaultLocale
     }),
     getCustomPageDataByCondition<PaginatedDocs<PostType>>({
-      endpoint: 'posts',
+      endpoint: `${locale}-blogs`,
       condition,
       locale,
       defaultLocale

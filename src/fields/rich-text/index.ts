@@ -38,11 +38,18 @@ interface Args {
   label?: string | false;
   name?: string;
   required?: boolean;
+  localized?: boolean;
   condition?: (data: any, siblingData: any) => boolean;
 }
 
 export const RichText = (args?: Args): Field => {
-  const { label, name = 'richText', required, condition } = args || {};
+  const {
+    label,
+    name = 'richText',
+    required,
+    localized = true,
+    condition
+  } = args || {};
 
   return deepMerge<RichTextField, Partial<RichTextField>>(
     {
@@ -50,7 +57,7 @@ export const RichText = (args?: Args): Field => {
       label: typeof label === 'boolean' ? label : label || 'Rich Text',
       type: 'richText',
       required,
-      localized: true,
+      localized,
       admin: {
         elements: [...elements],
         leaves: [...leaves],

@@ -110,7 +110,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       : 'blogs';
 
   const data = await getCustomPageDataBySlug<PaginatedDocs<PostType>>({
-    endpoint: 'posts',
+    endpoint: `${locale}-blogs`,
     slug,
     locale,
     defaultLocale
@@ -124,7 +124,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       : `[group.slug][equals]=blog`;
 
     relatedData = await getCustomPageDataByCondition<PaginatedDocs<PostType>>({
-      endpoint: 'posts',
+      endpoint: `${locale}-blogs`,
       condition,
       locale,
       defaultLocale
