@@ -184,7 +184,7 @@ export const Header = ({ menu, form }: HeaderProps) => {
   const availableLocales = locales?.filter((locale) => locale !== activeLocale);
 
   return (
-    <Flex h={16}>
+    <Flex h={16} pos="sticky" top={0} bgColor={'white'} zIndex={2}>
       <Container>
         <Flex align="center" justify="space-between" gap={10} boxSize="full">
           <InternalLink slug="home">
