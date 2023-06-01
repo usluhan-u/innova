@@ -20,7 +20,7 @@ export const InternalLink = ({
 
   return (
     <Link
-      href={slug}
+      href={slug.startsWith('/') ? slug : `/${slug}`}
       as={NextLink}
       scroll={false}
       _hover={{ textDecoration: 'none' }}

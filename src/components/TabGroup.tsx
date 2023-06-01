@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Flex,
   Tab,
   TabList,
   TabPanel,
@@ -38,39 +39,47 @@ export const TabGroup = ({
   return (
     <Template backgroundColor={backgroundColor} width={width}>
       {isLargerThanMd ? (
-        <Tabs align={alignment} orientation={orientation} isFitted>
-          <TabList
-            borderInlineStart={orientation === 'vertical' ? 'none' : 'inherit'}
-            borderBottom={orientation === 'vertical' ? 'none' : '2px solid'}
-            borderInlineEnd={orientation === 'vertical' ? 'none' : 'inherit'}
-            borderRight={orientation === 'vertical' ? '2px solid' : 'none'}
-            borderColor="inherit"
-          >
-            {items.map((item) => (
-              <Tab
-                key={uuidv4()}
-                color="text.secondary.100"
-                fontWeight="medium"
-                fontSize="sm"
-                _selected={{
-                  borderInlineStart: 'none',
-                  borderInlineEnd: 'inherit',
-                  color: 'text.primary',
-                  borderColor: 'background.blue.100'
-                }}
-              >
-                {item.label}
-              </Tab>
-            ))}
-          </TabList>
-          <TabPanels>
-            {items.map((item) => (
-              <TabPanel key={uuidv4()}>
-                <RenderBlocks layout={item.layout} />
-              </TabPanel>
-            ))}
-          </TabPanels>
-        </Tabs>
+        <Flex
+          boxSize="full"
+          justify={orientation === 'vertical' ? 'center' : 'inherit'}
+        >
+          <Tabs align={alignment} orientation={orientation} isFitted>
+            <TabList
+              borderInlineStart={
+                orientation === 'vertical' ? 'none' : 'inherit'
+              }
+              borderBottom={orientation === 'vertical' ? 'none' : '2px solid'}
+              borderInlineEnd={orientation === 'vertical' ? 'none' : 'inherit'}
+              borderRight={orientation === 'vertical' ? '2px solid' : 'none'}
+              borderColor="inherit"
+              width="full"
+            >
+              {items.map((item) => (
+                <Tab
+                  key={uuidv4()}
+                  color="text.secondary.100"
+                  fontWeight="medium"
+                  fontSize={orientation === 'vertical' ? 'lg' : 'sm'}
+                  _selected={{
+                    borderInlineStart: 'none',
+                    borderInlineEnd: 'inherit',
+                    color: 'text.primary',
+                    borderColor: 'background.blue.100'
+                  }}
+                >
+                  {item.label}
+                </Tab>
+              ))}
+            </TabList>
+            <TabPanels>
+              {items.map((item) => (
+                <TabPanel key={uuidv4()}>
+                  <RenderBlocks layout={item.layout} />
+                </TabPanel>
+              ))}
+            </TabPanels>
+          </Tabs>
+        </Flex>
       ) : (
         <Dropdown
           options={getOptions()}

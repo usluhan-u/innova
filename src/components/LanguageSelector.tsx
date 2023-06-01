@@ -48,6 +48,36 @@ export const LanguageSelector = ({
     (availableLocale) => availableLocale !== activeLocale
   )[0];
 
+  const handleLocaleChange = () => {
+    if (router.route.includes('award' || 'awards')) {
+      router.push('/awards', undefined, {
+        locale: otherAvailableLocale
+      });
+    }
+
+    if (router.route.includes('blog' || 'blogs')) {
+      router.push('/blogs', undefined, {
+        locale: otherAvailableLocale
+      });
+    }
+
+    if (router.route.includes('statement' || 'statements')) {
+      router.push('/statements', undefined, {
+        locale: otherAvailableLocale
+      });
+    }
+
+    if (router.route.includes('success-story' || 'success-stories')) {
+      router.push('/success-stories', undefined, {
+        locale: otherAvailableLocale
+      });
+    }
+
+    router.push(asPath, undefined, {
+      locale: otherAvailableLocale
+    });
+  };
+
   return (
     <>
       {type === 'button' && (
@@ -57,11 +87,7 @@ export const LanguageSelector = ({
           border="none"
           aria-label="Language"
           icon={<LocaleFlag locale={activeLocale} />}
-          onClick={() =>
-            router.push(asPath, asPath, {
-              locale: otherAvailableLocale
-            })
-          }
+          onClick={handleLocaleChange}
           _hover={{ borderColor: 'transparent' }}
           _active={{ borderColor: 'transparent' }}
           {...rest}
