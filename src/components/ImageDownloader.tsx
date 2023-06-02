@@ -43,8 +43,8 @@ export const ImageDownloader = ({ imageDownloader }: ImageDownloaderProps) => {
         <Center boxSize="full">
           <Image
             objectFit="contain"
-            src={imageDownloader.image.url}
-            alt={imageDownloader.image.alt}
+            src={imageDownloader.coverImage.url}
+            alt={imageDownloader.coverImage.alt}
           />
         </Center>
       </CardBody>

@@ -8,6 +8,7 @@ import {
 } from '../fields';
 
 export interface ImageDownloaderGroupItemType {
+  coverImage: UploadedMediaType;
   image: UploadedMediaType;
 }
 
@@ -36,6 +37,14 @@ export const ImageDownloaderGroup: Block = {
       type: 'array',
       minRows: 1,
       fields: [
+        {
+          name: 'coverImage',
+          label: 'Cover Image',
+          type: 'upload',
+          relationTo: 'medias',
+          required: true,
+          localized: true
+        },
         {
           name: 'image',
           label: 'Image',

@@ -26,7 +26,7 @@ interface LottieAnimationProps {
 const LottieAnimation = ({ src }: LottieAnimationProps) => (
   <Player
     loop
-    autoplay
+    hover
     src={src}
     style={{ width: '100%', height: '100%', backgroundColor: 'transparent' }}
   />
