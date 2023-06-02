@@ -7,6 +7,8 @@ import { FiArrowRight } from 'react-icons/fi';
 import { PageType, PostType } from '../collections';
 import NotFound from './not-found';
 import {
+  AutoPosition,
+  BackgroundColor,
   ButtonCallToAction,
   Head,
   Hero,
@@ -45,24 +47,26 @@ const Home = ({ page, blogs, successStories }: HomeProps) => {
         <RenderBlocks layout={page.content.layout} />
       )}
       {blogs?.length > 0 && (
-        <Template backgroundColor="background.primary" width="66.66%">
+        <BackgroundColor bgColor="background.primary">
           <VStack spacing="8" align="stretch" w="full">
-            <Flex w="full" align="center" justify="space-between">
-              <Text fontSize={{ base: 'xl', md: '4xl' }}>Blog</Text>
-              <TextIconCallToAction
-                label="Tüm Yazılar"
-                type="page"
-                page={{
-                  slug: '/blogs',
-                  name: 'Tüm Yazılar',
-                  breadcrumbs: [],
-                  meta: {}
-                }}
-                color="text.blue"
-                fontWeight="semibold"
-                icon={FiArrowRight}
-              />
-            </Flex>
+            <AutoPosition mb={0}>
+              <Flex w="full" align="center" justify="space-between">
+                <Text fontSize={{ base: 'xl', md: '4xl' }}>Blog</Text>
+                <TextIconCallToAction
+                  label="Tüm Yazılar"
+                  type="page"
+                  page={{
+                    slug: '/blogs',
+                    name: 'Tüm Yazılar',
+                    breadcrumbs: [],
+                    meta: {}
+                  }}
+                  color="text.blue"
+                  fontWeight="semibold"
+                  icon={FiArrowRight}
+                />
+              </Flex>
+            </AutoPosition>
             <Flex w="full" h="72" flexDir={{ base: 'column', md: 'row' }}>
               {blogs?.map((blog) => (
                 <Flex
@@ -122,7 +126,7 @@ const Home = ({ page, blogs, successStories }: HomeProps) => {
               ))}
             </Flex>
           </VStack>
-        </Template>
+        </BackgroundColor>
       )}
       {successStories?.length > 0 && (
         <Template backgroundColor="background.primary" width="66.66%">

@@ -3,7 +3,7 @@ import { Box, Flex, Image, Text, VStack, chakra } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 import dynamic from 'next/dynamic';
 import { AnimatePresence, motion } from 'framer-motion';
-import NextLink from 'next/link';
+// import NextLink from 'next/link';
 import { DotSliderType } from '../blocks';
 import { Slider } from './Slider';
 import { ButtonCallToAction } from './ButtonCallToAction';
@@ -113,31 +113,37 @@ const Slide = ({
   description,
   title
 }: SlideType) => (
-  <>
-    {callToAction && Object.keys(callToAction).length > 0 ? (
-      <NextLink
-        href={
-          (callToAction.page
-            ? `/${callToAction.page.slug}`
-            : callToAction.url) as unknown as URL
-        }
-      >
-        <SlideContent
-          backgroundImage={backgroundImage}
-          callToAction={callToAction}
-          description={description}
-          title={title}
-        />
-      </NextLink>
-    ) : (
-      <SlideContent
-        backgroundImage={backgroundImage}
-        callToAction={callToAction}
-        description={description}
-        title={title}
-      />
-    )}
-  </>
+  <SlideContent
+    backgroundImage={backgroundImage}
+    callToAction={callToAction}
+    description={description}
+    title={title}
+  />
+  // <>
+  //   {callToAction && Object.keys(callToAction).length > 0 ? (
+  //     <NextLink
+  //       href={
+  //         (callToAction.page
+  //           ? `/${callToAction.page.slug}`
+  //           : callToAction.url) as unknown as URL
+  //       }
+  //     >
+  //       <SlideContent
+  //         backgroundImage={backgroundImage}
+  //         callToAction={callToAction}
+  //         description={description}
+  //         title={title}
+  //       />
+  //     </NextLink>
+  //   ) : (
+  //     <SlideContent
+  //       backgroundImage={backgroundImage}
+  //       callToAction={callToAction}
+  //       description={description}
+  //       title={title}
+  //     />
+  //   )}
+  // </>
 );
 
 export const DotSlider = ({ slider }: DotSliderProps) => {
