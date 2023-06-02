@@ -172,12 +172,16 @@ const Home = ({ page, blogs, successStories }: HomeProps) => {
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async ({
+  params,
   locale,
   defaultLocale
 }) => {
+  const slug =
+    params?.slug && Array.isArray(params.slug) ? params.slug.join('/') : 'home';
+
   const [page, blog, successStory] = await Promise.all([
     getPageBySlug<PaginatedDocs<PageType>>({
-      slug: 'home',
+      slug,
       locale,
       defaultLocale
     }),
