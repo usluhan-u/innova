@@ -55,7 +55,7 @@ export const UnstyledFlippableCard = ({
           transform={`rotateY(${flipped ? 0 : -180}deg)`}
           transition="all 1s ease-in-out"
           cursor="pointer"
-          overflow="scroll"
+          overflow="hidden"
           p="8"
           sx={{
             backfaceVisibility: 'hidden'
@@ -67,7 +67,9 @@ export const UnstyledFlippableCard = ({
 
           {type === 'post' && post && (
             <>
-              {post.category && <Text>{post.category.name}</Text>}
+              {post.category && (
+                <Text fontWeight="bold">{post.category.name}</Text>
+              )}
               {post.name && <Text>{post.name}</Text>}
               <TextIconCallToAction
                 label="Read more"

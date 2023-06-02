@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Flex, Image, Text, VStack, chakra } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 import dynamic from 'next/dynamic';
+import { AnimatePresence, motion } from 'framer-motion';
 import { DotSliderType } from '../blocks';
 import { Slider } from './Slider';
 import { ButtonCallToAction } from './ButtonCallToAction';
@@ -54,33 +55,54 @@ const Slide = ({
         />
       </Box>
     )}
-    <VStack
-      align="flex-start"
-      pos="absolute"
-      w={{ base: 'xs', md: 'xl' }}
-      color="text.light"
-      top="30%"
-      left="10%"
-      transform="translateY(-15%)"
-    >
-      {title && (
-        <Text fontWeight="bold" fontSize="5xl">
-          {title}
-        </Text>
-      )}
-      {description && (
-        <Text fontWeight="medium" fontSize="xl">
-          {description}
-        </Text>
-      )}
-      {callToAction && Object.keys(callToAction).length > 0 && (
-        <ButtonCallToAction
-          {...callToAction}
-          bgColor="background.blue.100"
-          color="text.light"
-        />
-      )}
-    </VStack>
+    <AnimatePresence>
+      <VStack
+        key={uuidv4()}
+        as={motion.div}
+        variants={{
+          initial: {
+            opacity: 0,
+            y: '50px'
+          },
+          final: {
+            opacity: 1,
+            y: '0px',
+            transition: {
+              duration: 0.5,
+              delay: 0.5
+            }
+          }
+        }}
+        initial="initial"
+        animate="final"
+        exit="initial"
+        align="flex-start"
+        pos="absolute"
+        w={{ base: 'xs', md: 'xl' }}
+        color="text.light"
+        top="30%"
+        left="10%"
+        transform="translateY(-15%)"
+      >
+        {title && (
+          <Text fontWeight="bold" fontSize="5xl">
+            {title}
+          </Text>
+        )}
+        {description && (
+          <Text fontWeight="medium" fontSize="xl">
+            {description}
+          </Text>
+        )}
+        {callToAction && Object.keys(callToAction).length > 0 && (
+          <ButtonCallToAction
+            {...callToAction}
+            bgColor="background.blue.100"
+            color="text.light"
+          />
+        )}
+      </VStack>
+    </AnimatePresence>
   </Flex>
 );
 

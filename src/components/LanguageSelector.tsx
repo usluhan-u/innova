@@ -73,7 +73,7 @@ export const LanguageSelector = ({
       });
     }
 
-    router.push(asPath, undefined, {
+    router.push('/home', undefined, {
       locale: otherAvailableLocale
     });
   };
