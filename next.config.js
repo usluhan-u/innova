@@ -16,6 +16,23 @@ const nextConfig = {
     locales: ['en', 'tr'],
     defaultLocale: 'tr',
     localeDetection: false
+  },
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: '',
+  //       destination: '/home'
+  //     }
+  //   ];
+  // },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/home',
+        permanent: true
+      }
+    ];
   }
 };
 
