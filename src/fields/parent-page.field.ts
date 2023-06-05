@@ -5,7 +5,7 @@ export const ParentPage: Field = {
   label: 'Parent Page',
   type: 'relationship',
   relationTo: 'pages',
-  maxDepth: 0,
+  maxDepth: 1,
   index: true,
   admin: {
     position: 'sidebar'

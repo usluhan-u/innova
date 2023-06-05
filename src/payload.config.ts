@@ -29,12 +29,12 @@ export default buildConfig({
     disable: true
   },
   collections: [
+    Page,
     Category,
     PostGroup,
     Post,
     EnBlog,
     TrBlog,
-    Page,
     Media,
     Lottie,
     User
@@ -119,7 +119,7 @@ export default buildConfig({
       generateDescription: ({ doc }: any) => doc.excerpt.value
     }),
     nestedDocs({
-      collections: [Post.slug, EnBlog.slug, TrBlog.slug, Page.slug],
+      collections: [Page.slug, Post.slug, EnBlog.slug, TrBlog.slug],
       parentFieldSlug: 'parent',
       breadcrumbsFieldSlug: 'breadcrumbs',
       generateLabel: (_, page) => (page.name as string) || '',

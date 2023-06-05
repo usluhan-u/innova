@@ -4,6 +4,7 @@ export const Breadcrumbs: Field = {
   name: 'breadcrumbs',
   label: 'Breadcrumbs',
   type: 'array',
+  localized: true,
   fields: [
     {
       name: 'page',
@@ -38,6 +39,6 @@ export const Breadcrumbs: Field = {
     }
   ],
   admin: {
-    disabled: true
+    readOnly: true
   }
 };
