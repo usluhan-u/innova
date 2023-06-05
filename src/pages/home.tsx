@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Flex, Image, Spacer, Text, VStack } from '@chakra-ui/react';
 import { FiArrowRight } from 'react-icons/fi';
 import { PageType, PostType } from '../collections';
-import NotFound from './not-found';
+import Custom404 from './404';
 import {
   AutoPosition,
   BackgroundColor,
@@ -26,7 +26,7 @@ export interface HomeProps {
 }
 
 const Home = ({ page, blogs, successStories }: HomeProps) => {
-  if (!page) return <NotFound />;
+  if (!page) return <Custom404 />;
 
   return (
     <>

@@ -11,7 +11,7 @@ import {
   Hero,
   Template
 } from '../../components';
-import NotFound from '../not-found';
+import Custom404 from '../404';
 import {
   getCustomPageDataByCondition,
   getCustomPageDataBySlug
@@ -23,7 +23,7 @@ interface AwardProps {
 }
 
 const Award = ({ data, relatedData }: AwardProps) => {
-  if (data === null) return <NotFound />;
+  if (data === null) return <Custom404 />;
 
   const cardGroupItems = relatedData.map((item) => {
     const { category, featuredImage, publishDate, name, slug } = item;

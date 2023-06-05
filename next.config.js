@@ -31,6 +31,11 @@ const nextConfig = {
         source: '/',
         destination: '/home',
         permanent: true
+      },
+      {
+        source: '/_error',
+        destination: '/404',
+        permanent: true
       }
     ];
   }

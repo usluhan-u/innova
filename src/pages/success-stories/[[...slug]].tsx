@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next';
 import { PaginatedDocs } from 'payload/dist/mongoose/types';
 import { PageType, PostType } from '../../collections';
 import { getCustomPageDataByCondition, getPageBySlug } from '../../api';
-import NotFound from '../not-found';
+import Custom404 from '../404';
 import {
   CardGroup,
   CardItem,
@@ -19,7 +19,7 @@ export interface SuccessStoriesProps {
 }
 
 const SuccessStories = ({ page, data }: SuccessStoriesProps) => {
-  if (page === null) return <NotFound />;
+  if (page === null) return <Custom404 />;
 
   const cardGroupItems = data.map((item) => {
     const { category, featuredImage, publishDate, name, slug } = item;

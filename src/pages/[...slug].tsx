@@ -2,7 +2,7 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import { PaginatedDocs } from 'payload/dist/mongoose/types';
 import { PageType } from '../collections';
-import NotFound from './not-found';
+import Custom404 from './404';
 import { Head, Hero, RenderBlocks } from '../components';
 import { getPageBySlug } from '../api';
 
@@ -11,7 +11,7 @@ export interface PageProps {
 }
 
 const Page = ({ page }: PageProps) => {
-  if (!page) return <NotFound />;
+  if (!page) return <Custom404 />;
 
   return (
     <>

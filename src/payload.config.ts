@@ -16,7 +16,7 @@ import {
   TrBlog,
   User
 } from './collections';
-import { Footer, Menu, NotFound, SocialMedia } from './globals';
+import { Footer, Menu, SocialMedia } from './globals';
 import { Logo } from './icons';
 import { RichText } from './fields';
 
@@ -39,7 +39,7 @@ export default buildConfig({
     Lottie,
     User
   ],
-  globals: [Menu, SocialMedia, Footer, NotFound],
+  globals: [Menu, SocialMedia, Footer],
   localization: {
     locales: ['en', 'tr'],
     defaultLocale: 'tr',

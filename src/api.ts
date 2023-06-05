@@ -11,13 +11,21 @@ export const getCustomPageDataBySlug = async <T>({
   locale?: string;
   defaultLocale?: string;
 }) => {
-  const query = await fetch(
-    `${BASE_URL}/${endpoint}?locale=${locale}&fallbackLocale=${defaultLocale}&where[slug][equals]=${slug}`
-  );
+  try {
+    const query = await fetch(
+      `${BASE_URL}/${endpoint}?locale=${locale}&fallbackLocale=${defaultLocale}&where[slug][equals]=${slug}`
+    );
 
-  const data: T = await query.json();
+    const data: T = await query.json();
 
-  return data;
+    return data;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(JSON.stringify(error));
+    }
+
+    throw new Error('An error occurred');
+  }
 };
 
 export const getPageBySlug = async <T>({
@@ -45,13 +53,21 @@ export const getCustomPageData = async <T>({
   locale?: string;
   defaultLocale?: string;
 }) => {
-  const query = await fetch(
-    `${BASE_URL}/${endpoint}?locale=${locale}&fallbackLocale=${defaultLocale}`
-  );
+  try {
+    const query = await fetch(
+      `${BASE_URL}/${endpoint}?locale=${locale}&fallbackLocale=${defaultLocale}`
+    );
 
-  const data: T = await query.json();
+    const data: T = await query.json();
 
-  return data;
+    return data;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(JSON.stringify(error));
+    }
+
+    throw new Error('An error occurred');
+  }
 };
 
 export const getCustomPageDataByCondition = async <T>({
@@ -67,11 +83,19 @@ export const getCustomPageDataByCondition = async <T>({
   defaultLocale?: string;
   limit?: number;
 }) => {
-  const query = await fetch(
-    `${BASE_URL}/${endpoint}?locale=${locale}&fallbackLocale=${defaultLocale}&limit=${limit}&where${condition}`
-  );
+  try {
+    const query = await fetch(
+      `${BASE_URL}/${endpoint}?locale=${locale}&fallbackLocale=${defaultLocale}&limit=${limit}&where${condition}`
+    );
 
-  const data: T = await query.json();
+    const data: T = await query.json();
 
-  return data;
+    return data;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(JSON.stringify(error));
+    }
+
+    throw new Error('An error occurred');
+  }
 };
