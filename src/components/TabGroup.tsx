@@ -53,13 +53,14 @@ export const TabGroup = ({
               borderRight={orientation === 'vertical' ? '2px solid' : 'none'}
               borderColor="inherit"
               width="full"
+              alignItems={orientation === 'vertical' ? 'flex-end' : 'inherit'}
             >
               {items.map((item) => (
                 <Tab
                   key={uuidv4()}
                   color="text.secondary.100"
                   fontWeight="medium"
-                  fontSize={orientation === 'vertical' ? 'lg' : 'sm'}
+                  fontSize={orientation === 'vertical' ? 'xl' : 'sm'}
                   _selected={{
                     borderInlineStart: 'none',
                     borderInlineEnd: 'inherit',

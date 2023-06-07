@@ -12,7 +12,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from 'next/router';
 import { EN, TR } from '../icons';
 
-export interface LanguageSelectorProps
+export interface LanguageSwitcherProps
   extends Omit<IconButtonProps, 'type' | 'aria-label'> {
   asPath: string;
   availableLocales?: string[];
@@ -35,13 +35,13 @@ const LocaleFlag = ({ locale }: LocaleFlagProps) => {
   }
 };
 
-export const LanguageSelector = ({
+export const LanguageSwitcher = ({
   asPath,
   availableLocales,
   activeLocale,
   type = 'button',
   ...rest
-}: LanguageSelectorProps) => {
+}: LanguageSwitcherProps) => {
   const router = useRouter();
 
   const otherAvailableLocale = availableLocales?.filter(

@@ -19,7 +19,7 @@ import { MenuType } from '../globals';
 import { DesktopViewMenu } from './DesktopViewMenu';
 import { InternalLink } from './InternalLink';
 import { Chat, Logo } from '../icons';
-import { LanguageSelector } from './LanguageSelector';
+import { LanguageSwitcher } from './LanguageSwitcher';
 import { Container } from './Container';
 import { DesktopViewSearchBox } from './DesktopViewSearchBox';
 import { MobileViewMenu } from './MobileViewMenu';
@@ -59,7 +59,7 @@ const DesktopMenu = ({
           {!expanded && <DesktopViewMenu menu={menu} />}
           <DesktopViewSearchBox expanded={expanded} setExpanded={setExpanded} />
         </Flex>
-        <LanguageSelector
+        <LanguageSwitcher
           activeLocale={activeLocale}
           asPath={asPath}
           availableLocales={availableLocales}
@@ -117,7 +117,7 @@ const HamburgerMenu = ({
           <ModalHeader p={0}>
             <Container>
               <Flex h={16} align="center" justify="flex-end" gap={4}>
-                <LanguageSelector
+                <LanguageSwitcher
                   activeLocale={activeLocale}
                   asPath={asPath}
                   availableLocales={availableLocales}

@@ -8,7 +8,7 @@ export * from './DesktopViewMenu';
 export * from './Header';
 export * from './CallToAction';
 export * from './TextIconCallToAction';
-export * from './LanguageSelector';
+export * from './LanguageSwitcher';
 export * from './DesktopViewSearchBox';
 export * from './Head';
 export * from './ButtonCallToAction';
