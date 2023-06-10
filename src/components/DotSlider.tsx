@@ -30,6 +30,7 @@ const SlideContent = ({
         alt={backgroundImage.alt}
         transform="scale(1.2)"
         transition="all 1s"
+        bgGradient="linear(0deg, rgba(9, 34, 50, 0.1), rgba(9, 34, 50, 0.1))"
       />
     )}
     {backgroundImage.mimeType.startsWith('video') && (

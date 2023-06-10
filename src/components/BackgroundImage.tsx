@@ -12,7 +12,9 @@ export const BackgroundImage = ({ url, children }: BackgroundImageProps) => (
     bgPos="center"
     bgRepeat="no-repeat"
     bgSize="cover"
-    style={{ backgroundImage: `url("${url}")` }}
+    sx={{
+      backgroundImage: `linear-gradient(0deg, rgba(9, 34, 50, 0.1), rgba(9, 34, 50, 0.1)), url("${url}")`
+    }}
   >
     {children}
   </Flex>
