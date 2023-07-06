@@ -24,6 +24,10 @@ dotenv.config();
 
 export default buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
+  rateLimit: {
+    window: 15 * 60 * 1000,
+    max: 500000
+  },
   cors: '*',
   graphQL: {
     disable: true
