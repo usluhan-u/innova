@@ -34,7 +34,10 @@ const SuccessStory = ({ data, relatedData }: SuccessStoryProps) => {
       title: name,
       category,
       callToAction: {
-        label: 'Read More',
+        label:
+          localStorage.getItem('innovaLanguage') === 'tr'
+            ? 'Detaylı Bilgi'
+            : 'Read More',
         type: 'page',
         page: {
           ...item,

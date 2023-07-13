@@ -30,7 +30,10 @@ const Blogs = ({ page, data }: BlogsProps) => {
       title: name,
       category,
       callToAction: {
-        label: 'Read More',
+        label:
+          localStorage.getItem('innovaLanguage') === 'tr'
+            ? 'Detaylı Bilgi'
+            : 'Read More',
         type: 'page',
         page: {
           ...item,

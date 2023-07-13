@@ -34,7 +34,10 @@ const Blog = ({ data, relatedData }: BlogProps) => {
       title: name,
       category,
       callToAction: {
-        label: 'Read More',
+        label:
+          localStorage.getItem('innovaLanguage') === 'tr'
+            ? 'Detaylı Bilgi'
+            : 'Read More',
         type: 'page',
         page: {
           ...item,

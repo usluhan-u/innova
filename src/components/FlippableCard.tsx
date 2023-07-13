@@ -72,7 +72,11 @@ export const UnstyledFlippableCard = ({
               )}
               {post.name && <Text>{post.name}</Text>}
               <TextIconCallToAction
-                label="Read more"
+                label={
+                  localStorage.getItem('innovaLanguage') === 'tr'
+                    ? 'Detaylı Bilgi'
+                    : 'Read More'
+                }
                 type="page"
                 page={{
                   slug: post.slug,
