@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, Grid, GridItem } from '@chakra-ui/react';
+import { Flex, Grid, GridItem, VStack, Image, Box } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 import { ContentType } from '../blocks';
 import { RichText } from './RichText';
@@ -26,9 +26,21 @@ export const Content = ({
     >
       {columns.map((column) => (
         <GridItem key={uuidv4()}>
-          <Flex justify={column.align} textAlign={column.align} w="full">
-            <RichText content={column.content} />
-          </Flex>
+          <VStack align="flex-start">
+            {column.icon && (
+              <Box boxSize="64px">
+                <Image
+                  objectFit="cover"
+                  src={column.icon.url}
+                  alt={column.icon.alt}
+                  boxSize="full"
+                />
+              </Box>
+            )}
+            <Flex justify={column.align} textAlign={column.align} w="full">
+              <RichText content={column.content} />
+            </Flex>
+          </VStack>
         </GridItem>
       ))}
     </Grid>

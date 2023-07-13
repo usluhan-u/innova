@@ -4,6 +4,7 @@ import {
   BackgroundColor,
   BackgroundColorType,
   RichText,
+  UploadedMediaType,
   Width,
   WidthType
 } from '../fields';
@@ -12,6 +13,7 @@ export type ContentColumnTextAlignType = 'left' | 'center' | 'right';
 
 export interface ContentColumnType {
   align: ContentColumnTextAlignType;
+  icon?: UploadedMediaType;
   content: RichTextContentType[];
 }
 
@@ -61,6 +63,13 @@ export const Content: Block = {
               value: 'right'
             }
           ]
+        },
+        {
+          name: 'icon',
+          label: 'Icon',
+          type: 'upload',
+          relationTo: 'medias',
+          localized: true
         },
         RichText({ name: 'content', label: 'Content', required: true })
       ]
