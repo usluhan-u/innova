@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Flex, Text, VStack } from '@chakra-ui/react';
 import { FiArrowRight } from 'react-icons/fi';
+import { useRouter } from 'next/router';
 import { BackgroundImage } from './BackgroundImage';
 import { TextIconCallToAction } from './TextIconCallToAction';
 import { Template } from './Template';
@@ -17,6 +18,7 @@ export const UnstyledFlippableCard = ({
   customData,
   post
 }: UnstyledFlippableCardProps) => {
+  const { locale } = useRouter();
   const [flipped, setFlipped] = React.useState(false);
 
   return (
@@ -70,13 +72,15 @@ export const UnstyledFlippableCard = ({
               {post.category && (
                 <Text fontWeight="bold">{post.category.name}</Text>
               )}
-              {post.name && <Text>{post.name}</Text>}
+              {post.name && (
+                <Box maxW="100%" overflow="hidden">
+                  <Text overflow="hidden" textOverflow="ellipsis" noOfLines={5}>
+                    {post.name}
+                  </Text>
+                </Box>
+              )}
               <TextIconCallToAction
-                label={
-                  localStorage.getItem('innovaLanguage') === 'tr'
-                    ? 'Detaylı Bilgi'
-                    : 'Read More'
-                }
+                label={locale === 'tr' ? 'Detaylı Bilgi' : 'Read More'}
                 type="page"
                 page={{
                   slug: post.slug,

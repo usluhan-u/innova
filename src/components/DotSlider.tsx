@@ -3,11 +3,11 @@ import { Box, Flex, Image, Text, VStack, chakra } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 import dynamic from 'next/dynamic';
 import { AnimatePresence, motion } from 'framer-motion';
-// import NextLink from 'next/link';
 import { DotSliderType } from '../blocks';
 import { Slider } from './Slider';
 import { ButtonCallToAction } from './ButtonCallToAction';
 import { SlideType } from '../fields';
+import { Overlay } from './Overlay';
 
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false });
 
@@ -23,15 +23,16 @@ const SlideContent = ({
 }: SlideType) => (
   <Flex pos="relative" boxSize="full" overflow="hidden">
     {backgroundImage.mimeType.startsWith('image') && (
-      <Image
-        boxSize="full"
-        objectFit="cover"
-        src={backgroundImage.url}
-        alt={backgroundImage.alt}
-        transform="scale(1.2)"
-        transition="all 1s"
-        bgGradient="linear(0deg, rgba(9, 34, 50, 0.1), rgba(9, 34, 50, 0.1))"
-      />
+      <Overlay>
+        <Image
+          boxSize="full"
+          objectFit="cover"
+          src={backgroundImage.url}
+          alt={backgroundImage.alt}
+          transform="scale(1.2)"
+          transition="all 1s"
+        />
+      </Overlay>
     )}
     {backgroundImage.mimeType.startsWith('video') && (
       <Box boxSize="full" pos="relative">

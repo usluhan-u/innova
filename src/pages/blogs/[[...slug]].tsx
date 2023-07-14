@@ -1,6 +1,7 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import { PaginatedDocs } from 'payload/dist/mongoose/types';
+import { useRouter } from 'next/router';
 import { PageType, PostType } from '../../collections';
 import { getCustomPageDataByCondition, getPageBySlug } from '../../api';
 import Custom404 from '../404';
@@ -19,6 +20,7 @@ export interface BlogsProps {
 }
 
 const Blogs = ({ page, data }: BlogsProps) => {
+  const { locale } = useRouter();
   if (page === null) return <Custom404 />;
 
   const cardGroupItems = data.map((item) => {
@@ -30,10 +32,7 @@ const Blogs = ({ page, data }: BlogsProps) => {
       title: name,
       category,
       callToAction: {
-        label:
-          localStorage.getItem('innovaLanguage') === 'tr'
-            ? 'Detaylı Bilgi'
-            : 'Read More',
+        label: locale === 'tr' ? 'Detaylı Bilgi' : 'Read More',
         type: 'page',
         page: {
           ...item,

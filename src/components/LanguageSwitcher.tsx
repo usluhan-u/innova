@@ -44,15 +44,11 @@ export const LanguageSwitcher = ({
 }: LanguageSwitcherProps) => {
   const router = useRouter();
 
-  localStorage.setItem('innovaLanguage', activeLocale || 'tr');
-
   const otherAvailableLocale = availableLocales?.filter(
     (availableLocale) => availableLocale !== activeLocale
   )[0];
 
   const handleLocaleChange = () => {
-    localStorage.setItem('innovaLanguage', otherAvailableLocale || 'tr');
-
     if (router.route.includes('award' || 'awards')) {
       router.push('/awards', undefined, {
         locale: otherAvailableLocale

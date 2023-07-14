@@ -5,6 +5,7 @@ import { ArrowSliderType } from '../blocks';
 import { Slider } from './Slider';
 import { ButtonCallToAction } from './ButtonCallToAction';
 import { SlideType } from '../fields';
+import { Overlay } from './Overlay';
 
 export interface ArrowSliderProps extends ArrowSliderType {}
 
@@ -16,17 +17,19 @@ const Slide = ({
 }: SlideType) => (
   <Flex pos="relative" boxSize="full" overflow="hidden">
     {backgroundImage.mimeType?.startsWith('image') && (
-      <Image
-        boxSize="full"
-        objectFit="cover"
-        src={backgroundImage.url}
-        alt={backgroundImage.alt}
-        transition="transform 0.5s ease-in-out"
-        _hover={{
-          filter: 'blur(4px)',
-          transform: 'scale(1.2)'
-        }}
-      />
+      <Overlay>
+        <Image
+          boxSize="full"
+          objectFit="cover"
+          src={backgroundImage.url}
+          alt={backgroundImage.alt}
+          transition="transform 0.5s ease-in-out"
+          _hover={{
+            filter: 'blur(4px)',
+            transform: 'scale(1.2)'
+          }}
+        />
+      </Overlay>
     )}
     <VStack
       align="flex-start"

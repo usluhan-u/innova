@@ -2,6 +2,7 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import { PaginatedDocs } from 'payload/dist/mongoose/types';
 import { Flex, Image, Text } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 import { PostType } from '../../collections';
 import {
   CardGroup,
@@ -23,6 +24,7 @@ interface BlogProps {
 }
 
 const Blog = ({ data, relatedData }: BlogProps) => {
+  const { locale } = useRouter();
   if (data === null) return <Custom404 />;
 
   const cardGroupItems = relatedData.map((item) => {
@@ -34,10 +36,7 @@ const Blog = ({ data, relatedData }: BlogProps) => {
       title: name,
       category,
       callToAction: {
-        label:
-          localStorage.getItem('innovaLanguage') === 'tr'
-            ? 'Detaylı Bilgi'
-            : 'Read More',
+        label: locale === 'tr' ? 'Detaylı Bilgi' : 'Read More',
         type: 'page',
         page: {
           ...item,

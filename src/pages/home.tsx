@@ -12,6 +12,7 @@ import {
   ButtonCallToAction,
   Head,
   Hero,
+  Overlay,
   RenderBlocks,
   Template,
   TextIconCallToAction,
@@ -75,13 +76,14 @@ const Home = ({ page, blogs, successStories }: HomeProps) => {
                   boxSize="full"
                   overflow="hidden"
                 >
-                  <Image
-                    alt={blog.featuredImage.alt}
-                    src={blog.featuredImage.url}
-                    objectFit="cover"
-                    boxSize="full"
-                    bgGradient="linear(0deg, rgba(9, 34, 50, 0.1), rgba(9, 34, 50, 0.1))"
-                  />
+                  <Overlay>
+                    <Image
+                      alt={blog.featuredImage.alt}
+                      src={blog.featuredImage.url}
+                      objectFit="cover"
+                      boxSize="full"
+                    />
+                  </Overlay>
                   <VStack
                     align="stretch"
                     boxSize="full"
