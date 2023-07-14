@@ -56,7 +56,7 @@ const Home = ({ page, blogs, successStories }: HomeProps) => {
               <Flex w="full" align="center" justify="space-between">
                 <Text fontSize={{ base: 'xl', md: '4xl' }}>Blog</Text>
                 <TextIconCallToAction
-                  label="Tüm Yazılar"
+                  label={locale === 'tr' ? 'Tüm Yazılar' : 'All Posts'}
                   type="page"
                   page={{
                     slug: '/blogs',
@@ -143,7 +143,7 @@ const Home = ({ page, blogs, successStories }: HomeProps) => {
                 Başarı Hikayeleri
               </Text>
               <TextIconCallToAction
-                label="Tüm Hikayeler"
+                label={locale === 'tr' ? 'Tüm Hikayeler' : 'All Stories'}
                 type="page"
                 page={{
                   slug: '/success-stories',
