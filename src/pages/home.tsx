@@ -147,7 +147,8 @@ const Home = ({ page, blogs, successStories }: HomeProps) => {
                 type="page"
                 page={{
                   slug: '/success-stories',
-                  name: 'Başarı Hikayeleri',
+                  name:
+                    locale === 'tr' ? 'Başarı Hikayeleri' : 'Success Stories',
                   breadcrumbs: [],
                   meta: {}
                 }}
