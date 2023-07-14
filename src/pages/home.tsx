@@ -4,6 +4,7 @@ import { PaginatedDocs } from 'payload/dist/mongoose/types';
 import { v4 as uuidv4 } from 'uuid';
 import { Flex, Image, Spacer, Text, VStack } from '@chakra-ui/react';
 import { FiArrowRight } from 'react-icons/fi';
+import { useRouter } from 'next/router';
 import { PageType, PostType } from '../collections';
 import Custom404 from './404';
 import {
@@ -27,6 +28,7 @@ export interface HomeProps {
 }
 
 const Home = ({ page, blogs, successStories }: HomeProps) => {
+  const { locale } = useRouter();
   if (!page) return <Custom404 />;
 
   return (
@@ -112,7 +114,9 @@ const Home = ({ page, blogs, successStories }: HomeProps) => {
                             {blog.name}
                           </Text>
                           <ButtonCallToAction
-                            label="Detaylı Bilgi"
+                            label={
+                              locale === 'tr' ? 'Detaylı Bilgi' : 'Read More'
+                            }
                             type="page"
                             page={{
                               slug: `/blog/${blog.slug}`,
