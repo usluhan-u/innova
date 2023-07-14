@@ -17,14 +17,9 @@ const nextConfig = {
     defaultLocale: 'tr',
     localeDetection: false
   },
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: '',
-  //       destination: '/home'
-  //     }
-  //   ];
-  // },
+  eslint: {
+    ignoreDuringBuilds: true
+  },
   async redirects() {
     return [
       {

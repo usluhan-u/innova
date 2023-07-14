@@ -140,7 +140,7 @@ const Home = ({ page, blogs, successStories }: HomeProps) => {
           <VStack spacing="8" align="stretch" w="full">
             <Flex w="full" align="center" justify="space-between">
               <Text fontSize={{ base: 'xl', md: '4xl' }}>
-                Başarı Hikayeleri
+                {locale === 'tr' ? 'Başarı Hikayeleri' : 'Success Stories'}
               </Text>
               <TextIconCallToAction
                 label={locale === 'tr' ? 'Tüm Hikayeler' : 'All Stories'}
