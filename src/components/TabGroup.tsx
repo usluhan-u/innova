@@ -60,7 +60,7 @@ export const TabGroup = ({
                   key={uuidv4()}
                   color="text.secondary.100"
                   fontWeight="medium"
-                  fontSize={orientation === 'vertical' ? 'xl' : 'sm'}
+                  fontSize={orientation === 'vertical' ? '2xl' : 'sm'}
                   _selected={{
                     borderInlineStart: 'none',
                     borderInlineEnd: 'inherit',
