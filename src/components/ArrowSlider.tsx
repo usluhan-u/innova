@@ -34,7 +34,7 @@ const Slide = ({
     <VStack
       align="flex-start"
       pos="absolute"
-      w="lg"
+      w={{ base: 'xs', md: 'lg' }}
       color="text.light"
       transform={{
         base: 'translate(2rem, 17rem)',
