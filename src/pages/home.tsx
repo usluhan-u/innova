@@ -2,7 +2,14 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import { PaginatedDocs } from 'payload/dist/mongoose/types';
 import { v4 as uuidv4 } from 'uuid';
-import { Flex, Image, Spacer, Text, VStack } from '@chakra-ui/react';
+import {
+  Flex,
+  Image,
+  Spacer,
+  Text,
+  VStack,
+  useMediaQuery
+} from '@chakra-ui/react';
 import { FiArrowRight } from 'react-icons/fi';
 import { useRouter } from 'next/router';
 import { PageType, PostType } from '../collections';
@@ -29,6 +36,8 @@ export interface HomeProps {
 
 const Home = ({ page, blogs, successStories }: HomeProps) => {
   const { locale } = useRouter();
+  const [isLargerThanXL] = useMediaQuery('(min-width: 1300px)');
+
   if (!page) return <Custom404 />;
 
   return (
@@ -136,7 +145,10 @@ const Home = ({ page, blogs, successStories }: HomeProps) => {
         </BackgroundColor>
       )}
       {successStories?.length > 0 && (
-        <Template backgroundColor="background.primary" width="75%">
+        <Template
+          backgroundColor="background.primary"
+          width={isLargerThanXL ? '75%' : '85%'}
+        >
           <VStack spacing="8" align="stretch" w="full">
             <Flex w="full" align="center" justify="space-between">
               <Text fontSize={{ base: 'xl', md: '4xl' }}>
