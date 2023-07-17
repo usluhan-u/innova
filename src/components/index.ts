@@ -47,4 +47,3 @@ export * from './FlippableCardGroup';
 export * from './Media';
 export * from './PageRouter';
 export * from './Overlay';
-export * from './Pagination';
