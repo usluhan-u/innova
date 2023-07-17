@@ -59,7 +59,19 @@ const SuccessStory = ({ data, relatedData }: SuccessStoryProps) => {
       />
       <Hero
         {...data.hero}
-        breadcrumbs={data.breadcrumbs}
+        breadcrumbs={[
+          {
+            url: '/home',
+            label: locale === 'tr' ? 'Ana Sayfa' : 'Home Page',
+            doc: 'home'
+          },
+          {
+            url: '/success-stories',
+            label: locale === 'tr' ? 'Başarı Hikayeleri' : 'Success Stories',
+            doc: 'success-stories'
+          },
+          ...data.breadcrumbs
+        ]}
         activeSlug={data.slug}
       />
       {data.featuredImage && (

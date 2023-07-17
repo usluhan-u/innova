@@ -17,17 +17,18 @@ const Slide = ({
 }: SlideType) => (
   <Flex pos="relative" boxSize="full" overflow="hidden">
     {backgroundImage.mimeType?.startsWith('image') && (
-      <Overlay>
+      <Overlay
+        transition="transform 0.5s ease-in-out"
+        _hover={{
+          filter: 'blur(4px)',
+          transform: 'scale(1.2)'
+        }}
+      >
         <Image
           boxSize="full"
           objectFit="cover"
           src={backgroundImage.url}
           alt={backgroundImage.alt}
-          transition="transform 0.5s ease-in-out"
-          _hover={{
-            filter: 'blur(4px)',
-            transform: 'scale(1.2)'
-          }}
         />
       </Overlay>
     )}

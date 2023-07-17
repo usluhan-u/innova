@@ -59,7 +59,19 @@ const Statement = ({ data, relatedData }: StatementProps) => {
       />
       <Hero
         {...data.hero}
-        breadcrumbs={data.breadcrumbs}
+        breadcrumbs={[
+          {
+            url: '/home',
+            label: locale === 'tr' ? 'Ana Sayfa' : 'Home Page',
+            doc: 'home'
+          },
+          {
+            url: '/statements',
+            label: locale === 'tr' ? 'Haberler' : 'News',
+            doc: 'news'
+          },
+          ...data.breadcrumbs
+        ]}
         activeSlug={data.slug}
       />
       {data.featuredImage && (

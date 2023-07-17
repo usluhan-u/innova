@@ -136,7 +136,7 @@ const Home = ({ page, blogs, successStories }: HomeProps) => {
         </BackgroundColor>
       )}
       {successStories?.length > 0 && (
-        <Template backgroundColor="background.primary" width="66.66%">
+        <Template backgroundColor="background.primary" width="75%">
           <VStack spacing="8" align="stretch" w="full">
             <Flex w="full" align="center" justify="space-between">
               <Text fontSize={{ base: 'xl', md: '4xl' }}>

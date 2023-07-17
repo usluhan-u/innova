@@ -6,7 +6,12 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
-  InputRightElement
+  InputRightElement,
+  Popover,
+  PopoverAnchor,
+  PopoverContent,
+  PopoverTrigger,
+  useBoolean
 } from '@chakra-ui/react';
 import { FiSearch } from 'react-icons/fi';
 import { IoClose } from 'react-icons/io5';
@@ -31,25 +36,59 @@ export const DesktopViewSearchBox = ({
     process.env.NEXT_PUBLIC_MEILISEARCH_MASTER_KEY || ''
   );
 
+  const [isEditing, setIsEditing] = useBoolean();
+
   return (
     <InstantSearch indexName="" searchClient={meiliSearchClient}>
-      <InputGroup w={expanded ? 'full' : 'fit-content'}>
-        {expanded && (
-          <>
-            <InputLeftElement pos="relative">
-              <Icon as={FiSearch} boxSize={5} />
-            </InputLeftElement>
-            <Input variant="unstyled" />
-          </>
-        )}
-        <InputRightElement
-          pos="relative"
-          onClick={() => setExpanded(!expanded)}
+      <InputGroup
+        w={expanded ? 'full' : 'fit-content'}
+        sx={{
+          '.chakra-popover__popper': {
+            width: '100%'
+          },
+          '.chakra-popover__content': {
+            width: '100%',
+            minHeight: '10rem'
+          }
+        }}
+      >
+        <Popover
+          isOpen={isEditing}
+          onOpen={setIsEditing.on}
+          onClose={setIsEditing.off}
+          closeOnBlur={false}
+          lazyBehavior="keepMounted"
+          placement="bottom-start"
+          isLazy
         >
-          <Icon as={expanded ? IoClose : FiSearch} boxSize={expanded ? 7 : 5} />
-        </InputRightElement>
+          <PopoverAnchor>
+            <>
+              {expanded && (
+                <>
+                  <InputLeftElement pos="relative">
+                    <Icon as={FiSearch} boxSize={5} />
+                  </InputLeftElement>
+                  <Input variant="unstyled" />
+                </>
+              )}
+            </>
+          </PopoverAnchor>
+          <PopoverTrigger>
+            <InputRightElement
+              pos="relative"
+              onClick={() => setExpanded(!expanded)}
+            >
+              <Icon
+                as={expanded ? IoClose : FiSearch}
+                boxSize={expanded ? 7 : 5}
+              />
+            </InputRightElement>
+          </PopoverTrigger>
+          <PopoverContent>
+            <Hits hitComponent={Hit} />
+          </PopoverContent>
+        </Popover>
       </InputGroup>
-      <Hits hitComponent={Hit} />
     </InstantSearch>
   );
 };

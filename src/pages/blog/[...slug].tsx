@@ -59,7 +59,19 @@ const Blog = ({ data, relatedData }: BlogProps) => {
       />
       <Hero
         {...data.hero}
-        breadcrumbs={data.breadcrumbs}
+        breadcrumbs={[
+          {
+            url: '/home',
+            label: locale === 'tr' ? 'Ana Sayfa' : 'Home Page',
+            doc: 'home'
+          },
+          {
+            url: '/blogs',
+            label: 'Blog',
+            doc: 'blog'
+          },
+          ...data.breadcrumbs
+        ]}
         activeSlug={data.slug}
       />
       {data.featuredImage && (

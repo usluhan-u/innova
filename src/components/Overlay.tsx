@@ -1,12 +1,13 @@
-import { Box } from '@chakra-ui/react';
+import { Box, ChakraProps } from '@chakra-ui/react';
 import React from 'react';
 
-interface OverlayProps {
+interface OverlayProps extends ChakraProps {
   children: React.ReactNode | React.ReactNode[];
 }
 
-export const Overlay = ({ children }: OverlayProps) => (
+export const Overlay = ({ children, ...rest }: OverlayProps) => (
   <Box
+    {...rest}
     pos="relative"
     boxSize="full"
     overflow="hidden"

@@ -35,18 +35,24 @@ export const Card = ({ card }: CardProps) => (
       h="2xs"
     />
     <ChakraCardBody>
-      <Text>{card.title}</Text>
-      <Flex pt={2} gap={2} alignItems="center">
-        <Text color="text.secondary.100">
-          {format(new Date(card.date), 'MMMM dd, yyyy')}
-        </Text>
-        {card.category && (
-          <>
-            <Box boxSize="2" borderRadius="full" bgColor="text.secondary.100" />
-            <Text color="text.secondary.100">{card.category.name}</Text>
-          </>
-        )}
-      </Flex>
+      <Box w="full" h="20">
+        <Text>{card.title}</Text>
+        <Flex pt={2} gap={2} alignItems="center">
+          <Text color="text.secondary.100">
+            {format(new Date(card.date), 'MMMM dd, yyyy')}
+          </Text>
+          {card.category && (
+            <>
+              <Box
+                boxSize="2"
+                borderRadius="full"
+                bgColor="text.secondary.100"
+              />
+              <Text color="text.secondary.100">{card.category.name}</Text>
+            </>
+          )}
+        </Flex>
+      </Box>
     </ChakraCardBody>
     <ChakraCardFooter justify="space-between" flexWrap="wrap">
       {card.callToAction && Object.keys(card.callToAction).length > 0 && (

@@ -59,7 +59,19 @@ const Award = ({ data, relatedData }: AwardProps) => {
       />
       <Hero
         {...data.hero}
-        breadcrumbs={data.breadcrumbs}
+        breadcrumbs={[
+          {
+            url: '/home',
+            label: locale === 'tr' ? 'Ana Sayfa' : 'Home Page',
+            doc: 'home'
+          },
+          {
+            url: '/awards',
+            label: locale === 'tr' ? 'Ödüller' : 'Awards',
+            doc: 'award'
+          },
+          ...data.breadcrumbs
+        ]}
         activeSlug={data.slug}
       />
       {data.featuredImage && (
