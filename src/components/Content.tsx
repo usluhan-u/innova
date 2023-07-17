@@ -1,9 +1,11 @@
 import React from 'react';
 import { Flex, Grid, GridItem, VStack, Image, Box } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
+import { FiArrowRight } from 'react-icons/fi';
 import { ContentType } from '../blocks';
 import { RichText } from './RichText';
 import { Template } from './Template';
+import { TextIconCallToAction } from './TextIconCallToAction';
 
 export interface ContentProps extends ContentType {
   maxWidth?: string;
@@ -40,6 +42,14 @@ export const Content = ({
             <Flex justify={column.align} textAlign={column.align} w="full">
               <RichText content={column.content} />
             </Flex>
+            {column.callToAction &&
+              Object.keys(column.callToAction).length > 0 && (
+                <TextIconCallToAction
+                  {...column.callToAction}
+                  color="text.blue"
+                  icon={FiArrowRight}
+                />
+              )}
           </VStack>
         </GridItem>
       ))}

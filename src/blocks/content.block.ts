@@ -3,6 +3,8 @@ import { RichTextContentType } from '../components';
 import {
   BackgroundColor,
   BackgroundColorType,
+  CallToAction,
+  CallToActionType,
   RichText,
   UploadedMediaType,
   Width,
@@ -15,6 +17,7 @@ export interface ContentColumnType {
   align: ContentColumnTextAlignType;
   icon?: UploadedMediaType;
   content: RichTextContentType[];
+  callToAction: CallToActionType;
 }
 
 export interface ContentType {
@@ -71,7 +74,8 @@ export const Content: Block = {
           relationTo: 'medias',
           localized: true
         },
-        RichText({ name: 'content', label: 'Content', required: true })
+        RichText({ name: 'content', label: 'Content', required: true }),
+        CallToAction()
       ]
     }
   ]

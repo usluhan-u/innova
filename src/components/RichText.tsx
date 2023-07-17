@@ -179,6 +179,7 @@ const serialize = (
           <a
             key={uuidv4()}
             href={escapeHTML((node as RichTextContentType).url)}
+            style={{ color: '#005a9b' }}
           >
             {serialize((node as RichTextContentType).children!)}
           </a>
