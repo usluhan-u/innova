@@ -8,6 +8,7 @@ import type { AppContext, AppProps } from 'next/app';
 import App from 'next/app';
 import { ChakraProvider, Flex, useMediaQuery } from '@chakra-ui/react';
 import { PaginatedDocs } from 'payload/dist/mongoose/types';
+import { Router } from 'next/router';
 import { theme } from '../theme';
 import { FooterType, MenuType, SocialMediaType } from '../globals';
 import { Footer, Form, Header } from '../components';
@@ -31,6 +32,22 @@ const MyApp = ({
   floatForm
 }: MyAppProps) => {
   const [isLargerThanMd] = useMediaQuery('(min-width: 768px)');
+
+  const scrollToTop = () => {
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  React.useEffect(() => {
+    const handleRouteChange = () => scrollToTop();
+
+    Router.events.on('routeChangeComplete', handleRouteChange);
+
+    return () => {
+      Router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, []);
 
   return (
     <ChakraProvider theme={theme}>
