@@ -17,7 +17,7 @@ export interface ContentColumnType {
   align: ContentColumnTextAlignType;
   icon?: UploadedMediaType;
   content: RichTextContentType[];
-  callToAction: CallToActionType;
+  callToAction?: CallToActionType;
 }
 
 export interface ContentType {
