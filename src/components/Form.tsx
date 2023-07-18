@@ -60,11 +60,11 @@ const fields: Record<string, React.FC<any>> = {
   )
 };
 
-const Field = ({ blockType, ...restOfField }: FormFieldBlock) => {
+const Field = ({ blockType, ...rest }: FormFieldBlock) => {
   const Field = fields[blockType];
 
   if (Field) {
-    return <Field borderColor="border.primary" {...restOfField} />;
+    return <Field borderColor="border.primary" {...rest} />;
   }
 
   return null;
@@ -144,7 +144,7 @@ export const Form = ({ backgroundColor, width, form }: FormProps) => (
           <PopoverContent>
             <PopoverHeader borderBottom="none" />
             <PopoverCloseButton />
-            <PopoverBody>
+            <PopoverBody maxH={{ md: 'md', xl: 'full' }} overflowY="auto">
               <FormContent
                 backgroundColor={backgroundColor}
                 form={form}
