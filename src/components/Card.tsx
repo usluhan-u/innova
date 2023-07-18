@@ -9,10 +9,12 @@ import {
   Text
 } from '@chakra-ui/react';
 import { format } from 'date-fns';
+import { tr, enUS } from 'date-fns/locale';
 import { FiArrowRight } from 'react-icons/fi';
 import { TextIconCallToAction } from './TextIconCallToAction';
 import { CategoryType } from '../collections';
 import { CallToActionType, UploadedMediaType } from '../fields';
+import { Language } from '../contexts';
 
 export interface CardItem {
   title: string;
@@ -24,9 +26,10 @@ export interface CardItem {
 
 export interface CardProps {
   card: CardItem;
+  locale: Language;
 }
 
-export const Card = ({ card }: CardProps) => (
+export const Card = ({ card, locale }: CardProps) => (
   <ChakraCard overflow="hidden">
     <Image
       objectFit="cover"
@@ -39,7 +42,9 @@ export const Card = ({ card }: CardProps) => (
         <Text>{card.title}</Text>
         <Flex pt={2} gap={2} alignItems="center">
           <Text color="text.secondary.100">
-            {format(new Date(card.date), 'MMMM dd, yyyy')}
+            {format(new Date(card.date), 'PP', {
+              locale: locale === 'tr' ? tr : enUS
+            })}
           </Text>
           {card.category && (
             <>

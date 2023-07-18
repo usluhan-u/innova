@@ -17,6 +17,7 @@ import {
   getCustomPageDataByCondition,
   getCustomPageDataBySlug
 } from '../../api';
+import { Language } from '../../contexts';
 
 interface BlogProps {
   data: PostType | null;
@@ -24,7 +25,7 @@ interface BlogProps {
 }
 
 const Blog = ({ data, relatedData }: BlogProps) => {
-  const { locale } = useRouter();
+  const router = useRouter();
   if (data === null) return <Custom404 />;
 
   const cardGroupItems = relatedData.map((item) => {
@@ -36,7 +37,7 @@ const Blog = ({ data, relatedData }: BlogProps) => {
       title: name,
       category,
       callToAction: {
-        label: locale === 'tr' ? 'Detaylı Bilgi' : 'Read More',
+        label: router.locale === 'tr' ? 'Detaylı Bilgi' : 'Read More',
         type: 'page',
         page: {
           ...item,
@@ -62,7 +63,7 @@ const Blog = ({ data, relatedData }: BlogProps) => {
         breadcrumbs={[
           {
             url: '/home',
-            label: locale === 'tr' ? 'Ana Sayfa' : 'Home Page',
+            label: router.locale === 'tr' ? 'Ana Sayfa' : 'Home Page',
             doc: 'home'
           },
           {
@@ -103,7 +104,10 @@ const Blog = ({ data, relatedData }: BlogProps) => {
             <Text color="text.primary" fontSize="xl" fontWeight="semibold">
               İlgili Postlar
             </Text>
-            <CardGroup items={cardGroupItems} />
+            <CardGroup
+              items={cardGroupItems}
+              locale={(router.locale as Language) || 'tr'}
+            />
           </Flex>
         </Template>
       )}

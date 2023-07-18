@@ -17,6 +17,7 @@ import {
   getCustomPageDataByCondition,
   getCustomPageDataBySlug
 } from '../../api';
+import { Language } from '../../contexts';
 
 interface SuccessStoryProps {
   data: PostType | null;
@@ -24,7 +25,7 @@ interface SuccessStoryProps {
 }
 
 const SuccessStory = ({ data, relatedData }: SuccessStoryProps) => {
-  const { locale } = useRouter();
+  const router = useRouter();
   if (data === null) return <Custom404 />;
 
   const cardGroupItems = relatedData.map((item) => {
@@ -36,7 +37,7 @@ const SuccessStory = ({ data, relatedData }: SuccessStoryProps) => {
       title: name,
       category,
       callToAction: {
-        label: locale === 'tr' ? 'Detaylı Bilgi' : 'Read More',
+        label: router.locale === 'tr' ? 'Detaylı Bilgi' : 'Read More',
         type: 'page',
         page: {
           ...item,
@@ -62,12 +63,13 @@ const SuccessStory = ({ data, relatedData }: SuccessStoryProps) => {
         breadcrumbs={[
           {
             url: '/home',
-            label: locale === 'tr' ? 'Ana Sayfa' : 'Home Page',
+            label: router.locale === 'tr' ? 'Ana Sayfa' : 'Home Page',
             doc: 'home'
           },
           {
             url: '/success-stories',
-            label: locale === 'tr' ? 'Başarı Hikayeleri' : 'Success Stories',
+            label:
+              router.locale === 'tr' ? 'Başarı Hikayeleri' : 'Success Stories',
             doc: 'success-stories'
           },
           ...data.breadcrumbs
@@ -102,7 +104,10 @@ const SuccessStory = ({ data, relatedData }: SuccessStoryProps) => {
             <Text color="text.primary" fontSize="xl" fontWeight="semibold">
               İlgili Postlar
             </Text>
-            <CardGroup items={cardGroupItems} />
+            <CardGroup
+              items={cardGroupItems}
+              locale={(router.locale as Language) || 'tr'}
+            />
           </Flex>
         </Template>
       )}

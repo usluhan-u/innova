@@ -76,7 +76,9 @@ export const getCustomPageDataByCondition = async <T>({
   locale,
   defaultLocale,
   limit,
-  page
+  page,
+  sortBy,
+  sortOrder
 }: {
   endpoint: string;
   condition: string;
@@ -84,10 +86,14 @@ export const getCustomPageDataByCondition = async <T>({
   defaultLocale?: string;
   limit?: number;
   page?: number;
+  sortBy?: string;
+  sortOrder?: 'asc' | 'desc';
 }) => {
   try {
     const query = await fetch(
-      `${BASE_URL}/${endpoint}?locale=${locale}&fallbackLocale=${defaultLocale}&limit=${limit}&page=${page}&where${condition}`
+      `${BASE_URL}/${endpoint}?locale=${locale}&fallbackLocale=${defaultLocale}&limit=${limit}&page=${page}&sort=${
+        sortOrder === 'desc' && '-'
+      }${sortBy}&where${condition}`
     );
 
     const data: T = await query.json();

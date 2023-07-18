@@ -17,6 +17,7 @@ import {
   getCustomPageDataByCondition,
   getCustomPageDataBySlug
 } from '../../api';
+import { Language } from '../../contexts';
 
 interface StatementProps {
   data: PostType | null;
@@ -24,7 +25,7 @@ interface StatementProps {
 }
 
 const Statement = ({ data, relatedData }: StatementProps) => {
-  const { locale } = useRouter();
+  const router = useRouter();
   if (data === null) return <Custom404 />;
 
   const cardGroupItems = relatedData.map((item) => {
@@ -36,7 +37,7 @@ const Statement = ({ data, relatedData }: StatementProps) => {
       title: name,
       category,
       callToAction: {
-        label: locale === 'tr' ? 'Detaylı Bilgi' : 'Read More',
+        label: router.locale === 'tr' ? 'Detaylı Bilgi' : 'Read More',
         type: 'page',
         page: {
           ...item,
@@ -62,12 +63,12 @@ const Statement = ({ data, relatedData }: StatementProps) => {
         breadcrumbs={[
           {
             url: '/home',
-            label: locale === 'tr' ? 'Ana Sayfa' : 'Home Page',
+            label: router.locale === 'tr' ? 'Ana Sayfa' : 'Home Page',
             doc: 'home'
           },
           {
             url: '/statements',
-            label: locale === 'tr' ? 'Haberler' : 'News',
+            label: router.locale === 'tr' ? 'Haberler' : 'News',
             doc: 'news'
           },
           ...data.breadcrumbs
@@ -102,7 +103,10 @@ const Statement = ({ data, relatedData }: StatementProps) => {
             <Text color="text.primary" fontSize="xl" fontWeight="semibold">
               İlgili Postlar
             </Text>
-            <CardGroup items={cardGroupItems} />
+            <CardGroup
+              items={cardGroupItems}
+              locale={(router.locale as Language) || 'tr'}
+            />
           </Flex>
         </Template>
       )}

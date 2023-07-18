@@ -15,6 +15,7 @@ import {
   RenderBlocks,
   Template
 } from '../../components';
+import { Language } from '../../contexts';
 
 export interface StatementsProps {
   page: PageType | null;
@@ -72,7 +73,10 @@ const Statements = ({ page, data, totalPages }: StatementsProps) => {
       {data.length > 0 && (
         <Template backgroundColor="background.secondary" width="100%">
           <VStack w="full" spacing={10}>
-            <CardGroup items={cardGroupItems} />
+            <CardGroup
+              items={cardGroupItems}
+              locale={(router.locale as Language) || 'tr'}
+            />
             <Pagination
               totalSize={totalPages}
               onPageChange={handlePageChange}
@@ -117,7 +121,9 @@ export const getServerSideProps: GetServerSideProps = async ({
       condition,
       locale,
       defaultLocale,
-      page: pageNumber
+      page: pageNumber,
+      sortBy: 'publishDate',
+      sortOrder: 'desc'
     })
   ]);
 
