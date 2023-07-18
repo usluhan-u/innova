@@ -2,6 +2,7 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import { PaginatedDocs } from 'payload/dist/mongoose/types';
 import { useRouter } from 'next/router';
+import { VStack } from '@chakra-ui/react';
 import { PageType, PostType } from '../../collections';
 import { getCustomPageDataByCondition, getPageBySlug } from '../../api';
 import Custom404 from '../404';
@@ -10,17 +11,19 @@ import {
   CardItem,
   Head,
   Hero,
+  Pagination,
   RenderBlocks,
   Template
 } from '../../components';
 
 export interface StatementsProps {
   page: PageType | null;
+  totalPages: number;
   data: PostType[];
 }
 
-const Statements = ({ page, data }: StatementsProps) => {
-  const { locale } = useRouter();
+const Statements = ({ page, data, totalPages }: StatementsProps) => {
+  const router = useRouter();
   if (page === null) return <Custom404 />;
 
   const cardGroupItems = data.map((item) => {
@@ -32,7 +35,7 @@ const Statements = ({ page, data }: StatementsProps) => {
       title: name,
       category,
       callToAction: {
-        label: locale === 'tr' ? 'Detaylı Bilgi' : 'Read More',
+        label: router.locale === 'tr' ? 'Detaylı Bilgi' : 'Read More',
         type: 'page',
         page: {
           ...item,
@@ -44,6 +47,12 @@ const Statements = ({ page, data }: StatementsProps) => {
 
     return cardItem;
   });
+
+  const handlePageChange = (nextPage: number) =>
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, page: nextPage }
+    });
 
   return (
     <>
@@ -62,7 +71,13 @@ const Statements = ({ page, data }: StatementsProps) => {
       )}
       {data.length > 0 && (
         <Template backgroundColor="background.secondary" width="100%">
-          <CardGroup items={cardGroupItems} />
+          <VStack w="full" spacing={10}>
+            <CardGroup items={cardGroupItems} />
+            <Pagination
+              totalSize={totalPages}
+              onPageChange={handlePageChange}
+            />
+          </VStack>
         </Template>
       )}
       {page.content && Object.keys(page.content).length > 0 && (
@@ -77,7 +92,8 @@ export default Statements;
 export const getServerSideProps: GetServerSideProps = async ({
   params,
   locale,
-  defaultLocale
+  defaultLocale,
+  query
 }) => {
   const slug =
     params?.slug && Array.isArray(params.slug)
@@ -87,6 +103,8 @@ export const getServerSideProps: GetServerSideProps = async ({
   const condition = slug
     ? `[group.slug][equals]=statement&where[category.slug][equals]=${slug}`
     : `[group.slug][equals]=statement`;
+
+  const pageNumber = query.page ? parseInt(query.page as string, 10) : 1;
 
   const [page, data] = await Promise.all([
     getPageBySlug<PaginatedDocs<PageType>>({
@@ -98,13 +116,15 @@ export const getServerSideProps: GetServerSideProps = async ({
       endpoint: 'posts',
       condition,
       locale,
-      defaultLocale
+      defaultLocale,
+      page: pageNumber
     })
   ]);
 
   return {
     props: {
       page: page.docs[0] || null,
+      totalPages: data.totalPages,
       data: data.docs
     }
   };
