@@ -145,7 +145,7 @@ export const Form = ({ backgroundColor, width, form }: FormProps) => (
             <PopoverHeader borderBottom="none" />
             <PopoverCloseButton />
             <PopoverBody
-              maxH={{ md: 'sm', xl: 'full' }}
+              maxH={{ md: 'sm', '2xl': 'full' }}
               overflowY="auto"
               sx={{
                 '&': {
