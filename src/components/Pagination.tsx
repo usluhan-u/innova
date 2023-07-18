@@ -19,7 +19,7 @@ export const Pagination = ({ totalSize, onPageChange }: PaginationProps) => {
     useAjnaPagination({
       total: totalSize,
       initialState: {
-        pageSize: 10,
+        pageSize: 12,
         isDisabled: false,
         currentPage: 1
       }

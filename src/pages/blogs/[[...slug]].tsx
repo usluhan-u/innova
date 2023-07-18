@@ -121,6 +121,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       condition,
       locale,
       defaultLocale,
+      limit: 12,
       page: pageNumber,
       sortBy: 'publishDate',
       sortOrder: 'desc'

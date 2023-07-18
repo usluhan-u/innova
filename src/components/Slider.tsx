@@ -22,7 +22,7 @@ export interface SliderProps extends Pick<FlexProps, 'height'> {
 }
 
 const Arrows = ({ display }: { display: string }) => {
-  const { goToNextSlide, goToPrevSlide } = useSlider();
+  const { goToSlideIndex, currentSlideIndex } = useSlider();
 
   return (
     <Flex
@@ -39,13 +39,13 @@ const Arrows = ({ display }: { display: string }) => {
         variant="variant"
         aria-label="Previous slide"
         icon={<ArrowLeft boxSize="6" />}
-        onClick={goToPrevSlide}
+        onClick={() => goToSlideIndex(currentSlideIndex - 3)}
       />
       <IconButton
         variant="variant"
         aria-label="Next slide"
         icon={<ArrowRight boxSize="6" />}
-        onClick={goToNextSlide}
+        onClick={() => goToSlideIndex(currentSlideIndex + 3)}
       />
     </Flex>
   );

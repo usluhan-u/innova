@@ -210,14 +210,18 @@ export const getServerSideProps: GetServerSideProps = async ({
       condition: '[group.slug][equals]=blog',
       locale,
       defaultLocale,
-      limit: 2
+      limit: 2,
+      sortBy: 'publishDate',
+      sortOrder: 'desc'
     }),
     getCustomPageDataByCondition<PaginatedDocs<PostType>>({
       endpoint: 'posts',
       condition: '[group.slug][equals]=success-story',
       locale,
       defaultLocale,
-      limit: 4
+      limit: 4,
+      sortBy: 'publishDate',
+      sortOrder: 'desc'
     })
   ]);
 
