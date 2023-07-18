@@ -144,20 +144,7 @@ export const Form = ({ backgroundColor, width, form }: FormProps) => (
           <PopoverContent>
             <PopoverHeader borderBottom="none" />
             <PopoverCloseButton />
-            <PopoverBody
-              maxH={{ md: 'sm', '2xl': 'full' }}
-              overflowY="auto"
-              sx={{
-                '&': {
-                  width: 'full',
-                  scrollbarWidth: 'none',
-
-                  '&::-webkit-scrollbar': {
-                    display: 'none'
-                  }
-                }
-              }}
-            >
+            <PopoverBody maxH={{ md: 'sm', '2xl': 'full' }} overflowY="auto">
               <FormContent
                 backgroundColor={backgroundColor}
                 form={form}
