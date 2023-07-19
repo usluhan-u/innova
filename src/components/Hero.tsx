@@ -35,20 +35,44 @@ interface CallToActionGroupDesktopViewProps {
 const CallToActionGroupDesktopView = ({
   callToActionGroup,
   activeSlug
-}: CallToActionGroupDesktopViewProps) => (
-  <Flex gap={8}>
-    {callToActionGroup?.map((item) => (
-      <LinkButtonCallToAction
-        key={uuidv4()}
-        {...item.callToAction}
-        active={
-          item.callToAction.page?.slug === activeSlug ||
-          item.callToAction.url === activeSlug
-        }
-      />
-    ))}
-  </Flex>
-);
+}: CallToActionGroupDesktopViewProps) => {
+  const router = useRouter();
+
+  return (
+    <Flex gap={8}>
+      {callToActionGroup?.map((item) => {
+        const specialPaths = [
+          '/blogs',
+          '/success-stories',
+          '/statements',
+          '/awards'
+        ];
+
+        return (
+          <LinkButtonCallToAction
+            key={uuidv4()}
+            {...item.callToAction}
+            page={{
+              ...item.callToAction.page,
+              name: item.callToAction.page?.name || '',
+              breadcrumbs: item.callToAction.page?.breadcrumbs || [],
+              meta: item.callToAction.page?.meta || {},
+              slug: `${
+                specialPaths.includes(router.asPath)
+                  ? router.asPath.replace('/', '')
+                  : ''
+              }/${item.callToAction.page?.slug}`
+            }}
+            active={
+              item.callToAction.page?.slug === activeSlug ||
+              item.callToAction.url === activeSlug
+            }
+          />
+        );
+      })}
+    </Flex>
+  );
+};
 
 interface CallToActionGroupMobileViewProps
   extends CallToActionGroupDesktopViewProps {}
