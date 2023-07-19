@@ -22,7 +22,7 @@ export interface MobileViewMenuProps {
 }
 
 interface CurrentListItem {
-  label: string;
+  label?: string;
   callToAction?: CallToActionType;
   finalMenuCallToAction?: CallToActionType;
   subList?: CurrentListItem[];
@@ -36,7 +36,7 @@ interface CurrentList {
 
 interface MenuList {
   title?: string;
-  label: string;
+  label?: string;
   callToAction?: CallToActionType;
   finalMenuCallToAction?: CallToActionType;
   subList?: MenuList[];
@@ -47,24 +47,34 @@ export const MobileViewMenu = ({ menu, onClose }: MobileViewMenuProps) => {
 
   const list: MenuList[] =
     menu?.menuItems?.map((menuItem) => ({
-      label: menuItem.label,
+      label: menuItem.label.trim(),
       callToAction: menuItem.callToAction,
-      subList: menuItem.menuItemGroups?.map((menuItemGroup) => ({
-        title: menuItem.label,
-        label: menuItemGroup.label,
-        subList: menuItemGroup.subMenuItems?.map((subMenuItem) => ({
-          title: menuItemGroup.label,
-          label: subMenuItem.callToAction.label,
-          finalMenuCallToAction: subMenuItem.callToAction
-        }))
-      }))
+      finalMenuCallToAction: menuItem.menuItem.callToAction,
+      subList:
+        menuItem.menuItemGroups?.length === 1 &&
+        !menuItem.menuItemGroups[0].label
+          ? menuItem.menuItemGroups[0].subMenuItems?.map((subMenuItem) => ({
+              title: menuItem.label.trim(),
+              label: subMenuItem.callToAction.label.trim(),
+              finalMenuCallToAction: subMenuItem.callToAction
+            }))
+          : menuItem.menuItemGroups?.map((menuItemGroup) => ({
+              title: menuItem.label.trim(),
+              label: menuItemGroup.label?.trim(),
+              subList: menuItemGroup.subMenuItems?.map((subMenuItem) => ({
+                title: menuItemGroup.label?.trim(),
+                label: subMenuItem.callToAction.label.trim(),
+                finalMenuCallToAction: subMenuItem.callToAction
+              }))
+            }))
     })) ?? [];
 
   const [currentList, setCurrentList] = React.useState<CurrentList>(() => {
     const items = list.map((item) => ({
       label: item.label,
       subList: item.subList,
-      callToAction: item.callToAction
+      callToAction: item.callToAction,
+      finalMenuCallToAction: item.finalMenuCallToAction
     }));
 
     return {
@@ -84,7 +94,7 @@ export const MobileViewMenu = ({ menu, onClose }: MobileViewMenuProps) => {
     (listItem: CurrentListItem) => (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
 
-      if (listItem.subList) {
+      if (listItem.subList?.length) {
         setCurrentList({
           title: listItem.label,
           items: listItem.subList,
@@ -110,7 +120,7 @@ export const MobileViewMenu = ({ menu, onClose }: MobileViewMenuProps) => {
         {currentList?.items.map((item) => (
           <ListItem key={uuidv4()}>
             <Button
-              rightIcon={item.subList ? <RxCaretRight /> : undefined}
+              rightIcon={item.subList?.length ? <RxCaretRight /> : undefined}
               w="full"
               variant="variant"
               fontWeight="normal"
@@ -121,7 +131,7 @@ export const MobileViewMenu = ({ menu, onClose }: MobileViewMenuProps) => {
               fontSize="sm"
               onClick={handleOnClick(item)}
             >
-              {item.label}
+              <Text as="span">{item.label}</Text>
             </Button>
           </ListItem>
         ))}

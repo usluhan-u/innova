@@ -6,7 +6,7 @@ export interface MenuItemGroupSubMenuItemType {
 }
 
 export interface MenuItemGroupType {
-  label: string;
+  label?: string;
   subMenuItems: MenuItemGroupSubMenuItemType[];
 }
 
@@ -80,7 +80,6 @@ export const Menu: GlobalConfig = {
               name: 'label',
               label: 'Label',
               type: 'text',
-              required: true,
               localized: true
             },
             {
