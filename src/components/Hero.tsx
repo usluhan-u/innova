@@ -61,7 +61,9 @@ const CallToActionGroupDesktopView = ({
               name: item.callToAction.page?.name || '',
               breadcrumbs: item.callToAction.page?.breadcrumbs || [],
               meta: item.callToAction.page?.meta || {},
-              slug: `${specialPath}/${item.callToAction.page?.slug}`
+              slug: specialPath
+                ? `${specialPath}/${item.callToAction.page?.slug}`
+                : (item.callToAction.page?.slug as string)
             }}
             active={
               item.callToAction.page?.slug === activeSlug ||
