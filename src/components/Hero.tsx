@@ -48,6 +48,10 @@ const CallToActionGroupDesktopView = ({
           '/awards'
         ];
 
+        const specialPath = specialPaths.find((path) =>
+          router.pathname.includes(path)
+        );
+
         return (
           <LinkButtonCallToAction
             key={uuidv4()}
@@ -57,11 +61,7 @@ const CallToActionGroupDesktopView = ({
               name: item.callToAction.page?.name || '',
               breadcrumbs: item.callToAction.page?.breadcrumbs || [],
               meta: item.callToAction.page?.meta || {},
-              slug: `${
-                specialPaths.includes(router.asPath)
-                  ? router.asPath.replace('/', '')
-                  : ''
-              }/${item.callToAction.page?.slug}`
+              slug: `${specialPath}/${item.callToAction.page?.slug}`
             }}
             active={
               item.callToAction.page?.slug === activeSlug ||

@@ -7,7 +7,6 @@ import {
   PaginationSeparator as AjnaPaginationSeparator,
   PaginationPage as AjnaPaginationPage
 } from '@ajna/pagination';
-import { v4 as uuidv4 } from 'uuid';
 
 interface PaginationProps {
   totalSize: number;
@@ -18,6 +17,10 @@ export const Pagination = ({ totalSize, onPageChange }: PaginationProps) => {
   const { pages, pagesCount, currentPage, setCurrentPage, isDisabled } =
     useAjnaPagination({
       total: totalSize,
+      limits: {
+        outer: 1,
+        inner: 1
+      },
       initialState: {
         pageSize: 12,
         isDisabled: false,
@@ -41,11 +44,11 @@ export const Pagination = ({ totalSize, onPageChange }: PaginationProps) => {
         <AjnaPaginationPageGroup
           align="center"
           isInline
-          separator={<AjnaPaginationSeparator jumpSize={11} />}
+          separator={<AjnaPaginationSeparator jumpSize={10} />}
         >
           {pages.map((page) => (
             <AjnaPaginationPage
-              key={uuidv4()}
+              key={`pagination_page_${page}`}
               page={page}
               color="text.primary"
               bg="background.secondary"

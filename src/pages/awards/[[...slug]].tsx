@@ -19,11 +19,11 @@ import { Language } from '../../contexts';
 
 export interface AwardsProps {
   page: PageType | null;
-  totalPages: number;
+  totalDocs: number;
   data: PostType[];
 }
 
-const Awards = ({ page, data, totalPages }: AwardsProps) => {
+const Awards = ({ page, data, totalDocs }: AwardsProps) => {
   const router = useRouter();
   if (page === null) return <Custom404 />;
 
@@ -77,10 +77,7 @@ const Awards = ({ page, data, totalPages }: AwardsProps) => {
               items={cardGroupItems}
               locale={(router.locale as Language) || 'tr'}
             />
-            <Pagination
-              totalSize={totalPages}
-              onPageChange={handlePageChange}
-            />
+            <Pagination totalSize={totalDocs} onPageChange={handlePageChange} />
           </VStack>
         </Template>
       )}
@@ -131,7 +128,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   return {
     props: {
       page: page.docs[0] || null,
-      totalPages: data.totalPages,
+      totalDocs: data.totalDocs,
       data: data.docs
     }
   };
