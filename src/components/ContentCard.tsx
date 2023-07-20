@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Box,
   Card as ChakraCard,
   CardBody as ChakraCardBody,
   CardFooter as ChakraCardFooter
@@ -15,13 +14,10 @@ export interface ContentCardProps {
 }
 
 export const ContentCard = ({ contentCard }: ContentCardProps) => (
-  <ChakraCard overflow="hidden">
+  <ChakraCard overflow="hidden" minH="80">
     <ChakraCardBody>
-      <Box w="full" h="36">
-        <RichText content={contentCard.content} />
-      </Box>
+      <RichText content={contentCard.content} />
     </ChakraCardBody>
-
     <ChakraCardFooter justify="space-between" flexWrap="wrap">
       {contentCard.callToAction &&
         Object.keys(contentCard.callToAction).length > 0 && (

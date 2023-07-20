@@ -1,5 +1,4 @@
 import { Field } from 'payload/types';
-import { populateSlug } from '../hooks';
 
 interface Args {
   fieldToUse?: string;
@@ -8,7 +7,7 @@ interface Args {
 }
 
 export const Slug = (args?: Args): Field => {
-  const { fieldToUse = 'name', required = true, readOnly = false } = args || {};
+  const { required = true, readOnly = false } = args || {};
 
   return {
     name: 'slug',
@@ -21,9 +20,6 @@ export const Slug = (args?: Args): Field => {
     admin: {
       position: 'sidebar',
       readOnly
-    },
-    hooks: {
-      beforeValidate: [populateSlug(fieldToUse)]
     }
   };
 };
