@@ -121,31 +121,6 @@ const Slide = ({
     description={description}
     title={title}
   />
-  // <>
-  //   {callToAction && Object.keys(callToAction).length > 0 ? (
-  //     <NextLink
-  //       href={
-  //         (callToAction.page
-  //           ? `/${callToAction.page.slug}`
-  //           : callToAction.url) as unknown as URL
-  //       }
-  //     >
-  //       <SlideContent
-  //         backgroundImage={backgroundImage}
-  //         callToAction={callToAction}
-  //         description={description}
-  //         title={title}
-  //       />
-  //     </NextLink>
-  //   ) : (
-  //     <SlideContent
-  //       backgroundImage={backgroundImage}
-  //       callToAction={callToAction}
-  //       description={description}
-  //       title={title}
-  //     />
-  //   )}
-  // </>
 );
 
 export const DotSlider = ({ slider }: DotSliderProps) => {

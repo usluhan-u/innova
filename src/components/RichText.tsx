@@ -179,7 +179,6 @@ const serialize = (
           <a
             key={uuidv4()}
             href={escapeHTML((node as RichTextContentType).url)}
-            style={{ color: '#005a9b' }}
           >
             {serialize((node as RichTextContentType).children!)}
           </a>
@@ -229,7 +228,11 @@ export const RichText = ({ content, color }: RichTextProps) => (
           my: 0
         },
         '& a': {
-          color: 'text.blue'
+          color: 'text.blue',
+
+          '& span': {
+            color: 'text.blue'
+          }
         }
       }
     }}

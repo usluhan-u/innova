@@ -3,6 +3,8 @@ import { GetServerSideProps } from 'next';
 import { PaginatedDocs } from 'payload/dist/mongoose/types';
 import { Flex, Image, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+import { tr, enUS } from 'date-fns/locale';
+import { format } from 'date-fns';
 import { PostType } from '../../collections';
 import {
   CardGroup,
@@ -60,6 +62,9 @@ const Blog = ({ data, relatedData }: BlogProps) => {
       />
       <Hero
         {...data.hero}
+        description={format(new Date(data.publishDate), 'PP', {
+          locale: router.locale === 'tr' ? tr : enUS
+        })}
         breadcrumbs={[
           {
             url: '/home',

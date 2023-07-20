@@ -61,6 +61,7 @@ export const Slider = ({ height, slides, settings }: SliderProps) => (
     <SliderProvider
       slidesToShow={settings?.slidesToShow || 1}
       autoPlay
+      autoplaySpeed={5000}
       breakpoints={{
         '(max-width: 768px)': {
           slidesToShow: 1
