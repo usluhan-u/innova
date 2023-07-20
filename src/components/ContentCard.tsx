@@ -17,7 +17,7 @@ export interface ContentCardProps {
 export const ContentCard = ({ contentCard }: ContentCardProps) => (
   <ChakraCard overflow="hidden">
     <ChakraCardBody>
-      <Box h="36">
+      <Box w="full" h="36">
         <RichText content={contentCard.content} />
       </Box>
     </ChakraCardBody>
