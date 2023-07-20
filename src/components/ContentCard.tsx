@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Box,
   Card as ChakraCard,
   CardBody as ChakraCardBody,
   CardFooter as ChakraCardFooter
@@ -14,9 +15,11 @@ export interface ContentCardProps {
 }
 
 export const ContentCard = ({ contentCard }: ContentCardProps) => (
-  <ChakraCard overflow="hidden" h="60">
+  <ChakraCard overflow="hidden">
     <ChakraCardBody>
-      <RichText content={contentCard.content} />
+      <Box h="36">
+        <RichText content={contentCard.content} />
+      </Box>
     </ChakraCardBody>
 
     <ChakraCardFooter justify="space-between" flexWrap="wrap">
