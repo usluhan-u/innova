@@ -1,14 +1,8 @@
 import React from 'react';
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  Center,
-  Icon,
-  Image
-} from '@chakra-ui/react';
+import { Card, CardBody, CardFooter, Center, Icon } from '@chakra-ui/react';
 import { FiDownload } from 'react-icons/fi';
 import { ImageDownloaderGroupItemType } from '../blocks';
+import { Image } from './Image';
 
 export interface ImageDownloaderProps {
   imageDownloader: ImageDownloaderGroupItemType;
@@ -42,9 +36,10 @@ export const ImageDownloader = ({ imageDownloader }: ImageDownloaderProps) => {
       <CardBody>
         <Center boxSize="full">
           <Image
-            objectFit="contain"
             src={imageDownloader.coverImage?.url || imageDownloader.image.url}
             alt={imageDownloader.coverImage?.alt || imageDownloader.image.alt}
+            objectFit="contain"
+            h="28"
           />
         </Center>
       </CardBody>

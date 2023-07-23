@@ -76,6 +76,10 @@ export const DesktopViewSearchBox = ({
           <PopoverTrigger>
             <InputRightElement
               pos="relative"
+              role="button"
+              aria-label="Search"
+              aria-expanded="false"
+              aria-controls="popover__content"
               onClick={() => setExpanded(!expanded)}
             >
               <Icon

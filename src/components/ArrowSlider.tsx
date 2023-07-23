@@ -1,11 +1,12 @@
 import React from 'react';
-import { Flex, Image, Text, VStack } from '@chakra-ui/react';
+import { Flex, Text, VStack } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 import { ArrowSliderType } from '../blocks';
 import { Slider } from './Slider';
 import { ButtonCallToAction } from './ButtonCallToAction';
 import { SlideType } from '../fields';
 import { Overlay } from './Overlay';
+import { Image } from './Image';
 
 export interface ArrowSliderProps extends ArrowSliderType {}
 
@@ -25,10 +26,10 @@ const Slide = ({
         }}
       >
         <Image
-          boxSize="full"
-          objectFit="cover"
           src={backgroundImage.url}
           alt={backgroundImage.alt}
+          boxSize="full"
+          objectFit="cover"
         />
       </Overlay>
     )}

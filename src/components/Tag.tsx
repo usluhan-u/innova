@@ -3,7 +3,6 @@ import {
   Card,
   CardBody,
   CardFooter,
-  Image,
   Box,
   Text,
   Flex,
@@ -15,6 +14,7 @@ import { Player } from '@lottiefiles/react-lottie-player';
 import useHover from '@react-hook/hover';
 import { TagGroupItemType } from '../blocks';
 import { TextIconCallToAction } from './TextIconCallToAction';
+import { Image } from './Image';
 
 export interface TagProps extends ChakraProps {
   tag: TagGroupItemType;
@@ -71,10 +71,9 @@ export const Tag = ({ tag, ...rest }: TagProps) => {
               <Box boxSize="48px">
                 {tag.imageType === 'icon' && tag.icon && (
                   <Image
-                    objectFit="cover"
                     src={tag.icon.url}
                     alt={tag.icon.alt}
-                    boxSize="full"
+                    objectFit="cover"
                   />
                 )}
                 {tag.imageType === 'lottie' && tag.lottie && (

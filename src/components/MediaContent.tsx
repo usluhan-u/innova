@@ -1,10 +1,11 @@
 import React from 'react';
-import { Flex, Grid, GridItem, Image } from '@chakra-ui/react';
+import { Flex, Grid, GridItem } from '@chakra-ui/react';
 import { FiArrowRight } from 'react-icons/fi';
 import { MediaContentType } from '../blocks';
 import { RichText } from './RichText';
 import { TextIconCallToAction } from './TextIconCallToAction';
 import { Template } from './Template';
+import { Image } from './Image';
 
 export interface MediaContentProps extends MediaContentType {}
 
@@ -27,11 +28,10 @@ export const MediaContent = ({
         <>
           <GridItem>
             <Image
-              objectFit="cover"
               src={image.url}
               alt={image.alt}
-              boxSize="full"
-              maxH="2xl"
+              objectFit="cover"
+              h="lg"
               borderRadius="lg"
             />
           </GridItem>

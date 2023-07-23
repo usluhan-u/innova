@@ -1,6 +1,7 @@
 import React from 'react';
-import { Center, Card, CardBody, Image } from '@chakra-ui/react';
+import { Center, Card, CardBody } from '@chakra-ui/react';
 import { ImageTagGroupItemType } from '../blocks';
+import { Image } from './Image';
 
 export interface ImageTagProps {
   imageTag: ImageTagGroupItemType;
@@ -17,9 +18,10 @@ export const ImageTag = ({ imageTag }: ImageTagProps) => (
     <CardBody>
       <Center boxSize="full">
         <Image
-          objectFit="contain"
           src={imageTag.image.url}
           alt={imageTag.image.alt}
+          objectFit="contain"
+          h="40"
         />
       </Center>
     </CardBody>

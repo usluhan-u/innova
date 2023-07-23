@@ -5,7 +5,6 @@ import {
   CardBody as ChakraCardBody,
   CardFooter as ChakraCardFooter,
   Flex,
-  Image,
   Text
 } from '@chakra-ui/react';
 import { format } from 'date-fns';
@@ -15,6 +14,7 @@ import { TextIconCallToAction } from './TextIconCallToAction';
 import { CategoryType } from '../collections';
 import { CallToActionType, UploadedMediaType } from '../fields';
 import { Language } from '../contexts';
+import { Image } from './Image';
 
 export interface CardItem {
   title: string;
@@ -30,11 +30,11 @@ export interface CardProps {
 }
 
 export const Card = ({ card, locale }: CardProps) => (
-  <ChakraCard overflow="hidden">
+  <ChakraCard pos="relative" overflow="hidden">
     <Image
-      objectFit="cover"
       src={card.image.url}
       alt={card.image.alt}
+      objectFit="cover"
       h="2xs"
     />
     <ChakraCardBody>

@@ -2,14 +2,7 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import { PaginatedDocs } from 'payload/dist/mongoose/types';
 import { v4 as uuidv4 } from 'uuid';
-import {
-  Flex,
-  Image,
-  Spacer,
-  Text,
-  VStack,
-  useMediaQuery
-} from '@chakra-ui/react';
+import { Flex, Spacer, Text, VStack, useMediaQuery } from '@chakra-ui/react';
 import { FiArrowRight } from 'react-icons/fi';
 import { useRouter } from 'next/router';
 import { PageType, PostType } from '../collections';
@@ -20,6 +13,7 @@ import {
   ButtonCallToAction,
   Head,
   Hero,
+  Image,
   Overlay,
   RenderBlocks,
   Template,
