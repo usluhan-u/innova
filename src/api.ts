@@ -57,6 +57,8 @@ export const getCustomPageData = async <T>({
     const query = await fetch(
       `${BASE_URL}/${endpoint}?locale=${locale}&fallbackLocale=${defaultLocale}`
     );
+    // eslint-disable-next-line no-console
+    console.log('🚀 ~ file: api.ts:60 ~ BASE_URL:', BASE_URL);
 
     const data: T = await query.json();
 
