@@ -13,7 +13,7 @@ export const getCustomPageDataBySlug = async <T>({
 }) => {
   try {
     const query = await fetch(
-      `${BASE_URL}/${endpoint}?locale=${locale}&fallbackLocale=${defaultLocale}&where[slug][equals]=${slug}`
+      `${BASE_URL}/${endpoint}?locale=${locale}&fallback-locale=${defaultLocale}&where[slug][equals]=${slug}`
     );
 
     const data: T = await query.json();
@@ -55,7 +55,7 @@ export const getCustomPageData = async <T>({
 }) => {
   try {
     const query = await fetch(
-      `${BASE_URL}/${endpoint}?locale=${locale}&fallbackLocale=${defaultLocale}`
+      `${BASE_URL}/${endpoint}?locale=${locale}&fallback-locale=${defaultLocale}`
     );
 
     const data: T = await query.json();
@@ -91,7 +91,7 @@ export const getCustomPageDataByCondition = async <T>({
 }) => {
   try {
     const query = await fetch(
-      `${BASE_URL}/${endpoint}?locale=${locale}&fallbackLocale=${defaultLocale}&limit=${limit}&page=${page}&sort=${
+      `${BASE_URL}/${endpoint}?locale=${locale}&fallback-locale=${defaultLocale}&limit=${limit}&page=${page}&sort=${
         sortOrder === 'desc' && '-'
       }${sortBy}&where${condition}`
     );
