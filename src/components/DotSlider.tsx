@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, Text, VStack, chakra } from '@chakra-ui/react';
+import { Box, Flex, Image, Text, VStack, chakra } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 import dynamic from 'next/dynamic';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -8,7 +8,6 @@ import { Slider } from './Slider';
 import { ButtonCallToAction } from './ButtonCallToAction';
 import { SlideType } from '../fields';
 import { Overlay } from './Overlay';
-import { Image } from './Image';
 
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false });
 
@@ -26,10 +25,10 @@ const SlideContent = ({
     {backgroundImage.mimeType.startsWith('image') && (
       <Overlay>
         <Image
-          src={backgroundImage.url}
-          alt={backgroundImage.alt}
           boxSize="full"
           objectFit="cover"
+          src={backgroundImage.url}
+          alt={backgroundImage.alt}
           transform="scale(1.2)"
           transition="all 1s"
         />

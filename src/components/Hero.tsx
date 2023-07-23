@@ -4,6 +4,7 @@ import {
   BreadcrumbItem as ChakraBreadcrumbItem,
   BreadcrumbLink as ChakraBreadcrumbLink,
   Flex,
+  Image,
   Select,
   Text,
   useMediaQuery
@@ -20,7 +21,6 @@ import { LinkButtonCallToAction } from './LinkButtonCallToAction';
 import { DotSlider } from './DotSlider';
 import { Container } from './Container';
 import { HeroBackground } from '../icons';
-import { Image } from './Image';
 
 export interface HeroProps extends HeroType {
   breadcrumbs?: Breadcrumb[];
@@ -172,9 +172,7 @@ export const Hero = ({
                   align={{ base: 'flex-start', md: 'center' }}
                   gap={4}
                 >
-                  {logo && (
-                    <Image src={logo?.url} alt={logo?.alt} w="170px" h="40px" />
-                  )}
+                  {logo && <Image src={logo?.url} alt={logo?.alt} />}
                   {callToAction && Object.keys(callToAction).length > 0 && (
                     <ButtonCallToAction
                       {...callToAction}

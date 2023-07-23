@@ -1,12 +1,11 @@
 import React from 'react';
-import { Flex, Grid, GridItem, VStack, Box } from '@chakra-ui/react';
+import { Flex, Grid, GridItem, VStack, Image, Box } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 import { FiArrowRight } from 'react-icons/fi';
 import { ContentType } from '../blocks';
 import { RichText } from './RichText';
 import { Template } from './Template';
 import { TextIconCallToAction } from './TextIconCallToAction';
-import { Image } from './Image';
 
 export interface ContentProps extends ContentType {
   maxWidth?: string;
@@ -33,9 +32,9 @@ export const Content = ({
             {column.icon && (
               <Box boxSize="64px">
                 <Image
+                  objectFit="cover"
                   src={column.icon.url}
                   alt={column.icon.alt}
-                  objectFit="cover"
                   boxSize="full"
                 />
               </Box>

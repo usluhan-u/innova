@@ -1,7 +1,7 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import { PaginatedDocs } from 'payload/dist/mongoose/types';
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex, Image, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { format } from 'date-fns';
 import { enUS, tr } from 'date-fns/locale';
@@ -12,7 +12,6 @@ import {
   Content,
   Head,
   Hero,
-  Image,
   Template
 } from '../../components';
 import Custom404 from '../404';
@@ -88,10 +87,11 @@ const Statement = ({ data, relatedData }: StatementProps) => {
           maxWidth="890px"
         >
           <Image
+            objectFit="cover"
             src={data.featuredImage.url}
             alt={data.featuredImage.alt}
-            objectFit="cover"
             h="lg"
+            w="full"
             borderRadius="lg"
           />
         </Template>
