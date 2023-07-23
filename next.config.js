@@ -23,6 +23,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/',
+        destination: '/home',
+        permanent: true
+      },
+      {
         source: '/_error',
         destination: '/404',
         permanent: true

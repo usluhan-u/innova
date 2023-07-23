@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: /admin
-Allow: /
-Sitemap: https://www.innova.com.tr/xml/sitemap.xml

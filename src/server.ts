@@ -63,17 +63,7 @@ const boilerplate = async () => {
     app.listen(PORT, async () => {
       payload.logger.info('Client is building now...');
 
-      await nextBuild(
-        path.join(__dirname, '../'),
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        'default'
-      );
+      await nextBuild(path.join(__dirname, '../'));
 
       process.exit();
     });

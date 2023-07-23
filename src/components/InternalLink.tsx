@@ -23,7 +23,6 @@ export const InternalLink = ({
       href={slug.startsWith('/') ? slug : `/${slug}`}
       as={NextLink}
       scroll={false}
-      aria-label={slug}
       _hover={{ textDecoration: 'none' }}
       {...newTabProps}
       {...rest}

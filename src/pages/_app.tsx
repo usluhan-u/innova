@@ -6,7 +6,7 @@ import '../styles/globals.css';
 import React from 'react';
 import type { AppContext, AppProps } from 'next/app';
 import App from 'next/app';
-import { ChakraProvider, Flex, useMediaQuery } from '@chakra-ui/react';
+import { Box, ChakraProvider, Flex, useMediaQuery } from '@chakra-ui/react';
 import { PaginatedDocs } from 'payload/dist/mongoose/types';
 import { Router } from 'next/router';
 import { theme } from '../theme';
@@ -55,6 +55,7 @@ const MyApp = ({
         <Flex minH="100vh" flexDir="column">
           <Header menu={menu} form={floatForm} />
           <Component {...pageProps} flexGrow={1} />
+          <Box w="full" h="10" />
           <Footer socialMedia={socialMedia} footer={footer} marginTop="auto" />
           {floatForm && isLargerThanMd && (
             <Form

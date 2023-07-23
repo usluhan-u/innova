@@ -48,4 +48,3 @@ export * from './Media';
 export * from './PageRouter';
 export * from './Overlay';
 export * from './Pagination';
-export * from './Image';
