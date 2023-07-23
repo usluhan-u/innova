@@ -5,7 +5,6 @@ import escapeHTML from 'escape-html';
 import { v4 as uuidv4 } from 'uuid';
 import { Text as SlateText } from 'slate';
 import {
-  Image,
   List,
   ListIcon,
   ListItem,
@@ -17,6 +16,7 @@ import {
 import { FiCheck, FiCheckCircle } from 'react-icons/fi';
 import { IconType } from 'react-icons';
 import { UploadedMediaType } from '../fields';
+import { Image } from './Image';
 
 export interface RichTextContentType {
   text: string;
@@ -187,11 +187,10 @@ const serialize = (
         return (
           <Image
             key={uuidv4()}
+            src={(node as RichTextContentType).value?.url || ''}
+            alt={(node as RichTextContentType).value?.alt || ''}
             objectFit="cover"
-            src={(node as RichTextContentType).value?.url}
-            alt={(node as RichTextContentType).value?.alt}
             h="lg"
-            w="full"
             borderRadius="lg"
           />
         );

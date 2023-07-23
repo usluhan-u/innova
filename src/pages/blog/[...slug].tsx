@@ -1,7 +1,7 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import { PaginatedDocs } from 'payload/dist/mongoose/types';
-import { Flex, Image, Text } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { tr, enUS } from 'date-fns/locale';
 import { format } from 'date-fns';
@@ -12,6 +12,7 @@ import {
   Content,
   Head,
   Hero,
+  Image,
   Template
 } from '../../components';
 import Custom404 from '../404';
@@ -76,7 +77,7 @@ const Blog = ({ data, relatedData }: BlogProps) => {
             label: 'Blog',
             doc: 'blog'
           },
-          ...data.breadcrumbs
+          ...(data.breadcrumbs || [])
         ]}
         activeSlug={data.slug}
       />
@@ -87,11 +88,10 @@ const Blog = ({ data, relatedData }: BlogProps) => {
           maxWidth="890px"
         >
           <Image
-            objectFit="cover"
             src={data.featuredImage.url}
             alt={data.featuredImage.alt}
+            objectFit="cover"
             h="lg"
-            w="full"
             borderRadius="lg"
           />
         </Template>
