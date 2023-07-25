@@ -1,4 +1,4 @@
-const BASE_URL = `${process.env.PAYLOAD_PUBLIC_SERVER_URL}/api`;
+const BASE_URL = `${process.env.NEXT_PUBLIC_SERVER_URL}/api`;
 
 export const getCustomPageDataBySlug = async <T>({
   endpoint,
