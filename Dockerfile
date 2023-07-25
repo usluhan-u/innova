@@ -1,5 +1,5 @@
 # [BASE] LAYER
-FROM node:19-alpine AS base
+FROM node:20-alpine AS base
 
 WORKDIR /app
 
@@ -19,7 +19,7 @@ COPY . .
 RUN yarn build
 
 # [PRODUCTION] LAYER
-FROM node:19-alpine AS production
+FROM node:20-alpine AS production
 
 WORKDIR /app
 
