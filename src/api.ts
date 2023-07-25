@@ -13,7 +13,10 @@ export const getCustomPageDataBySlug = async <T>({
 }) => {
   try {
     const query = await fetch(
-      `${BASE_URL}/${endpoint}?locale=${locale}&fallbackLocale=${defaultLocale}&where[slug][equals]=${slug}`
+      `${BASE_URL}/${endpoint}?locale=${locale}&fallbackLocale=${defaultLocale}&where[slug][equals]=${slug}`,
+      {
+        keepalive: true
+      }
     );
 
     const data: T = await query.json();
@@ -55,10 +58,11 @@ export const getCustomPageData = async <T>({
 }) => {
   try {
     const query = await fetch(
-      `${BASE_URL}/${endpoint}?locale=${locale}&fallbackLocale=${defaultLocale}`
+      `${BASE_URL}/${endpoint}?locale=${locale}&fallbackLocale=${defaultLocale}`,
+      {
+        keepalive: true
+      }
     );
-    // eslint-disable-next-line no-console
-    console.log('🚀 ~ file: api.ts:60 ~ BASE_URL:', BASE_URL);
 
     const data: T = await query.json();
 
@@ -95,7 +99,10 @@ export const getCustomPageDataByCondition = async <T>({
     const query = await fetch(
       `${BASE_URL}/${endpoint}?locale=${locale}&fallbackLocale=${defaultLocale}&limit=${limit}&page=${page}&sort=${
         sortOrder === 'desc' && '-'
-      }${sortBy}&where${condition}`
+      }${sortBy}&where${condition}`,
+      {
+        keepalive: true
+      }
     );
 
     const data: T = await query.json();
