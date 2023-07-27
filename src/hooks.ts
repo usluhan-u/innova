@@ -1,11 +1,11 @@
-import { FieldHook } from 'payload/types';
+import { FieldHook, GlobalBeforeReadHook } from 'payload/types';
 import {
   convertToKebabCase,
   convertToPascalCase,
   generateFullTitle
 } from './utils';
 
-export const populateFullTitle: FieldHook = async ({ data, originalDoc }) =>
+export const populateFullTitle: FieldHook = ({ data, originalDoc }) =>
   generateFullTitle(data?.breadcrumbs || originalDoc?.breadcrumbs);
 
 export const populateValueAfterCaseChange =
@@ -29,3 +29,12 @@ export const populateSlug =
 
     return value;
   };
+
+export const populateDocWithLocalizedSlugs: GlobalBeforeReadHook = async ({
+  doc
+}) => {
+  // eslint-disable-next-line no-param-reassign
+  doc.localizedSlugs = doc.slug;
+
+  return doc;
+};

@@ -20,7 +20,10 @@ import {
 import { RichTextContentType } from '../components';
 import { PostGroupType } from './post-group.collection';
 import { CategoryType } from './category.collection';
-import { populateValueAfterCaseChange } from '../hooks';
+import {
+  populateDocWithLocalizedSlugs,
+  populateValueAfterCaseChange
+} from '../hooks';
 
 export interface PostType {
   slug: string;
@@ -36,6 +39,9 @@ export interface PostType {
   group: PostGroupType;
   category?: CategoryType;
   publishDate: string;
+  localizedSlugs: {
+    [key: string]: string;
+  };
 }
 
 export const Post: CollectionConfig = {
@@ -49,6 +55,9 @@ export const Post: CollectionConfig = {
   },
   versions: {
     drafts: true
+  },
+  hooks: {
+    beforeRead: [populateDocWithLocalizedSlugs]
   },
   fields: [
     {
@@ -84,6 +93,10 @@ export const Post: CollectionConfig = {
       ]
     },
     Slug(),
+    {
+      name: 'localizedSlugs',
+      type: 'json'
+    },
     ParentPage,
     {
       name: 'group',

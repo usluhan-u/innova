@@ -27,6 +27,7 @@ import {
   UnstyledFlippableCard
 } from '../components';
 import { getCustomPageDataByCondition, getPageBySlug } from '../api';
+import { useData } from '../contexts';
 
 export interface HomeProps {
   page?: PageType;
@@ -35,10 +36,14 @@ export interface HomeProps {
 }
 
 const Home = ({ page, blogs, successStories }: HomeProps) => {
-  const { locale } = useRouter();
+  const { setLocalizedSlugs } = useData();
+  const router = useRouter();
   const [isLargerThanXL] = useMediaQuery('(min-width: 1300px)');
 
   if (!page) return <Custom404 />;
+
+  if (setLocalizedSlugs && typeof setLocalizedSlugs === 'function')
+    setLocalizedSlugs(page.localizedSlugs);
 
   return (
     <>
@@ -65,13 +70,14 @@ const Home = ({ page, blogs, successStories }: HomeProps) => {
               <Flex w="full" align="center" justify="space-between">
                 <Text fontSize={{ base: 'xl', md: '4xl' }}>Blog</Text>
                 <TextIconCallToAction
-                  label={locale === 'tr' ? 'Tüm Yazılar' : 'All Posts'}
+                  label={router.locale === 'tr' ? 'Tüm Yazılar' : 'All Posts'}
                   type="page"
                   page={{
                     slug: '/blogs',
                     name: 'Tüm Yazılar',
                     breadcrumbs: [],
-                    meta: {}
+                    meta: {},
+                    localizedSlugs: {}
                   }}
                   color="text.blue"
                   fontWeight="semibold"
@@ -124,14 +130,17 @@ const Home = ({ page, blogs, successStories }: HomeProps) => {
                           </Text>
                           <ButtonCallToAction
                             label={
-                              locale === 'tr' ? 'Detaylı Bilgi' : 'Read More'
+                              router.locale === 'tr'
+                                ? 'Detaylı Bilgi'
+                                : 'Read More'
                             }
                             type="page"
                             page={{
                               slug: `/blog/${blog.slug}`,
                               name: blog.name,
                               breadcrumbs: blog.breadcrumbs,
-                              meta: blog.meta
+                              meta: blog.meta,
+                              localizedSlugs: blog.localizedSlugs
                             }}
                           />
                         </Flex>
@@ -152,17 +161,22 @@ const Home = ({ page, blogs, successStories }: HomeProps) => {
           <VStack spacing="8" align="stretch" w="full">
             <Flex w="full" align="center" justify="space-between">
               <Text fontSize={{ base: 'xl', md: '4xl' }}>
-                {locale === 'tr' ? 'Başarı Hikayeleri' : 'Success Stories'}
+                {router.locale === 'tr'
+                  ? 'Başarı Hikayeleri'
+                  : 'Success Stories'}
               </Text>
               <TextIconCallToAction
-                label={locale === 'tr' ? 'Tüm Hikayeler' : 'All Stories'}
+                label={router.locale === 'tr' ? 'Tüm Hikayeler' : 'All Stories'}
                 type="page"
                 page={{
                   slug: '/success-stories',
                   name:
-                    locale === 'tr' ? 'Başarı Hikayeleri' : 'Success Stories',
+                    router.locale === 'tr'
+                      ? 'Başarı Hikayeleri'
+                      : 'Success Stories',
                   breadcrumbs: [],
-                  meta: {}
+                  meta: {},
+                  localizedSlugs: {}
                 }}
                 color="text.blue"
                 fontWeight="semibold"

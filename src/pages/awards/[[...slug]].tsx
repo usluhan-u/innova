@@ -15,7 +15,7 @@ import {
   RenderBlocks,
   Template
 } from '../../components';
-import { Language } from '../../contexts';
+import { Language, useData } from '../../contexts';
 
 export interface AwardsProps {
   page: PageType | null;
@@ -24,8 +24,13 @@ export interface AwardsProps {
 }
 
 const Awards = ({ page, data, totalDocs }: AwardsProps) => {
+  const { setLocalizedSlugs } = useData();
   const router = useRouter();
+
   if (page === null) return <Custom404 />;
+
+  if (setLocalizedSlugs && typeof setLocalizedSlugs === 'function')
+    setLocalizedSlugs(page.localizedSlugs);
 
   const cardGroupItems = data.map((item) => {
     const { category, featuredImage, publishDate, name, slug } = item;

@@ -12,7 +12,10 @@ import {
   Slug,
   Width
 } from '../fields';
-import { populateValueAfterCaseChange } from '../hooks';
+import {
+  populateDocWithLocalizedSlugs,
+  populateValueAfterCaseChange
+} from '../hooks';
 import { getCustomPageDataByCondition } from '../api';
 
 export const EnBlog: CollectionConfig = {
@@ -30,6 +33,9 @@ export const EnBlog: CollectionConfig = {
   },
   versions: {
     drafts: true
+  },
+  hooks: {
+    beforeRead: [populateDocWithLocalizedSlugs]
   },
   fields: [
     {
@@ -71,6 +77,10 @@ export const EnBlog: CollectionConfig = {
       ]
     },
     Slug(),
+    {
+      name: 'localizedSlugs',
+      type: 'json'
+    },
     ParentPage,
     {
       name: 'group',

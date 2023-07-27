@@ -5,13 +5,19 @@ import { PageType } from '../collections';
 import Custom404 from './404';
 import { Head, Hero, RenderBlocks } from '../components';
 import { getPageBySlug } from '../api';
+import { useData } from '../contexts';
 
 export interface PageProps {
   page?: PageType;
 }
 
 const Page = ({ page }: PageProps) => {
+  const { setLocalizedSlugs } = useData();
+
   if (!page) return <Custom404 />;
+
+  if (setLocalizedSlugs && typeof setLocalizedSlugs === 'function')
+    setLocalizedSlugs(page.localizedSlugs);
 
   return (
     <>

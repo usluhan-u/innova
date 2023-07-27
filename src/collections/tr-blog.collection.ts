@@ -12,7 +12,10 @@ import {
   Slug,
   Width
 } from '../fields';
-import { populateValueAfterCaseChange } from '../hooks';
+import {
+  populateDocWithLocalizedSlugs,
+  populateValueAfterCaseChange
+} from '../hooks';
 import { getCustomPageDataByCondition } from '../api';
 
 export const TrBlog: CollectionConfig = {
@@ -30,6 +33,9 @@ export const TrBlog: CollectionConfig = {
   },
   versions: {
     drafts: true
+  },
+  hooks: {
+    beforeRead: [populateDocWithLocalizedSlugs]
   },
   fields: [
     {
@@ -71,6 +77,10 @@ export const TrBlog: CollectionConfig = {
       ]
     },
     Slug(),
+    {
+      name: 'localizedSlugs',
+      type: 'json'
+    },
     ParentPage,
     {
       name: 'group',

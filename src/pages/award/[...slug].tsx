@@ -19,7 +19,7 @@ import {
   getCustomPageDataByCondition,
   getCustomPageDataBySlug
 } from '../../api';
-import { Language } from '../../contexts';
+import { Language, useData } from '../../contexts';
 
 interface AwardProps {
   data: PostType | null;
@@ -27,8 +27,13 @@ interface AwardProps {
 }
 
 const Award = ({ data, relatedData }: AwardProps) => {
+  const { setLocalizedSlugs } = useData();
   const router = useRouter();
+
   if (data === null) return <Custom404 />;
+
+  if (setLocalizedSlugs && typeof setLocalizedSlugs === 'function')
+    setLocalizedSlugs(data.localizedSlugs);
 
   const cardGroupItems = relatedData.map((item) => {
     const { category, featuredImage, publishDate, name, slug } = item;

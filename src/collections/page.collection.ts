@@ -44,7 +44,10 @@ import {
   TagGroup,
   TagGroupType
 } from '../blocks';
-import { populateValueAfterCaseChange } from '../hooks';
+import {
+  populateDocWithLocalizedSlugs,
+  populateValueAfterCaseChange
+} from '../hooks';
 
 export type PageLayout =
   | AccordionType
@@ -93,6 +96,9 @@ export interface PageType {
   content?: PageContent;
   breadcrumbs: Breadcrumb[];
   meta: MetaType;
+  localizedSlugs: {
+    [key: string]: string;
+  };
 }
 
 export const Page: CollectionConfig = {
@@ -106,6 +112,9 @@ export const Page: CollectionConfig = {
   },
   versions: {
     drafts: true
+  },
+  hooks: {
+    beforeRead: [populateDocWithLocalizedSlugs]
   },
   fields: [
     {
@@ -159,6 +168,10 @@ export const Page: CollectionConfig = {
     FullTitle,
     Breadcrumbs,
     Slug(),
+    {
+      name: 'localizedSlugs',
+      type: 'json'
+    },
     ParentPage,
     Meta
   ]

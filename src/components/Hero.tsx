@@ -63,7 +63,8 @@ const CallToActionGroupDesktopView = ({
               meta: item.callToAction.page?.meta || {},
               slug: specialPath
                 ? `${specialPath}/${item.callToAction.page?.slug}`
-                : (item.callToAction.page?.slug as string)
+                : (item.callToAction.page?.slug as string),
+              localizedSlugs: {}
             }}
             active={
               item.callToAction.page?.slug === activeSlug ||

@@ -14,7 +14,7 @@ import { FooterType, MenuType, SocialMediaType } from '../globals';
 import { Footer, Form, Header } from '../components';
 import { getCustomPageData, getCustomPageDataByCondition } from '../api';
 import { ExtendedFormBuilder } from '../blocks';
-import { LanguageProvider } from '../contexts';
+import { DataProvider, LanguageProvider } from '../contexts';
 
 interface MyAppProps extends AppProps {
   socialMedia: SocialMediaType;
@@ -52,19 +52,25 @@ const MyApp = ({
   return (
     <ChakraProvider theme={theme}>
       <LanguageProvider>
-        <Flex minH="100vh" flexDir="column">
-          <Header menu={menu} form={floatForm} />
-          <Component {...pageProps} flexGrow={1} />
-          <Box w="full" h="10" />
-          <Footer socialMedia={socialMedia} footer={footer} marginTop="auto" />
-          {floatForm && isLargerThanMd && (
-            <Form
-              backgroundColor="background.primary"
-              width="100%"
-              form={floatForm}
+        <DataProvider>
+          <Flex minH="100vh" flexDir="column">
+            <Header menu={menu} form={floatForm} />
+            <Component {...pageProps} flexGrow={1} />
+            <Box w="full" h="10" />
+            <Footer
+              socialMedia={socialMedia}
+              footer={footer}
+              marginTop="auto"
             />
-          )}
-        </Flex>
+            {floatForm && isLargerThanMd && (
+              <Form
+                backgroundColor="background.primary"
+                width="100%"
+                form={floatForm}
+              />
+            )}
+          </Flex>
+        </DataProvider>
       </LanguageProvider>
     </ChakraProvider>
   );

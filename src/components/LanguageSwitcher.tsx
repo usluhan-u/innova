@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from 'next/router';
 import { EN, TR } from '../icons';
+import { useData } from '../contexts';
 
 export interface LanguageSwitcherProps
   extends Omit<IconButtonProps, 'type' | 'aria-label'> {
@@ -43,39 +44,22 @@ export const LanguageSwitcher = ({
   ...rest
 }: LanguageSwitcherProps) => {
   const router = useRouter();
+  const { localizedSlugs } = useData();
 
   const otherAvailableLocale = availableLocales?.filter(
     (availableLocale) => availableLocale !== activeLocale
   )[0];
 
   const handleLocaleChange = () => {
-    if (router.route.includes('award' || 'awards')) {
-      router.push('/awards', undefined, {
-        locale: otherAvailableLocale
-      });
-    }
+    const parentSlug = router.asPath.split('/').slice(0, -1).join('/');
 
-    if (router.route.includes('blog' || 'blogs')) {
-      router.push('/blogs', undefined, {
+    router.push(
+      `${parentSlug}/${localizedSlugs[otherAvailableLocale || 'tr'] ?? ''}`,
+      undefined,
+      {
         locale: otherAvailableLocale
-      });
-    }
-
-    if (router.route.includes('statement' || 'statements')) {
-      router.push('/statements', undefined, {
-        locale: otherAvailableLocale
-      });
-    }
-
-    if (router.route.includes('success-story' || 'success-stories')) {
-      router.push('/success-stories', undefined, {
-        locale: otherAvailableLocale
-      });
-    }
-
-    router.push('/home', undefined, {
-      locale: otherAvailableLocale
-    });
+      }
+    );
   };
 
   return (

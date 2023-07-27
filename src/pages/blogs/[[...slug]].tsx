@@ -15,7 +15,7 @@ import {
   RenderBlocks,
   Template
 } from '../../components';
-import { Language } from '../../contexts';
+import { Language, useData } from '../../contexts';
 
 export interface BlogsProps {
   page: PageType | null;
@@ -24,8 +24,14 @@ export interface BlogsProps {
 }
 
 const Blogs = ({ page, data, totalDocs }: BlogsProps) => {
+  const { setLocalizedSlugs } = useData();
+
   const router = useRouter();
+
   if (page === null) return <Custom404 />;
+
+  if (setLocalizedSlugs && typeof setLocalizedSlugs === 'function')
+    setLocalizedSlugs(page.localizedSlugs);
 
   const cardGroupItems = data.map((item) => {
     const { category, featuredImage, publishDate, name, slug } = item;
