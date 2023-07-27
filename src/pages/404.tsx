@@ -1,33 +1,13 @@
 import React from 'react';
 import { Center, Text } from '@chakra-ui/react';
-// import { useRouter } from 'next/router';
 import { ButtonCallToAction } from '../components';
 import { NotFoundType } from '../globals';
-// import { getCustomPageData } from '../api';
 
 export interface NotFoundProps {
   notFound?: NotFoundType;
 }
 
 const Custom404 = () => {
-  // const [notFound, setNotFound] = React.useState<NotFoundType | null>(null);
-
-  // const router = useRouter();
-
-  // React.useEffect(() => {
-  //   const getData = async () => {
-  //     const result = await getCustomPageData<NotFoundType>({
-  //       endpoint: 'globals/not-found',
-  //       locale: router.locale,
-  //       defaultLocale: router.defaultLocale
-  //     });
-
-  //     setNotFound(result);
-  //   };
-
-  //   getData();
-  // }, []);
-
   const notFound: NotFoundType = {
     title: 'Aradığınız sayfa bulunamadı',
     description: 'Üzgünüz, açmaya çalıştığınız sayfa yok ya da taşınmış.',
@@ -38,7 +18,8 @@ const Custom404 = () => {
         slug: 'home',
         name: 'Ana Sayfa',
         breadcrumbs: [],
-        meta: {}
+        meta: {},
+        localizedSlugs: {}
       }
     }
   };
