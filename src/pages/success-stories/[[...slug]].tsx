@@ -27,10 +27,12 @@ const SuccessStories = ({ page, data, totalDocs }: SuccessStoriesProps) => {
   const { setLocalizedSlugs } = useData();
   const router = useRouter();
 
-  if (page === null) return <Custom404 />;
+  React.useEffect(() => {
+    if (setLocalizedSlugs && typeof setLocalizedSlugs === 'function')
+      setLocalizedSlugs(page?.localizedSlugs || {});
+  }, [page, setLocalizedSlugs]);
 
-  if (setLocalizedSlugs && typeof setLocalizedSlugs === 'function')
-    setLocalizedSlugs(page.localizedSlugs);
+  if (page === null) return <Custom404 />;
 
   const cardGroupItems = data.map((item) => {
     const { category, featuredImage, publishDate, name, slug } = item;

@@ -54,7 +54,7 @@ export const LanguageSwitcher = ({
     const parentSlug = router.asPath.split('/').slice(0, -1).join('/');
 
     router.push(
-      `${parentSlug}/${localizedSlugs[otherAvailableLocale || 'tr'] ?? ''}`,
+      `${parentSlug}/${localizedSlugs[otherAvailableLocale || 'tr'] ?? 'home'}`,
       undefined,
       {
         locale: otherAvailableLocale

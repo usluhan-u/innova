@@ -14,10 +14,12 @@ export interface PageProps {
 const Page = ({ page }: PageProps) => {
   const { setLocalizedSlugs } = useData();
 
-  if (!page) return <Custom404 />;
+  React.useEffect(() => {
+    if (setLocalizedSlugs && typeof setLocalizedSlugs === 'function')
+      setLocalizedSlugs(page?.localizedSlugs || {});
+  }, [page, setLocalizedSlugs]);
 
-  if (setLocalizedSlugs && typeof setLocalizedSlugs === 'function')
-    setLocalizedSlugs(page.localizedSlugs);
+  if (!page) return <Custom404 />;
 
   return (
     <>

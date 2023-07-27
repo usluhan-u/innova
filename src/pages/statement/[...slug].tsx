@@ -28,13 +28,14 @@ interface StatementProps {
 
 const Statement = ({ data, relatedData }: StatementProps) => {
   const { setLocalizedSlugs } = useData();
-
   const router = useRouter();
 
-  if (data === null) return <Custom404 />;
+  React.useEffect(() => {
+    if (setLocalizedSlugs && typeof setLocalizedSlugs === 'function')
+      setLocalizedSlugs(data?.localizedSlugs || {});
+  }, [data, setLocalizedSlugs]);
 
-  if (setLocalizedSlugs && typeof setLocalizedSlugs === 'function')
-    setLocalizedSlugs(data.localizedSlugs);
+  if (data === null) return <Custom404 />;
 
   const cardGroupItems = relatedData.map((item) => {
     const { category, featuredImage, publishDate, name, slug } = item;

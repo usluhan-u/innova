@@ -40,10 +40,12 @@ const Home = ({ page, blogs, successStories }: HomeProps) => {
   const router = useRouter();
   const [isLargerThanXL] = useMediaQuery('(min-width: 1300px)');
 
-  if (!page) return <Custom404 />;
+  React.useEffect(() => {
+    if (setLocalizedSlugs && typeof setLocalizedSlugs === 'function')
+      setLocalizedSlugs(page?.localizedSlugs || {});
+  }, [page, setLocalizedSlugs]);
 
-  if (setLocalizedSlugs && typeof setLocalizedSlugs === 'function')
-    setLocalizedSlugs(page.localizedSlugs);
+  if (!page) return <Custom404 />;
 
   return (
     <>
