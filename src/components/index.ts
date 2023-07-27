@@ -49,3 +49,4 @@ export * from './PageRouter';
 export * from './Overlay';
 export * from './Pagination';
 export * from './SearchBox';
+export * from './FormSubmit';

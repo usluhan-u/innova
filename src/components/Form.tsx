@@ -30,6 +30,9 @@ import { RichText, RichTextContentType } from './RichText';
 import { BackgroundColor } from './BackgroundColor';
 import { Width } from './Width';
 import { Chat } from '../icons';
+import { FormSubmit } from './FormSubmit';
+import { useFieldType } from './FormSubmit/useFieldType';
+import { validateEmail } from './FormSubmit/validations';
 
 interface FormProps extends Omit<FormType, 'blockType'> {}
 
@@ -60,7 +63,13 @@ const fields: Record<string, React.FC<any>> = {
   )
 };
 
-const Field = ({ blockType, ...rest }: FormFieldBlock) => {
+const Field = ({
+  blockType,
+  ...rest
+}: FormFieldBlock & {
+  value?: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}) => {
   const Field = fields[blockType];
 
   if (Field) {
@@ -70,49 +79,97 @@ const Field = ({ blockType, ...rest }: FormFieldBlock) => {
   return null;
 };
 
-export const FormContent = ({ backgroundColor, width, form }: FormProps) => (
-  <BackgroundColor bgColor={backgroundColor}>
-    <Center w="full">
-      <Width value={width}>
-        <VStack align="stretch" w="full">
-          <Center textAlign="center">
-            <RichText content={form.leader} />
-          </Center>
-          {form.type === 'default' && form.fields.length === 1 ? (
-            <InputGroup size="md">
-              <Field {...form.fields[0]} />
-              <InputRightElement w="6rem">
-                <Button
-                  size="sm"
-                  color="text.light"
-                  bgColor="background.blue.100"
-                  width="fit-content"
-                  _hover={{ bgColor: 'background.blue.100' }}
-                >
-                  {form.submitButtonLabel}
-                </Button>
-              </InputRightElement>
-            </InputGroup>
-          ) : (
-            <>
-              {form.fields.map((field) => (
-                <Field key={uuidv4()} {...field} />
-              ))}
-              <Button
-                color="text.light"
-                bgColor="background.blue.100"
-                width={{ base: 'full', md: 'fit-content' }}
-                _hover={{ bgColor: 'background.blue.100' }}
-              >
-                {form.submitButtonLabel}
-              </Button>
-            </>
-          )}
-        </VStack>
-      </Width>
-    </Center>
-  </BackgroundColor>
-);
+const initialState = {
+  message: {
+    value: 'Message',
+    initialValue: 'Message',
+    valid: true
+  }
+};
+
+export const FormContent = ({ backgroundColor, width, form }: FormProps) => {
+  const [submitted, setSubmitted] = React.useState(false);
+
+  const { value, setValue } = useFieldType({
+    path: 'email',
+    validate: validateEmail
+  });
+
+  const handleOnSubmit = React.useCallback(async (data: any) => {
+    const res = await fetch('/api/form-submissions', {
+      body: JSON.stringify({
+        ...data,
+        source: 'Website Form'
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'post'
+    });
+
+    if (res.status === 201) {
+      setSubmitted(true);
+    } else {
+      // console.error(
+      //   'There was a problem submitting your request. Please check your submission and try again, or email us directly.'
+      // );
+    }
+  }, []);
+
+  return (
+    <BackgroundColor bgColor={backgroundColor}>
+      <Center w="full">
+        <Width value={width}>
+          <VStack align="stretch" w="full">
+            <Center textAlign="center">
+              <RichText content={form.leader} />
+            </Center>
+            {!submitted && (
+              <FormSubmit onSubmit={handleOnSubmit} initialState={initialState}>
+                {form.type === 'default' && form.fields.length === 1 ? (
+                  <InputGroup size="md">
+                    <Field
+                      {...form.fields[0]}
+                      value={(value as string) || ''}
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                        setValue(event.target.value)
+                      }
+                    />
+                    <InputRightElement w="6rem">
+                      <Button
+                        size="sm"
+                        color="text.light"
+                        bgColor="background.blue.100"
+                        width="fit-content"
+                        _hover={{ bgColor: 'background.blue.100' }}
+                      >
+                        {form.submitButtonLabel}
+                      </Button>
+                    </InputRightElement>
+                  </InputGroup>
+                ) : (
+                  <>
+                    {form.fields.map((field) => (
+                      <Field key={uuidv4()} {...field} />
+                    ))}
+                    <Button
+                      color="text.light"
+                      bgColor="background.blue.100"
+                      width={{ base: 'full', md: 'fit-content' }}
+                      _hover={{ bgColor: 'background.blue.100' }}
+                    >
+                      {form.submitButtonLabel}
+                    </Button>
+                  </>
+                )}
+              </FormSubmit>
+            )}
+          </VStack>
+        </Width>
+      </Center>
+    </BackgroundColor>
+  );
+};
 
 export const Form = ({ backgroundColor, width, form }: FormProps) => (
   <>
