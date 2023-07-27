@@ -22,8 +22,6 @@ const sync = async () => {
   });
 
   await index.addDocuments(docs);
-
-  process.exit(0);
 };
 
 sync();

@@ -95,6 +95,7 @@ export const DesktopViewSearchBox = ({
     {}
   );
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleExpanded =
     (value: boolean) => (event: React.MouseEvent<HTMLDivElement>) => {
       event.stopPropagation();
@@ -140,7 +141,7 @@ export const DesktopViewSearchBox = ({
           <PopoverTrigger>
             <InputRightElement
               pos="relative"
-              onClick={handleExpanded(!expanded)}
+              // onClick={handleExpanded(!expanded)}
             >
               <Icon
                 as={expanded ? IoClose : FiSearch}
