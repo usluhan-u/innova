@@ -70,7 +70,7 @@ export const LanguageSwitcher = ({
           borderRadius="full"
           border="none"
           aria-label="Language"
-          icon={<LocaleFlag locale={activeLocale} />}
+          icon={<LocaleFlag locale={otherAvailableLocale} />}
           onClick={handleLocaleChange}
           _hover={{ borderColor: 'transparent' }}
           _active={{ borderColor: 'transparent' }}
@@ -85,7 +85,7 @@ export const LanguageSwitcher = ({
             borderRadius="full"
             border="none"
             aria-label="Language"
-            icon={<LocaleFlag locale={activeLocale} />}
+            icon={<LocaleFlag locale={otherAvailableLocale} />}
             _hover={{ bgColor: 'transparent' }}
             _active={{ bgColor: 'transparent' }}
           />
