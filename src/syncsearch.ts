@@ -12,8 +12,7 @@ const sync = async () => {
 
   await payload.init({
     secret: process.env.PAYLOAD_SECRET_KEY || '',
-    mongoURL: process.env.MONGODB_URI || '',
-    local: true
+    mongoURL: process.env.MONGODB_URI || ''
   });
 
   const index = client.index('pages');

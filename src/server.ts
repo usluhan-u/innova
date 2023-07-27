@@ -6,6 +6,7 @@ import path from 'path';
 import { IncomingMessage, ServerResponse } from 'http';
 import dotenv from 'dotenv';
 import nodemailer from 'nodemailer';
+import MeiliSearch from 'meilisearch';
 import { seed } from './seed';
 
 dotenv.config();
@@ -19,6 +20,11 @@ const boilerplate = async () => {
   const transport = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
     port: parseInt(process.env.EMAIL_PORT || '587', 10)
+  });
+
+  const client = new MeiliSearch({
+    host: process.env.NEXT_PUBLIC_MEILISEARCH_URL || 'http://localhost:7700',
+    apiKey: process.env.NEXT_PUBLIC_MEILISEARCH_MASTER_KEY || ''
   });
 
   await payload.init({
@@ -35,6 +41,14 @@ const boilerplate = async () => {
       payload.logger.info(`Payload API URL: ${payload.getAPIURL()}`);
     }
   });
+
+  const index = client.index('pages');
+
+  const { docs } = await payload.find({
+    collection: 'pages'
+  });
+
+  await index.addDocuments(docs);
 
   if (process.env.DB_SEED === 'true') {
     payload.logger.info('Seeding database...');
