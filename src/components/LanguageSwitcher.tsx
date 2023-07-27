@@ -28,9 +28,9 @@ interface LocaleFlagProps {
 const LocaleFlag = ({ locale }: LocaleFlagProps) => {
   switch (locale) {
     case 'en':
-      return <EN width={32} height={32} />;
+      return <EN width={24} height={24} />;
     case 'tr':
-      return <TR width={32} height={32} />;
+      return <TR width={24} height={24} />;
     default:
       return null;
   }
