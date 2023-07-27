@@ -9,7 +9,7 @@ export const EN = (props: React.ComponentProps<'svg'>) => (
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
-    <g clip-path="url(#clip0_1530_936)">
+    <g clipPath="url(#clip0_1530_936)">
       <path
         d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z"
         fill="#005A9B"
