@@ -92,7 +92,17 @@ export const DesktopViewSearchBox = ({
   const client = instantMeiliSearch(
     process.env.NEXT_PUBLIC_MEILISEARCH_URL || 'http://localhost:7700',
     process.env.NEXT_PUBLIC_MEILISEARCH_MASTER_KEY || '',
-    {}
+    {
+      requestConfig: {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers':
+            'X-Powered-By, X-Requested-With, Content-Type, Accept, Origin, Authorization',
+          'Access-Control-Allow-Methods':
+            'GET, POST, PUT, DELETE, PATCH, OPTIONS'
+        }
+      }
+    }
   );
 
   const handleExpanded =

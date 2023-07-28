@@ -19,67 +19,64 @@ interface FormSubmitProps {
   setSubmitted: (value: boolean) => void;
 }
 
-export const FormSubmit = ({
-  formId,
-  children,
-  submitButton,
-  setSubmitted
-}: FormSubmitProps) => {
-  const { language } = useLanguage();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<FormValues>();
+export const FormSubmit = React.forwardRef<HTMLFormElement, FormSubmitProps>(
+  ({ formId, children, submitButton, setSubmitted }: FormSubmitProps) => {
+    const { language } = useLanguage();
+    const {
+      register,
+      handleSubmit,
+      formState: { errors }
+    } = useForm<FormValues>();
 
-  const childrenArray: any = React.Children.toArray(children);
+    const childrenArray: any = React.Children.toArray(children);
 
-  const onSubmit = React.useCallback(
-    async (data: FormValues) => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const dataToSend = Object.entries(data).map(([name, value]) => ({
-        field: name,
-        value: 'test'
-      }));
+    const onSubmit = React.useCallback(
+      async (data: FormValues) => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const dataToSend = Object.entries(data).map(([name, value]) => ({
+          field: name,
+          value: 'test'
+        }));
 
-      const response = await submitForm({
-        body: {
-          form: formId,
-          submissionData: dataToSend
-        }
-      });
+        const response = await submitForm({
+          body: {
+            form: formId,
+            submissionData: dataToSend
+          }
+        });
 
-      setSubmitted(response);
-    },
-    [formId, setSubmitted]
-  );
+        setSubmitted(response);
+      },
+      [formId, setSubmitted]
+    );
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      {React.Children.map(childrenArray, (child) => (
-        <FormControl
-          key={uuidv4()}
-          isInvalid={Boolean(errors[child.props.name])}
-        >
-          {React.cloneElement(child, {
-            refs: {
-              ...register(child.props.name, {
-                required: child.props.required
-                  ? language === 'tr'
-                    ? `Lütfen ${child.props.label} alanını doldurunuz`
-                    : language === 'en'
-                    ? `Please fill in the ${child.props.label} field`
-                    : 'Unknown language'
-                  : false
-              })
-            }
-          })}
-          <FormErrorMessage>
-            {errors[child.props.name]?.message}
-          </FormErrorMessage>
-        </FormControl>
-      ))}
-      {submitButton}
-    </form>
-  );
-};
+    return (
+      <form onSubmit={handleSubmit(onSubmit)}>
+        {React.Children.map(childrenArray, (child) => (
+          <FormControl
+            key={uuidv4()}
+            isInvalid={Boolean(errors[child.props.name])}
+          >
+            {React.cloneElement(child, {
+              refs: {
+                ...register(child.props.name, {
+                  required: child.props.required
+                    ? language === 'tr'
+                      ? `Lütfen ${child.props.label} alanını doldurunuz`
+                      : language === 'en'
+                      ? `Please fill in the ${child.props.label} field`
+                      : 'Unknown language'
+                    : false
+                })
+              }
+            })}
+            <FormErrorMessage>
+              {errors[child.props.name]?.message}
+            </FormErrorMessage>
+          </FormControl>
+        ))}
+        {submitButton}
+      </form>
+    );
+  }
+);

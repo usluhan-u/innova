@@ -111,18 +111,15 @@ export const getCustomPageDataByCondition = async <T>({
 
 export const submitForm = async ({ body }: { body: any }) => {
   try {
-    const query = await fetch(
-      `${process.env.PAYLOAD_PUBLIC_SERVER_URL}/form-submissions`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          ...body
-        })
-      }
-    );
+    const query = await fetch(`${BASE_URL}/form-submissions`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        ...body
+      })
+    });
 
     return query.status === 201;
   } catch (error) {
