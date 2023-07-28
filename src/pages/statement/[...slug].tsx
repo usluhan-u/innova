@@ -2,7 +2,6 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import { PaginatedDocs } from 'payload/dist/mongoose/types';
 import { Flex, Image, Text } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
 import { format } from 'date-fns';
 import { enUS, tr } from 'date-fns/locale';
 import { PostType } from '../../collections';
@@ -19,7 +18,7 @@ import {
   getCustomPageDataByCondition,
   getCustomPageDataBySlug
 } from '../../api';
-import { Language, useData } from '../../contexts';
+import { Language, useData, useLanguage } from '../../contexts';
 
 interface StatementProps {
   data: PostType | null;
@@ -27,8 +26,8 @@ interface StatementProps {
 }
 
 const Statement = ({ data, relatedData }: StatementProps) => {
+  const { language } = useLanguage();
   const { setLocalizedSlugs } = useData();
-  const router = useRouter();
 
   React.useEffect(() => {
     if (setLocalizedSlugs && typeof setLocalizedSlugs === 'function')
@@ -46,7 +45,7 @@ const Statement = ({ data, relatedData }: StatementProps) => {
       title: name,
       category,
       callToAction: {
-        label: router.locale === 'tr' ? 'Detaylı Bilgi' : 'Read More',
+        label: language === 'tr' ? 'Detaylı Bilgi' : 'Read More',
         type: 'page',
         page: {
           ...item,
@@ -70,17 +69,17 @@ const Statement = ({ data, relatedData }: StatementProps) => {
       <Hero
         {...data.hero}
         description={format(new Date(data.publishDate), 'PP', {
-          locale: router.locale === 'tr' ? tr : enUS
+          locale: language === 'tr' ? tr : enUS
         })}
         breadcrumbs={[
           {
             url: '/home',
-            label: router.locale === 'tr' ? 'Ana Sayfa' : 'Home Page',
+            label: language === 'tr' ? 'Ana Sayfa' : 'Home Page',
             doc: 'home'
           },
           {
             url: '/statements',
-            label: router.locale === 'tr' ? 'Haberler' : 'News',
+            label: language === 'tr' ? 'Haberler' : 'News',
             doc: 'news'
           },
           ...data.breadcrumbs
@@ -117,7 +116,7 @@ const Statement = ({ data, relatedData }: StatementProps) => {
             </Text>
             <CardGroup
               items={cardGroupItems}
-              locale={(router.locale as Language) || 'tr'}
+              locale={(language as Language) || 'tr'}
             />
           </Flex>
         </Template>

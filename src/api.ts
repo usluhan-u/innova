@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const BASE_URL = `${process.env.NEXT_PUBLIC_SERVER_URL}/api`;
 
 export const getCustomPageDataBySlug = async <T>({
@@ -99,6 +100,28 @@ export const getCustomPageDataByCondition = async <T>({
     const data: T = await query.json();
 
     return data;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(JSON.stringify(error));
+    }
+
+    throw new Error('An error occurred');
+  }
+};
+
+export const submitForm = async ({ body }: { body: any }) => {
+  try {
+    const query = await fetch(`${BASE_URL}/form-submissions`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        ...body
+      })
+    });
+
+    return query.status === 201;
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(JSON.stringify(error));

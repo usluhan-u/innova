@@ -15,7 +15,7 @@ import {
   RenderBlocks,
   Template
 } from '../../components';
-import { Language, useData } from '../../contexts';
+import { Language, useData, useLanguage } from '../../contexts';
 
 export interface BlogsProps {
   page: PageType | null;
@@ -24,6 +24,7 @@ export interface BlogsProps {
 }
 
 const Blogs = ({ page, data, totalDocs }: BlogsProps) => {
+  const { language } = useLanguage();
   const { setLocalizedSlugs } = useData();
   const router = useRouter();
 
@@ -43,7 +44,7 @@ const Blogs = ({ page, data, totalDocs }: BlogsProps) => {
       title: name,
       category,
       callToAction: {
-        label: router.locale === 'tr' ? 'Detaylı Bilgi' : 'Read More',
+        label: language === 'tr' ? 'Detaylı Bilgi' : 'Read More',
         type: 'page',
         page: {
           ...item,
@@ -82,7 +83,7 @@ const Blogs = ({ page, data, totalDocs }: BlogsProps) => {
           <VStack w="full" spacing={10}>
             <CardGroup
               items={cardGroupItems}
-              locale={(router.locale as Language) || 'tr'}
+              locale={(language as Language) || 'tr'}
             />
             <Pagination totalSize={totalDocs} onPageChange={handlePageChange} />
           </VStack>

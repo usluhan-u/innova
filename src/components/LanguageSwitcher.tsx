@@ -11,7 +11,7 @@ import Link from 'next/link';
 import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from 'next/router';
 import { EN, TR } from '../icons';
-import { useData } from '../contexts';
+import { Language, useData, useLanguage } from '../contexts';
 
 export interface LanguageSwitcherProps
   extends Omit<IconButtonProps, 'type' | 'aria-label'> {
@@ -44,6 +44,7 @@ export const LanguageSwitcher = ({
   ...rest
 }: LanguageSwitcherProps) => {
   const router = useRouter();
+  const { switchLanguage } = useLanguage();
   const { localizedSlugs } = useData();
 
   const otherAvailableLocale = availableLocales?.filter(
@@ -51,6 +52,9 @@ export const LanguageSwitcher = ({
   )[0];
 
   const handleLocaleChange = () => {
+    if (switchLanguage && typeof switchLanguage === 'function')
+      switchLanguage(otherAvailableLocale as Language);
+
     const parentSlug = router.asPath.split('/').slice(0, -1).join('/');
 
     router.push(

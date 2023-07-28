@@ -1,7 +1,9 @@
+/* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import {
   Button,
+  ButtonProps,
   Center,
   Checkbox,
   Icon,
@@ -31,22 +33,30 @@ import { BackgroundColor } from './BackgroundColor';
 import { Width } from './Width';
 import { Chat } from '../icons';
 import { FormSubmit } from './FormSubmit';
-import { useFieldType } from './FormSubmit/useFieldType';
-import { validateEmail } from './FormSubmit/validations';
 
 interface FormProps extends Omit<FormType, 'blockType'> {}
 
+interface SubmitButtonProps extends ButtonProps {
+  label: string;
+}
+
 const fields: Record<string, React.FC<any>> = {
-  text: ({ label }: { label: string }) => <Input placeholder={label} />,
-  textarea: ({ label }: { label: string }) => <Textarea placeholder={label} />,
+  text: ({ label, name }: { label: string; name: string }) => (
+    <Input placeholder={label} name={name} id={name} />
+  ),
+  textarea: ({ label, name }: { label: string; name: string }) => (
+    <Textarea placeholder={label} name={name} id={name} />
+  ),
   select: ({
     label,
+    name,
     options
   }: {
     label: string;
+    name: string;
     options: SelectFieldOption[];
   }) => (
-    <Select placeholder={label} w="full">
+    <Select placeholder={label} name={name} id={name} w="full">
       {options.map((option) => (
         <option key={uuidv4()} value={option.value}>
           {option.label}
@@ -54,9 +64,13 @@ const fields: Record<string, React.FC<any>> = {
       ))}
     </Select>
   ),
-  checkbox: ({ label }: { label: string }) => <Checkbox>{label}</Checkbox>,
-  email: ({ label }: { label: string }) => (
-    <Input type="email" placeholder={label} />
+  checkbox: ({ label, name }: { label: string; name: string }) => (
+    <Checkbox name={name} id={name}>
+      {label}
+    </Checkbox>
+  ),
+  email: ({ label, name }: { label: string; name: string }) => (
+    <Input type="email" placeholder={label} name={name} id={name} />
   ),
   message: ({ message }: { message: RichTextContentType[] }) => (
     <RichText content={message} />
@@ -79,97 +93,58 @@ const Field = ({
   return null;
 };
 
-const initialState = {
-  message: {
-    value: 'Message',
-    initialValue: 'Message',
-    valid: true
-  }
-};
+const SubmitButton = ({ label, ...rest }: SubmitButtonProps) => (
+  <Button
+    type="submit"
+    color="text.light"
+    bgColor="background.blue.100"
+    _hover={{ bgColor: 'background.blue.100' }}
+    {...rest}
+  >
+    {label}
+  </Button>
+);
 
-export const FormContent = ({ backgroundColor, width, form }: FormProps) => {
-  const [submitted, setSubmitted] = React.useState(false);
-
-  const { value, setValue } = useFieldType({
-    path: 'email',
-    validate: validateEmail
-  });
-
-  const handleOnSubmit = React.useCallback(async (data: any) => {
-    const res = await fetch('/api/form-submissions', {
-      body: JSON.stringify({
-        ...data,
-        source: 'Website Form'
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: 'post'
-    });
-
-    if (res.status === 201) {
-      setSubmitted(true);
-    } else {
-      // console.error(
-      //   'There was a problem submitting your request. Please check your submission and try again, or email us directly.'
-      // );
-    }
-  }, []);
-
-  return (
-    <BackgroundColor bgColor={backgroundColor}>
-      <Center w="full">
-        <Width value={width}>
-          <VStack align="stretch" w="full">
-            <Center textAlign="center">
-              <RichText content={form.leader} />
-            </Center>
-            {!submitted && (
-              <FormSubmit onSubmit={handleOnSubmit} initialState={initialState}>
-                {form.type === 'default' && form.fields.length === 1 ? (
-                  <InputGroup size="md">
-                    <Field
-                      {...form.fields[0]}
-                      value={(value as string) || ''}
-                      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                        setValue(event.target.value)
-                      }
-                    />
-                    <InputRightElement w="6rem">
-                      <Button
-                        size="sm"
-                        color="text.light"
-                        bgColor="background.blue.100"
-                        width="fit-content"
-                        _hover={{ bgColor: 'background.blue.100' }}
-                      >
-                        {form.submitButtonLabel}
-                      </Button>
-                    </InputRightElement>
-                  </InputGroup>
-                ) : (
-                  <>
-                    {form.fields.map((field) => (
-                      <Field key={uuidv4()} {...field} />
-                    ))}
-                    <Button
-                      color="text.light"
-                      bgColor="background.blue.100"
-                      width={{ base: 'full', md: 'fit-content' }}
-                      _hover={{ bgColor: 'background.blue.100' }}
-                    >
-                      {form.submitButtonLabel}
-                    </Button>
-                  </>
-                )}
-              </FormSubmit>
-            )}
-          </VStack>
-        </Width>
-      </Center>
-    </BackgroundColor>
-  );
-};
+export const FormContent = ({ backgroundColor, width, form }: FormProps) => (
+  <BackgroundColor bgColor={backgroundColor}>
+    <Center w="full">
+      <Width value={width}>
+        <VStack align="stretch" w="full">
+          <Center textAlign="center">
+            <RichText content={form.leader} />
+          </Center>
+          {form.type === 'default' && form.fields.length === 1 ? (
+            <InputGroup size="md">
+              <Field {...form.fields[0]} />
+              <InputRightElement w="6rem">
+                <SubmitButton
+                  label={form.submitButtonLabel || ''}
+                  size="sm"
+                  width="fit-content"
+                />
+              </InputRightElement>
+            </InputGroup>
+          ) : (
+            <FormSubmit
+              formId={form.id}
+              message={form.confirmationMessage}
+              submitButton={
+                <SubmitButton
+                  label={form.submitButtonLabel || ''}
+                  width={{ base: 'full', md: 'fit-content' }}
+                />
+              }
+            >
+              {form.fields.map((field) => (
+                <Field key={uuidv4()} {...field} />
+              ))}
+            </FormSubmit>
+          )}
+        </VStack>
+      </Width>
+    </Center>
+  </BackgroundColor>
+);
 
 export const Form = ({ backgroundColor, width, form }: FormProps) => (
   <>

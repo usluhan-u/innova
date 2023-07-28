@@ -2,7 +2,6 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import { PaginatedDocs } from 'payload/dist/mongoose/types';
 import { Flex, Image, Text } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
 import { tr, enUS } from 'date-fns/locale';
 import { format } from 'date-fns';
 import { PostType } from '../../collections';
@@ -19,7 +18,7 @@ import {
   getCustomPageDataByCondition,
   getCustomPageDataBySlug
 } from '../../api';
-import { Language, useData } from '../../contexts';
+import { Language, useData, useLanguage } from '../../contexts';
 
 interface BlogProps {
   data: PostType | null;
@@ -27,8 +26,8 @@ interface BlogProps {
 }
 
 const Blog = ({ data, relatedData }: BlogProps) => {
+  const { language } = useLanguage();
   const { setLocalizedSlugs } = useData();
-  const router = useRouter();
 
   React.useEffect(() => {
     if (setLocalizedSlugs && typeof setLocalizedSlugs === 'function')
@@ -46,7 +45,7 @@ const Blog = ({ data, relatedData }: BlogProps) => {
       title: name,
       category,
       callToAction: {
-        label: router.locale === 'tr' ? 'Detaylı Bilgi' : 'Read More',
+        label: language === 'tr' ? 'Detaylı Bilgi' : 'Read More',
         type: 'page',
         page: {
           ...item,
@@ -70,12 +69,12 @@ const Blog = ({ data, relatedData }: BlogProps) => {
       <Hero
         {...data.hero}
         description={format(new Date(data.publishDate), 'PP', {
-          locale: router.locale === 'tr' ? tr : enUS
+          locale: language === 'tr' ? tr : enUS
         })}
         breadcrumbs={[
           {
             url: '/home',
-            label: router.locale === 'tr' ? 'Ana Sayfa' : 'Home Page',
+            label: language === 'tr' ? 'Ana Sayfa' : 'Home Page',
             doc: 'home'
           },
           {
@@ -118,7 +117,7 @@ const Blog = ({ data, relatedData }: BlogProps) => {
             </Text>
             <CardGroup
               items={cardGroupItems}
-              locale={(router.locale as Language) || 'tr'}
+              locale={(language as Language) || 'tr'}
             />
           </Flex>
         </Template>

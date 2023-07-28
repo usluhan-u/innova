@@ -21,11 +21,11 @@ const useDataContext = (): Context => {
   return context;
 };
 
-export const DataProvider = ({
-  children
-}: {
+interface DataProviderProps {
   children: React.ReactNode | React.ReactNode[];
-}): JSX.Element => {
+}
+
+export const DataProvider = ({ children }: DataProviderProps): JSX.Element => {
   const [currentLocalizedSlugs, setCurrentLocalizedSlugs] =
     React.useState<LocalizedSlugs>({});
 

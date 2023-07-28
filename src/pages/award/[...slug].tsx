@@ -2,7 +2,6 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import { PaginatedDocs } from 'payload/dist/mongoose/types';
 import { Flex, Image, Text } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
 import { enUS, tr } from 'date-fns/locale';
 import { format } from 'date-fns';
 import { PostType } from '../../collections';
@@ -19,7 +18,7 @@ import {
   getCustomPageDataByCondition,
   getCustomPageDataBySlug
 } from '../../api';
-import { Language, useData } from '../../contexts';
+import { Language, useData, useLanguage } from '../../contexts';
 
 interface AwardProps {
   data: PostType | null;
@@ -27,8 +26,8 @@ interface AwardProps {
 }
 
 const Award = ({ data, relatedData }: AwardProps) => {
+  const { language } = useLanguage();
   const { setLocalizedSlugs } = useData();
-  const router = useRouter();
 
   React.useEffect(() => {
     if (setLocalizedSlugs && typeof setLocalizedSlugs === 'function')
@@ -46,7 +45,7 @@ const Award = ({ data, relatedData }: AwardProps) => {
       title: name,
       category,
       callToAction: {
-        label: router.locale === 'tr' ? 'Detaylı Bilgi' : 'Read More',
+        label: language === 'tr' ? 'Detaylı Bilgi' : 'Read More',
         type: 'page',
         page: {
           ...item,
@@ -70,17 +69,17 @@ const Award = ({ data, relatedData }: AwardProps) => {
       <Hero
         {...data.hero}
         description={format(new Date(data.publishDate), 'PP', {
-          locale: router.locale === 'tr' ? tr : enUS
+          locale: language === 'tr' ? tr : enUS
         })}
         breadcrumbs={[
           {
             url: '/home',
-            label: router.locale === 'tr' ? 'Ana Sayfa' : 'Home Page',
+            label: language === 'tr' ? 'Ana Sayfa' : 'Home Page',
             doc: 'home'
           },
           {
             url: '/awards',
-            label: router.locale === 'tr' ? 'Ödüller' : 'Awards',
+            label: language === 'tr' ? 'Ödüller' : 'Awards',
             doc: 'award'
           },
           ...data.breadcrumbs
@@ -117,7 +116,7 @@ const Award = ({ data, relatedData }: AwardProps) => {
             </Text>
             <CardGroup
               items={cardGroupItems}
-              locale={(router.locale as Language) || 'tr'}
+              locale={(language as Language) || 'tr'}
             />
           </Flex>
         </Template>

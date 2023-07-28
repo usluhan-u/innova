@@ -11,7 +11,6 @@ import {
   useMediaQuery
 } from '@chakra-ui/react';
 import { FiArrowRight } from 'react-icons/fi';
-import { useRouter } from 'next/router';
 import { PageType, PostType } from '../collections';
 import Custom404 from './404';
 import {
@@ -27,7 +26,7 @@ import {
   UnstyledFlippableCard
 } from '../components';
 import { getCustomPageDataByCondition, getPageBySlug } from '../api';
-import { useData } from '../contexts';
+import { useData, useLanguage } from '../contexts';
 
 export interface HomeProps {
   page?: PageType;
@@ -36,8 +35,8 @@ export interface HomeProps {
 }
 
 const Home = ({ page, blogs, successStories }: HomeProps) => {
+  const { language } = useLanguage();
   const { setLocalizedSlugs } = useData();
-  const router = useRouter();
   const [isLargerThanXL] = useMediaQuery('(min-width: 1300px)');
 
   React.useEffect(() => {
@@ -72,7 +71,7 @@ const Home = ({ page, blogs, successStories }: HomeProps) => {
               <Flex w="full" align="center" justify="space-between">
                 <Text fontSize={{ base: 'xl', md: '4xl' }}>Blog</Text>
                 <TextIconCallToAction
-                  label={router.locale === 'tr' ? 'Tüm Yazılar' : 'All Posts'}
+                  label={language === 'tr' ? 'Tüm Yazılar' : 'All Posts'}
                   type="page"
                   page={{
                     slug: '/blogs',
@@ -132,9 +131,7 @@ const Home = ({ page, blogs, successStories }: HomeProps) => {
                           </Text>
                           <ButtonCallToAction
                             label={
-                              router.locale === 'tr'
-                                ? 'Detaylı Bilgi'
-                                : 'Read More'
+                              language === 'tr' ? 'Detaylı Bilgi' : 'Read More'
                             }
                             type="page"
                             page={{
@@ -163,19 +160,15 @@ const Home = ({ page, blogs, successStories }: HomeProps) => {
           <VStack spacing="8" align="stretch" w="full">
             <Flex w="full" align="center" justify="space-between">
               <Text fontSize={{ base: 'xl', md: '4xl' }}>
-                {router.locale === 'tr'
-                  ? 'Başarı Hikayeleri'
-                  : 'Success Stories'}
+                {language === 'tr' ? 'Başarı Hikayeleri' : 'Success Stories'}
               </Text>
               <TextIconCallToAction
-                label={router.locale === 'tr' ? 'Tüm Hikayeler' : 'All Stories'}
+                label={language === 'tr' ? 'Tüm Hikayeler' : 'All Stories'}
                 type="page"
                 page={{
                   slug: '/success-stories',
                   name:
-                    router.locale === 'tr'
-                      ? 'Başarı Hikayeleri'
-                      : 'Success Stories',
+                    language === 'tr' ? 'Başarı Hikayeleri' : 'Success Stories',
                   breadcrumbs: [],
                   meta: {},
                   localizedSlugs: {}
