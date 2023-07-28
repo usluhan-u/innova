@@ -1,7 +1,17 @@
+/* eslint-disable unused-imports/no-unused-imports */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
-import { FormControl, FormErrorMessage } from '@chakra-ui/react';
+import {
+  Checkbox,
+  FormControl,
+  FormErrorMessage,
+  Input,
+  Select,
+  Textarea,
+  VStack
+} from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 import { useForm } from 'react-hook-form';
 import { useLanguage } from '../contexts';
@@ -36,10 +46,9 @@ export const FormSubmit = ({
 
   const onSubmit = React.useCallback(
     async (data: FormValues) => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const dataToSend = Object.entries(data).map(([name, value]) => ({
         field: name,
-        value: 'test'
+        value
       }));
       const response = await submitForm({
         body: {
@@ -54,39 +63,33 @@ export const FormSubmit = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input type="text" {...register('test')} />
-      {/* {childrenArray.map((child) => {
-        return (
-          <input type="text" {...register(child.props.name)} />
-          // <FormControl
-          //   key={uuidv4()}
-          //   isInvalid={Boolean(errors[child.props.name])}
-          // >
-          //   {React.cloneElement(child, {
-          //     ref: {
-          //       ...register(child.props.name, {
-          //         required: child.props.required
-          //           ? language === 'tr'
-          //             ? `Lütfen ${child.props.label} alanını doldurunuz`
-          //             : language === 'en'
-          //             ? `Please fill in the ${child.props.label} field`
-          //             : 'Unknown language'
-          //           : false
-          //       })
-          //     }
-          //   })}
-          //   <FormErrorMessage>
-          //     {errors[child.props.name]?.message}
-          //   </FormErrorMessage>
-          // </FormControl>
-        );
-      })} */}
+      <VStack spacing={2} align="stretch">
+        <Input {...register('fullname')} placeholder="Ad & Soyad" />
+        <Input {...register('telephone')} placeholder="Telefon" />
+        <Input {...register('company')} placeholder="Çalıştığınız Şirket" />
+        <Textarea {...register('message')} placeholder="Mesajınız" />
+        <Select {...register('subject')} w="full">
+          <option value="Recommendation">Öneri</option>
+          <option value="Complaint">Şikayet</option>
+          <option value="Satisfaction">Memnuniyet</option>
+          <option value="New Product / Service Request">
+            Yeni Ürün / Hizmet Talebi
+          </option>
+        </Select>
+        <Checkbox {...register('info')}>
+          Aydınlatma Metni’ni kabul ediyorum.
+        </Checkbox>
+        <Checkbox {...register('consent')}>
+          Ticari elektronik ileti gönderilmesine onay veriyorum.
+        </Checkbox>
+      </VStack>
 
-      {React.Children.map(childrenArray, (child) => (
+      {/* {React.Children.map(childrenArray, (child) => (
         <FormControl
           key={uuidv4()}
           isInvalid={Boolean(errors[child.props.name])}
         >
+          <Input {...register(child.props.name)} />
           {React.cloneElement(child, {
             ref: {
               ...register(child.props.name, {
@@ -104,7 +107,7 @@ export const FormSubmit = ({
             {errors[child.props.name]?.message}
           </FormErrorMessage>
         </FormControl>
-      ))}
+      ))} */}
       {submitButton}
     </form>
   );
