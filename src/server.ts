@@ -18,7 +18,8 @@ const app = express();
 const boilerplate = async () => {
   const transport = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
-    port: parseInt(process.env.EMAIL_PORT || '25', 10)
+    port: parseInt(process.env.EMAIL_PORT || '25', 10),
+    secure: false
   });
 
   await payload.init({
