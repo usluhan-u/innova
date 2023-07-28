@@ -105,46 +105,54 @@ const SubmitButton = ({ label, ...rest }: SubmitButtonProps) => (
   </Button>
 );
 
-export const FormContent = ({ backgroundColor, width, form }: FormProps) => (
-  <BackgroundColor bgColor={backgroundColor}>
-    <Center w="full">
-      <Width value={width}>
-        <VStack align="stretch" w="full">
-          <Center textAlign="center">
-            <RichText content={form.leader} />
-          </Center>
-          {form.type === 'default' && form.fields.length === 1 ? (
-            <InputGroup size="md">
-              <Field {...form.fields[0]} />
-              <InputRightElement w="6rem">
-                <SubmitButton
-                  label={form.submitButtonLabel || ''}
-                  size="sm"
-                  width="fit-content"
-                />
-              </InputRightElement>
-            </InputGroup>
+export const FormContent = ({ backgroundColor, width, form }: FormProps) => {
+  const [formSubmitted, setFormSubmitted] = React.useState(false);
+
+  return (
+    <BackgroundColor bgColor={backgroundColor}>
+      <Center w="full">
+        <Width value={width}>
+          {formSubmitted ? (
+            <Center>{form.confirmationMessage}</Center>
           ) : (
-            <FormSubmit
-              formId={form.id}
-              message={form.confirmationMessage}
-              submitButton={
-                <SubmitButton
-                  label={form.submitButtonLabel || ''}
-                  width={{ base: 'full', md: 'fit-content' }}
-                />
-              }
-            >
-              {form.fields.map((field) => (
-                <Field key={uuidv4()} {...field} />
-              ))}
-            </FormSubmit>
+            <VStack align="stretch" w="full">
+              <Center textAlign="center">
+                <RichText content={form.leader} />
+              </Center>
+              {form.type === 'default' && form.fields.length === 1 ? (
+                <InputGroup size="md">
+                  <Field {...form.fields[0]} />
+                  <InputRightElement w="6rem">
+                    <SubmitButton
+                      label={form.submitButtonLabel || ''}
+                      size="sm"
+                      width="fit-content"
+                    />
+                  </InputRightElement>
+                </InputGroup>
+              ) : (
+                <FormSubmit
+                  formId={form.id}
+                  submitButton={
+                    <SubmitButton
+                      label={form.submitButtonLabel || ''}
+                      width={{ base: 'full', md: 'fit-content' }}
+                    />
+                  }
+                  setSubmitted={setFormSubmitted}
+                >
+                  {form.fields.map((field) => (
+                    <Field key={uuidv4()} {...field} />
+                  ))}
+                </FormSubmit>
+              )}
+            </VStack>
           )}
-        </VStack>
-      </Width>
-    </Center>
-  </BackgroundColor>
-);
+        </Width>
+      </Center>
+    </BackgroundColor>
+  );
+};
 
 export const Form = ({ backgroundColor, width, form }: FormProps) => (
   <>

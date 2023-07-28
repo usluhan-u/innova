@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
@@ -17,15 +16,15 @@ interface FormSubmitProps {
   children: React.ReactNode | React.ReactNode[];
   submitButton: React.ReactNode;
   message?: string;
+  setSubmitted: (value: boolean) => void;
 }
 
 export const FormSubmit = ({
   formId,
   children,
   submitButton,
-  message
+  setSubmitted
 }: FormSubmitProps) => {
-  const [submitted, setSubmitted] = React.useState(false);
   const { language } = useLanguage();
   const {
     register,
@@ -37,6 +36,7 @@ export const FormSubmit = ({
 
   const onSubmit = React.useCallback(
     async (data: FormValues) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const dataToSend = Object.entries(data).map(([name, value]) => ({
         field: name,
         value: 'test'
@@ -51,7 +51,7 @@ export const FormSubmit = ({
 
       setSubmitted(response);
     },
-    [formId]
+    [formId, setSubmitted]
   );
 
   return (
@@ -62,17 +62,17 @@ export const FormSubmit = ({
           isInvalid={Boolean(errors[child.props.name])}
         >
           {React.cloneElement(child, {
-            // refs: {
-            //   ...register(child.props.name, {
-            //     required: child.props.required
-            //       ? language === 'tr'
-            //         ? `Lütfen ${child.props.label} alanını doldurunuz`
-            //         : language === 'en'
-            //         ? `Please fill in the ${child.props.label} field`
-            //         : 'Unknown language'
-            //       : false
-            //   })
-            // }
+            refs: {
+              ...register(child.props.name, {
+                required: child.props.required
+                  ? language === 'tr'
+                    ? `Lütfen ${child.props.label} alanını doldurunuz`
+                    : language === 'en'
+                    ? `Please fill in the ${child.props.label} field`
+                    : 'Unknown language'
+                  : false
+              })
+            }
           })}
           <FormErrorMessage>
             {errors[child.props.name]?.message}
