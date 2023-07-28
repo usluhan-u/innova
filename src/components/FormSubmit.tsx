@@ -76,9 +76,21 @@ export const FormSubmit = ({
             Yeni Ürün / Hizmet Talebi
           </option>
         </Select>
-        <Checkbox {...register('info')}>
-          Aydınlatma Metni’ni kabul ediyorum.
-        </Checkbox>
+        <FormControl isInvalid={Boolean(errors.info)}>
+          <Checkbox
+            {...register('info', {
+              required:
+                language === 'tr'
+                  ? `Lütfen Aydınlatma Metni’ni kabul ediniz.`
+                  : language === 'en'
+                  ? `Please accept the Information Text.`
+                  : 'Unknown language'
+            })}
+          >
+            Aydınlatma Metni’ni kabul ediyorum.
+          </Checkbox>
+          <FormErrorMessage>{errors.info?.message}</FormErrorMessage>
+        </FormControl>
         <Checkbox {...register('consent')}>
           Ticari elektronik ileti gönderilmesine onay veriyorum.
         </Checkbox>
