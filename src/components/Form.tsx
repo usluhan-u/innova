@@ -105,46 +105,62 @@ const SubmitButton = ({ label, ...rest }: SubmitButtonProps) => (
   </Button>
 );
 
-export const FormContent = ({ backgroundColor, width, form }: FormProps) => (
-  <BackgroundColor bgColor={backgroundColor}>
-    <Center w="full">
-      <Width value={width}>
-        <VStack align="stretch" w="full">
-          <Center textAlign="center">
-            <RichText content={form.leader} />
-          </Center>
-          {form.type === 'default' && form.fields.length === 1 ? (
-            <InputGroup size="md">
-              <Field {...form.fields[0]} />
-              <InputRightElement w="6rem">
-                <SubmitButton
-                  label={form.submitButtonLabel || ''}
-                  size="sm"
-                  width="fit-content"
-                />
-              </InputRightElement>
-            </InputGroup>
+export const FormContent = ({ backgroundColor, width, form }: FormProps) => {
+  const [submitted, setSubmitted] = React.useState(false);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setSubmitted(false);
+    }, 3000);
+  }, [submitted]);
+
+  return (
+    <BackgroundColor bgColor={backgroundColor}>
+      <Center w="full">
+        <Width value={width}>
+          {submitted ? (
+            <Center>
+              <RichText content={form.confirmationMessage} />
+            </Center>
           ) : (
-            <FormSubmit
-              formId={form.id}
-              submitButton={
-                <SubmitButton
-                  label={form.submitButtonLabel || ''}
-                  width={{ base: 'full', md: 'fit-content' }}
-                />
-              }
-              setSubmitted={() => {}}
-            >
-              {form.fields.map((field) => (
-                <Field key={uuidv4()} {...field} />
-              ))}
-            </FormSubmit>
+            <VStack align="stretch" w="full">
+              <Center textAlign="center">
+                <RichText content={form.leader} />
+              </Center>
+              {form.type === 'default' && form.fields.length === 1 ? (
+                <InputGroup size="md">
+                  <Field {...form.fields[0]} />
+                  <InputRightElement w="6rem">
+                    <SubmitButton
+                      label={form.submitButtonLabel || ''}
+                      size="sm"
+                      width="fit-content"
+                    />
+                  </InputRightElement>
+                </InputGroup>
+              ) : (
+                <FormSubmit
+                  formId={form.id}
+                  submitButton={
+                    <SubmitButton
+                      label={form.submitButtonLabel || ''}
+                      width={{ base: 'full', md: 'fit-content' }}
+                    />
+                  }
+                  setSubmitted={setSubmitted}
+                >
+                  {form.fields.map((field) => (
+                    <Field key={uuidv4()} {...field} />
+                  ))}
+                </FormSubmit>
+              )}
+            </VStack>
           )}
-        </VStack>
-      </Width>
-    </Center>
-  </BackgroundColor>
-);
+        </Width>
+      </Center>
+    </BackgroundColor>
+  );
+};
 
 export const Form = ({ backgroundColor, width, form }: FormProps) => (
   <>

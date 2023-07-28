@@ -19,7 +19,10 @@ const boilerplate = async () => {
   const transport = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
     port: parseInt(process.env.EMAIL_PORT || '25', 10),
-    secure: false
+    secure: false,
+    tls: {
+      rejectUnauthorized: false
+    }
   });
 
   await payload.init({
