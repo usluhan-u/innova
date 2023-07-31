@@ -223,7 +223,6 @@ export const Hero = ({
           </Container>
         </BackgroundImage>
       )}
-
       {type === 'home' && slider && (
         <DotSlider blockType="dotSlider" slider={slider} />
       )}
