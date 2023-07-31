@@ -15,13 +15,29 @@ const sync = async () => {
     mongoURL: process.env.MONGODB_URI || ''
   });
 
-  const index = client.index('pages');
+  const pagesIndex = client.index('pages');
+  // const blogsIndex = client.index('blogs');
+  const postsIndex = client.index('posts');
 
-  const { docs } = await payload.find({
+  const { docs: pageDocs } = await payload.find({
     collection: 'pages'
   });
 
-  await index.addDocuments(docs);
+  // const { docs: trBlogDocs } = await payload.find({
+  //   collection: 'tr-blogs'
+  // });
+
+  // const { docs: enBlogDocs } = await payload.find({
+  //   collection: 'en-blogs'
+  // });
+
+  const { docs: postDocs } = await payload.find({
+    collection: 'posts'
+  });
+
+  await pagesIndex.addDocuments(pageDocs);
+  // await blogsIndex.addDocuments([...trBlogDocs, ...enBlogDocs]);
+  await postsIndex.addDocuments(postDocs);
 };
 
 sync();
