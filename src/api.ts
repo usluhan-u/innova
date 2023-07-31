@@ -91,11 +91,21 @@ export const getCustomPageDataByCondition = async <T>({
   sortOrder?: 'asc' | 'desc';
 }) => {
   try {
-    const query = await fetch(
-      `${BASE_URL}/${endpoint}?locale=${locale}&fallback-locale=${defaultLocale}&limit=${limit}&page=${page}&sort=${
-        sortOrder === 'desc' && '-'
-      }${sortBy}&where${condition}`
-    );
+    const url = `${BASE_URL}/${endpoint}?locale=${locale}&fallback-locale=${defaultLocale}&where${condition}`;
+
+    if (limit) {
+      url.concat(`&limit=${limit}`);
+    }
+
+    if (page) {
+      url.concat(`&page=${page}`);
+    }
+
+    if (sortBy) {
+      url.concat(`&sort=${sortOrder === 'desc' ? '-' : ''}${sortBy}`);
+    }
+
+    const query = await fetch(url);
 
     const data: T = await query.json();
 

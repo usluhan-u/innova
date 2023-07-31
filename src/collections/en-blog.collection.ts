@@ -16,7 +16,6 @@ import {
   populateDocWithLocalizedSlugs,
   populateValueAfterCaseChange
 } from '../hooks';
-import { getCustomPageDataByCondition } from '../api';
 
 export const EnBlog: CollectionConfig = {
   slug: 'en-blogs',
@@ -90,16 +89,22 @@ export const EnBlog: CollectionConfig = {
       required: true,
       localized: true,
       defaultValue: async () => {
-        const response = await getCustomPageDataByCondition<
-          PaginatedDocs<{ id: string }>
-        >({
-          endpoint: 'post-groups',
-          condition: '[slug][equals]=blog',
-          locale: 'en',
-          defaultLocale: 'tr'
-        });
-        const [group] = response.docs;
-        return group.id;
+        try {
+          const query = await fetch(
+            `${process.env.PAYLOAD_PUBLIC_SERVER_URL}/api/post-groups?locale=en&fallback-locale=tr&where[slug][equals]=blog`
+          );
+
+          const response: PaginatedDocs<{ id: string }> = await query.json();
+
+          const [group] = response.docs;
+          return group.id;
+        } catch (error) {
+          if (error instanceof Error) {
+            throw new Error(JSON.stringify(error));
+          }
+
+          throw new Error('An error occurred');
+        }
       },
       admin: {
         position: 'sidebar',
