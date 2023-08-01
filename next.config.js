@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+// const payload = require('payload');
+
 require('dotenv').config();
 
 /**
@@ -21,7 +23,14 @@ const nextConfig = {
     ignoreDuringBuilds: true
   },
   async redirects() {
+    // const redirects = await payload.find({ collection: 'redirects' });
+
     return [
+      // ...redirects.docs.map(({ from, to }) => ({
+      //   source: `/${from.replace(/^\//, '')}`,
+      //   destination: `/${to.reference.value.slug}`,
+      //   permanent: true
+      // })),
       {
         source: '/',
         destination: '/home',
