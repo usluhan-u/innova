@@ -1,13 +1,9 @@
-/* eslint-disable react/no-unstable-nested-components */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import {
   Button,
   ButtonProps,
   Center,
-  Checkbox,
   Icon,
-  Input,
   InputGroup,
   InputRightElement,
   Popover,
@@ -18,80 +14,21 @@ import {
   PopoverHeader,
   PopoverTrigger,
   Portal,
-  Select,
-  Textarea,
   VStack
 } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
-import {
-  FormFieldBlock,
-  SelectFieldOption
-} from '@payloadcms/plugin-form-builder/types';
 import { FormType } from '../blocks';
-import { RichText, RichTextContentType } from './RichText';
+import { RichText } from './RichText';
 import { BackgroundColor } from './BackgroundColor';
 import { Width } from './Width';
 import { Chat } from '../icons';
-import { FormSubmit } from './FormSubmit';
+import { Field, FormSubmit } from './FormSubmit';
 
 interface FormProps extends Omit<FormType, 'blockType'> {}
 
 interface SubmitButtonProps extends ButtonProps {
   label: string;
 }
-
-const fields: Record<string, React.FC<any>> = {
-  text: ({ label, name }: { label: string; name: string }) => (
-    <Input placeholder={label} name={name} id={name} />
-  ),
-  textarea: ({ label, name }: { label: string; name: string }) => (
-    <Textarea placeholder={label} name={name} id={name} />
-  ),
-  select: ({
-    label,
-    name,
-    options
-  }: {
-    label: string;
-    name: string;
-    options: SelectFieldOption[];
-  }) => (
-    <Select placeholder={label} name={name} id={name} w="full">
-      {options.map((option) => (
-        <option key={uuidv4()} value={option.value}>
-          {option.label}
-        </option>
-      ))}
-    </Select>
-  ),
-  checkbox: ({ label, name }: { label: string; name: string }) => (
-    <Checkbox name={name} id={name}>
-      {label}
-    </Checkbox>
-  ),
-  email: ({ label, name }: { label: string; name: string }) => (
-    <Input type="email" placeholder={label} name={name} id={name} />
-  ),
-  message: ({ message }: { message: RichTextContentType[] }) => (
-    <RichText content={message} />
-  )
-};
-
-const Field = ({
-  blockType,
-  ...rest
-}: FormFieldBlock & {
-  value?: string;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}) => {
-  const Field = fields[blockType];
-
-  if (Field) {
-    return <Field borderColor="border.primary" {...rest} />;
-  }
-
-  return null;
-};
 
 const SubmitButton = ({ label, ...rest }: SubmitButtonProps) => (
   <Button
@@ -107,6 +44,7 @@ const SubmitButton = ({ label, ...rest }: SubmitButtonProps) => (
 
 export const FormContent = ({ backgroundColor, width, form }: FormProps) => {
   const [submitted, setSubmitted] = React.useState(false);
+  const formSubmitRef = React.useRef<HTMLFormElement>(null);
 
   React.useEffect(() => {
     setTimeout(() => {
@@ -140,6 +78,7 @@ export const FormContent = ({ backgroundColor, width, form }: FormProps) => {
                 </InputGroup>
               ) : (
                 <FormSubmit
+                  ref={formSubmitRef}
                   formId={form.id}
                   submitButton={
                     <SubmitButton

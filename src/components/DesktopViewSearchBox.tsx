@@ -88,6 +88,7 @@ export const DesktopViewSearchBox = ({
   setExpanded
 }: DesktopViewSearchBoxProps) => {
   const [isEditing, setIsEditing] = useBoolean();
+  const searchBoxRef = React.useRef<any>(null);
 
   const client = instantMeiliSearch(
     process.env.NEXT_PUBLIC_MEILISEARCH_URL || 'http://localhost:7700',
@@ -109,6 +110,7 @@ export const DesktopViewSearchBox = ({
     (value: boolean) => (event: React.MouseEvent<HTMLDivElement>) => {
       event.stopPropagation();
 
+      searchBoxRef.current?.focus();
       setExpanded(value);
     };
 
@@ -130,6 +132,7 @@ export const DesktopViewSearchBox = ({
           isOpen={isEditing}
           onOpen={setIsEditing.on}
           onClose={setIsEditing.off}
+          initialFocusRef={searchBoxRef}
           closeOnBlur={false}
           lazyBehavior="keepMounted"
           placement="bottom-start"
@@ -142,7 +145,7 @@ export const DesktopViewSearchBox = ({
                   <InputLeftElement pos="relative">
                     <Icon as={FiSearch} boxSize={5} />
                   </InputLeftElement>
-                  <SearchBox />
+                  <SearchBox ref={searchBoxRef} />
                 </>
               )}
             </>

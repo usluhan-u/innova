@@ -1,5 +1,3 @@
-/* eslint-disable unused-imports/no-unused-imports */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
@@ -13,9 +11,14 @@ import {
   VStack
 } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
-import { useForm } from 'react-hook-form';
-import { useLanguage } from '../contexts';
+import { UseFormRegister, useForm } from 'react-hook-form';
+import {
+  FormFieldBlock,
+  SelectFieldOption
+} from '@payloadcms/plugin-form-builder/types';
+import { Language, useLanguage } from '../contexts';
 import { submitForm } from '../api';
+import { RichText, RichTextContentType } from './RichText';
 
 export interface FormValues {
   [k: string]: string;
@@ -29,98 +32,259 @@ interface FormSubmitProps {
   setSubmitted: (value: boolean) => void;
 }
 
-export const FormSubmit = ({
-  formId,
-  children,
-  submitButton,
-  setSubmitted
-}: FormSubmitProps) => {
-  const { language } = useLanguage();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<FormValues>();
-
-  const childrenArray: any = React.Children.toArray(children);
-
-  const onSubmit = React.useCallback(
-    async (data: FormValues) => {
-      const dataToSend = Object.entries(data).map(([name, value]) => ({
-        field: name,
-        value
-      }));
-      const response = await submitForm({
-        body: {
-          form: formId,
-          submissionData: dataToSend
-        }
-      });
-      setSubmitted(response);
-    },
-    [formId, setSubmitted]
-  );
-
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <VStack spacing={2} align="stretch">
-        <Input {...register('fullname')} placeholder="Ad & Soyad" />
-        <Input {...register('telephone')} placeholder="Telefon" />
-        <Input {...register('company')} placeholder="Çalıştığınız Şirket" />
-        <Textarea {...register('message')} placeholder="Mesajınız" />
-        <Select {...register('subject')} w="full">
-          <option value="Recommendation">Öneri</option>
-          <option value="Complaint">Şikayet</option>
-          <option value="Satisfaction">Memnuniyet</option>
-          <option value="New Product / Service Request">
-            Yeni Ürün / Hizmet Talebi
-          </option>
-        </Select>
-        <FormControl isInvalid={Boolean(errors.info)}>
-          <Checkbox
-            {...register('info', {
-              required:
-                language === 'tr'
-                  ? `Lütfen Aydınlatma Metni’ni kabul ediniz.`
-                  : language === 'en'
-                  ? `Please accept the Information Text.`
-                  : 'Unknown language'
-            })}
-          >
-            Aydınlatma Metni’ni kabul ediyorum.
-          </Checkbox>
-          <FormErrorMessage>{errors.info?.message}</FormErrorMessage>
-        </FormControl>
-        <Checkbox {...register('consent')}>
-          Ticari elektronik ileti gönderilmesine onay veriyorum.
-        </Checkbox>
-      </VStack>
-
-      {/* {React.Children.map(childrenArray, (child) => (
-        <FormControl
-          key={uuidv4()}
-          isInvalid={Boolean(errors[child.props.name])}
-        >
-          <Input {...register(child.props.name)} />
-          {React.cloneElement(child, {
-            ref: {
-              ...register(child.props.name, {
-                required: child.props.required
-                  ? language === 'tr'
-                    ? `Lütfen ${child.props.label} alanını doldurunuz`
-                    : language === 'en'
-                    ? `Please fill in the ${child.props.label} field`
-                    : 'Unknown language'
-                  : false
-              })
-            }
-          })}
-          <FormErrorMessage>
-            {errors[child.props.name]?.message}
-          </FormErrorMessage>
-        </FormControl>
-      ))} */}
-      {submitButton}
-    </form>
-  );
+const fields: Record<string, React.FC<any>> = {
+  text: ({
+    label,
+    name,
+    language,
+    required,
+    register
+  }: {
+    label: string;
+    name: string;
+    language: Language;
+    required: boolean;
+    register: UseFormRegister<any>;
+  }) => (
+    <Input
+      {...register(name, {
+        required: required
+          ? language === 'tr'
+            ? `Lütfen ${label} alanını doldurunuz`
+            : language === 'en'
+            ? `Please fill in the ${label} field`
+            : 'Unknown language'
+          : false
+      })}
+      placeholder={label}
+      name={name}
+      id={name}
+    />
+  ),
+  textarea: ({
+    label,
+    name,
+    language,
+    required,
+    register
+  }: {
+    label: string;
+    name: string;
+    language: Language;
+    required: boolean;
+    register: UseFormRegister<any>;
+  }) => (
+    <Textarea
+      {...register(name, {
+        required: required
+          ? language === 'tr'
+            ? `Lütfen ${label} alanını doldurunuz`
+            : language === 'en'
+            ? `Please fill in the ${label} field`
+            : 'Unknown language'
+          : false
+      })}
+      placeholder={label}
+      name={name}
+      id={name}
+    />
+  ),
+  select: ({
+    label,
+    name,
+    options,
+    language,
+    required,
+    register
+  }: {
+    label: string;
+    name: string;
+    options: SelectFieldOption[];
+    language: Language;
+    required: boolean;
+    register: UseFormRegister<any>;
+  }) => (
+    <Select
+      {...register(name, {
+        required: required
+          ? language === 'tr'
+            ? `Lütfen ${label} alanını doldurunuz`
+            : language === 'en'
+            ? `Please fill in the ${label} field`
+            : 'Unknown language'
+          : false
+      })}
+      placeholder={label}
+      name={name}
+      id={name}
+      w="full"
+    >
+      {options.map((option) => (
+        <option key={uuidv4()} value={option.value.trim()}>
+          {option.label}
+        </option>
+      ))}
+    </Select>
+  ),
+  checkbox: ({
+    label,
+    name,
+    language,
+    required,
+    register
+  }: {
+    label: string;
+    name: string;
+    language: Language;
+    required: boolean;
+    register: UseFormRegister<any>;
+  }) => (
+    <Checkbox
+      {...register(name, {
+        required: required
+          ? language === 'tr'
+            ? `Lütfen ${label} alanını doldurunuz`
+            : language === 'en'
+            ? `Please fill in the ${label} field`
+            : 'Unknown language'
+          : false
+      })}
+      name={name}
+      id={name}
+    >
+      {label}
+    </Checkbox>
+  ),
+  email: ({
+    label,
+    name,
+    language,
+    required,
+    register
+  }: {
+    label: string;
+    name: string;
+    language: Language;
+    required: boolean;
+    register: UseFormRegister<any>;
+  }) => (
+    <Input
+      {...register(name, {
+        required: required
+          ? language === 'tr'
+            ? `Lütfen ${label} alanını doldurunuz`
+            : language === 'en'
+            ? `Please fill in the ${label} field`
+            : 'Unknown language'
+          : false
+      })}
+      type="email"
+      placeholder={label}
+      name={name}
+      id={name}
+    />
+  ),
+  message: ({
+    label,
+    name,
+    message,
+    language,
+    required,
+    register
+  }: {
+    label: string;
+    name: string;
+    message: RichTextContentType[];
+    language: Language;
+    required: boolean;
+    register: UseFormRegister<any>;
+  }) => (
+    <RichText
+      {...register(name, {
+        required: required
+          ? language === 'tr'
+            ? `Lütfen ${label} alanını doldurunuz`
+            : language === 'en'
+            ? `Please fill in the ${label} field`
+            : 'Unknown language'
+          : false
+      })}
+      content={message}
+    />
+  )
 };
+
+export const Field = ({
+  blockType,
+  ...rest
+}: FormFieldBlock & {
+  value?: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}) => {
+  const Field = fields[blockType];
+
+  if (Field) {
+    return <Field borderColor="border.primary" {...rest} />;
+  }
+
+  return null;
+};
+
+export const FormSubmit = React.forwardRef<HTMLFormElement, FormSubmitProps>(
+  ({ formId, children, submitButton, setSubmitted }: FormSubmitProps, ref) => {
+    const { language } = useLanguage();
+    const {
+      register,
+      handleSubmit,
+      formState: { errors }
+    } = useForm<FormValues>();
+
+    const onSubmit = React.useCallback(
+      async (data: FormValues) => {
+        const dataToSend = Object.entries(data).map(([name, value]) => ({
+          field: name,
+          value
+        }));
+        const response = await submitForm({
+          body: {
+            form: formId,
+            submissionData: dataToSend
+          }
+        });
+        setSubmitted(response);
+      },
+      [formId, setSubmitted]
+    );
+
+    return (
+      <form onSubmit={handleSubmit(onSubmit)} ref={ref}>
+        <VStack spacing={2} align="stretch">
+          {Array.isArray(children)
+            ? children.map((child: any) =>
+                child.props.name ? (
+                  <FormControl
+                    key={uuidv4()}
+                    isInvalid={Boolean(errors[child.props.name])}
+                  >
+                    {React.createElement(child.type, {
+                      ...{
+                        ...child.props,
+                        register,
+                        language
+                      }
+                    })}
+                    <FormErrorMessage>
+                      {errors[child.props.name]?.message}
+                    </FormErrorMessage>
+                  </FormControl>
+                ) : (
+                  child
+                )
+              )
+            : children}
+        </VStack>
+        {submitButton}
+      </form>
+    );
+  }
+);

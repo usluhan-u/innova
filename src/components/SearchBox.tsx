@@ -7,13 +7,20 @@ interface SearchBoxProps {
   refine: (value: string) => void;
 }
 
-export const SearchBox = connectSearchBox(
-  ({ currentRefinement, refine }: SearchBoxProps) => (
+const Search = React.forwardRef(
+  (props: SearchBoxProps, ref: React.ForwardedRef<HTMLInputElement>) => (
     <Input
+      border="1p solid red"
       type="search"
       variant="unstyled"
-      value={currentRefinement}
-      onChange={(event) => refine(event.currentTarget.value)}
+      w="full"
+      value={props.currentRefinement}
+      ref={ref}
+      onChange={(event) => props.refine(event.currentTarget.value)}
     />
   )
 );
+
+export const SearchBox = connectSearchBox(({ currentRefinement, refine }) => (
+  <Search currentRefinement={currentRefinement} refine={refine} />
+));
