@@ -25,9 +25,9 @@ export const ExternalLink = ({
       href={escapeHTML(href)}
       scroll={false}
       textDecoration="none"
+      _hover={{ textDecoration: 'none' }}
       {...newTabProps}
       {...rest}
-      _hover={{ textDecoration: 'none' }}
     >
       {children}
     </Link>

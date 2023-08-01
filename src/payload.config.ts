@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import redirects from '@payloadcms/plugin-redirects';
 import nestedDocs from '@payloadcms/plugin-nested-docs';
 import seo from '@payloadcms/plugin-seo';
-import formBuilder from '@payloadcms/plugin-form-builder';
+import formBuilder, { fields } from '@payloadcms/plugin-form-builder';
 import {
   Category,
   EnBlog,
@@ -75,6 +75,70 @@ export default buildConfig({
   },
   plugins: [
     formBuilder({
+      fields: {
+        checkbox: {
+          ...fields.checkbox,
+          fields: [
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'name',
+                  label: 'Name (lowercase, no special characters)',
+                  type: 'text',
+                  required: true,
+                  admin: {
+                    width: '50%'
+                  }
+                },
+                {
+                  name: 'label',
+                  label: 'Label',
+                  type: 'text',
+                  localized: true,
+                  admin: {
+                    width: '50%'
+                  }
+                }
+              ]
+            },
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'width',
+                  label: 'Field Width (percentage)',
+                  type: 'number'
+                },
+                {
+                  name: 'required',
+                  label: 'Required',
+                  type: 'checkbox'
+                }
+              ]
+            },
+            {
+              name: 'defaultValue',
+              label: 'Default Value',
+              type: 'checkbox'
+            },
+            {
+              name: 'link',
+              label: 'Link',
+              type: 'checkbox'
+            },
+            {
+              name: 'url',
+              label: 'URL',
+              type: 'text',
+              required: true,
+              admin: {
+                condition: (_, siblingData) => siblingData.link
+              }
+            }
+          ]
+        }
+      },
       formOverrides: {
         fields: [
           RichText({

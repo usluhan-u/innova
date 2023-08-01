@@ -3,10 +3,12 @@
 import React from 'react';
 import {
   Checkbox,
+  Flex,
   FormControl,
   FormErrorMessage,
   Input,
   Select,
+  Text,
   Textarea,
   VStack
 } from '@chakra-ui/react';
@@ -19,6 +21,7 @@ import {
 import { Language, useLanguage } from '../contexts';
 import { submitForm } from '../api';
 import { RichText, RichTextContentType } from './RichText';
+import { ExternalLink } from './ExternalLink';
 
 export interface FormValues {
   [k: string]: string;
@@ -129,31 +132,63 @@ const fields: Record<string, React.FC<any>> = {
   checkbox: ({
     label,
     name,
+    link,
+    url,
     language,
     required,
     register
   }: {
     label: string;
     name: string;
+    link: boolean;
+    url?: string;
     language: Language;
     required: boolean;
     register: UseFormRegister<any>;
   }) => (
-    <Checkbox
-      {...register(name, {
-        required: required
-          ? language === 'tr'
-            ? `Lütfen ${label} alanını doldurunuz`
-            : language === 'en'
-            ? `Please fill in the ${label} field`
-            : 'Unknown language'
-          : false
-      })}
-      name={name}
-      id={name}
-    >
-      {label}
-    </Checkbox>
+    <>
+      {link && url ? (
+        <Flex align="center" gap="2">
+          <Checkbox
+            {...register(name, {
+              required: required
+                ? language === 'tr'
+                  ? `Lütfen ${label} alanını doldurunuz`
+                  : language === 'en'
+                  ? `Please fill in the ${label} field`
+                  : 'Unknown language'
+                : false
+            })}
+            name={name}
+            id={name}
+          />
+          <ExternalLink
+            href={url}
+            textDecor="underline"
+            _hover={{ textDecor: 'underline' }}
+            newTab
+          >
+            <Text fontSize="sm">{label}</Text>
+          </ExternalLink>
+        </Flex>
+      ) : (
+        <Checkbox
+          {...register(name, {
+            required: required
+              ? language === 'tr'
+                ? `Lütfen ${label} alanını doldurunuz`
+                : language === 'en'
+                ? `Please fill in the ${label} field`
+                : 'Unknown language'
+              : false
+          })}
+          name={name}
+          id={name}
+        >
+          <Text fontSize="sm">{label}</Text>
+        </Checkbox>
+      )}
+    </>
   ),
   email: ({
     label,
@@ -273,7 +308,7 @@ export const FormSubmit = React.forwardRef<HTMLFormElement, FormSubmitProps>(
                         language
                       }
                     })}
-                    <FormErrorMessage>
+                    <FormErrorMessage fontSize="xs">
                       {errors[child.props.name]?.message}
                     </FormErrorMessage>
                   </FormControl>
