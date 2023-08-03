@@ -13,8 +13,6 @@
     "build:payload": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload build",
     "build": "cross-env NODE_ENV=production rimraf .next build dist && yarn build:payload && yarn build:server && yarn copyfiles:media && yarn copyfiles:lottie && yarn build:client",
     "serve": "cross-env NODE_ENV=production PAYLOAD_CONFIG_PATH=dist/src/payload.config.js node dist/src/server.js",
-    "syncsearch:dev": "ts-node src/syncsearch.ts",
-    "syncsearch:prod": "node src/syncsearch.js",
     "lint": "eslint src/**/*.{ts,tsx} --fix",
     "format": "prettier --write src/**/*.{ts,tsx}",
     "husky": "husky install"

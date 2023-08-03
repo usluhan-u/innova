@@ -7,6 +7,7 @@ import nextBuild from 'next/dist/build';
 import dotenv from 'dotenv';
 import nodemailer from 'nodemailer';
 import { seed } from './seed';
+import { meilisearch } from './meilisearch';
 
 dotenv.config();
 
@@ -40,6 +41,8 @@ const boilerplate = async () => {
       payload.logger.info(`Payload API URL: ${payload.getAPIURL()}`);
     }
   });
+
+  await meilisearch(payload);
 
   if (process.env.DB_SEED === 'true') {
     payload.logger.info('Seeding database...');
