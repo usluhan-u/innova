@@ -125,13 +125,15 @@ export default buildConfig({
             {
               name: 'link',
               label: 'Link',
-              type: 'checkbox'
+              type: 'checkbox',
+              localized: true
             },
             {
               name: 'url',
               label: 'URL',
               type: 'text',
               required: true,
+              localized: true,
               admin: {
                 condition: (_, siblingData) => siblingData.link
               }
