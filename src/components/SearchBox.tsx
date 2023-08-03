@@ -11,7 +11,6 @@ const Search = React.forwardRef(
   (props: SearchBoxProps, ref: React.ForwardedRef<HTMLInputElement>) => (
     <Input
       border="1p solid red"
-      type="search"
       variant="unstyled"
       w="full"
       value={props.currentRefinement}

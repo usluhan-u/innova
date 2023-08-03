@@ -9122,7 +9122,7 @@ __metadata:
     nodemailer: ^6.9.4
     nodemon: ^3.0.1
     payload: ^1.11.7
-    prettier: ^3.0.0
+    prettier: ^3.0.1
     qs: ^6.11.2
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -9130,6 +9130,7 @@ __metadata:
     react-hook-form: ^7.45.2
     react-icons: ^4.10.1
     react-instantsearch-dom: ^6.40.4
+    react-instantsearch-hooks-web: ^6.47.3
     react-player: ^2.12.0
     rimraf: ^5.0.1
     slate: ^0.94.1
@@ -9141,7 +9142,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"instantsearch.js@npm:^4.56.8":
+"instantsearch.js@npm:4.56.8, instantsearch.js@npm:^4.56.8":
   version: 4.56.8
   resolution: "instantsearch.js@npm:4.56.8"
   dependencies:
@@ -12550,12 +12551,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "prettier@npm:3.0.0"
+"prettier@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "prettier@npm:3.0.1"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 6a832876a1552dc58330d2467874e5a0b46b9ccbfc5d3531eb69d15684743e7f83dc9fbd202db6270446deba9c82b79d24383d09924c462b457136a759425e33
+  checksum: e1f3f16c7fe0495de3faa182597871f74927d787cce3c52095a66ff5d7eacc05173371d5f58bf12141a0a1b6bfe739a338531d6cf18b92c7256c1319f2c84e73
   languageName: node
   linkType: hard
 
@@ -12962,6 +12963,36 @@ __metadata:
     react: ">= 16.3.0 < 19"
     react-dom: ">= 16.3.0 < 19"
   checksum: 401174b5a5aa9362a9aef17c8bb120d85b69e19d9e63ed193b08534e6695b306bd768801e7be1ed36d4f7d973a2efb6eb49d8a9fc8bb81936da89fcdd2a2d603
+  languageName: node
+  linkType: hard
+
+"react-instantsearch-hooks-web@npm:^6.47.3":
+  version: 6.47.3
+  resolution: "react-instantsearch-hooks-web@npm:6.47.3"
+  dependencies:
+    "@babel/runtime": ^7.1.2
+    instantsearch.js: 4.56.8
+    react-instantsearch-hooks: 6.47.3
+  peerDependencies:
+    algoliasearch: ">= 3.1 < 5"
+    react: ">= 16.8.0 < 19"
+    react-dom: ">= 16.8.0 < 19"
+  checksum: 904c6073156dc885e9979582f529165eb7aec1041a8fc9d431bcefb5b280bcd061921c9c14f4c34dde3d5bd78bc11106e93c2fbf25e176166b72735a9cde56eb
+  languageName: node
+  linkType: hard
+
+"react-instantsearch-hooks@npm:6.47.3":
+  version: 6.47.3
+  resolution: "react-instantsearch-hooks@npm:6.47.3"
+  dependencies:
+    "@babel/runtime": ^7.1.2
+    algoliasearch-helper: 3.14.0
+    instantsearch.js: 4.56.8
+    use-sync-external-store: ^1.0.0
+  peerDependencies:
+    algoliasearch: ">= 3.1 < 5"
+    react: ">= 16.8.0 < 19"
+  checksum: 10ca49c19349fefe0ed5803bdf4100a61fa46a3197346817ae94543d331d5c448fa5387b785048b7d4a7789a30b6072dc5a81c27027d4038f39fb7dfab9b949b
   languageName: node
   linkType: hard
 
@@ -15243,6 +15274,15 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 925d1922f9853e516eaad526b6fed1be38008073067274f0ecc3f56b17bb8ab63480140dd7c271f94150027c996cea4efe83d3e3525e8f3eda22055f6a39220b
+  languageName: node
+  linkType: hard
+
+"use-sync-external-store@npm:^1.0.0":
+  version: 1.2.0
+  resolution: "use-sync-external-store@npm:1.2.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 5c639e0f8da3521d605f59ce5be9e094ca772bd44a4ce7322b055a6f58eeed8dda3c94cabd90c7a41fb6fa852210092008afe48f7038792fd47501f33299116a
   languageName: node
   linkType: hard
 

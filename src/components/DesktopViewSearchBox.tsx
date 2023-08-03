@@ -1,7 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
-import { InstantSearch, connectStateResults } from 'react-instantsearch-dom';
 import {
+  Configure,
+  Index,
+  InstantSearch,
+  connectInfiniteHits
+} from 'react-instantsearch-dom';
+import {
+  Flex,
   HStack,
   Icon,
   InputGroup,
@@ -20,19 +26,14 @@ import {
 import { FiSearch } from 'react-icons/fi';
 import { IoClose } from 'react-icons/io5';
 import { instantMeiliSearch } from '@meilisearch/instant-meilisearch';
-import { v4 as uuidv4 } from 'uuid';
 import { FaArrowRight } from 'react-icons/fa';
+import { v4 as uuidv4 } from 'uuid';
 import { SearchBox } from './SearchBox';
 import { InternalLink } from './InternalLink';
-import { PageType } from '../collections';
+import { PageType, PostType } from '../collections';
 
 interface HitProps {
-  hit: PageType;
-}
-
-interface HitsProps {
-  searchState: any;
-  searchResults: any;
+  hit: PageType | PostType;
 }
 
 export interface DesktopViewSearchBoxProps {
@@ -40,48 +41,74 @@ export interface DesktopViewSearchBoxProps {
   setExpanded: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Hit = ({ hit }: HitProps) => (
-  <InternalLink slug={hit.slug}>
-    <HStack
-      align="center"
-      justify="space-between"
-      boxSize="full"
-      bgColor="background.secondary"
-      p="3"
-      borderRadius="lg"
-      _hover={{
-        bgColor: 'background.blue.100',
-        color: 'text.light'
-      }}
-    >
-      <VStack boxSize="full" align="flex-start" spacing={0}>
-        <Text>{hit.hero?.title}</Text>
-        <Text>{hit.hero?.description}</Text>
-      </VStack>
-      <Icon as={FaArrowRight} />
-    </HStack>
-  </InternalLink>
-);
+const Hit = ({ hit }: HitProps) => {
+  const groupSlug: string | undefined = (hit as PostType).group?.slug;
 
-const Hits = connectStateResults(
-  ({ searchResults, searchState }: HitsProps) => {
-    const validQuery = searchState.query?.length >= 1;
+  return (
+    hit.slug && (
+      <InternalLink slug={groupSlug ? `${groupSlug}/${hit.slug}` : hit.slug}>
+        <HStack
+          align="center"
+          justify="space-between"
+          boxSize="full"
+          bgColor="background.secondary"
+          p="3"
+          borderRadius="lg"
+          _hover={{
+            bgColor: 'background.blue.100',
+            color: 'text.light'
+          }}
+        >
+          <VStack boxSize="full" align="flex-start" spacing={0}>
+            <Text>{hit.hero?.title}</Text>
+            <Text>{hit.hero?.description}</Text>
+          </VStack>
+          <Icon as={FaArrowRight} />
+        </HStack>
+      </InternalLink>
+    )
+  );
+};
 
-    return (
-      <>
-        {searchResults?.hits.length > 0 && validQuery && (
-          <List spacing={3}>
-            {searchResults.hits.map((hit: PageType) => (
-              <ListItem key={uuidv4()}>
-                <Hit hit={hit} />
-              </ListItem>
-            ))}
-          </List>
-        )}
-      </>
-    );
-  }
-);
+const Hits = connectInfiniteHits(({ hasMore, hits, refineNext }) => {
+  // const { hits, isLastPage, showMore } = useInfiniteHits();
+  const sentinelRef = React.useRef(null);
+
+  React.useEffect(() => {
+    if (sentinelRef.current !== null) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && hasMore) {
+            refineNext();
+          }
+        });
+      });
+
+      observer.observe(sentinelRef.current);
+
+      return () => {
+        observer.disconnect();
+      };
+    }
+
+    return () => {};
+  }, [hasMore, refineNext]);
+
+  return (
+    <>
+      {hits.length > 0 && (
+        <List spacing={3}>
+          {hits.map((hit) => (
+            <ListItem key={uuidv4()}>
+              <Hit hit={hit} />
+            </ListItem>
+          ))}
+          <ListItem ref={sentinelRef} aria-hidden="true" />
+        </List>
+      )}
+    </>
+  );
+});
 
 export const DesktopViewSearchBox = ({
   expanded,
@@ -90,7 +117,7 @@ export const DesktopViewSearchBox = ({
   const [isEditing, setIsEditing] = useBoolean();
   const searchBoxRef = React.useRef<any>(null);
 
-  const client = instantMeiliSearch(
+  const meiliSearchClient = instantMeiliSearch(
     process.env.NEXT_PUBLIC_MEILISEARCH_URL || 'http://localhost:7700',
     process.env.NEXT_PUBLIC_MEILISEARCH_MASTER_KEY || '',
     {
@@ -105,6 +132,29 @@ export const DesktopViewSearchBox = ({
       }
     }
   );
+
+  const client = {
+    ...meiliSearchClient,
+    search(requests: any) {
+      if (requests.every(({ params }: { params: any }) => !params.query)) {
+        return Promise.resolve({
+          results: requests.map(() => ({
+            hits: [],
+            nbHits: 0,
+            nbPages: 0,
+            page: 0,
+            processingTimeMS: 0,
+            hitsPerPage: 0,
+            exhaustiveNbHits: false,
+            query: '',
+            params: ''
+          }))
+        });
+      }
+
+      return meiliSearchClient.search(requests);
+    }
+  };
 
   const handleExpanded =
     (value: boolean) => (event: React.MouseEvent<HTMLDivElement>) => {
@@ -123,8 +173,10 @@ export const DesktopViewSearchBox = ({
             width: '100%'
           },
           '.chakra-popover__content': {
+            overflowY: 'auto',
             width: '100%',
-            minHeight: '5rem'
+            minH: '5rem',
+            maxH: '25rem'
           }
         }}
       >
@@ -162,7 +214,20 @@ export const DesktopViewSearchBox = ({
             </InputRightElement>
           </PopoverTrigger>
           <PopoverContent p={3}>
-            <Hits />
+            <Flex flexDir="column" gap={3}>
+              <Index indexName="pages">
+                <Configure />
+                <Hits />
+              </Index>
+              <Index indexName="blogs">
+                <Configure />
+                <Hits />
+              </Index>
+              <Index indexName="posts">
+                <Configure />
+                <Hits />
+              </Index>
+            </Flex>
           </PopoverContent>
         </Popover>
       </InputGroup>

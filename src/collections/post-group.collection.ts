@@ -4,6 +4,7 @@ import { Slug } from '../fields';
 
 export interface PostGroupType {
   name: string;
+  slug: string;
 }
 
 export const PostGroup: CollectionConfig = {
