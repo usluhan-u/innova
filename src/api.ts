@@ -45,7 +45,7 @@ export const getPageBySlug = async <T>({
     defaultLocale
   });
 
-export const getCustomPageData = async <T>({
+export const getCustomData = async <T>({
   endpoint,
   locale,
   defaultLocale

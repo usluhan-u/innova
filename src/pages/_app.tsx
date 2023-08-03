@@ -12,7 +12,7 @@ import { Router } from 'next/router';
 import { theme } from '../theme';
 import { FooterType, MenuType, SocialMediaType } from '../globals';
 import { Footer, Form, Header } from '../components';
-import { getCustomPageData, getCustomPageDataByCondition } from '../api';
+import { getCustomData, getCustomPageDataByCondition } from '../api';
 import { ExtendedFormBuilder } from '../blocks';
 import { DataProvider, LanguageProvider } from '../contexts';
 
@@ -82,17 +82,17 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
   const appProps = await App.getInitialProps(appContext);
 
   const [socialMedia, footer, menu, floatForm] = await Promise.all([
-    getCustomPageData<SocialMediaType>({
+    getCustomData<SocialMediaType>({
       endpoint: 'globals/social-media',
       locale: appContext.ctx.locale,
       defaultLocale: appContext.ctx.defaultLocale
     }),
-    getCustomPageData<FooterType>({
+    getCustomData<FooterType>({
       endpoint: 'globals/footer',
       locale: appContext.ctx.locale,
       defaultLocale: appContext.ctx.defaultLocale
     }),
-    getCustomPageData<MenuType>({
+    getCustomData<MenuType>({
       endpoint: 'globals/menu',
       locale: appContext.ctx.locale,
       defaultLocale: appContext.ctx.defaultLocale

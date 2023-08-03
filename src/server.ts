@@ -13,6 +13,7 @@ dotenv.config();
 
 const DEV = process.env.NODE_ENV !== 'production';
 const PORT = parseInt(process.env.PORT || '3000', 10);
+const HOSTNAME = process.env.HOSTNAME || 'localhost';
 
 const app = express();
 
@@ -77,7 +78,11 @@ const boilerplate = async () => {
   }
 
   if (!process.env.NEXT_BUILD) {
-    const nextApp = next({ dev: DEV });
+    const nextApp = next({
+      dev: DEV,
+      hostname: HOSTNAME,
+      port: PORT
+    });
     const nextHandler = nextApp.getRequestHandler();
 
     app.get(
