@@ -16,27 +16,27 @@ const sync = async () => {
   });
 
   const pagesIndex = client.index('pages');
-  // const blogsIndex = client.index('blogs');
+  const blogsIndex = client.index('blogs');
   const postsIndex = client.index('posts');
 
   const { docs: pageDocs } = await payload.find({
     collection: 'pages'
   });
 
-  // const { docs: trBlogDocs } = await payload.find({
-  //   collection: 'tr-blogs'
-  // });
+  const { docs: trBlogDocs } = await payload.find({
+    collection: 'tr-blogs'
+  });
 
-  // const { docs: enBlogDocs } = await payload.find({
-  //   collection: 'en-blogs'
-  // });
+  const { docs: enBlogDocs } = await payload.find({
+    collection: 'en-blogs'
+  });
 
   const { docs: postDocs } = await payload.find({
     collection: 'posts'
   });
 
   await pagesIndex.addDocuments(pageDocs);
-  // await blogsIndex.addDocuments([...trBlogDocs, ...enBlogDocs]);
+  await blogsIndex.addDocuments([...trBlogDocs, ...enBlogDocs]);
   await postsIndex.addDocuments(postDocs);
 };
 

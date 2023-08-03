@@ -6,7 +6,6 @@ import next from 'next';
 import nextBuild from 'next/dist/build';
 import dotenv from 'dotenv';
 import nodemailer from 'nodemailer';
-import { MeiliSearch } from 'meilisearch';
 import { seed } from './seed';
 
 dotenv.config();
@@ -27,10 +26,10 @@ const boilerplate = async () => {
     }
   });
 
-  const client = new MeiliSearch({
-    host: process.env.NEXT_PUBLIC_MEILISEARCH_URL || 'http://localhost:7700',
-    apiKey: process.env.NEXT_PUBLIC_MEILISEARCH_MASTER_KEY || ''
-  });
+  // const client = new MeiliSearch({
+  //   host: process.env.NEXT_PUBLIC_MEILISEARCH_URL || 'http://localhost:7700',
+  //   apiKey: process.env.NEXT_PUBLIC_MEILISEARCH_MASTER_KEY || ''
+  // });
 
   await payload.init({
     secret: process.env.PAYLOAD_SECRET_KEY || '',
@@ -47,29 +46,29 @@ const boilerplate = async () => {
     }
   });
 
-  const pagesIndex = client.index('pages');
-  const blogsIndex = client.index('blogs');
-  const postsIndex = client.index('posts');
+  // const pagesIndex = client.index('pages');
+  // const blogsIndex = client.index('blogs');
+  // const postsIndex = client.index('posts');
 
-  const { docs: pageDocs } = await payload.find({
-    collection: 'pages'
-  });
+  // const { docs: pageDocs } = await payload.find({
+  //   collection: 'pages'
+  // });
 
-  const { docs: trBlogDocs } = await payload.find({
-    collection: 'tr-blogs'
-  });
+  // const { docs: trBlogDocs } = await payload.find({
+  //   collection: 'tr-blogs'
+  // });
 
-  const { docs: enBlogDocs } = await payload.find({
-    collection: 'en-blogs'
-  });
+  // const { docs: enBlogDocs } = await payload.find({
+  //   collection: 'en-blogs'
+  // });
 
-  const { docs: postDocs } = await payload.find({
-    collection: 'posts'
-  });
+  // const { docs: postDocs } = await payload.find({
+  //   collection: 'posts'
+  // });
 
-  await pagesIndex.addDocuments(pageDocs);
-  await blogsIndex.addDocuments([...trBlogDocs, ...enBlogDocs]);
-  await postsIndex.addDocuments(postDocs);
+  // await pagesIndex.addDocuments(pageDocs);
+  // await blogsIndex.addDocuments([...trBlogDocs, ...enBlogDocs]);
+  // await postsIndex.addDocuments(postDocs);
 
   if (process.env.DB_SEED === 'true') {
     payload.logger.info('Seeding database...');
