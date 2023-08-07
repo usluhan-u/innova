@@ -9,6 +9,7 @@ import App from 'next/app';
 import { Box, ChakraProvider, Flex, useMediaQuery } from '@chakra-ui/react';
 import { PaginatedDocs } from 'payload/dist/mongoose/types';
 import { Router } from 'next/router';
+import Script from 'next/script';
 import { theme } from '../theme';
 import { FooterType, MenuType, SocialMediaType } from '../globals';
 import { Footer, Form, Header } from '../components';
@@ -70,6 +71,18 @@ const MyApp = ({
               />
             )}
           </Flex>
+          <Script
+            id="gtm-script"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','GTM-PC2JQ4J');
+              `
+            }}
+          />
         </DataProvider>
       </LanguageProvider>
     </ChakraProvider>
