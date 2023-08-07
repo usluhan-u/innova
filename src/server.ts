@@ -42,7 +42,9 @@ const boilerplate = async () => {
     }
   });
 
-  await meilisearch(payload);
+  if (!DEV) {
+    await meilisearch(payload);
+  }
 
   if (process.env.DB_SEED === 'true') {
     payload.logger.info('Seeding database...');

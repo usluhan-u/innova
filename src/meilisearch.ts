@@ -16,19 +16,23 @@ export const meilisearch = async (payload: Payload) => {
     const postsIndex = client.index('posts');
 
     const { docs: pageDocs } = await payload.find({
-      collection: 'pages'
+      collection: 'pages',
+      limit: 1000000
     });
 
     const { docs: trBlogDocs } = await payload.find({
-      collection: 'tr-blogs'
+      collection: 'tr-blogs',
+      limit: 1000000
     });
 
     const { docs: enBlogDocs } = await payload.find({
-      collection: 'en-blogs'
+      collection: 'en-blogs',
+      limit: 1000000
     });
 
     const { docs: postDocs } = await payload.find({
-      collection: 'posts'
+      collection: 'posts',
+      limit: 1000000
     });
 
     await pagesIndex.addDocuments([...pageDocs]);
