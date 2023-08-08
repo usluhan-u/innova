@@ -44,10 +44,7 @@ import {
   TagGroup,
   TagGroupType
 } from '../blocks';
-import {
-  populateDocWithLocalizedSlugs,
-  populateValueAfterCaseChange
-} from '../hooks';
+import { populateDocWithLocalizedSlugs } from '../hooks';
 
 export type PageLayout =
   | AccordionType
@@ -122,10 +119,7 @@ export const Page: CollectionConfig = {
       label: 'Name',
       type: 'text',
       required: true,
-      localized: true,
-      hooks: {
-        beforeChange: [populateValueAfterCaseChange('name')]
-      }
+      localized: true
     },
     {
       type: 'tabs',
