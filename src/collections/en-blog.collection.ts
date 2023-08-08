@@ -12,10 +12,7 @@ import {
   Slug,
   Width
 } from '../fields';
-import {
-  populateDocWithLocalizedSlugs,
-  populateValueAfterCaseChange
-} from '../hooks';
+import { populateDocWithLocalizedSlugs } from '../hooks';
 
 export const EnBlog: CollectionConfig = {
   slug: 'en-blogs',
@@ -42,10 +39,7 @@ export const EnBlog: CollectionConfig = {
       label: 'Name',
       type: 'text',
       required: true,
-      localized: true,
-      hooks: {
-        beforeChange: [populateValueAfterCaseChange('name')]
-      }
+      localized: true
     },
     {
       type: 'tabs',

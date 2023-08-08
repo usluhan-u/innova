@@ -20,10 +20,7 @@ import {
 import { RichTextContentType } from '../components';
 import { PostGroupType } from './post-group.collection';
 import { CategoryType } from './category.collection';
-import {
-  populateDocWithLocalizedSlugs,
-  populateValueAfterCaseChange
-} from '../hooks';
+import { populateDocWithLocalizedSlugs } from '../hooks';
 
 export interface PostType {
   slug: string;
@@ -65,10 +62,7 @@ export const Post: CollectionConfig = {
       label: 'Name',
       type: 'text',
       required: true,
-      localized: true,
-      hooks: {
-        beforeChange: [populateValueAfterCaseChange('name')]
-      }
+      localized: true
     },
     {
       type: 'tabs',

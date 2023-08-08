@@ -1,5 +1,4 @@
 import { CollectionConfig } from 'payload/types';
-import { populateValueAfterCaseChange } from '../hooks';
 import { Slug } from '../fields';
 
 export interface PostGroupType {
@@ -24,9 +23,6 @@ export const PostGroup: CollectionConfig = {
       required: true,
       localized: true,
       unique: true,
-      hooks: {
-        beforeChange: [populateValueAfterCaseChange('name')]
-      },
       admin: {
         readOnly: true
       }
