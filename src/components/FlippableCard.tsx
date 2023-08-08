@@ -83,7 +83,7 @@ export const UnstyledFlippableCard = ({
                 label={locale === 'tr' ? 'Detaylı Bilgi' : 'Read More'}
                 type="page"
                 page={{
-                  slug: post.slug,
+                  slug: `${post.group.slug}/${post.slug}`,
                   name: post.name,
                   breadcrumbs: post.breadcrumbs,
                   meta: post.meta,

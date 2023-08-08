@@ -82,7 +82,7 @@ export const getCustomPageDataByCondition = async <T>({
   sortOrder
 }: {
   endpoint: string;
-  condition: string;
+  condition?: string;
   locale?: string;
   defaultLocale?: string;
   limit?: number;
@@ -91,7 +91,11 @@ export const getCustomPageDataByCondition = async <T>({
   sortOrder?: 'asc' | 'desc';
 }) => {
   try {
-    let url = `${BASE_URL}/${endpoint}?locale=${locale}&fallback-locale=${defaultLocale}&where${condition}`;
+    let url = `${BASE_URL}/${endpoint}?locale=${locale}&fallback-locale=${defaultLocale}`;
+
+    if (condition) {
+      url = `${url}&where${condition}`;
+    }
 
     if (limit) {
       url = `${url}&limit=${limit}`;
