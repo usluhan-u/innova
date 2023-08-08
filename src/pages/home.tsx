@@ -185,7 +185,7 @@ const Home = ({ page, blogs, successStories }: HomeProps) => {
                   type="post"
                   post={{
                     ...successStory,
-                    slug: `/success-story/${successStory.slug}`
+                    slug: `${successStory.slug}`
                   }}
                   blockType="flippableCard"
                 />
