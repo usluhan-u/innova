@@ -161,7 +161,9 @@ export const Hero = ({
                       isCurrentPage={index === breadcrumbs.length - 1}
                     >
                       <ChakraBreadcrumbLink
-                        href={breadcrumb.url?.split('/').at(-1)}
+                        href={`${
+                          process.env.NEXT_PUBLIC_SERVER_URL
+                        }/${breadcrumb.url?.split('/').at(-1)}`}
                       >
                         {breadcrumb.label}
                       </ChakraBreadcrumbLink>
