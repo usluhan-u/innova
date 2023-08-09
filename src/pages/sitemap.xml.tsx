@@ -91,7 +91,7 @@ const generateSitemap = ({
           .map(
             ({ group, localizedSlugs }) => `
           ${
-            localizedSlugs.tr
+            localizedSlugs.tr && group?.slug
               ? `
               <url>
                   <loc>${`${BASE_URL}/${group.slug}/${localizedSlugs.tr}`}</loc>
@@ -100,7 +100,7 @@ const generateSitemap = ({
               : ''
           }
           ${
-            localizedSlugs.en
+            localizedSlugs.en && group?.slug
               ? `
               <url>
                   <loc>${`${BASE_URL}/en/${group.slug}/${localizedSlugs.en}`}</loc>
