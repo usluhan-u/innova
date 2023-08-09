@@ -31,7 +31,7 @@ const generateSitemap = ({
               <loc>${`${BASE_URL}/${localizedSlugs.tr}`}</loc>
           </url>
          `
-           : null
+           : ''
        }
        ${
          localizedSlugs.en
@@ -40,7 +40,7 @@ const generateSitemap = ({
               <loc>${`${BASE_URL}/en/${localizedSlugs.en}`}</loc>
           </url>
          `
-           : null
+           : ''
        }
      `
        )
