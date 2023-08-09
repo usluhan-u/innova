@@ -60,10 +60,10 @@ const Hit = ({ hit }: HitProps) => {
           }}
         >
           <VStack boxSize="full" align="flex-start" spacing={0}>
-            <Text w={{ md: '44rem', xl: '100rem' }} isTruncated>
+            <Text w={{ md: '44rem', lg: '88rem', xl: '100rem' }} isTruncated>
               {hit.hero?.title}
             </Text>
-            <Text w={{ md: '44rem', xl: '100rem' }} isTruncated>
+            <Text w={{ md: '44rem', lg: '88rem', xl: '100rem' }} isTruncated>
               {hit.hero?.description}
             </Text>
           </VStack>
