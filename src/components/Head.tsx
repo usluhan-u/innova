@@ -52,6 +52,10 @@ export const Head = ({
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:image" content={ogImage || DEFAULT_OG_IMAGE} />
       <meta property="og:image" content={ogImage || DEFAULT_OG_IMAGE} />
+      <meta
+        name="google-site-verification"
+        content="MLx7Q3Wl8XnAk7z_aYxoKcJKVyBvWEqg0sgdpFX_-mk"
+      />
     </NextHead>
   );
 };
