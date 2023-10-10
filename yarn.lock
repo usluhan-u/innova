@@ -9116,6 +9116,7 @@ __metadata:
     framer-motion: ^10.13.1
     husky: ^8.0.3
     instantsearch.js: ^4.56.8
+    is-url-http: ^2.3.6
     lint-staged: ^13.2.3
     meilisearch: ^0.33.0
     next: ^13.4.12
@@ -9141,6 +9142,16 @@ __metadata:
     uuid: ^9.0.0
   languageName: unknown
   linkType: soft
+
+"install-artifact-from-github@npm:^1.3.3":
+  version: 1.3.3
+  resolution: "install-artifact-from-github@npm:1.3.3"
+  bin:
+    install-from-cache: bin/install-from-cache.js
+    save-to-github-cache: bin/save-to-github-cache.js
+  checksum: 586a47c1370f40139f103769e5104db3e7c2ef3ee24bea56c60d8770307a9a3e094de1e9b81603dc81d2a69a2514913bd194a7507ad232c4018fc2e07e1b1136
+  languageName: node
+  linkType: hard
 
 "instantsearch.js@npm:4.56.8, instantsearch.js@npm:^4.56.8":
   version: 4.56.8
@@ -9189,6 +9200,13 @@ __metadata:
   dependencies:
     loose-envify: ^1.0.0
   checksum: cc3182d793aad82a8d1f0af697b462939cb46066ec48bbf1707c150ad5fad6406137e91a262022c269702e01621f35ef60269f6c0d7fd178487959809acdfb14
+  languageName: node
+  linkType: hard
+
+"ip-regex@npm:4.3.0":
+  version: 4.3.0
+  resolution: "ip-regex@npm:4.3.0"
+  checksum: 7ff904b891221b1847f3fdf3dbb3e6a8660dc39bc283f79eb7ed88f5338e1a3d1104b779bc83759159be266249c59c2160e779ee39446d79d4ed0890dfd06f08
   languageName: node
   linkType: hard
 
@@ -9528,6 +9546,15 @@ __metadata:
   dependencies:
     which-typed-array: ^1.1.11
   checksum: 4c89c4a3be07186caddadf92197b17fda663a9d259ea0d44a85f171558270d36059d1c386d34a12cba22dfade5aba497ce22778e866adc9406098c8fc4771796
+  languageName: node
+  linkType: hard
+
+"is-url-http@npm:^2.3.6":
+  version: 2.3.6
+  resolution: "is-url-http@npm:2.3.6"
+  dependencies:
+    url-http: ~1.1.1
+  checksum: 834ac17aea28bf71fbe0b3a50f2032ab4d48acd642eae9b843f2d0dceedda74e2c55e9d0083f93372bcf62f8a079b462efeb8213ca67033c13db95b28a4aaefa
   languageName: node
   linkType: hard
 
@@ -10735,6 +10762,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nan@npm:^2.17.0":
+  version: 2.18.0
+  resolution: "nan@npm:2.18.0"
+  dependencies:
+    node-gyp: latest
+  checksum: 4fe42f58456504eab3105c04a5cffb72066b5f22bd45decf33523cb17e7d6abc33cca2a19829407b9000539c5cb25f410312d4dc5b30220167a3594896ea6a0a
+  languageName: node
+  linkType: hard
+
 "nanoid@npm:^3.3.4, nanoid@npm:^3.3.6":
   version: 3.3.6
   resolution: "nanoid@npm:3.3.6"
@@ -10900,7 +10936,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-gyp@npm:latest":
+"node-gyp@npm:^9.4.0, node-gyp@npm:latest":
   version: 9.4.0
   resolution: "node-gyp@npm:9.4.0"
   dependencies:
@@ -12777,6 +12813,17 @@ __metadata:
   bin:
     rc: ./cli.js
   checksum: 2e26e052f8be2abd64e6d1dabfbd7be03f80ec18ccbc49562d31f617d0015fbdbcf0f9eed30346ea6ab789e0fdfe4337f033f8016efdbee0df5354751842080e
+  languageName: node
+  linkType: hard
+
+"re2@npm:~1.20.1":
+  version: 1.20.3
+  resolution: "re2@npm:1.20.3"
+  dependencies:
+    install-artifact-from-github: ^1.3.3
+    nan: ^2.17.0
+    node-gyp: ^9.4.0
+  checksum: 3d03f3357ab2a4605129dd16cd21bacda8f8c5b0e1bb226862d27c30d964d7bfcbcebcf95b91c368e44abf4502c71406547e9dedd2644ede9b4a8924b1cbd883
   languageName: node
   linkType: hard
 
@@ -14774,6 +14821,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tlds@npm:^1.242.0":
+  version: 1.242.0
+  resolution: "tlds@npm:1.242.0"
+  bin:
+    tlds: bin.js
+  checksum: 97881aae50c40836c51f3179d5d7f8107c6898db511718001da5d11b9886273bd6a963c5c4c07b30e239e96d4229dffb451d2e4bddf8959ace10b1967dc923af
+  languageName: node
+  linkType: hard
+
 "to-fast-properties@npm:^2.0.0":
   version: 2.0.0
   resolution: "to-fast-properties@npm:2.0.0"
@@ -15200,6 +15256,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"url-http@npm:~1.1.1":
+  version: 1.1.2
+  resolution: "url-http@npm:1.1.2"
+  dependencies:
+    re2: ~1.20.1
+    url-regex-safe: ~4.0.0
+  checksum: 6afcc6317d01f69a25e1e33e93d6e76f8f044d7c4d75f3b29953931e285fac0c5b5bd0855613aba431593c563c587eca5dfd416c3bdea244fefcd0ff469b9884
+  languageName: node
+  linkType: hard
+
 "url-loader@npm:^4.1.1":
   version: 4.1.1
   resolution: "url-loader@npm:4.1.1"
@@ -15214,6 +15280,21 @@ __metadata:
     file-loader:
       optional: true
   checksum: c1122a992c6cff70a7e56dfc2b7474534d48eb40b2cc75467cde0c6972e7597faf8e43acb4f45f93c2473645dfd803bcbc20960b57544dd1e4c96e77f72ba6fd
+  languageName: node
+  linkType: hard
+
+"url-regex-safe@npm:~4.0.0":
+  version: 4.0.0
+  resolution: "url-regex-safe@npm:4.0.0"
+  dependencies:
+    ip-regex: 4.3.0
+    tlds: ^1.242.0
+  peerDependencies:
+    re2: ^1.20.1
+  peerDependenciesMeta:
+    re2:
+      optional: true
+  checksum: 8a6bdee092a474e06ea1e2b6c9f3522598112da353aed6abbecae97bb9e5b0384297ffd34eacc63bed4926d8840badb21675ab42f7557f81dafee6b706f4c65c
   languageName: node
   linkType: hard
 
