@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import {
   Card,
   CardBody,
@@ -13,6 +13,7 @@ import {
 import { FiArrowRight } from 'react-icons/fi';
 import { Player } from '@lottiefiles/react-lottie-player';
 import useHover from '@react-hook/hover';
+import NoSSR from 'react-no-ssr';
 import { TagGroupItemType } from '../blocks';
 import { TextIconCallToAction } from './TextIconCallToAction';
 
@@ -20,22 +21,7 @@ export interface TagProps extends ChakraProps {
   tag: TagGroupItemType;
 }
 
-interface LottieAnimationProps {
-  src: string;
-  hover?: boolean;
-}
-
-const LottieAnimation = React.forwardRef(
-  ({ src }: LottieAnimationProps, ref: React.ForwardedRef<Player>) => (
-    <Player
-      ref={ref}
-      loop
-      hover
-      src={src}
-      style={{ width: '100%', height: '100%', backgroundColor: 'transparent' }}
-    />
-  )
-);
+const LottiePlayer = lazy(() => import('./LottieAnimation'));
 
 export const Tag = ({ tag, ...rest }: TagProps) => {
   const lottieRef = React.createRef<Player>();
@@ -78,7 +64,11 @@ export const Tag = ({ tag, ...rest }: TagProps) => {
                   />
                 )}
                 {tag.imageType === 'lottie' && tag.lottie && (
-                  <LottieAnimation src={tag.lottie.url} ref={lottieRef} />
+                  <NoSSR>
+                    <Suspense>
+                      <LottiePlayer src={tag.lottie.url} ref={lottieRef} />
+                    </Suspense>
+                  </NoSSR>
                 )}
               </Box>
             </Center>
