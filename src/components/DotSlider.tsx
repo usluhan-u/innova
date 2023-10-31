@@ -1,19 +1,16 @@
 import React from 'react';
-import { Box, Flex, Image, Text, VStack, chakra } from '@chakra-ui/react';
+import { Box, Flex, Image, Text, VStack } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
-import dynamic from 'next/dynamic';
 import { AnimatePresence, motion } from 'framer-motion';
 import { DotSliderType } from '../blocks';
 import { Slider } from './Slider';
 import { ButtonCallToAction } from './ButtonCallToAction';
 import { SlideType } from '../fields';
 import { Overlay } from './Overlay';
-
-const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false });
+import { VideoPlayer } from './VideoPlayer';
+import { isMobileOS } from '../utils';
 
 export interface DotSliderProps extends DotSliderType {}
-
-const VideoPlayer = chakra(ReactPlayer);
 
 const SlideContent = ({
   backgroundImage,
@@ -37,24 +34,12 @@ const SlideContent = ({
     {backgroundImage.mimeType.startsWith('video') && (
       <Box boxSize="full" pos="relative">
         <VideoPlayer
-          width="100%"
-          height="100%"
           pos="absolute"
           url={backgroundImage.url}
-          volume={0}
           muted
-          playing
+          autoPlay
           loop
-          sx={{
-            '&': {
-              width: '100% !important',
-              height: '100% !important',
-
-              '& > video': {
-                objectFit: 'cover'
-              }
-            }
-          }}
+          controls={isMobileOS()}
         />
       </Box>
     )}

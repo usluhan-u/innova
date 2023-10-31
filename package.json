@@ -55,7 +55,6 @@
     "react-instantsearch-dom": "^6.40.4",
     "react-instantsearch-hooks-web": "^6.47.3",
     "react-no-ssr": "^1.1.0",
-    "react-player": "^2.12.0",
     "slate": "^0.94.1",
     "slate-react": "^0.98.0",
     "uuid": "^9.0.0"

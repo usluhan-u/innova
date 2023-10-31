@@ -50,3 +50,4 @@ export * from './Overlay';
 export * from './Pagination';
 export * from './SearchBox';
 export * from './FormSubmit';
+export * from './VideoPlayer';

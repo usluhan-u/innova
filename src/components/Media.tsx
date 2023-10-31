@@ -1,14 +1,11 @@
 import React from 'react';
-import { Image, chakra } from '@chakra-ui/react';
-import dynamic from 'next/dynamic';
+import { Image } from '@chakra-ui/react';
 import { MediaBlockType } from '../blocks';
 import { Template } from './Template';
+import { VideoPlayer } from './VideoPlayer';
+import { isMobileOS } from '../utils';
 
 interface MediaProps extends MediaBlockType {}
-
-const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false });
-
-const VideoPlayer = chakra(ReactPlayer);
 
 export const Media = ({ backgroundColor, media, width }: MediaProps) => (
   <Template backgroundColor={backgroundColor} width={width}>
@@ -23,23 +20,13 @@ export const Media = ({ backgroundColor, media, width }: MediaProps) => (
     )}
     {media.mimeType.startsWith('video') && (
       <VideoPlayer
-        width="100%"
-        height="100%"
         url={media.url}
-        volume={0}
-        muted
-        playing
+        type={media.mimeType}
+        controls={isMobileOS()}
         loop
-        sx={{
-          '&': {
-            width: '100% !important',
-            height: '100% !important',
-
-            '& > video': {
-              objectFit: 'cover'
-            }
-          }
-        }}
+        muted
+        autoPlay
+        playsInline
       />
     )}
   </Template>
