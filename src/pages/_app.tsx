@@ -83,6 +83,12 @@ const MyApp = ({
               `
             }}
           />
+          <Script
+            id="cookie-script"
+            src="//ccdn.mobildev.in/04ab314644074cae880a50aeafd2e2ae.js"
+            data-token="4zJtjEZ599XY5Xm9t4Z7"
+            strategy="afterInteractive"
+          />
         </DataProvider>
       </LanguageProvider>
     </ChakraProvider>
