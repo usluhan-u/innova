@@ -27,7 +27,7 @@ COPY package*.json yarn.lock* ./
 COPY .yarn ./.yarn
 COPY .yarnrc.yml ./
 
-RUN npm install --only=prod
+RUN npm install --omit=dev
 
 COPY --from=build /app/dist ./
 COPY --from=build /app/build ./build
