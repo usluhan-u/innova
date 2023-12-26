@@ -7,7 +7,7 @@ COPY package*.json yarn.lock* ./
 COPY .yarn ./.yarn
 COPY .yarnrc.yml ./
 
-RUN yarn install
+RUN npm install
 
 # [BUILD] LAYER
 FROM base AS build
@@ -16,7 +16,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN yarn build
+RUN npm run build
 
 # [PRODUCTION] LAYER
 FROM node:20-alpine AS production
@@ -27,7 +27,7 @@ COPY package*.json yarn.lock* ./
 COPY .yarn ./.yarn
 COPY .yarnrc.yml ./
 
-RUN yarn workspaces focus --all --production
+RUN npm install --only=prod
 
 COPY --from=build /app/dist ./
 COPY --from=build /app/build ./build
