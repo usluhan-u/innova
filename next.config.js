@@ -3,6 +3,11 @@
 
 require('dotenv').config();
 
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE_BUNDLE === 'true',
+  openAnalyzer: false
+})
+
 /**
  * @type {import('next').NextConfig}
  */
@@ -45,4 +50,4 @@ const nextConfig = {
   }
 };
 
-module.exports = nextConfig;
+module.exports = withBundleAnalyzer(nextConfig);
