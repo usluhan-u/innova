@@ -143,7 +143,7 @@ export const MobileViewMenu = ({ menu, onClose }: MobileViewMenuProps) => {
             <Button
               rightIcon={<FiArrowRight />}
               variant="link"
-              color="text.blue"
+              color="text.blue.100"
               fontSize="sm"
               fontWeight="medium"
               mt={0}

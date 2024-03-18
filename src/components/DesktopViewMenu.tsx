@@ -40,7 +40,7 @@ const NavMenu = ({ menuItem }: NavMenuProps) => {
               fontWeight="normal"
               fontSize="sm"
               border="none"
-              _hover={{ bgColor: 'transparent', color: 'text.blue' }}
+              _hover={{ bgColor: 'transparent', color: 'text.blue.100' }}
               _active={{ bgColor: 'transparent' }}
             >
               {menuItem.label}
@@ -96,7 +96,7 @@ const NavMenu = ({ menuItem }: NavMenuProps) => {
                         page={menuItem.callToAction.page}
                         url={menuItem.callToAction.url}
                         icon={FiArrowRight}
-                        color="text.blue"
+                        color="text.blue.100"
                         fontSize="sm"
                         fontWeight="medium"
                       />
@@ -111,7 +111,7 @@ const NavMenu = ({ menuItem }: NavMenuProps) => {
           <Button
             bgColor="transparent"
             fontWeight="normal"
-            _hover={{ bgColor: 'transparent', color: 'text.blue' }}
+            _hover={{ bgColor: 'transparent', color: 'text.blue.100' }}
           >
             <CallToAction {...menuItem.menuItem.callToAction} fontSize="sm">
               {menuItem.label}

@@ -23,7 +23,7 @@ export const ContentCard = ({ contentCard }: ContentCardProps) => (
         Object.keys(contentCard.callToAction).length > 0 && (
           <TextIconCallToAction
             {...contentCard.callToAction}
-            color="text.blue"
+            color="text.blue.100"
             icon={FiArrowRight}
           />
         )}

@@ -46,7 +46,7 @@ export const Content = ({
               Object.keys(column.callToAction).length > 0 && (
                 <TextIconCallToAction
                   {...column.callToAction}
-                  color="text.blue"
+                  color="text.blue.100"
                   icon={FiArrowRight}
                 />
               )}

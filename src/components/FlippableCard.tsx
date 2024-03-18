@@ -89,7 +89,7 @@ export const UnstyledFlippableCard = ({
                   meta: post.meta,
                   localizedSlugs: post.localizedSlugs
                 }}
-                color="text.blue"
+                color="text.blue.100"
                 icon={FiArrowRight}
               />
             </>

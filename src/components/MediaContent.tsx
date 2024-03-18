@@ -41,7 +41,7 @@ export const MediaContent = ({
               {callToAction && Object.keys(callToAction).length > 0 && (
                 <TextIconCallToAction
                   {...callToAction}
-                  color="text.blue"
+                  color="text.blue.100"
                   icon={FiArrowRight}
                 />
               )}
@@ -58,7 +58,7 @@ export const MediaContent = ({
               {callToAction && Object.keys(callToAction).length > 0 && (
                 <TextIconCallToAction
                   {...callToAction}
-                  color="text.blue"
+                  color="text.blue.100"
                   icon={FiArrowRight}
                 />
               )}

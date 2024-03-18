@@ -63,7 +63,7 @@ export const Card = ({ card, locale }: CardProps) => (
       {card.callToAction && Object.keys(card.callToAction).length > 0 && (
         <TextIconCallToAction
           {...card.callToAction}
-          color="text.blue"
+          color="text.blue.100"
           icon={FiArrowRight}
         />
       )}

@@ -228,10 +228,14 @@ export const RichText = ({ content, color }: RichTextProps) => (
           my: 0
         },
         '& a': {
-          color: 'text.blue',
+          color: 'text.blue.200',
+
+          '&:hover': {
+            textDecoration: 'underline'
+          },
 
           '& span': {
-            color: 'text.blue'
+            color: 'text.blue.200'
           }
         }
       }
