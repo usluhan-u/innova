@@ -1,4 +1,5 @@
 import { Field } from 'payload/types';
+import { convertToEnglishKebabCase } from '../utils';
 
 interface Args {
   fieldToUse?: string;
@@ -20,6 +21,17 @@ export const Slug = (args?: Args): Field => {
     admin: {
       position: 'sidebar',
       readOnly
+    },
+    hooks: {
+      beforeChange: [
+        ({ value }) => {
+          if (typeof value === 'string') {
+            return convertToEnglishKebabCase(value);
+          }
+
+          return value;
+        }
+      ]
     }
   };
 };
