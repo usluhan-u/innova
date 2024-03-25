@@ -119,7 +119,7 @@ const Blog = ({ data, relatedData }: BlogProps) => {
         <Template backgroundColor="background.secondary" width="100%">
           <Flex w="full" direction="column" gap={7}>
             <Text color="text.primary" fontSize="xl" fontWeight="semibold">
-              İlgili Postlar
+              {language === 'tr' ? 'İlgili Postlar' : 'Related Articles'}
             </Text>
             <CardGroup
               items={cardGroupItems}
