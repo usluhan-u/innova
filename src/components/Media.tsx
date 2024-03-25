@@ -11,7 +11,7 @@ export const Media = ({ backgroundColor, media, width }: MediaProps) => (
   <Template backgroundColor={backgroundColor} width={width}>
     {media.mimeType.startsWith('image') && (
       <Image
-        objectFit="cover"
+        objectFit="fill"
         src={media.url}
         alt={media.alt}
         boxSize="full"

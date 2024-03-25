@@ -187,7 +187,7 @@ const serialize = (
         return (
           <Image
             key={uuidv4()}
-            objectFit="cover"
+            objectFit="fill"
             src={(node as RichTextContentType).value?.url}
             alt={(node as RichTextContentType).value?.alt}
             h="lg"

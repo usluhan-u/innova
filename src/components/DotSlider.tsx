@@ -23,7 +23,7 @@ const SlideContent = ({
       <Overlay>
         <Image
           boxSize="full"
-          objectFit="cover"
+          objectFit="fill"
           src={backgroundImage.url}
           alt={backgroundImage.alt}
           transform="scale(1.2)"

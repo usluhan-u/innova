@@ -93,7 +93,7 @@ const Statement = ({ data, relatedData }: StatementProps) => {
           maxWidth="890px"
         >
           <Image
-            objectFit="cover"
+            objectFit="fill"
             src={data.featuredImage.url}
             alt={data.featuredImage.alt}
             h="lg"

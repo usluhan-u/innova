@@ -57,7 +57,7 @@ export const Tag = ({ tag, ...rest }: TagProps) => {
               <Box boxSize="48px">
                 {tag.imageType === 'icon' && tag.icon && (
                   <Image
-                    objectFit="cover"
+                    objectFit="fill"
                     src={tag.icon.url}
                     alt={tag.icon.alt}
                     boxSize="full"

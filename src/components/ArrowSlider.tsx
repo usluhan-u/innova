@@ -26,7 +26,7 @@ const Slide = ({
       >
         <Image
           boxSize="full"
-          objectFit="cover"
+          objectFit="fill"
           src={backgroundImage.url}
           alt={backgroundImage.alt}
         />

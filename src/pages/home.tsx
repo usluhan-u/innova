@@ -98,7 +98,7 @@ const Home = ({ page, blogs, successStories }: HomeProps) => {
                     <Image
                       alt={blog.featuredImage.alt}
                       src={blog.featuredImage.url}
-                      objectFit="cover"
+                      objectFit="fill"
                       boxSize="full"
                     />
                   </Overlay>
