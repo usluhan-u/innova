@@ -80,7 +80,7 @@ const Home = ({ page, blogs, successStories }: HomeProps) => {
                     meta: {},
                     localizedSlugs: {}
                   }}
-                  color="text.blue.100"
+                  color="text.dark"
                   fontWeight="semibold"
                   icon={FiArrowRight}
                 />
@@ -173,7 +173,7 @@ const Home = ({ page, blogs, successStories }: HomeProps) => {
                   meta: {},
                   localizedSlugs: {}
                 }}
-                color="text.blue.100"
+                color="text.dark"
                 fontWeight="semibold"
                 icon={FiArrowRight}
               />

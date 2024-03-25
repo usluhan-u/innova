@@ -27,7 +27,7 @@ export const FlippableCardGroup = ({
             label={callToAction.label}
             type={callToAction.type}
             page={callToAction.page}
-            color="text.blue.100"
+            color="text.dark"
             icon={FiArrowRight}
           />
         ) : null}

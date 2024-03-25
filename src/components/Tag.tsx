@@ -88,7 +88,7 @@ export const Tag = ({ tag, ...rest }: TagProps) => {
           <TextIconCallToAction
             {...tag.callToAction}
             icon={FiArrowRight}
-            color="text.blue.100"
+            color="text.dark"
           />
         </CardFooter>
       )}

@@ -48,7 +48,7 @@ export const Head = ({
         content={description || DEFAULT_DESCRIPTION}
       />
       <meta property="twitter:title" content={title || DEFAULT_TITLE} />
-      <meta name="twitter:site" content="@payloadcms" />
+      <meta name="twitter:site" content="@innovabilisim" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:image" content={ogImage || DEFAULT_OG_IMAGE} />
       <meta property="og:image" content={ogImage || DEFAULT_OG_IMAGE} />

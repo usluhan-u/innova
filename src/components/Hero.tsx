@@ -156,7 +156,7 @@ export const Hero = ({
                       textColor={
                         index === breadcrumbs.length - 1
                           ? 'text.light'
-                          : 'text.gray'
+                          : 'text.gray.100'
                       }
                       isCurrentPage={index === breadcrumbs.length - 1}
                     >

@@ -116,7 +116,7 @@ export const Form = ({ backgroundColor, width, form }: FormProps) => (
           <Button
             pos="fixed"
             color="text.light"
-            bgColor="background.blue.100"
+            bgColor="background.dark"
             borderRadius="3xl"
             zIndex="overlay"
             left="calc(100vw - 15rem)"
