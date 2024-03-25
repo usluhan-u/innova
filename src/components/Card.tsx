@@ -15,6 +15,7 @@ import { TextIconCallToAction } from './TextIconCallToAction';
 import { CategoryType } from '../collections';
 import { CallToActionType, UploadedMediaType } from '../fields';
 import { Language } from '../contexts';
+import { InternalLink } from './InternalLink';
 
 export interface CardItem {
   title: string;
@@ -48,7 +49,9 @@ export const Card = ({ card, locale }: CardProps) => (
                 borderRadius="full"
                 bgColor="text.secondary.100"
               />
-              <Text color="text.secondary.100">{card.category.name}</Text>
+              <InternalLink slug={`/${locale}/${card.category.slug}`}>
+                <Text color="text.secondary.100">{card.category.name}</Text>
+              </InternalLink>
             </>
           )}
         </Flex>

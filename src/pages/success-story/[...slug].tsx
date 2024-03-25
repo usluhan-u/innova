@@ -68,9 +68,6 @@ const SuccessStory = ({ data, relatedData }: SuccessStoryProps) => {
       />
       <Hero
         {...data.hero}
-        description={format(new Date(data.publishDate), 'PP', {
-          locale: language === 'tr' ? tr : enUS
-        })}
         breadcrumbs={[
           {
             url: '/home',
@@ -92,14 +89,23 @@ const SuccessStory = ({ data, relatedData }: SuccessStoryProps) => {
           width={data.width}
           maxWidth="890px"
         >
-          <Image
-            objectFit="fill"
-            src={data.featuredImage.url}
-            alt={data.featuredImage.alt}
-            h="lg"
-            w="full"
-            borderRadius="lg"
-          />
+          <Flex boxSize="full" flexDir="column" gap="2">
+            <Image
+              objectFit="fill"
+              src={data.featuredImage.url}
+              alt={data.featuredImage.alt}
+              h="lg"
+              w="full"
+              borderRadius="lg"
+            />
+            <Flex boxSize="full" align="center" gap="2">
+              <Text fontWeight="medium" fontSize={{ base: 'sm', md: 'lg' }}>
+                {format(new Date(data.publishDate), 'PP', {
+                  locale: language === 'tr' ? tr : enUS
+                })}
+              </Text>
+            </Flex>
+          </Flex>
         </Template>
       )}
       <Content
