@@ -1,11 +1,13 @@
 import React from 'react';
-import { Flex, Image, Text, VStack } from '@chakra-ui/react';
+import { Box, Flex, Image, Text, VStack } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 import { ArrowSliderType } from '../blocks';
 import { Slider } from './Slider';
 import { ButtonCallToAction } from './ButtonCallToAction';
 import { SlideType } from '../fields';
 import { Overlay } from './Overlay';
+import { VideoPlayer } from './VideoPlayer';
+import { isMobileOS } from '../utils';
 
 export interface ArrowSliderProps extends ArrowSliderType {}
 
@@ -31,6 +33,18 @@ const Slide = ({
           alt={backgroundImage.alt}
         />
       </Overlay>
+    )}
+    {backgroundImage.mimeType.startsWith('video') && (
+      <Box boxSize="full" pos="relative">
+        <VideoPlayer
+          pos="absolute"
+          url={backgroundImage.url}
+          muted
+          autoPlay
+          loop
+          controls={isMobileOS()}
+        />
+      </Box>
     )}
     <VStack
       align="flex-start"
