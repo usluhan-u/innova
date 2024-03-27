@@ -34,8 +34,8 @@ const SubmitButton = ({ label, ...rest }: SubmitButtonProps) => (
   <Button
     type="submit"
     color="text.light"
-    bgColor="background.blue.100"
-    _hover={{ bgColor: 'background.blue.100' }}
+    bgColor="background.dark"
+    _hover={{ bgColor: 'background.dark' }}
     {...rest}
   >
     {label}
@@ -122,7 +122,7 @@ export const Form = ({ backgroundColor, width, form }: FormProps) => (
             left="calc(100vw - 15rem)"
             bottom="3.5rem"
             rightIcon={<Icon as={Chat} />}
-            _hover={{ bgColor: 'background.blue.100' }}
+            _hover={{ bgColor: 'background.dark' }}
           >
             {form.floatButtonLabel}
           </Button>

@@ -60,7 +60,7 @@ export const DocumentDownloader = ({
               </Text>
             </Flex>
           </Flex>
-          <Icon as={FiDownload} fontSize="1.5rem" color="background.blue.100" />
+          <Icon as={FiDownload} fontSize="1.5rem" color="background.dark" />
         </Flex>
       </CardBody>
     </Card>
