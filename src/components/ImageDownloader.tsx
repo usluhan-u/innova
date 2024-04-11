@@ -49,7 +49,7 @@ export const ImageDownloader = ({ imageDownloader }: ImageDownloaderProps) => {
         </Center>
       </CardBody>
       <CardFooter p="2" justify="flex-end">
-        <Icon as={FiDownload} fontSize="1rem" color="background.dark" />
+        <Icon as={FiDownload} fontSize="1rem" color="background.blue.100" />
       </CardFooter>
     </Card>
   );
