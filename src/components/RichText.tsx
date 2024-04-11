@@ -167,7 +167,7 @@ const serialize = (
             {customIcon && (
               <ListIcon
                 as={customIcon}
-                color="background.blue.100"
+                color="background.dark"
                 fontSize="2xl"
               />
             )}
