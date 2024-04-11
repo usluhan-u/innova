@@ -69,7 +69,7 @@ const Slide = ({
       {callToAction && Object.keys(callToAction).length > 0 && (
         <ButtonCallToAction
           {...callToAction}
-          bgColor="background.dark"
+          bgColor="background.blue.100"
           color="text.light"
         />
       )}

@@ -54,10 +54,10 @@ export const Pagination = ({ totalSize, onPageChange }: PaginationProps) => {
               bg="background.secondary"
               w="10"
               _current={{
-                bg: 'background.dark',
+                bg: 'background.blue.200',
                 color: 'text.light',
                 _hover: {
-                  bg: 'background.dark'
+                  bg: 'background.blue.200'
                 }
               }}
             />
