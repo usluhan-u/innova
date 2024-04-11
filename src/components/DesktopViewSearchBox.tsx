@@ -55,7 +55,7 @@ const Hit = ({ hit }: HitProps) => {
           p="3"
           borderRadius="lg"
           _hover={{
-            bgColor: 'background.blue.100',
+            bgColor: 'background.dark',
             color: 'text.light'
           }}
         >

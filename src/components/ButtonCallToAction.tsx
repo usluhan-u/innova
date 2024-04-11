@@ -17,7 +17,7 @@ export const ButtonCallToAction = ({
   color = 'text.light',
   leftIcon,
   rightIcon,
-  bgColor = 'background.blue.100'
+  bgColor = 'background.dark'
 }: ButtonCallToActionProps) => (
   <Center color={color}>
     <CallToAction type={type} page={page} url={url} newTab={newTab}>
