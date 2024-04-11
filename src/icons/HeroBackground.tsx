@@ -10,7 +10,7 @@ export const HeroBackground = () => (
     xmlnsXlink="http://www.w3.org/1999/xlink"
   >
     <g clipPath="url(#clip0_237_6185)">
-      <rect width="1440" height="298" fill="#000000" />
+      <rect width="1440" height="298" fill="#092232" />
       <g opacity="0.6">
         <path
           d="M1324.92 1.5L1410.37 149.5L1324.92 297.5L1154.03 297.5L1068.58 149.5L1154.03 1.49999L1324.92 1.5Z"

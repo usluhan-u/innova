@@ -32,7 +32,7 @@ export const Content = ({
             {column.icon && (
               <Box boxSize="64px">
                 <Image
-                  objectFit="fill"
+                  objectFit="cover"
                   src={column.icon.url}
                   alt={column.icon.alt}
                   boxSize="full"
@@ -46,7 +46,7 @@ export const Content = ({
               Object.keys(column.callToAction).length > 0 && (
                 <TextIconCallToAction
                   {...column.callToAction}
-                  color="text.dark"
+                  color="text.blue"
                   icon={FiArrowRight}
                 />
               )}

@@ -27,7 +27,7 @@ export const MediaContent = ({
         <>
           <GridItem>
             <Image
-              objectFit="fill"
+              objectFit="cover"
               src={image.url}
               alt={image.alt}
               boxSize="full"
@@ -41,7 +41,7 @@ export const MediaContent = ({
               {callToAction && Object.keys(callToAction).length > 0 && (
                 <TextIconCallToAction
                   {...callToAction}
-                  color="text.dark"
+                  color="text.blue"
                   icon={FiArrowRight}
                 />
               )}
@@ -58,7 +58,7 @@ export const MediaContent = ({
               {callToAction && Object.keys(callToAction).length > 0 && (
                 <TextIconCallToAction
                   {...callToAction}
-                  color="text.dark"
+                  color="text.blue"
                   icon={FiArrowRight}
                 />
               )}
@@ -66,7 +66,7 @@ export const MediaContent = ({
           </GridItem>
           <GridItem>
             <Image
-              objectFit="fill"
+              objectFit="cover"
               src={image.url}
               alt={image.alt}
               boxSize="full"

@@ -65,7 +65,7 @@ export const TabGroup = ({
                     borderInlineStart: 'none',
                     borderInlineEnd: 'inherit',
                     color: 'text.primary',
-                    borderColor: 'background.dark'
+                    borderColor: 'background.blue.100'
                   }}
                 >
                   {item.label}

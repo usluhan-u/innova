@@ -109,7 +109,7 @@ export const MobileViewMenu = ({ menu, onClose }: MobileViewMenuProps) => {
     <VStack boxSize="full">
       <Center w="full" h="10">
         {currentList?.title ? (
-          <Text color="text.gray.200" fontSize="sm" fontWeight="bold">
+          <Text color="text.secondary.100" fontSize="sm" fontWeight="bold">
             {currentList.title}
           </Text>
         ) : (
@@ -143,7 +143,7 @@ export const MobileViewMenu = ({ menu, onClose }: MobileViewMenuProps) => {
             <Button
               rightIcon={<FiArrowRight />}
               variant="link"
-              color="text.dark"
+              color="text.blue"
               fontSize="sm"
               fontWeight="medium"
               mt={0}

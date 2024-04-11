@@ -36,11 +36,11 @@ const NavMenu = ({ menuItem }: NavMenuProps) => {
               as={Button}
               rightIcon={<FiChevronDown />}
               bgColor="transparent"
-              color="text.gray.200"
-              fontWeight="bold"
+              color="text.primary"
+              fontWeight="normal"
               fontSize="sm"
               border="none"
-              _hover={{ bgColor: 'transparent', color: 'text.primary' }}
+              _hover={{ bgColor: 'transparent', color: 'text.blue' }}
               _active={{ bgColor: 'transparent' }}
             >
               {menuItem.label}
@@ -52,14 +52,14 @@ const NavMenu = ({ menuItem }: NavMenuProps) => {
                     <ChakraMenuGroup
                       key={uuidv4()}
                       title={menuItemGroup.label}
-                      color="text.gray.200"
-                      fontWeight="bold"
+                      color="text.secondary.100"
+                      fontWeight="medium"
                       fontSize="sm"
                     >
                       {menuItemGroup.subMenuItems?.map((subMenuItem) => (
                         <ChakraMenuItem
                           key={uuidv4()}
-                          color="text.gray.300"
+                          color="text.primary"
                           fontWeight="normal"
                           fontSize="sm"
                           bgColor="transparent"
@@ -75,7 +75,7 @@ const NavMenu = ({ menuItem }: NavMenuProps) => {
                                 router.asPath.substring(1) ||
                               subMenuItem.callToAction.url ===
                                 router.asPath.substring(1)
-                                ? '2px solid #000000'
+                                ? '2px solid #005a9b'
                                 : 'none'
                             }
                           >
@@ -96,7 +96,7 @@ const NavMenu = ({ menuItem }: NavMenuProps) => {
                         page={menuItem.callToAction.page}
                         url={menuItem.callToAction.url}
                         icon={FiArrowRight}
-                        color="text.dark"
+                        color="text.blue"
                         fontSize="sm"
                         fontWeight="medium"
                       />
@@ -110,9 +110,8 @@ const NavMenu = ({ menuItem }: NavMenuProps) => {
         {menuItem.type === 'single' && (
           <Button
             bgColor="transparent"
-            color="text.gray.200"
-            fontWeight="bold"
-            _hover={{ bgColor: 'transparent', color: 'text.primary' }}
+            fontWeight="normal"
+            _hover={{ bgColor: 'transparent', color: 'text.blue' }}
           >
             <CallToAction {...menuItem.menuItem.callToAction} fontSize="sm">
               {menuItem.label}

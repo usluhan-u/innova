@@ -25,9 +25,9 @@ export const LinkButtonCallToAction = ({
         bgColor="transparent"
         fontWeight="normal"
         border="none"
-        borderBottomWidth="3px"
+        borderBottomWidth="5px"
         borderBottomStyle={active ? 'solid' : 'none'}
-        borderBottomColor={active ? 'background.red' : 'transparent'}
+        borderBottomColor={active ? 'background.blue.100' : 'transparent'}
         borderRadius="none"
         _hover={{
           color: active ? 'text.light' : 'text.secondary.200',

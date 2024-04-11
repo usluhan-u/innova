@@ -80,7 +80,7 @@ const Home = ({ page, blogs, successStories }: HomeProps) => {
                     meta: {},
                     localizedSlugs: {}
                   }}
-                  color="text.dark"
+                  color="text.blue"
                   fontWeight="semibold"
                   icon={FiArrowRight}
                 />
@@ -98,7 +98,7 @@ const Home = ({ page, blogs, successStories }: HomeProps) => {
                     <Image
                       alt={blog.featuredImage.alt}
                       src={blog.featuredImage.url}
-                      objectFit="fill"
+                      objectFit="cover"
                       boxSize="full"
                     />
                   </Overlay>
@@ -173,7 +173,7 @@ const Home = ({ page, blogs, successStories }: HomeProps) => {
                   meta: {},
                   localizedSlugs: {}
                 }}
-                color="text.dark"
+                color="text.blue"
                 fontWeight="semibold"
                 icon={FiArrowRight}
               />

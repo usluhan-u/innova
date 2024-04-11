@@ -57,7 +57,7 @@ export const Tag = ({ tag, ...rest }: TagProps) => {
               <Box boxSize="48px">
                 {tag.imageType === 'icon' && tag.icon && (
                   <Image
-                    objectFit="fill"
+                    objectFit="cover"
                     src={tag.icon.url}
                     alt={tag.icon.alt}
                     boxSize="full"
@@ -88,7 +88,7 @@ export const Tag = ({ tag, ...rest }: TagProps) => {
           <TextIconCallToAction
             {...tag.callToAction}
             icon={FiArrowRight}
-            color="text.dark"
+            color="text.blue"
           />
         </CardFooter>
       )}

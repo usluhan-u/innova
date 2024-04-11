@@ -15,7 +15,6 @@ import { TextIconCallToAction } from './TextIconCallToAction';
 import { CategoryType } from '../collections';
 import { CallToActionType, UploadedMediaType } from '../fields';
 import { Language } from '../contexts';
-import { InternalLink } from './InternalLink';
 
 export interface CardItem {
   title: string;
@@ -32,7 +31,12 @@ export interface CardProps {
 
 export const Card = ({ card, locale }: CardProps) => (
   <ChakraCard overflow="hidden">
-    <Image objectFit="fill" src={card.image.url} alt={card.image.alt} h="xs" />
+    <Image
+      objectFit="cover"
+      src={card.image.url}
+      alt={card.image.alt}
+      h="2xs"
+    />
     <ChakraCardBody>
       <Box w="full" h="20">
         <Text>{card.title}</Text>
@@ -49,9 +53,7 @@ export const Card = ({ card, locale }: CardProps) => (
                 borderRadius="full"
                 bgColor="text.secondary.100"
               />
-              <InternalLink slug={`/${locale}/${card.category.slug}`}>
-                <Text color="text.secondary.100">{card.category.name}</Text>
-              </InternalLink>
+              <Text color="text.secondary.100">{card.category.name}</Text>
             </>
           )}
         </Flex>
@@ -61,7 +63,7 @@ export const Card = ({ card, locale }: CardProps) => (
       {card.callToAction && Object.keys(card.callToAction).length > 0 && (
         <TextIconCallToAction
           {...card.callToAction}
-          color="text.dark"
+          color="text.blue"
           icon={FiArrowRight}
         />
       )}
