@@ -21,7 +21,7 @@ export const LinkButtonCallToAction = ({
     <CallToAction type={type} page={page} url={url}>
       <Button
         variant="outline"
-        color={active ? 'text.light' : 'text.secondary.200'}
+        color={active ? 'text.light' : 'text.secondary.100'}
         bgColor="transparent"
         fontWeight="normal"
         border="none"
@@ -30,7 +30,7 @@ export const LinkButtonCallToAction = ({
         borderBottomColor={active ? 'background.blue.100' : 'transparent'}
         borderRadius="none"
         _hover={{
-          color: active ? 'text.light' : 'text.secondary.200',
+          color: active ? 'text.light' : 'text.secondary.100',
           bgColor: 'transparent'
         }}
       >

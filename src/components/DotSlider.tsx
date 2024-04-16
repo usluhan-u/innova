@@ -73,7 +73,7 @@ const SlideContent = ({
         transform="translateY(-15%)"
       >
         {title && (
-          <Text fontWeight="bold" fontSize="5xl">
+          <Text fontWeight="semibold" fontSize="3.5rem">
             {title}
           </Text>
         )}

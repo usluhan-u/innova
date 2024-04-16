@@ -53,11 +53,11 @@ export const Tag = ({ tag, ...rest }: TagProps) => {
       <CardBody>
         <Flex flexDir="column" gap={4}>
           <Flex align="center" gap={4}>
-            <Center bgColor="background.secondary" borderRadius="lg" p={2}>
+            <Center borderRadius="lg" p={2}>
               <Box boxSize="48px">
                 {tag.imageType === 'icon' && tag.icon && (
                   <Image
-                    objectFit="cover"
+                    objectFit="fill"
                     src={tag.icon.url}
                     alt={tag.icon.alt}
                     boxSize="full"

@@ -8,12 +8,12 @@ export const theme = extendTheme({
   colors: {
     background: {
       primary: '#FFFFFF',
-      secondary: '#F4F6F8',
+      secondary: '#F3F4F4',
       blue: {
-        100: '#005A9B',
+        100: '#065EA6',
         200: '#1B425E'
       },
-      dark: '#092232',
+      dark: '#171515',
       light: '#FFFFFF',
       gray: {
         primary: '#C7D8E5',
@@ -21,12 +21,12 @@ export const theme = extendTheme({
       }
     },
     text: {
-      primary: '#002946',
+      primary: '#171515',
       secondary: {
-        100: '#7893A7',
+        100: '#939598',
         200: '#8A9EAD'
       },
-      blue: '#005A9B',
+      blue: '#065EA6',
       light: '#FFFFFF',
       gray: '#AAA9A9'
     },
