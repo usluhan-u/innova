@@ -15,7 +15,7 @@ export const Overlay = ({ children, ...rest }: OverlayProps) => (
       content: '""',
       pos: 'absolute',
       inset: '0',
-      bgGradient: 'linear(0deg, rgba(9, 34, 50, 0.4), rgba(9, 34, 50, 0.4))'
+      bgGradient: 'linear(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4))'
     }}
   >
     {children}

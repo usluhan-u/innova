@@ -27,7 +27,7 @@ export const MediaContent = ({
         <>
           <GridItem>
             <Image
-              objectFit="cover"
+              objectFit="fill"
               src={image.url}
               alt={image.alt}
               boxSize="full"
@@ -66,7 +66,7 @@ export const MediaContent = ({
           </GridItem>
           <GridItem>
             <Image
-              objectFit="cover"
+              objectFit="fill"
               src={image.url}
               alt={image.alt}
               boxSize="full"

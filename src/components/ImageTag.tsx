@@ -17,7 +17,7 @@ export const ImageTag = ({ imageTag }: ImageTagProps) => (
     <CardBody>
       <Center boxSize="full">
         <Image
-          objectFit="contain"
+          objectFit="fill"
           src={imageTag.image.url}
           alt={imageTag.image.alt}
         />

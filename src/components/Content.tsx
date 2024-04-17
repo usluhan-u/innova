@@ -32,7 +32,7 @@ export const Content = ({
             {column.icon && (
               <Box boxSize="64px">
                 <Image
-                  objectFit="cover"
+                  objectFit="fill"
                   src={column.icon.url}
                   alt={column.icon.alt}
                   boxSize="full"

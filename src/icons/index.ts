@@ -9,3 +9,4 @@ export * from './Video';
 export * from './ArrowLeft';
 export * from './ArrowRight';
 export * from './HeroBackground';
+export * from './FooterBackground';

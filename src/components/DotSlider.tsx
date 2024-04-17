@@ -6,7 +6,6 @@ import { DotSliderType } from '../blocks';
 import { Slider } from './Slider';
 import { ButtonCallToAction } from './ButtonCallToAction';
 import { SlideType } from '../fields';
-import { Overlay } from './Overlay';
 import { VideoPlayer } from './VideoPlayer';
 import { isMobileOS } from '../utils';
 
@@ -20,16 +19,13 @@ const SlideContent = ({
 }: SlideType) => (
   <Flex pos="relative" boxSize="full" overflow="hidden">
     {backgroundImage.mimeType.startsWith('image') && (
-      <Overlay>
-        <Image
-          boxSize="full"
-          objectFit="fill"
-          src={backgroundImage.url}
-          alt={backgroundImage.alt}
-          transform="scale(1.2)"
-          transition="all 1s"
-        />
-      </Overlay>
+      <Image
+        boxSize="full"
+        objectFit="fill"
+        src={backgroundImage.url}
+        alt={backgroundImage.alt}
+        transition="all 1s"
+      />
     )}
     {backgroundImage.mimeType.startsWith('video') && (
       <Box boxSize="full" pos="relative">
@@ -73,7 +69,7 @@ const SlideContent = ({
         transform="translateY(-15%)"
       >
         {title && (
-          <Text fontWeight="bold" fontSize="5xl">
+          <Text fontWeight="semibold" fontSize="3.5rem">
             {title}
           </Text>
         )}
