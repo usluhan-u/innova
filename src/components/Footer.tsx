@@ -4,9 +4,9 @@ import {
   FaFacebookF,
   FaInstagram,
   FaLinkedin,
-  FaTwitter,
+  FaXTwitter,
   FaYoutube
-} from 'react-icons/fa';
+} from 'react-icons/fa6';
 import { v4 as uuidv4 } from 'uuid';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { FooterType, SocialMediaType } from '../globals';
@@ -98,7 +98,7 @@ export const Footer = ({ socialMedia, footer }: FooterProps) => {
                 <SocialMedia icon={FaYoutube} href={socialMedia.youtube} />
               )}
               {socialMedia.twitter && (
-                <SocialMedia icon={FaTwitter} href={socialMedia.twitter} />
+                <SocialMedia icon={FaXTwitter} href={socialMedia.twitter} />
               )}
               {socialMedia.instagram && (
                 <SocialMedia icon={FaInstagram} href={socialMedia.instagram} />
