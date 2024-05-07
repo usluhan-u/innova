@@ -98,13 +98,11 @@ const Award = ({ data, relatedData }: AwardProps) => {
               w="full"
               borderRadius="lg"
             />
-            <Flex boxSize="full" align="center" gap="2">
-              <Text fontWeight="medium" fontSize={{ base: 'sm', md: 'lg' }}>
-                {format(new Date(data.publishDate), 'PP', {
-                  locale: language === 'tr' ? tr : enUS
-                })}
-              </Text>
-            </Flex>
+            <Text fontWeight="medium" fontSize={{ base: 'sm', md: 'lg' }}>
+              {format(new Date(data.publishDate), 'PP', {
+                locale: language === 'tr' ? tr : enUS
+              })}
+            </Text>
           </Flex>
         </Template>
       )}
