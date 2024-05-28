@@ -21,7 +21,7 @@ export const isMobileOS = (): boolean => {
   return false;
 };
 
-export const calculateReadingTime = (content: string) => {
+export const calculateReadingDuration = (content: string) => {
   const wordsPerMinute = 225;
   const words = content.trim().split(/\s+/).length;
   return Math.ceil(words / wordsPerMinute);

@@ -4,3 +4,4 @@ export * from './string-manipulation';
 export * from './generate-full-title';
 export * from './validate-url';
 export * from './general';
+export * from './rich-text-to-string';

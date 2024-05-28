@@ -42,7 +42,10 @@ const Blogs = ({ page, data, totalDocs }: BlogsProps) => {
       date: publishDate,
       image: featuredImage,
       title: name,
-      category,
+      category: category && {
+        ...category,
+        slug: `/blogs/${category.slug}`
+      },
       callToAction: {
         label: language === 'tr' ? 'Detaylı Bilgi' : 'Read More',
         type: 'page',

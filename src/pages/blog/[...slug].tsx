@@ -19,6 +19,7 @@ import {
   getCustomPageDataBySlug
 } from '../../api';
 import { Language, useData, useLanguage } from '../../contexts';
+import { calculateReadingDuration, extractTextValues } from '../../utils';
 
 interface BlogProps {
   data: PostType | null;
@@ -57,6 +58,9 @@ const Blog = ({ data, relatedData }: BlogProps) => {
 
     return cardItem;
   });
+
+  const content = extractTextValues(data.content);
+  const readingDuration = calculateReadingDuration(content.join(' '));
 
   return (
     <>
@@ -98,11 +102,18 @@ const Blog = ({ data, relatedData }: BlogProps) => {
               w="full"
               borderRadius="lg"
             />
-            <Text fontWeight="medium" fontSize={{ base: 'sm', md: 'lg' }}>
-              {format(new Date(data.publishDate), 'PP', {
-                locale: language === 'tr' ? tr : enUS
-              })}
-            </Text>
+            <Flex align="center" justify="space-between">
+              <Text fontWeight="medium" fontSize={{ base: 'sm', md: 'lg' }}>
+                {format(new Date(data.publishDate), 'PP', {
+                  locale: language === 'tr' ? tr : enUS
+                })}
+              </Text>
+              <Text fontWeight="medium" fontSize={{ base: 'sm', md: 'lg' }}>
+                {`${readingDuration} ${
+                  language === 'tr' ? ' dk okuma süresi' : ' min read'
+                }`}
+              </Text>
+            </Flex>
           </Flex>
         </Template>
       )}

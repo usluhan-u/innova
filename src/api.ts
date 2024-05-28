@@ -14,7 +14,7 @@ export const getCustomPageDataBySlug = async <T>({
 }) => {
   try {
     const query = await fetch(
-      `${BASE_URL}/${endpoint}?locale=${locale}&fallback-locale=${defaultLocale}&where[slug][equals]=${slug}`
+      `${BASE_URL}/${endpoint}?locale=${locale}&fallback-locale=${defaultLocale}&where[slug][equals]=${slug}&where[_status][equals]=published`
     );
 
     const data: T = await query.json();
