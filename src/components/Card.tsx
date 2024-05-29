@@ -49,10 +49,7 @@ export const Card = ({ card, locale }: CardProps) => (
                 borderRadius="full"
                 bgColor="text.secondary.100"
               />
-              <InternalLink
-                slug={card.category.slug}
-                color="text.secondary.100"
-              >
+              <InternalLink slug={card.category.slug} color="text.blue">
                 {card.category.name}
               </InternalLink>
             </>
