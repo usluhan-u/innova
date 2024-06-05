@@ -120,7 +120,8 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   const [pageDocs, trBlogDocs, enBlogDocs, postDocs] = await Promise.all([
     getCustomPageDataByCondition<PaginatedDocs<PageType>>({
       endpoint: 'pages',
-      limit: 1000000
+      limit: 1000000,
+      condition: '[_status][equals]=published'
     }),
     getCustomPageDataByCondition<PaginatedDocs<PostType>>({
       endpoint: 'tr-blogs',
