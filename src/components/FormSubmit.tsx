@@ -18,6 +18,7 @@ import {
   FormFieldBlock,
   SelectFieldOption
 } from '@payloadcms/plugin-form-builder/types';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { Language, useLanguage } from '../contexts';
 import { submitForm } from '../api';
 import { RichText, RichTextContentType } from './RichText';
@@ -267,6 +268,7 @@ export const Field = ({
 
 export const FormSubmit = React.forwardRef<HTMLFormElement, FormSubmitProps>(
   ({ formId, children, submitButton, setSubmitted }: FormSubmitProps, ref) => {
+    const { executeRecaptcha } = useGoogleReCaptcha();
     const { language } = useLanguage();
     const {
       register,
@@ -276,17 +278,38 @@ export const FormSubmit = React.forwardRef<HTMLFormElement, FormSubmitProps>(
 
     const onSubmit = React.useCallback(
       async (data: FormValues) => {
-        const dataToSend = Object.entries(data).map(([name, value]) => ({
-          field: name,
-          value
-        }));
-        const response = await submitForm({
-          body: {
-            form: formId,
-            submissionData: dataToSend
+        if (!executeRecaptcha) {
+          return;
+        }
+
+        executeRecaptcha('submit').then(async (token) => {
+          const captchaResponse = await fetch(`/api/captcha?token=${token}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+
+          const captchaData = await captchaResponse.json();
+
+          if (!captchaData.success) {
+            throw new Error('Recaptcha verification failed');
           }
+
+          const dataToSend = Object.entries(data).map(([name, value]) => ({
+            field: name,
+            value
+          }));
+
+          const response = await submitForm({
+            body: {
+              form: formId,
+              submissionData: dataToSend
+            }
+          });
+
+          setSubmitted(response);
         });
-        setSubmitted(response);
       },
       [formId, setSubmitted]
     );
