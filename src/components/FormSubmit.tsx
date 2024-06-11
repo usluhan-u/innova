@@ -1,5 +1,6 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-console */
 import React from 'react';
 import {
   Checkbox,
@@ -279,10 +280,17 @@ export const FormSubmit = React.forwardRef<HTMLFormElement, FormSubmitProps>(
     const onSubmit = React.useCallback(
       async (data: FormValues) => {
         if (!executeRecaptcha) {
+          console.error('Recaptcha not initialized');
           return;
         }
 
-        executeRecaptcha('submit').then(async (token) => {
+        try {
+          const token = await executeRecaptcha('submit');
+
+          if (!token) {
+            console.error('Recaptcha verification failed');
+          }
+
           const captchaResponse = await fetch(`/api/captcha?token=${token}`, {
             method: 'GET',
             headers: {
@@ -293,7 +301,7 @@ export const FormSubmit = React.forwardRef<HTMLFormElement, FormSubmitProps>(
           const captchaData = await captchaResponse.json();
 
           if (!captchaData.success) {
-            throw new Error('Recaptcha verification failed');
+            console.error('Recaptcha verification failed');
           }
 
           const dataToSend = Object.entries(data).map(([name, value]) => ({
@@ -309,9 +317,11 @@ export const FormSubmit = React.forwardRef<HTMLFormElement, FormSubmitProps>(
           });
 
           setSubmitted(response);
-        });
+        } catch (error) {
+          console.error(error);
+        }
       },
-      [formId, setSubmitted]
+      [formId, setSubmitted, executeRecaptcha]
     );
 
     return (

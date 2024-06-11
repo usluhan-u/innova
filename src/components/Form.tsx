@@ -17,7 +17,6 @@ import {
   VStack
 } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
-import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import { FormType } from '../blocks';
 import { RichText } from './RichText';
 import { BackgroundColor } from './BackgroundColor';
@@ -78,31 +77,21 @@ export const FormContent = ({ backgroundColor, width, form }: FormProps) => {
                   </InputRightElement>
                 </InputGroup>
               ) : (
-                <GoogleReCaptchaProvider
-                  reCaptchaKey={process.env.NEXT_PUBLIC_CAPTCHA_SITE_KEY ?? ''}
-                  scriptProps={{
-                    async: false,
-                    defer: false,
-                    appendTo: 'head',
-                    nonce: undefined
-                  }}
+                <FormSubmit
+                  ref={formSubmitRef}
+                  formId={form.id}
+                  submitButton={
+                    <SubmitButton
+                      label={form.submitButtonLabel || ''}
+                      width={{ base: 'full', md: 'fit-content' }}
+                    />
+                  }
+                  setSubmitted={setSubmitted}
                 >
-                  <FormSubmit
-                    ref={formSubmitRef}
-                    formId={form.id}
-                    submitButton={
-                      <SubmitButton
-                        label={form.submitButtonLabel || ''}
-                        width={{ base: 'full', md: 'fit-content' }}
-                      />
-                    }
-                    setSubmitted={setSubmitted}
-                  >
-                    {form.fields.map((field) => (
-                      <Field key={uuidv4()} {...field} />
-                    ))}
-                  </FormSubmit>
-                </GoogleReCaptchaProvider>
+                  {form.fields.map((field) => (
+                    <Field key={uuidv4()} {...field} />
+                  ))}
+                </FormSubmit>
               )}
             </VStack>
           )}
