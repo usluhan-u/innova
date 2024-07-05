@@ -1,5 +1,12 @@
 import React from 'react';
-import { Box, Flex, Image, Text, VStack } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Image,
+  Text,
+  useMediaQuery,
+  VStack
+} from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 import { AnimatePresence, motion } from 'framer-motion';
 import { DotSliderType } from '../blocks';
@@ -16,79 +23,86 @@ const SlideContent = ({
   callToAction,
   description,
   title
-}: SlideType) => (
-  <Flex pos="relative" boxSize="full" overflow="hidden">
-    {backgroundImage.mimeType.startsWith('image') && (
-      <Image
-        boxSize="full"
-        objectFit="fill"
-        src={backgroundImage.url}
-        alt={backgroundImage.alt}
-        transition="all 1s"
-      />
-    )}
-    {backgroundImage.mimeType.startsWith('video') && (
-      <Box boxSize="full" pos="relative">
-        <VideoPlayer
-          pos="absolute"
-          url={backgroundImage.url}
-          muted
-          autoPlay
-          loop
-          controls={isMobileOS()}
+}: SlideType) => {
+  const [isLargerThanMd] = useMediaQuery('(min-width: 768px)');
+
+  return (
+    <Flex pos="relative" boxSize="full" overflow="hidden">
+      {backgroundImage.mimeType.startsWith('image') && (
+        <Image
+          boxSize="full"
+          objectFit="fill"
+          src={backgroundImage.url}
+          alt={backgroundImage.alt}
+          transition="all 1s"
         />
-      </Box>
-    )}
-    <AnimatePresence>
-      <VStack
-        key={uuidv4()}
-        as={motion.div}
-        variants={{
-          initial: {
-            opacity: 0,
-            y: '50px'
-          },
-          final: {
-            opacity: 1,
-            y: '0px',
-            transition: {
-              duration: 0.5,
-              delay: 0.5
-            }
-          }
-        }}
-        initial="initial"
-        animate="final"
-        exit="initial"
-        align="flex-start"
-        pos="absolute"
-        w={{ base: '2xs', md: 'xl' }}
-        color="text.light"
-        top={{ base: '15%', md: '30%' }}
-        left={{ base: '7%', md: '10%' }}
-        transform="translateY(-15%)"
-      >
-        {title && (
-          <Text fontWeight="semibold" fontSize={{ base: '2xl', md: '3.5rem' }}>
-            {title}
-          </Text>
-        )}
-        {description && (
-          <Text fontWeight="medium" fontSize={{ base: 'md', md: 'xl' }}>
-            {description}
-          </Text>
-        )}
-        {callToAction && Object.keys(callToAction).length > 0 && (
-          <ButtonCallToAction
-            {...callToAction}
-            bgColor="background.blue.100"
-            color="text.light"
+      )}
+      {backgroundImage.mimeType.startsWith('video') && (
+        <Box boxSize="full" pos="relative">
+          <VideoPlayer
+            pos="absolute"
+            url={backgroundImage.url}
+            muted
+            autoPlay
+            loop
+            controls={isMobileOS()}
           />
-        )}
-      </VStack>
-    </AnimatePresence>
-  </Flex>
-);
+        </Box>
+      )}
+      <AnimatePresence>
+        <VStack
+          key={uuidv4()}
+          as={motion.div}
+          variants={{
+            initial: {
+              opacity: 0,
+              y: '50px'
+            },
+            final: {
+              opacity: 1,
+              y: '0px',
+              transition: {
+                duration: 0.5,
+                delay: 0.5
+              }
+            }
+          }}
+          initial="initial"
+          animate="final"
+          exit="initial"
+          align="flex-start"
+          pos="absolute"
+          w={{ base: '2xs', md: 'xl' }}
+          color="text.light"
+          top={{ base: '15%', md: '30%' }}
+          left={{ base: '7%', md: '10%' }}
+          transform="translateY(-15%)"
+        >
+          {title && (
+            <Text
+              fontWeight="semibold"
+              fontSize={{ base: '2xl', md: '3.5rem' }}
+            >
+              {title}
+            </Text>
+          )}
+          {description && isLargerThanMd && (
+            <Text fontWeight="medium" fontSize={{ base: 'md', md: 'xl' }}>
+              {description}
+            </Text>
+          )}
+          {callToAction && Object.keys(callToAction).length > 0 && (
+            <ButtonCallToAction
+              {...callToAction}
+              bgColor="background.blue.100"
+              color="text.light"
+            />
+          )}
+        </VStack>
+      </AnimatePresence>
+    </Flex>
+  );
+};
 
 const Slide = ({
   backgroundImage,
