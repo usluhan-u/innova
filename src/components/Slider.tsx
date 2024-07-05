@@ -95,7 +95,7 @@ export const Slider = ({ height, slides, settings }: SliderProps) => (
           '&': {
             pos: 'absolute',
             top: { base: '95%', md: '90%' },
-            left: '10%',
+            left: { base: '7%', md: '10%' },
             transform: { base: 'translateY(-100%)', md: 'translateY(-80%)' },
             display: settings?.dots ? 'flex' : 'none',
             '& .dot': {

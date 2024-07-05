@@ -62,19 +62,19 @@ const SlideContent = ({
         exit="initial"
         align="flex-start"
         pos="absolute"
-        w={{ base: 'xs', md: 'xl' }}
+        w={{ base: '2xs', md: 'xl' }}
         color="text.light"
-        top={{ base: '7%', md: '30%' }}
-        left="10%"
+        top={{ base: '15%', md: '30%' }}
+        left={{ base: '7%', md: '10%' }}
         transform="translateY(-15%)"
       >
         {title && (
-          <Text fontWeight="semibold" fontSize="3.5rem">
+          <Text fontWeight="semibold" fontSize={{ base: '2xl', md: '3.5rem' }}>
             {title}
           </Text>
         )}
         {description && (
-          <Text fontWeight="medium" fontSize="xl">
+          <Text fontWeight="medium" fontSize={{ base: 'md', md: 'xl' }}>
             {description}
           </Text>
         )}
@@ -109,5 +109,11 @@ export const DotSlider = ({ slider }: DotSliderProps) => {
     <Slide {...slide} key={uuidv4()} />
   ));
 
-  return <Slider settings={{ dots: true }} slides={slides} height="90vh" />;
+  return (
+    <Slider
+      settings={{ dots: true }}
+      slides={slides}
+      height={{ base: '40vh', md: '90vh' }}
+    />
+  );
 };

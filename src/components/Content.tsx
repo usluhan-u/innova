@@ -42,7 +42,7 @@ export const Content = ({
             <Flex justify={column.align} textAlign={column.align} w="full">
               <RichText content={column.content} />
             </Flex>
-            {column.callToAction &&
+            {column.callToAction?.url &&
               Object.keys(column.callToAction).length > 0 && (
                 <TextIconCallToAction
                   {...column.callToAction}

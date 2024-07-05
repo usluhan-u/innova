@@ -49,20 +49,20 @@ const Slide = ({
     <VStack
       align="flex-start"
       pos="absolute"
-      w={{ base: 'xs' }}
+      w={{ base: '2xs', md: 'xs' }}
       color="text.light"
       transform={{
-        base: 'translate(2rem, 17rem)',
+        base: 'translate(2rem, 16rem)',
         md: 'translate(5rem, 15rem)'
       }}
     >
       {title && (
-        <Text fontWeight="medium" fontSize="4xl">
+        <Text fontWeight="medium" fontSize={{ base: '2xl', md: '4xl' }}>
           {title}
         </Text>
       )}
       {description && (
-        <Text fontWeight="normal" fontSize="lg">
+        <Text fontWeight="normal" fontSize={{ base: 'md', md: 'lg' }}>
           {description}
         </Text>
       )}
