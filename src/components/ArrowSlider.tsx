@@ -52,7 +52,7 @@ const Slide = ({
       w={{ base: '2xs', md: 'xs' }}
       color="text.light"
       transform={{
-        base: 'translate(2rem, 16rem)',
+        base: 'translate(2rem, 14rem)',
         md: 'translate(5rem, 15rem)'
       }}
     >
@@ -86,7 +86,7 @@ export const ArrowSlider = ({ slider }: ArrowSliderProps) => {
     <Slider
       settings={{ arrows: true, slidesToShow: 3 }}
       slides={slides}
-      height="md"
+      height={{ base: 'sm', md: 'md' }}
     />
   );
 };

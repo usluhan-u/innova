@@ -127,7 +127,7 @@ export const DotSlider = ({ slider }: DotSliderProps) => {
     <Slider
       settings={{ dots: true }}
       slides={slides}
-      height={{ base: '40vh', md: '90vh' }}
+      height={{ base: 'xs', md: '90vh' }}
     />
   );
 };
