@@ -74,15 +74,12 @@ const SlideContent = ({
           pos="absolute"
           w={{ base: '2xs', md: 'xl' }}
           color="text.light"
-          top={{ base: '15%', md: '30%' }}
+          top={{ base: '10%', md: '30%' }}
           left={{ base: '7%', md: '10%' }}
           transform="translateY(-15%)"
         >
           {title && (
-            <Text
-              fontWeight="semibold"
-              fontSize={{ base: '2xl', md: '3.5rem' }}
-            >
+            <Text fontWeight="semibold" fontSize={{ base: 'xl', md: '3.5rem' }}>
               {title}
             </Text>
           )}
@@ -127,7 +124,7 @@ export const DotSlider = ({ slider }: DotSliderProps) => {
     <Slider
       settings={{ dots: true }}
       slides={slides}
-      height={{ base: 'xs', md: '90vh' }}
+      height={{ base: '20vh', md: '90vh' }}
     />
   );
 };
