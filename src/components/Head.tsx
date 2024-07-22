@@ -56,6 +56,10 @@ export const Head = ({
         name="google-site-verification"
         content="MLx7Q3Wl8XnAk7z_aYxoKcJKVyBvWEqg0sgdpFX_-mk"
       />
+      <meta
+        name="facebook-domain-verification"
+        content="jvxsmlnarbuoj51ref96avkbtzbt4z"
+      />
     </NextHead>
   );
 };
