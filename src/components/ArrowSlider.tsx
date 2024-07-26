@@ -48,24 +48,28 @@ const Slide = ({
     )}
     <VStack
       align="flex-start"
+      justify="space-between"
       pos="absolute"
       w={{ base: '2xs', md: 'xs' }}
+      h={{ md: '9.5rem' }}
       color="text.light"
       transform={{
         base: 'translate(2rem, 14rem)',
         md: 'translate(5rem, 15rem)'
       }}
     >
-      {title && (
-        <Text fontWeight="medium" fontSize={{ base: '2xl', md: '4xl' }}>
-          {title}
-        </Text>
-      )}
-      {description && (
-        <Text fontWeight="normal" fontSize={{ base: 'md', md: 'lg' }}>
-          {description}
-        </Text>
-      )}
+      <Box>
+        {title && (
+          <Text fontWeight="medium" fontSize={{ base: '2xl', md: '4xl' }}>
+            {title}
+          </Text>
+        )}
+        {description && (
+          <Text fontWeight="normal" fontSize={{ base: 'md', md: 'lg' }}>
+            {description}
+          </Text>
+        )}
+      </Box>
       {callToAction && Object.keys(callToAction).length > 0 && (
         <ButtonCallToAction
           {...callToAction}

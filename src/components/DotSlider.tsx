@@ -74,7 +74,7 @@ const SlideContent = ({
           pos="absolute"
           w={{ base: '2xs', md: 'xl' }}
           color="text.light"
-          top={{ base: '10%', md: '30%' }}
+          top={{ base: '7%', md: '20%' }}
           left={{ base: '7%', md: '10%' }}
           transform="translateY(-15%)"
         >
