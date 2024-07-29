@@ -4,7 +4,7 @@ import { CallToAction, CallToActionProps } from './CallToAction';
 
 export interface ButtonCallToActionProps
   extends Omit<CallToActionProps, 'children'>,
-    Pick<ButtonProps, 'bgColor' | 'color' | 'leftIcon' | 'rightIcon'> {
+    Pick<ButtonProps, 'bgColor' | 'color' | 'leftIcon' | 'rightIcon' | 'size'> {
   label: string;
 }
 
@@ -17,7 +17,8 @@ export const ButtonCallToAction = ({
   color = 'text.light',
   leftIcon,
   rightIcon,
-  bgColor = 'background.blue.100'
+  bgColor = 'background.blue.100',
+  size = 'sm'
 }: ButtonCallToActionProps) => (
   <Center color={color}>
     <CallToAction type={type} page={page} url={url} newTab={newTab}>
@@ -27,7 +28,7 @@ export const ButtonCallToAction = ({
         fontWeight="normal"
         leftIcon={leftIcon}
         rightIcon={rightIcon}
-        size="sm"
+        size={size}
         _hover={{ color, bgColor }}
       >
         {label}

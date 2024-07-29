@@ -72,19 +72,19 @@ const SlideContent = ({
           exit="initial"
           align="flex-start"
           pos="absolute"
-          w={{ base: '2xs', md: 'xl' }}
+          w={{ base: '3xs', md: 'xl' }}
           color="text.light"
           top={{ base: '7%', md: '20%' }}
           left={{ base: '7%', md: '10%' }}
           transform="translateY(-15%)"
         >
           {title && (
-            <Text fontWeight="semibold" fontSize={{ base: 'xl', md: '3.5rem' }}>
+            <Text fontWeight="semibold" fontSize={{ base: 'xs', md: '3.5rem' }}>
               {title}
             </Text>
           )}
           {description && isLargerThanMd && (
-            <Text fontWeight="medium" fontSize={{ base: 'md', md: 'xl' }}>
+            <Text fontWeight="medium" fontSize={{ base: '2xs', md: 'xl' }}>
               {description}
             </Text>
           )}
@@ -93,6 +93,7 @@ const SlideContent = ({
               {...callToAction}
               bgColor="background.blue.100"
               color="text.light"
+              size={{ base: 'xs', md: 'sm' }}
             />
           )}
         </VStack>

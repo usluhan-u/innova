@@ -100,7 +100,7 @@ export const Slider = ({ height, slides, settings }: SliderProps) => (
             display: settings?.dots ? 'flex' : 'none',
             '& .dot': {
               border: 'none',
-              boxSize: '3',
+              boxSize: { base: '2', sm: '3' },
               borderRadius: 'full',
               margin: '0 0.5rem',
               cursor: 'pointer',
