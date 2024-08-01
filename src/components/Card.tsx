@@ -17,6 +17,7 @@ import { CategoryType } from '../collections';
 import { CallToActionType, UploadedMediaType } from '../fields';
 import { Language } from '../contexts';
 import { InternalLink } from './InternalLink';
+import { CallToAction } from './CallToAction';
 
 export interface CardItem {
   title: string;
@@ -33,17 +34,36 @@ export interface CardProps {
 
 export const Card = ({ card, locale }: CardProps) => (
   <ChakraCard overflow="hidden">
-    <AspectRatio ratio={16 / 9}>
-      <Image
-        objectFit="fill"
-        src={card.image.url}
-        alt={card.image.alt}
-        h="2xs"
-      />
-    </AspectRatio>
+    {card.callToAction ? (
+      <CallToAction {...card.callToAction}>
+        <AspectRatio ratio={16 / 9}>
+          <Image
+            objectFit="fill"
+            src={card.image.url}
+            alt={card.image.alt}
+            h="2xs"
+          />
+        </AspectRatio>
+      </CallToAction>
+    ) : (
+      <AspectRatio ratio={16 / 9}>
+        <Image
+          objectFit="fill"
+          src={card.image.url}
+          alt={card.image.alt}
+          h="2xs"
+        />
+      </AspectRatio>
+    )}
     <ChakraCardBody>
       <Box w="full" h="20">
-        <Text>{card.title}</Text>
+        {card.callToAction ? (
+          <CallToAction {...card.callToAction}>
+            <Text>{card.title}</Text>
+          </CallToAction>
+        ) : (
+          <Text>{card.title}</Text>
+        )}
         <Flex pt={2} gap={2} alignItems="center">
           <Text color="text.secondary.100">
             {format(new Date(card.date), 'PP', {
