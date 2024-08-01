@@ -1,7 +1,7 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import { PaginatedDocs } from 'payload/dist/mongoose/types';
-import { Flex, Image, Text } from '@chakra-ui/react';
+import { AspectRatio, Flex, Image, Text } from '@chakra-ui/react';
 import { tr, enUS } from 'date-fns/locale';
 import { format } from 'date-fns';
 import { PostType } from '../../collections';
@@ -94,14 +94,16 @@ const Blog = ({ data, relatedData }: BlogProps) => {
           maxWidth="890px"
         >
           <Flex boxSize="full" flexDir="column" gap="2">
-            <Image
-              objectFit="fill"
-              src={data.featuredImage.url}
-              alt={data.featuredImage.alt}
-              h="lg"
-              w="full"
-              borderRadius="lg"
-            />
+            <AspectRatio ratio={16 / 9}>
+              <Image
+                objectFit="fill"
+                src={data.featuredImage.url}
+                alt={data.featuredImage.alt}
+                h="lg"
+                w="full"
+                borderRadius="lg"
+              />
+            </AspectRatio>
             <Flex align="center" justify="space-between">
               <Text fontWeight="medium" fontSize={{ base: 'sm', md: 'lg' }}>
                 {format(new Date(data.publishDate), 'PP', {

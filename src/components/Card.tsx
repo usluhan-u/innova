@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  AspectRatio,
   Box,
   Card as ChakraCard,
   CardBody as ChakraCardBody,
@@ -32,7 +33,14 @@ export interface CardProps {
 
 export const Card = ({ card, locale }: CardProps) => (
   <ChakraCard overflow="hidden">
-    <Image objectFit="fill" src={card.image.url} alt={card.image.alt} h="2xs" />
+    <AspectRatio ratio={16 / 9}>
+      <Image
+        objectFit="fill"
+        src={card.image.url}
+        alt={card.image.alt}
+        h="2xs"
+      />
+    </AspectRatio>
     <ChakraCardBody>
       <Box w="full" h="20">
         <Text>{card.title}</Text>
