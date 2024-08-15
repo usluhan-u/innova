@@ -1,10 +1,9 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import { PaginatedDocs } from 'payload/dist/mongoose/types';
-import { AspectRatio, chakra, Flex, Text } from '@chakra-ui/react';
+import { AspectRatio, Flex, Image, Text } from '@chakra-ui/react';
 import { tr, enUS } from 'date-fns/locale';
 import { format } from 'date-fns';
-import NextImage from 'next/image';
 import { PostType } from '../../collections';
 import {
   CardGroup,
@@ -26,8 +25,6 @@ interface BlogProps {
   data: PostType | null;
   relatedData: PostType[];
 }
-
-const Image = chakra(NextImage);
 
 const Blog = ({ data, relatedData }: BlogProps) => {
   const { language } = useLanguage();
@@ -106,7 +103,6 @@ const Blog = ({ data, relatedData }: BlogProps) => {
               }}
             >
               <Image
-                layout="fill"
                 src={data.featuredImage.url}
                 alt={data.featuredImage.alt}
                 h="lg"

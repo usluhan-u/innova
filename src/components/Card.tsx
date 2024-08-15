@@ -2,17 +2,16 @@ import React from 'react';
 import {
   AspectRatio,
   Box,
-  chakra,
   Card as ChakraCard,
   CardBody as ChakraCardBody,
   CardFooter as ChakraCardFooter,
   Flex,
+  Image,
   Text
 } from '@chakra-ui/react';
 import { format } from 'date-fns';
 import { tr, enUS } from 'date-fns/locale';
 import { FiArrowRight } from 'react-icons/fi';
-import NextImage from 'next/image';
 import { TextIconCallToAction } from './TextIconCallToAction';
 import { CategoryType } from '../collections';
 import { CallToActionType, UploadedMediaType } from '../fields';
@@ -33,8 +32,6 @@ export interface CardProps {
   locale: Language;
 }
 
-const Image = chakra(NextImage);
-
 export const Card = ({ card, locale }: CardProps) => (
   <ChakraCard overflow="hidden">
     {card.callToAction ? (
@@ -47,12 +44,7 @@ export const Card = ({ card, locale }: CardProps) => (
             }
           }}
         >
-          <Image
-            layout="fill"
-            src={card.image.url}
-            alt={card.image.alt}
-            h="2xs"
-          />
+          <Image src={card.image.url} alt={card.image.alt} h="2xs" />
         </AspectRatio>
       </CallToAction>
     ) : (
@@ -64,12 +56,7 @@ export const Card = ({ card, locale }: CardProps) => (
           }
         }}
       >
-        <Image
-          layout="fill"
-          src={card.image.url}
-          alt={card.image.alt}
-          h="2xs"
-        />
+        <Image src={card.image.url} alt={card.image.alt} h="2xs" />
       </AspectRatio>
     )}
     <ChakraCardBody>
