@@ -1,9 +1,10 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import { PaginatedDocs } from 'payload/dist/mongoose/types';
-import { AspectRatio, Flex, Image, Text } from '@chakra-ui/react';
+import { AspectRatio, chakra, Flex, Text } from '@chakra-ui/react';
 import { format } from 'date-fns';
 import { enUS, tr } from 'date-fns/locale';
+import NextImage from 'next/image';
 import { PostType } from '../../collections';
 import {
   CardGroup,
@@ -24,6 +25,8 @@ interface SuccessStoryProps {
   data: PostType | null;
   relatedData: PostType[];
 }
+
+const Image = chakra(NextImage);
 
 const SuccessStory = ({ data, relatedData }: SuccessStoryProps) => {
   const { language } = useLanguage();
@@ -90,9 +93,16 @@ const SuccessStory = ({ data, relatedData }: SuccessStoryProps) => {
           maxWidth="890px"
         >
           <Flex boxSize="full" flexDir="column" gap="2">
-            <AspectRatio ratio={16 / 9}>
+            <AspectRatio
+              ratio={16 / 9}
+              sx={{
+                '& > img': {
+                  objectFit: 'inherit'
+                }
+              }}
+            >
               <Image
-                objectFit="fill"
+                layout="fill"
                 src={data.featuredImage.url}
                 alt={data.featuredImage.alt}
                 h="lg"
