@@ -41,6 +41,7 @@ export const Head = ({
       <meta name="keywords" content={keywords || DEFAULT_KEYWORDS} />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       {noIndex && <meta name="robots" content="noindex" />}
+      <meta name="robots" content="index, follow" />
       <meta property="og:url" content={`${SERVER_URL}${asPath}`} />
       <meta property="og:title" content={title || DEFAULT_TITLE} />
       <meta

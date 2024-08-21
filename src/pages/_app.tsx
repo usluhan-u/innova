@@ -93,6 +93,22 @@ const MyApp = ({
               data-token="4zJtjEZ599XY5Xm9t4Z7"
               strategy="afterInteractive"
             />
+            <Script
+              strategy="afterInteractive"
+              src="https://www.googletagmanager.com/gtag/js?id=G-LXR3Z2B1D7"
+            />
+            <Script
+              id=""
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+
+                gtag('config', 'G-LXR3Z2B1D7');
+              `
+              }}
+            />
           </DataProvider>
         </LanguageProvider>
       </ChakraProvider>
