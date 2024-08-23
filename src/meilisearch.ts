@@ -15,6 +15,10 @@ export const meilisearch = async (payload: Payload) => {
     const blogsIndex = client.index('blogs');
     const postsIndex = client.index('posts');
 
+    pagesIndex.updateFilterableAttributes(['_status']);
+    blogsIndex.updateFilterableAttributes(['_status']);
+    postsIndex.updateFilterableAttributes(['_status']);
+
     const { docs: pageDocs } = await payload.find({
       collection: 'pages',
       limit: 1000000

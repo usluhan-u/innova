@@ -94,11 +94,8 @@ const MyApp = ({
               strategy="afterInteractive"
             />
             <Script
-              strategy="afterInteractive"
+              id="google-analytics-script"
               src="https://www.googletagmanager.com/gtag/js?id=G-LXR3Z2B1D7"
-            />
-            <Script
-              id=""
               strategy="afterInteractive"
               dangerouslySetInnerHTML={{
                 __html: `window.dataLayer = window.dataLayer || [];

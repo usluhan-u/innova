@@ -91,7 +91,7 @@ const MobileSearchBox = connectSearchBox(({ currentRefinement, refine }) => (
 export const MobileViewSearchBox = () => {
   const [isEditing, setIsEditing] = useBoolean();
 
-  const client = instantMeiliSearch(
+  const meiliSearchClient = instantMeiliSearch(
     process.env.NEXT_PUBLIC_MEILISEARCH_URL || 'http://localhost:7700',
     process.env.NEXT_PUBLIC_MEILISEARCH_MASTER_KEY || '',
     {
@@ -106,6 +106,37 @@ export const MobileViewSearchBox = () => {
       }
     }
   );
+
+  const client = {
+    ...meiliSearchClient,
+    search(requests: any) {
+      if (requests.every(({ params }: { params: any }) => !params.query)) {
+        return Promise.resolve({
+          results: requests.map(() => ({
+            hits: [],
+            nbHits: 0,
+            nbPages: 0,
+            page: 0,
+            processingTimeMS: 0,
+            hitsPerPage: 0,
+            exhaustiveNbHits: false,
+            query: '',
+            params: ''
+          }))
+        });
+      }
+
+      const filteredRequests = requests.map((request: any) => ({
+        ...request,
+        params: {
+          ...request.params,
+          filters: '_status = published'
+        }
+      }));
+
+      return meiliSearchClient.search(filteredRequests);
+    }
+  };
 
   return (
     <InstantSearch indexName="pages" searchClient={client}>

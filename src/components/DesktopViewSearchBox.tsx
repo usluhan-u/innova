@@ -156,7 +156,15 @@ export const DesktopViewSearchBox = ({
         });
       }
 
-      return meiliSearchClient.search(requests);
+      const filteredRequests = requests.map((request: any) => ({
+        ...request,
+        params: {
+          ...request.params,
+          filters: '_status = published'
+        }
+      }));
+
+      return meiliSearchClient.search(filteredRequests);
     }
   };
 
