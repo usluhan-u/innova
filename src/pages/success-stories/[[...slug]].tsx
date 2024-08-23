@@ -42,7 +42,10 @@ const SuccessStories = ({ page, data, totalDocs }: SuccessStoriesProps) => {
       date: publishDate,
       image: featuredImage,
       title: name,
-      category,
+      category: category && {
+        ...category,
+        slug: `/success-stories/${category.slug}`
+      },
       callToAction: {
         label: language === 'tr' ? 'Detaylı Bilgi' : 'Read More',
         type: 'page',
