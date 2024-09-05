@@ -181,7 +181,7 @@ export default buildConfig({
       redirectRelationships: [Page.slug]
     }),
     redirects({
-      collections: [Page.slug]
+      collections: [Page.slug, Post.slug, EnBlog.slug, TrBlog.slug]
     }),
     seo({
       collections: [Post.slug, EnBlog.slug, TrBlog.slug, Page.slug],
