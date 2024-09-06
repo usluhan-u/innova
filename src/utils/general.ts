@@ -1,3 +1,6 @@
+import { RichTextContentType } from '../components';
+import { extractTextValues } from './rich-text-to-string';
+
 export enum MobileOS {
   IOS = 'ios',
   ANDROID = 'android'
@@ -21,8 +24,9 @@ export const isMobileOS = (): boolean => {
   return false;
 };
 
-export const calculateReadingDuration = (content: string) => {
+export const calculateReadingDuration = (content: RichTextContentType[]) => {
   const wordsPerMinute = 225;
-  const words = content.trim().split(/\s+/).length;
-  return Math.ceil(words / wordsPerMinute);
+  const text = extractTextValues(content).join(' ');
+  const words = text.trim().split(/\s+/).length;
+  return Math.round(words / wordsPerMinute);
 };

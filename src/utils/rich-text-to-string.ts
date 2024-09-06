@@ -8,8 +8,9 @@ export const traverseContent = (content: RichTextContentType[]) => {
     if (item.text) {
       texts.push(item.text);
     }
+
     if (item.children) {
-      traverseContent(item.children);
+      texts.push(...traverseContent(item.children));
     }
   }
 

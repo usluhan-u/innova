@@ -19,7 +19,7 @@ import {
   getCustomPageDataBySlug
 } from '../../api';
 import { Language, useData, useLanguage } from '../../contexts';
-import { calculateReadingDuration, extractTextValues } from '../../utils';
+import { calculateReadingDuration } from '../../utils';
 
 interface BlogProps {
   data: PostType | null;
@@ -59,8 +59,7 @@ const Blog = ({ data, relatedData }: BlogProps) => {
     return cardItem;
   });
 
-  const content = extractTextValues(data.content);
-  const readingDuration = calculateReadingDuration(content.join(' '));
+  const readingDuration = calculateReadingDuration(data.content);
 
   return (
     <>
