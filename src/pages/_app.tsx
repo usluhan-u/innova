@@ -88,23 +88,25 @@ const MyApp = ({
               }}
             />
             <Script
+              id="google-analytics"
+              src="https://www.googletagmanager.com/gtag/js?id=G-LXR3Z2B1D7"
+              strategy="afterInteractive"
+            />
+            <Script
+              id="google-analytics-inline"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', 'G-LXR3Z2B1D7');`
+              }}
+            />
+            <Script
               id="cookie-script"
               src="//ccdn.mobildev.in/04ab314644074cae880a50aeafd2e2ae.js"
               data-token="4zJtjEZ599XY5Xm9t4Z7"
               strategy="afterInteractive"
-            />
-            <Script
-              id="google-analytics-script"
-              src="https://www.googletagmanager.com/gtag/js?id=G-LXR3Z2B1D7"
-              strategy="afterInteractive"
-              dangerouslySetInnerHTML={{
-                __html: `window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-
-                gtag('config', 'G-LXR3Z2B1D7');
-              `
-              }}
             />
           </DataProvider>
         </LanguageProvider>
