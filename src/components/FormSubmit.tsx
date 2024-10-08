@@ -291,18 +291,18 @@ export const FormSubmit = React.forwardRef<HTMLFormElement, FormSubmitProps>(
             console.error('Recaptcha verification failed');
           }
 
-          const captchaResponse = await fetch(`/api/captcha?token=${token}`, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          });
+          // const captchaResponse = await fetch(`/api/captcha?token=${token}`, {
+          //   method: 'GET',
+          //   headers: {
+          //     'Content-Type': 'application/json'
+          //   }
+          // });
 
-          const captchaData = await captchaResponse.json();
+          // const captchaData = await captchaResponse.json();
 
-          if (!captchaData.success) {
-            console.error('Recaptcha verification failed');
-          }
+          // if (!captchaData.success) {
+          //   console.error('Recaptcha verification failed');
+          // }
 
           const dataToSend = Object.entries(data).map(([name, value]) => ({
             field: name,
