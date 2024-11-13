@@ -186,6 +186,7 @@ export const Hero = ({
               </Flex>
               <Flex flexDir="column" gap={{ base: 4, md: 0 }}>
                 <Text
+                  as="h1"
                   fontWeight="semibold"
                   fontSize={{ base: '2xl', md: '4xl' }}
                 >

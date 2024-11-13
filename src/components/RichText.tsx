@@ -28,6 +28,7 @@ export interface RichTextContentType {
   underline?: boolean;
   strikethrough?: boolean;
   code?: boolean;
+  color?: string;
   value?: UploadedMediaType;
   children?: RichTextContentType[];
 }
@@ -206,6 +207,16 @@ const serialize = (
           <List key={uuidv4()} spacing={3}>
             {serialize((node as RichTextContentType).children!, FiCheckCircle)}
           </List>
+        );
+      case 'color':
+        return (
+          <Text
+            key={uuidv4()}
+            as="span"
+            color={(node as RichTextContentType).color || 'inherit'}
+          >
+            {serialize((node as RichTextContentType).children!)}
+          </Text>
         );
       default:
         return (
