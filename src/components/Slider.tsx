@@ -62,6 +62,7 @@ export const Slider = ({ height, slides, settings }: SliderProps) => (
       slidesToShow={settings?.slidesToShow || 1}
       autoPlay
       dragScroll={false}
+      scrollSnap
       autoplaySpeed={5000}
       breakpoints={{
         '(max-width: 768px)': {
