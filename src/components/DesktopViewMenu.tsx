@@ -83,40 +83,35 @@ const NavMenu = ({ menuItem }: NavMenuProps) => {
                               </AccordionButton>
                               <AccordionPanel paddingTop={0} paddingBottom={0}>
                                 <Flex flexDir="column">
-                                  <Flex gap={4}>
-                                    {subMenuItem.dropdownMenuItems?.map(
-                                      (dropdownMenuItem) => (
-                                        <ChakraMenuItem
-                                          key={
-                                            dropdownMenuItem.callToAction.label
+                                  {subMenuItem.dropdownMenuItems?.map(
+                                    (dropdownMenuItem) => (
+                                      <ChakraMenuItem
+                                        key={
+                                          dropdownMenuItem.callToAction.label
+                                        }
+                                        color="text.primary"
+                                        fontWeight="normal"
+                                        fontSize="sm"
+                                        bgColor="transparent"
+                                        _hover={{ bgColor: 'transparent' }}
+                                        _active={{ bgColor: 'transparent' }}
+                                      >
+                                        <CallToAction
+                                          type={
+                                            dropdownMenuItem.callToAction.type
                                           }
-                                          color="text.primary"
-                                          fontWeight="normal"
-                                          fontSize="sm"
-                                          bgColor="transparent"
-                                          _hover={{ bgColor: 'transparent' }}
-                                          _active={{ bgColor: 'transparent' }}
+                                          page={
+                                            dropdownMenuItem.callToAction.page
+                                          }
+                                          url={
+                                            dropdownMenuItem.callToAction.url
+                                          }
                                         >
-                                          <CallToAction
-                                            type={
-                                              dropdownMenuItem.callToAction.type
-                                            }
-                                            page={
-                                              dropdownMenuItem.callToAction.page
-                                            }
-                                            url={
-                                              dropdownMenuItem.callToAction.url
-                                            }
-                                          >
-                                            {
-                                              dropdownMenuItem.callToAction
-                                                .label
-                                            }
-                                          </CallToAction>
-                                        </ChakraMenuItem>
-                                      )
-                                    )}
-                                  </Flex>
+                                          {dropdownMenuItem.callToAction.label}
+                                        </CallToAction>
+                                      </ChakraMenuItem>
+                                    )
+                                  )}
                                 </Flex>
                               </AccordionPanel>
                             </AccordionItem>
