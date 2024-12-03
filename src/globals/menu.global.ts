@@ -2,6 +2,11 @@ import { GlobalConfig } from 'payload/types';
 import { CallToAction, CallToActionType } from '../fields';
 
 export interface MenuItemGroupSubMenuItemType {
+  type: 'dropdown' | 'text';
+  label: string;
+  dropdownMenuItems: {
+    callToAction: CallToActionType;
+  }[];
   callToAction: CallToActionType;
 }
 
@@ -90,7 +95,55 @@ export const Menu: GlobalConfig = {
               },
               type: 'array',
               minRows: 1,
-              fields: [CallToAction()]
+              fields: [
+                {
+                  name: 'type',
+                  label: 'Type',
+                  type: 'radio',
+                  defaultValue: 'text',
+                  required: true,
+                  options: [
+                    {
+                      label: 'Dropdown',
+                      value: 'dropdown'
+                    },
+                    {
+                      label: 'Text',
+                      value: 'text'
+                    }
+                  ],
+                  admin: {
+                    layout: 'horizontal'
+                  }
+                },
+                CallToAction({
+                  condition: (_, siblingData) => siblingData?.type === 'text'
+                }),
+                {
+                  name: 'label',
+                  label: 'Label',
+                  type: 'text',
+                  localized: true,
+                  admin: {
+                    condition: (_, siblingData) =>
+                      siblingData?.type === 'dropdown'
+                  }
+                },
+                {
+                  name: 'dropdownMenuItems',
+                  labels: {
+                    singular: 'Dropdown Menu Item',
+                    plural: 'Dropdown Menu Items'
+                  },
+                  type: 'array',
+                  minRows: 1,
+                  fields: [CallToAction()],
+                  admin: {
+                    condition: (_, siblingData) =>
+                      siblingData?.type === 'dropdown'
+                  }
+                }
+              ]
             }
           ],
           admin: {

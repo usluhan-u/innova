@@ -53,19 +53,47 @@ export const MobileViewMenu = ({ menu, onClose }: MobileViewMenuProps) => {
       subList:
         menuItem.menuItemGroups?.length === 1 &&
         !menuItem.menuItemGroups[0].label
-          ? menuItem.menuItemGroups[0].subMenuItems?.map((subMenuItem) => ({
-              title: menuItem.label.trim(),
-              label: subMenuItem.callToAction.label.trim(),
-              finalMenuCallToAction: subMenuItem.callToAction
-            }))
+          ? menuItem.menuItemGroups[0].subMenuItems?.map((subMenuItem) =>
+              subMenuItem.type === 'dropdown'
+                ? {
+                    title: subMenuItem.label.trim(),
+                    label: subMenuItem.label.trim(),
+                    subList: subMenuItem.dropdownMenuItems?.map(
+                      (dropdownMenuItem) => ({
+                        title: subMenuItem.label.trim(),
+                        label: dropdownMenuItem.callToAction.label.trim(),
+                        finalMenuCallToAction: dropdownMenuItem.callToAction
+                      })
+                    )
+                  }
+                : {
+                    title: menuItem.label.trim(),
+                    label: subMenuItem.callToAction.label.trim(),
+                    finalMenuCallToAction: subMenuItem.callToAction
+                  }
+            )
           : menuItem.menuItemGroups?.map((menuItemGroup) => ({
               title: menuItem.label.trim(),
               label: menuItemGroup.label?.trim(),
-              subList: menuItemGroup.subMenuItems?.map((subMenuItem) => ({
-                title: menuItemGroup.label?.trim(),
-                label: subMenuItem.callToAction.label.trim(),
-                finalMenuCallToAction: subMenuItem.callToAction
-              }))
+              subList: menuItemGroup.subMenuItems?.map((subMenuItem) =>
+                subMenuItem.type === 'dropdown'
+                  ? {
+                      title: subMenuItem.label.trim(),
+                      label: subMenuItem.label.trim(),
+                      subList: subMenuItem.dropdownMenuItems?.map(
+                        (dropdownMenuItem) => ({
+                          title: subMenuItem.label.trim(),
+                          label: dropdownMenuItem.callToAction.label.trim(),
+                          finalMenuCallToAction: dropdownMenuItem.callToAction
+                        })
+                      )
+                    }
+                  : {
+                      title: menuItem.label.trim(),
+                      label: subMenuItem.callToAction.label.trim(),
+                      finalMenuCallToAction: subMenuItem.callToAction
+                    }
+              )
             }))
     })) ?? [];
 

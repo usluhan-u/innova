@@ -7,9 +7,12 @@ import {
   MenuGroup as ChakraMenuGroup,
   MenuItem as ChakraMenuItem,
   Button,
-  Divider
+  Divider,
+  AccordionItem,
+  Accordion,
+  AccordionButton,
+  AccordionPanel
 } from '@chakra-ui/react';
-import { v4 as uuidv4 } from 'uuid';
 import { FiArrowRight, FiChevronDown } from 'react-icons/fi';
 import { useRouter } from 'next/router';
 import { MenuItemType, MenuType } from '../globals';
@@ -50,39 +53,153 @@ const NavMenu = ({ menuItem }: NavMenuProps) => {
                 <Flex justify="space-between" gap={8}>
                   {menuItem.menuItemGroups?.map((menuItemGroup) => (
                     <ChakraMenuGroup
-                      key={uuidv4()}
+                      key={menuItemGroup.label}
                       title={menuItemGroup.label}
                       color="text.secondary.100"
                       fontWeight="medium"
                       fontSize="sm"
                     >
-                      {menuItemGroup.subMenuItems?.map((subMenuItem) => (
-                        <ChakraMenuItem
-                          key={uuidv4()}
-                          color="text.primary"
-                          fontWeight="normal"
-                          fontSize="sm"
-                          bgColor="transparent"
-                          _hover={{ bgColor: 'transparent' }}
-                          _active={{ bgColor: 'transparent' }}
-                        >
-                          <CallToAction
-                            type={subMenuItem.callToAction.type}
-                            page={subMenuItem.callToAction.page}
-                            url={subMenuItem.callToAction.url}
-                            borderBottom={
-                              subMenuItem.callToAction.page?.slug ===
-                                router.asPath.substring(1) ||
-                              subMenuItem.callToAction.url ===
-                                router.asPath.substring(1)
-                                ? '2px solid #005a9b'
-                                : 'none'
-                            }
+                      {menuItemGroup.subMenuItems?.map((subMenuItem) =>
+                        subMenuItem.type === 'dropdown' ? (
+                          <Accordion
+                            key={subMenuItem.label}
+                            borderColor="transparent"
+                            allowToggle
                           >
-                            {subMenuItem.callToAction.label}
-                          </CallToAction>
-                        </ChakraMenuItem>
-                      ))}
+                            <AccordionItem>
+                              <AccordionButton
+                                as={Button}
+                                rightIcon={<FiChevronDown />}
+                                color="text.primary"
+                                fontWeight="normal"
+                                fontSize="sm"
+                                bgColor="transparent"
+                                paddingInlineStart={3}
+                                paddingInlineEnd={3}
+                                _hover={{ bgColor: 'transparent' }}
+                                _active={{ bgColor: 'transparent' }}
+                              >
+                                {subMenuItem.label}
+                              </AccordionButton>
+                              <AccordionPanel paddingTop={0} paddingBottom={0}>
+                                <Flex flexDir="column">
+                                  <Flex gap={4}>
+                                    {subMenuItem.dropdownMenuItems?.map(
+                                      (dropdownMenuItem) => (
+                                        <ChakraMenuItem
+                                          key={
+                                            dropdownMenuItem.callToAction.label
+                                          }
+                                          color="text.primary"
+                                          fontWeight="normal"
+                                          fontSize="sm"
+                                          bgColor="transparent"
+                                          _hover={{ bgColor: 'transparent' }}
+                                          _active={{ bgColor: 'transparent' }}
+                                        >
+                                          <CallToAction
+                                            type={
+                                              dropdownMenuItem.callToAction.type
+                                            }
+                                            page={
+                                              dropdownMenuItem.callToAction.page
+                                            }
+                                            url={
+                                              dropdownMenuItem.callToAction.url
+                                            }
+                                          >
+                                            {
+                                              dropdownMenuItem.callToAction
+                                                .label
+                                            }
+                                          </CallToAction>
+                                        </ChakraMenuItem>
+                                      )
+                                    )}
+                                  </Flex>
+                                </Flex>
+                              </AccordionPanel>
+                            </AccordionItem>
+                          </Accordion>
+                        ) : (
+                          // <ChakraMenu key={subMenuItem.label} defaultIsOpen>
+                          //   <ChakraMenuButton
+                          //     as={Button}
+                          //     rightIcon={<FiChevronDown />}
+                          //     color="text.primary"
+                          //     fontWeight="normal"
+                          //     fontSize="sm"
+                          //     bgColor="transparent"
+                          //     paddingInlineStart={3}
+                          //     paddingInlineEnd={3}
+                          //     _hover={{ bgColor: 'transparent' }}
+                          //     _active={{ bgColor: 'transparent' }}
+                          //   >
+                          //     {subMenuItem.label}
+                          //   </ChakraMenuButton>
+                          //   <ChakraMenuList border="none" padding={0}>
+                          //     <Flex flexDir="column" ml={6}>
+                          //       <Flex gap={4}>
+                          //         {subMenuItem.dropdownMenuItems?.map(
+                          //           (dropdownMenuItem) => (
+                          //             <ChakraMenuItem
+                          //               key={
+                          //                 dropdownMenuItem.callToAction.label
+                          //               }
+                          //               color="text.primary"
+                          //               fontWeight="normal"
+                          //               fontSize="sm"
+                          //               bgColor="transparent"
+                          //               _hover={{ bgColor: 'transparent' }}
+                          //               _active={{ bgColor: 'transparent' }}
+                          //             >
+                          //               <CallToAction
+                          //                 type={
+                          //                   dropdownMenuItem.callToAction.type
+                          //                 }
+                          //                 page={
+                          //                   dropdownMenuItem.callToAction.page
+                          //                 }
+                          //                 url={
+                          //                   dropdownMenuItem.callToAction.url
+                          //                 }
+                          //               >
+                          //                 {dropdownMenuItem.callToAction.label}
+                          //               </CallToAction>
+                          //             </ChakraMenuItem>
+                          //           )
+                          //         )}
+                          //       </Flex>
+                          //     </Flex>
+                          //   </ChakraMenuList>
+                          // </ChakraMenu>
+                          <ChakraMenuItem
+                            key={subMenuItem.callToAction.label}
+                            color="text.primary"
+                            fontWeight="normal"
+                            fontSize="sm"
+                            bgColor="transparent"
+                            _hover={{ bgColor: 'transparent' }}
+                            _active={{ bgColor: 'transparent' }}
+                          >
+                            <CallToAction
+                              type={subMenuItem.callToAction.type}
+                              page={subMenuItem.callToAction.page}
+                              url={subMenuItem.callToAction.url}
+                              borderBottom={
+                                subMenuItem.callToAction.page?.slug ===
+                                  router.asPath.substring(1) ||
+                                subMenuItem.callToAction.url ===
+                                  router.asPath.substring(1)
+                                  ? '2px solid #005a9b'
+                                  : 'none'
+                              }
+                            >
+                              {subMenuItem.callToAction.label}
+                            </CallToAction>
+                          </ChakraMenuItem>
+                        )
+                      )}
                     </ChakraMenuGroup>
                   ))}
                 </Flex>
@@ -126,7 +243,7 @@ const NavMenu = ({ menuItem }: NavMenuProps) => {
 export const DesktopViewMenu = ({ menu }: DesktopViewMenuProps) => (
   <Flex w="full" align="center">
     {menu.menuItems?.map((menuItem) => (
-      <NavMenu key={uuidv4()} menuItem={menuItem} />
+      <NavMenu key={menuItem.label} menuItem={menuItem} />
     ))}
   </Flex>
 );
