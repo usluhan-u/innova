@@ -117,57 +117,6 @@ const NavMenu = ({ menuItem }: NavMenuProps) => {
                             </AccordionItem>
                           </Accordion>
                         ) : (
-                          // <ChakraMenu key={subMenuItem.label} defaultIsOpen>
-                          //   <ChakraMenuButton
-                          //     as={Button}
-                          //     rightIcon={<FiChevronDown />}
-                          //     color="text.primary"
-                          //     fontWeight="normal"
-                          //     fontSize="sm"
-                          //     bgColor="transparent"
-                          //     paddingInlineStart={3}
-                          //     paddingInlineEnd={3}
-                          //     _hover={{ bgColor: 'transparent' }}
-                          //     _active={{ bgColor: 'transparent' }}
-                          //   >
-                          //     {subMenuItem.label}
-                          //   </ChakraMenuButton>
-                          //   <ChakraMenuList border="none" padding={0}>
-                          //     <Flex flexDir="column" ml={6}>
-                          //       <Flex gap={4}>
-                          //         {subMenuItem.dropdownMenuItems?.map(
-                          //           (dropdownMenuItem) => (
-                          //             <ChakraMenuItem
-                          //               key={
-                          //                 dropdownMenuItem.callToAction.label
-                          //               }
-                          //               color="text.primary"
-                          //               fontWeight="normal"
-                          //               fontSize="sm"
-                          //               bgColor="transparent"
-                          //               _hover={{ bgColor: 'transparent' }}
-                          //               _active={{ bgColor: 'transparent' }}
-                          //             >
-                          //               <CallToAction
-                          //                 type={
-                          //                   dropdownMenuItem.callToAction.type
-                          //                 }
-                          //                 page={
-                          //                   dropdownMenuItem.callToAction.page
-                          //                 }
-                          //                 url={
-                          //                   dropdownMenuItem.callToAction.url
-                          //                 }
-                          //               >
-                          //                 {dropdownMenuItem.callToAction.label}
-                          //               </CallToAction>
-                          //             </ChakraMenuItem>
-                          //           )
-                          //         )}
-                          //       </Flex>
-                          //     </Flex>
-                          //   </ChakraMenuList>
-                          // </ChakraMenu>
                           <ChakraMenuItem
                             key={subMenuItem.callToAction.label}
                             color="text.primary"
