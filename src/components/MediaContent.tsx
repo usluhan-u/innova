@@ -30,7 +30,7 @@ export const MediaContent = ({
               objectFit="fill"
               src={image.url}
               alt={image.alt}
-              boxSize="full"
+              w="full"
               maxH="2xl"
               borderRadius="lg"
             />
@@ -69,7 +69,7 @@ export const MediaContent = ({
               objectFit="fill"
               src={image.url}
               alt={image.alt}
-              boxSize="full"
+              w="full"
               maxH="2xl"
               borderRadius="lg"
             />
