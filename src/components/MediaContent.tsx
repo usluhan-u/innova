@@ -19,7 +19,7 @@ export const MediaContent = ({
   <Template backgroundColor={backgroundColor} width={width}>
     <Grid
       templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
-      alignItems={{ base: 'normal', md: 'center' }}
+      alignItems={{ base: 'normal', md: 'normal' }}
       w="full"
       gap={10}
     >
