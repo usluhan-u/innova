@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, Grid, GridItem, Image } from '@chakra-ui/react';
+import { Flex, Image } from '@chakra-ui/react';
 import { FiArrowRight } from 'react-icons/fi';
 import { MediaContentType } from '../blocks';
 import { RichText } from './RichText';
@@ -17,65 +17,51 @@ export const MediaContent = ({
   width
 }: MediaContentProps) => (
   <Template backgroundColor={backgroundColor} width={width}>
-    <Grid
-      templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
-      alignItems={{ base: 'normal', md: 'normal' }}
-      w="full"
-      gap={10}
-    >
+    <Flex w="full" gap={10}>
       {contentPosition === 'right' && (
         <>
-          <GridItem>
-            <Image
-              objectFit="fill"
-              src={image.url}
-              alt={image.alt}
-              w="full"
-              maxH="xl"
-              borderRadius="lg"
-            />
-          </GridItem>
-          <GridItem>
-            <Flex flexDir="column" justify="space-between">
-              <RichText content={content} />
-              {callToAction && Object.keys(callToAction).length > 0 && (
-                <TextIconCallToAction
-                  {...callToAction}
-                  color="text.blue"
-                  icon={FiArrowRight}
-                />
-              )}
-            </Flex>
-          </GridItem>
+          <Image
+            objectFit="fill"
+            src={image.url}
+            alt={image.alt}
+            w="full"
+            maxH="xl"
+            borderRadius="lg"
+          />
+          <Flex flexDir="column" justify="space-between">
+            <RichText content={content} />
+            {callToAction && Object.keys(callToAction).length > 0 && (
+              <TextIconCallToAction
+                {...callToAction}
+                color="text.blue"
+                icon={FiArrowRight}
+              />
+            )}
+          </Flex>
         </>
       )}
-
       {contentPosition === 'left' && (
         <>
-          <GridItem>
-            <Flex flexDir="column" justify="space-between" boxSize="full">
-              <RichText content={content} />
-              {callToAction && Object.keys(callToAction).length > 0 && (
-                <TextIconCallToAction
-                  {...callToAction}
-                  color="text.blue"
-                  icon={FiArrowRight}
-                />
-              )}
-            </Flex>
-          </GridItem>
-          <GridItem>
-            <Image
-              objectFit="fill"
-              src={image.url}
-              alt={image.alt}
-              w="full"
-              maxH="xl"
-              borderRadius="lg"
-            />
-          </GridItem>
+          <Flex flexDir="column" justify="space-between">
+            <RichText content={content} />
+            {callToAction && Object.keys(callToAction).length > 0 && (
+              <TextIconCallToAction
+                {...callToAction}
+                color="text.blue"
+                icon={FiArrowRight}
+              />
+            )}
+          </Flex>
+          <Image
+            objectFit="fill"
+            src={image.url}
+            alt={image.alt}
+            w="full"
+            maxH="xl"
+            borderRadius="lg"
+          />
         </>
       )}
-    </Grid>
+    </Flex>
   </Template>
 );
