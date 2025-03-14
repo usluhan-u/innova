@@ -17,7 +17,11 @@ export const MediaContent = ({
   width
 }: MediaContentProps) => (
   <Template backgroundColor={backgroundColor} width={width}>
-    <Flex w="full" gap={10}>
+    <Flex
+      w="full"
+      flexDir={{ base: 'column', lg: 'row' }}
+      gap={{ base: 5, lg: 10 }}
+    >
       {contentPosition === 'right' && (
         <>
           <Image
