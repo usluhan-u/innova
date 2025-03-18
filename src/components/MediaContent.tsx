@@ -19,7 +19,7 @@ export const MediaContent = ({
   <Template backgroundColor={backgroundColor} width={width}>
     <Flex
       w="full"
-      flexDir={{ base: 'column', lg: 'row' }}
+      flexDir={{ base: 'column', xl: 'row' }}
       gap={{ base: 5, lg: 10 }}
     >
       {contentPosition === 'right' && (
